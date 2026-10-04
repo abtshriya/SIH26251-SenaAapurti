@@ -1,0 +1,485 @@
+<div class="public-page-wrapper">
+
+  <!-- ================= BREADCRUMB & SECTION HEADER ================= -->
+  <div class="page-top-banner">
+    <div class="page-container">
+      <div class="breadcrumb-trail">
+        <a routerLink="/" class="bc-link">Home</a>
+        <span class="bc-sep">/</span>
+        <span class="bc-current">
+          <ng-container [ngSwitch]="currentSection">
+            <span *ngSwitchCase="'about'">About SenaAapurti</span>
+            <span *ngSwitchCase="'ai-logistics'">AI in Military Logistics</span>
+            <span *ngSwitchCase="'features'">Features & Capabilities</span>
+            <span *ngSwitchCase="'guidelines'">User Guidelines & SOPs</span>
+            <span *ngSwitchCase="'support'">Support & Helpdesk</span>
+            <span *ngSwitchCase="'downloads'">Downloads & Circulars</span>
+            <span *ngSwitchCase="'contact'">Contact Directory</span>
+            <span *ngSwitchDefault>Public Information</span>
+          </ng-container>
+        </span>
+      </div>
+
+      <h1 class="page-main-heading">
+        <ng-container [ngSwitch]="currentSection">
+          <span *ngSwitchCase="'about'">About Project SenaAapurti</span>
+          <span *ngSwitchCase="'ai-logistics'">Artificial Intelligence in Military Logistics</span>
+          <span *ngSwitchCase="'features'">Defense Logistics Operational Capabilities</span>
+          <span *ngSwitchCase="'guidelines'">Standard Operating Procedures & Guidelines</span>
+          <span *ngSwitchCase="'support'">24x7 Military Logistics Support & Control Cell</span>
+          <span *ngSwitchCase="'downloads'">Official Publications, Manuals & Field APKs</span>
+          <span *ngSwitchCase="'contact'">Indian Army Logistics Directory & Secretariat</span>
+        </ng-container>
+      </h1>
+      <p class="page-lead-subtitle">
+        Empowering the Indian Army supply chain through real-time data synchronization, predictive stocking, and resilient multi-terrain mobility.
+      </p>
+    </div>
+  </div>
+
+  <!-- ================= MAIN LAYOUT WITH SIDEBAR NAV ================= -->
+  <div class="page-container content-grid-layout">
+
+    <!-- Sticky Navigation Sidebar -->
+    <aside class="sidebar-nav-card">
+      <h3 class="sidebar-title">Information Sections</h3>
+      <ul class="sidebar-links">
+        <li>
+          <a
+            [class.active]="currentSection === 'about'"
+            (click)="setSection('about')"
+            routerLink="/about"
+          >
+            <span>🇮🇳</span> About SenaAapurti
+          </a>
+        </li>
+        <li>
+          <a
+            [class.active]="currentSection === 'ai-logistics'"
+            (click)="setSection('ai-logistics')"
+            routerLink="/ai-logistics"
+          >
+            <span>🤖</span> AI in Military Logistics
+          </a>
+        </li>
+        <li>
+          <a
+            [class.active]="currentSection === 'features'"
+            (click)="setSection('features')"
+            routerLink="/features"
+          >
+            <span>⚙️</span> Capabilities & Modules
+          </a>
+        </li>
+        <li>
+          <a
+            [class.active]="currentSection === 'guidelines'"
+            (click)="setSection('guidelines')"
+            routerLink="/guidelines"
+          >
+            <span>📋</span> Standard Operating Procedures
+          </a>
+        </li>
+        <li>
+          <a
+            [class.active]="currentSection === 'support'"
+            (click)="setSection('support')"
+            routerLink="/support"
+          >
+            <span>🎧</span> 24x7 Support & Helpdesk
+          </a>
+        </li>
+        <li>
+          <a
+            [class.active]="currentSection === 'downloads'"
+            (click)="setSection('downloads')"
+            routerLink="/downloads"
+          >
+            <span>📥</span> Manuals & Downloads
+          </a>
+        </li>
+        <li>
+          <a
+            [class.active]="currentSection === 'contact'"
+            (click)="setSection('contact')"
+            routerLink="/contact"
+          >
+            <span>📍</span> Contact Secretariat
+          </a>
+        </li>
+      </ul>
+
+      <!-- Portal Access CTA in Sidebar -->
+      <div class="sidebar-portal-promo">
+        <h4>Authorized Defense Personnel</h4>
+        <p>Access live strategic or regimental portals with two-factor military authentication.</p>
+        <div class="sidebar-cta-btns">
+          <a routerLink="/auth" [queryParams]="{portal: 'command'}" class="sb-btn command">Command Portal</a>
+          <a routerLink="/auth" [queryParams]="{portal: 'unit'}" class="sb-btn unit">Unit Portal</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Details Area -->
+    <section class="main-article-card">
+
+      <!-- ================= 1. ABOUT SECTION ================= -->
+      <div *ngIf="currentSection === 'about'" class="article-body">
+        <h2>Genesis & Mandate of Project SenaAapurti</h2>
+        <p>
+          <strong>SenaAapurti</strong> is the flagship national defense logistics initiative spearheaded by the Directorate General of Ordnance Services (DGOS) under the aegis of the Master General of Sustenance (MGS) Branch, Integrated Headquarters of Ministry of Defence (Army).
+        </p>
+
+        <div class="highlight-quote-box">
+          <p class="quote-text">
+            "Logistics is the lifeblood of warfare. In high-altitude battlegrounds like the Siachen Glacier, eastern Ladakh, and the dense jungles of the North-East, victory belongs to the force that can sustain its combatants without interruption."
+          </p>
+          <span class="quote-author">— Integrated Logistics Doctrine, Indian Army</span>
+        </div>
+
+        <h3>Strategic Pillars</h3>
+        <div class="pillars-row">
+          <div class="pillar-box">
+            <h4>From Reactive to Predictive</h4>
+            <p>Moving away from manual post-consumption replenishment to algorithmically driven pre-positioning of munitions, cold weather fuels, and rations.</p>
+          </div>
+          <div class="pillar-box">
+            <h4>Depot-to-Foxhole Visibility</h4>
+            <p>End-to-end telemetry connecting Central Ordnance Depots (CODs), Advance Base Depots, and Field Supply Depots down to isolated forward defiles.</p>
+          </div>
+          <div class="pillar-box">
+            <h4>All-Weather Route Resilience</h4>
+            <p>Sensor integration across high-altitude mountain passes (Zojila, Khardung La, Chang La, Sela Tunnel) for dynamic hazard avoidance.</p>
+          </div>
+        </div>
+
+        <h3>Tri-Services Synchronization</h3>
+        <p>
+          SenaAapurti provides native APIs for inter-service coordination with the Indian Air Force (Air Logistics Wing for C-17, C-130J, AN-32, and Mi-17 heavy aerial drops) and Indian Navy (Naval Armament Depots and coastal supply lines), creating an unshakeable theater command logistics network.
+        </p>
+      </div>
+
+      <!-- ================= 2. AI IN MILITARY LOGISTICS ================= -->
+      <div *ngIf="currentSection === 'ai-logistics'" class="article-body">
+        <h2>Next-Generation AI & Autonomous Decision Systems</h2>
+        <p>
+          SenaAapurti embeds cutting-edge machine learning and predictive modeling directly into the defense supply chain, transforming logistics planning into an impenetrable force multiplier.
+        </p>
+
+        <div class="ai-features-grid">
+          <div class="ai-feature-card">
+            <div class="ai-icon">📊</div>
+            <h4>Winter Burn Rate Forecasting</h4>
+            <p>Recurrent Neural Networks (RNNs) analyze 15 years of meteorological data, troop deployment densities, and historical cold-weather consumption to forecast fuel, kerosene, and ration burn with 96.8% accuracy.</p>
+          </div>
+
+          <div class="ai-feature-card">
+            <div class="ai-icon">🛰️</div>
+            <h4>Satellite Terrain & Avalanche Prediction</h4>
+            <p>Synthetic Aperture Radar (SAR) imagery coupled with Border Roads Organisation (BRO) ground sensors identifies slope instability and road subsidence hours before landslides occur, rerouting convoys automatically.</p>
+          </div>
+
+          <div class="ai-feature-card">
+            <div class="ai-icon">📦</div>
+            <h4>Computer Vision Ordnance Auditing</h4>
+            <p>Edge-AI cameras installed at Central Ordnance Depots rapidly tally ammunition crates, inspect tamper seals, and detect micro-corrosion on mortar and artillery projectiles in seconds.</p>
+          </div>
+
+          <div class="ai-feature-card">
+            <div class="ai-icon">🚁</div>
+            <h4>Autonomous Drone Swarm Logistics</h4>
+            <p>Integrated routing algorithms for heavy-lift defense logistics drones capable of carrying 50kg to 150kg payloads to forward Siachen pickets in sub-zero blizzard conditions.</p>
+          </div>
+        </div>
+
+        <h3>What-If Wargame Scenario Engine</h3>
+        <p>
+          Logistics commanders can simulate full-scale multi-front mobilization scenarios, severe railhead disruptions, or fuel depot strikes. The AI engine recalculates alternative pass throughputs and automatically drafts airlift sortie taskings.
+        </p>
+      </div>
+
+      <!-- ================= 3. FEATURES ================= -->
+      <div *ngIf="currentSection === 'features'" class="article-body">
+        <h2>Comprehensive Platform Capabilities</h2>
+        <p>
+          An integrated suite of 8 core modular capabilities designed to support Army Formations across tactical, operational, and strategic levels:
+        </p>
+
+        <div class="features-detailed-list">
+          <div class="feat-detail-item">
+            <div class="fd-number">01</div>
+            <div>
+              <h4>Predictive Demand Forecasting</h4>
+              <p>Predicts localized demand spikes up to 90 days in advance based on seasonal weather, altitude gradients, and exercise schedules.</p>
+            </div>
+          </div>
+
+          <div class="feat-detail-item">
+            <div class="fd-number">02</div>
+            <div>
+              <h4>Inventory Intelligence & Smart Barcoding</h4>
+              <p>Automated RFID tagging and QR-coded Issue Vouchers (IV) eliminate ghost inventories and ensure zero-delay store reconciliation.</p>
+            </div>
+          </div>
+
+          <div class="feat-detail-item">
+            <div class="fd-number">03</div>
+            <div>
+              <h4>Logistics Movement Tracking & Telemetry</h4>
+              <p>Continuous transponder monitoring of ALS, Tatra 8x8, and civilian hired transport vehicles with speed, cargo temperature, and escort telemetry.</p>
+            </div>
+          </div>
+
+          <div class="feat-detail-item">
+            <div class="fd-number">04</div>
+            <div>
+              <h4>Route Optimization & Risk Analysis</h4>
+              <p>Real-time bypass generation around blocked mountain passes (e.g. Atal Tunnel bypass, Shinku La axis, Rohtang corridors).</p>
+            </div>
+          </div>
+
+          <div class="feat-detail-item">
+            <div class="fd-number">05</div>
+            <div>
+              <h4>Weather & Terrain Intelligence</h4>
+              <p>Sensor feeds from DRDO snow & avalanche study establishments (SASE), IMD mountain radars, and forward weather stations.</p>
+            </div>
+          </div>
+
+          <div class="feat-detail-item">
+            <div class="fd-number">06</div>
+            <div>
+              <h4>AI-Driven Replenishment Recommendations</h4>
+              <p>Proactive alerts to Quartermasters recommending early requisitioning before passes close for the 6-month winter stocking window.</p>
+            </div>
+          </div>
+
+          <div class="feat-detail-item">
+            <div class="fd-number">07</div>
+            <div>
+              <h4>What-If Crisis Simulation</h4>
+              <p>Simulates worst-case logistical bottlenecks, bridge collapses, and theater ammunition surges to test replenishment viability.</p>
+            </div>
+          </div>
+
+          <div class="feat-detail-item">
+            <div class="fd-number">08</div>
+            <div>
+              <h4>Executive Defense Analytics & Audit</h4>
+              <p>Real-time dashboards for the Chief of Army Staff (COAS), Vice Chief (VCOAS), and Army Commanders with national readiness scores.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= 4. GUIDELINES & SOPS ================= -->
+      <div *ngIf="currentSection === 'guidelines'" class="article-body">
+        <h2>Standard Operating Procedures (SOPs)</h2>
+        <p>Guidelines for Unit Quartermasters (RQM), Depot Commandants, and Convoy Escort Commanders:</p>
+
+        <div class="sop-accordion">
+          <div class="sop-card">
+            <h4>SOP 14/A: Indent Requisition Lifecycles</h4>
+            <p>All indents must be categorized into Routine (Class I to IX), Operational Priority 1 (Forward border deployment), or SOS Emergency. Digital vouchers must be countersigned using defense smartcards.</p>
+          </div>
+
+          <div class="sop-card">
+            <h4>SOP 28/W: High-Altitude Winter Stocking Protocol</h4>
+            <p>Winter stocking for Ladakh (14 Corps) and Siachen sectors must achieve 100% pre-positioning by 15 October annually. Sub-zero grade High-Speed Diesel (-40°C pour point) and arctic multi-layer clothing must be verified via chemical analysis.</p>
+          </div>
+
+          <div class="sop-card">
+            <h4>SOP 39/C: Convoy Safety & Breakdown Procedures</h4>
+            <p>Convoys exceeding 10 vehicles must maintain a recovery ALS vehicle and medical escort. In the event of icing on mountain passes, snow chains must be deployed immediately.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= 5. SUPPORT & HELPDESK ================= -->
+      <div *ngIf="currentSection === 'support'" class="article-body">
+        <h2>24x7 Logistics Ops Room & Field Helpdesk</h2>
+        <p>Contact the Army Logistics Operations Cell for technical assistance, transponder troubleshooting, or urgent priority voucher escalations.</p>
+
+        <div *ngIf="ticketSuccess" class="alert-success-banner" style="margin-bottom: 20px;">
+          {{ ticketSuccess }}
+        </div>
+
+        <div class="support-split">
+          <!-- Ticket Form -->
+          <div class="ticket-form-card">
+            <h3>Submit Operational Support Ticket</h3>
+            <form (submit)="submitTicket(); $event.preventDefault()">
+              <div class="form-group">
+                <label class="form-label">Officer / Operator Name</label>
+                <input type="text" [(ngModel)]="ticketName" name="ticketName" class="form-control" placeholder="e.g. Capt Rahul Mehra">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Army Service No</label>
+                <input type="text" [(ngModel)]="ticketServiceNo" name="ticketServiceNo" class="form-control" placeholder="e.g. IC-88201K">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Issue Category</label>
+                <select [(ngModel)]="ticketCategory" name="ticketCategory" class="form-control">
+                  <option value="Voucher Tracking">Voucher Tracking / Requisition Delay</option>
+                  <option value="Convoy Telemetry">Convoy GPS Telemetry Offline</option>
+                  <option value="Stock Reconciliation">Depot Stock Reconciliation Discrepancy</option>
+                  <option value="Security Access">Account Security / Access Permissions</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Query Description & Reference #</label>
+                <textarea [(ngModel)]="ticketMessage" name="ticketMessage" rows="3" class="form-control" placeholder="Provide voucher #, convoy callsign, or details of the issue..."></textarea>
+              </div>
+
+              <button type="submit" class="btn-army-primary full-width">
+                Dispatch Priority Ticket
+              </button>
+            </form>
+          </div>
+
+          <!-- Hotline Directory -->
+          <div class="hotline-card">
+            <h3>Direct Military Control Nodes</h3>
+            <div class="hotline-item">
+              <span class="hl-label">Army HQ Ops Room (Toll-Free):</span>
+              <span class="hl-number">1800-11-SENA (7362)</span>
+            </div>
+            <div class="hotline-item">
+              <span class="hl-label">Northern Command Logistics Cell:</span>
+              <span class="hl-number">ASCON Ext: 4421 / 4422</span>
+            </div>
+            <div class="hotline-item">
+              <span class="hl-label">Eastern Command Logistics Cell:</span>
+              <span class="hl-number">ASCON Ext: 6180 / 6181</span>
+            </div>
+            <div class="hotline-item">
+              <span class="hl-label">Class V Ammunition Emergency Cell:</span>
+              <span class="hl-number">1800-22-AMMO (2666)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= 6. DOWNLOADS ================= -->
+      <div *ngIf="currentSection === 'downloads'" class="article-body">
+        <h2>Official Defense Publications & Downloads</h2>
+        <p>Download official manuals, offline mobile APKs for ruggedized defense tablets, and standardized indent templates.</p>
+
+        <div class="downloads-list">
+          <div class="download-item-card">
+            <div class="dl-icon">📄</div>
+            <div class="dl-info">
+              <h4>SenaAapurti Comprehensive User Manual v4.2</h4>
+              <p>Full reference manual covering requisition generation, depot stock auditing, and convoy manifest verification.</p>
+              <span class="dl-meta">PDF • 8.4 MB • Updated Oct 2026</span>
+            </div>
+            <button class="btn-dl" (click)="downloadManual('SenaAapurti_Manual_v4.2.pdf')">
+              Download PDF
+            </button>
+          </div>
+
+          <div class="download-item-card">
+            <div class="dl-icon">📱</div>
+            <div class="dl-info">
+              <h4>Field Supply Tablet Client (Ruggedized Android APK)</h4>
+              <p>Offline-capable application for Forward Supply Depots (FSD) with encrypted offline barcode scanning and mesh sync.</p>
+              <span class="dl-meta">APK • 42 MB • Version 3.1.0</span>
+            </div>
+            <button class="btn-dl" (click)="downloadManual('SenaAapurti_Field_v3.1.apk')">
+              Download APK
+            </button>
+          </div>
+
+          <div class="download-item-card">
+            <div class="dl-icon">📑</div>
+            <div class="dl-info">
+              <h4>Winter Stocking Operational Guidelines 2026-27</h4>
+              <p>Official Directorate General of Supplies & Transport (DGST) directive on high-altitude POL and ration buffer requirements.</p>
+              <span class="dl-meta">PDF • 3.2 MB • Army Order 19/2026</span>
+            </div>
+            <button class="btn-dl" (click)="downloadManual('Winter_Stocking_Guidelines_2026.pdf')">
+              Download PDF
+            </button>
+          </div>
+
+          <div class="download-item-card">
+            <div class="dl-icon">📊</div>
+            <div class="dl-info">
+              <h4>Standard Indent & RV Barcode Template Specification</h4>
+              <p>Technical schema for QR-coded issue vouchers, RFID pallet tags, and ammunition box identification.</p>
+              <span class="dl-meta">ZIP • 1.8 MB • Defense Standards</span>
+            </div>
+            <button class="btn-dl" (click)="downloadManual('Barcode_Indent_Specs.zip')">
+              Download ZIP
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= 7. CONTACT US ================= -->
+      <div *ngIf="currentSection === 'contact'" class="article-body">
+        <h2>Official Defense Directory & Contact</h2>
+        <p>Get in touch with the Directorate General of Ordnance Services or regional command logistics headquarters.</p>
+
+        <div *ngIf="contactSuccess" class="alert-success-banner" style="margin-bottom: 20px;">
+          {{ contactSuccess }}
+        </div>
+
+        <div class="support-split">
+          <!-- Contact Form -->
+          <div class="ticket-form-card">
+            <h3>Send Official Communication</h3>
+            <form (submit)="submitContact(); $event.preventDefault()">
+              <div class="form-group">
+                <label class="form-label">Your Name & Designation</label>
+                <input type="text" [(ngModel)]="contactName" name="contactName" class="form-control" placeholder="e.g. Col Alok Sharma">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Official Defense Email / Gov.in</label>
+                <input type="email" [(ngModel)]="contactEmail" name="contactEmail" class="form-control" placeholder="name&#64;nic.in">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Subject / Purpose</label>
+                <input type="text" [(ngModel)]="contactSubject" name="contactSubject" class="form-control" placeholder="Subject of query">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Message Details</label>
+                <textarea [(ngModel)]="contactMsg" name="contactMsg" rows="3" class="form-control" placeholder="Enter message..."></textarea>
+              </div>
+
+              <button type="submit" class="btn-army-primary full-width">
+                Send Communication
+              </button>
+            </form>
+          </div>
+
+          <!-- Headquarters Directory -->
+          <div class="hotline-card">
+            <h3>Principal Logistics HQs</h3>
+            <div class="hotline-item">
+              <span class="hl-label">Master General of Sustenance (MGS):</span>
+              <p class="hl-desc">Integrated HQ of MoD (Army), South Block / Sena Bhawan, New Delhi - 110011</p>
+            </div>
+            <div class="hotline-item">
+              <span class="hl-label">Directorate General of Ordnance Services (DGOS):</span>
+              <p class="hl-desc">West Block IV, RK Puram, New Delhi - 110066</p>
+            </div>
+            <div class="hotline-item">
+              <span class="hl-label">Directorate General of Supplies & Transport (DGST):</span>
+              <p class="hl-desc">Sena Bhawan, DHQ PO, New Delhi - 110011</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+</div>

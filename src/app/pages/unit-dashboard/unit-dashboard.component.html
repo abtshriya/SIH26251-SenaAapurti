@@ -1,0 +1,427 @@
+<div class="unit-dash-wrapper">
+
+  <!-- ================= UNIT COMMAND HEADER ================= -->
+  <header class="unit-header-bar">
+    <div class="dash-container">
+      <div class="unit-profile-row">
+        <div class="unit-title-box">
+          <div class="unit-patch-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="unit-name-title">
+              <h2>{{ authService.currentUser()?.unit || '14 RAJPUT (MECHANISED)' }}</h2>
+              <span class="location-tag">Forward Defended Locality - Leh Sector (14 Corps)</span>
+            </div>
+            <div class="qm-info">
+              <span>Quartermaster: <strong>{{ authService.currentUser()?.name || 'Major Amit Sharma' }}</strong></span>
+              <span class="meta-sep">•</span>
+              <span>Service No: <strong>{{ authService.currentUser()?.serviceNo || 'IC-71044A' }}</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="unit-readiness-box">
+          <div class="readiness-meter">
+            <span class="r-label">Unit Combat Readiness</span>
+            <span class="r-value">{{ logisticsService.unitStock().readinessScore }}%</span>
+          </div>
+          <button class="btn-sos-trigger" (click)="setActiveTab('emergency-sos')">
+            <span class="pulse-white"></span>
+            SOS Emergency Indent
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= UNIT TABS ================= -->
+  <div class="unit-tabs-nav">
+    <div class="dash-container unit-tabs-flex">
+      <button
+        type="button"
+        class="unit-tab-btn"
+        [class.active]="activeTab === 'inventory'"
+        (click)="setActiveTab('inventory')"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/>
+        </svg>
+        <span>Unit Stock & Days of Supply</span>
+      </button>
+
+      <button
+        type="button"
+        class="unit-tab-btn"
+        [class.active]="activeTab === 'create-indent'"
+        (click)="setActiveTab('create-indent')"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 4.5v15m7.5-7.5h-15"/>
+        </svg>
+        <span>New Indent / Requisition</span>
+      </button>
+
+      <button
+        type="button"
+        class="unit-tab-btn"
+        [class.active]="activeTab === 'in-transit'"
+        (click)="setActiveTab('in-transit')"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.25V3.75a1.125 1.125 0 00-1.125-1.125H3.375A1.125 1.125 0 002.25 3.75v10.5"/>
+        </svg>
+        <span>Incoming In-Transit Consignments</span>
+      </button>
+
+      <button
+        type="button"
+        class="unit-tab-btn sos-tab"
+        [class.active]="activeTab === 'emergency-sos'"
+        (click)="setActiveTab('emergency-sos')"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 9v3.75m0-10.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
+        </svg>
+        <span>Emergency SOS Dispatch</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ================= UNIT CONTENT BODY ================= -->
+  <main class="unit-main-content">
+    <div class="dash-container">
+
+      <!-- ================= 1. UNIT INVENTORY ================= -->
+      <div *ngIf="activeTab === 'inventory'" class="unit-pane">
+
+        <!-- AI Proactive Replenishment Prompt -->
+        <div class="ai-unit-suggestion-card">
+          <div class="ai-sugg-left">
+            <span class="ai-spark-icon">⚡</span>
+            <div>
+              <h4 class="ai-sugg-title">AI Predictive Recommendation for 14 Rajput Mech:</h4>
+              <p class="ai-sugg-desc">
+                Upcoming cold wave (-28°C) within 48 hours will accelerate Sub-Zero HSD fuel burn by 32%. Pre-order 12,000L sub-zero diesel and 30x cold-start heater glow plugs now.
+              </p>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="btn-apply-rec"
+            (click)="applyAiRecommendation('Class III (POL)', 'Sub-Zero HSD & Cold-Start Glow Plugs', '12,000 Litres + 30 Units')"
+          >
+            Auto-Generate Requisition
+          </button>
+        </div>
+
+        <!-- 4 Classes Cards Grid -->
+        <div class="unit-classes-grid">
+          <!-- Class I -->
+          <div class="unit-class-card">
+            <div class="class-card-top">
+              <span class="class-num-badge">CLASS I</span>
+              <span class="class-status-tag status-healthy">{{ logisticsService.unitStock().classI.status }}</span>
+            </div>
+            <h3 class="class-title">Rations & Subsistence</h3>
+            <div class="class-stock-val">{{ logisticsService.unitStock().classI.current }}</div>
+            <div class="progress-bar-wrap">
+              <div class="progress-fill fill-green" [style.width.%]="logisticsService.unitStock().classI.percentage"></div>
+            </div>
+            <p class="class-notes">{{ logisticsService.unitStock().classI.notes }}</p>
+            <button class="btn-class-indent" (click)="applyAiRecommendation('Class I (Rations)', 'Combat Rations & Fresh Dry Stores', '1,200 Daily Ration Packs')">
+              + Indent Class I
+            </button>
+          </div>
+
+          <!-- Class III -->
+          <div class="unit-class-card">
+            <div class="class-card-top">
+              <span class="class-num-badge">CLASS III</span>
+              <span class="class-status-tag status-adequate">{{ logisticsService.unitStock().classIII.status }}</span>
+            </div>
+            <h3 class="class-title">POL (Fuel & Engine Oils)</h3>
+            <div class="class-stock-val">{{ logisticsService.unitStock().classIII.current }}</div>
+            <div class="progress-bar-wrap">
+              <div class="progress-fill fill-saffron" [style.width.%]="logisticsService.unitStock().classIII.percentage"></div>
+            </div>
+            <p class="class-notes">{{ logisticsService.unitStock().classIII.notes }}</p>
+            <button class="btn-class-indent" (click)="applyAiRecommendation('Class III (POL)', 'Winter Grade -40°C High-Speed Diesel', '10,000 Litres')">
+              + Indent Class III
+            </button>
+          </div>
+
+          <!-- Class V -->
+          <div class="unit-class-card">
+            <div class="class-card-top">
+              <span class="class-num-badge">CLASS V</span>
+              <span class="class-status-tag status-healthy">{{ logisticsService.unitStock().classV.status }}</span>
+            </div>
+            <h3 class="class-title">Ammunition & Missiles</h3>
+            <div class="class-stock-val">{{ logisticsService.unitStock().classV.current }}</div>
+            <div class="progress-bar-wrap">
+              <div class="progress-fill fill-green" [style.width.%]="logisticsService.unitStock().classV.percentage"></div>
+            </div>
+            <p class="class-notes">{{ logisticsService.unitStock().classV.notes }}</p>
+            <button class="btn-class-indent" (click)="applyAiRecommendation('Class V (Ammo)', '30mm BMP Cannon HEI Rounds', '400 Rounds')">
+              + Indent Class V
+            </button>
+          </div>
+
+          <!-- Class IX -->
+          <div class="unit-class-card">
+            <div class="class-card-top">
+              <span class="class-num-badge">CLASS IX</span>
+              <span class="class-status-tag status-review">{{ logisticsService.unitStock().classIX.status }}</span>
+            </div>
+            <h3 class="class-title">Armor Spares & Components</h3>
+            <div class="class-stock-val">{{ logisticsService.unitStock().classIX.current }}</div>
+            <div class="progress-bar-wrap">
+              <div class="progress-fill fill-amber" [style.width.%]="logisticsService.unitStock().classIX.percentage"></div>
+            </div>
+            <p class="class-notes">{{ logisticsService.unitStock().classIX.notes }}</p>
+            <button class="btn-class-indent" (click)="applyAiRecommendation('Class IX (Spares)', 'BMP-II Track Rubber Pads & Suspension Bushings', '24 Sets')">
+              + Indent Class IX
+            </button>
+          </div>
+        </div>
+
+        <!-- Unit Active Indents Table -->
+        <div class="unit-panel-card" style="margin-top: 24px;">
+          <div class="panel-header">
+            <h3 class="panel-title">14 Rajput Active Requisitions Status</h3>
+            <span class="panel-tag">Synced with COD Pathankot</span>
+          </div>
+
+          <div class="theaters-table-wrap">
+            <table class="tactical-table">
+              <thead>
+                <tr>
+                  <th>Voucher #</th>
+                  <th>Category</th>
+                  <th>Item Details</th>
+                  <th>Quantity</th>
+                  <th>Requisition Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let ind of logisticsService.indents()">
+                  <td class="font-bold text-army">{{ ind.id }}</td>
+                  <td>{{ ind.category }}</td>
+                  <td>{{ ind.itemDescription }}</td>
+                  <td class="font-bold">{{ ind.requestedQty }}</td>
+                  <td>{{ ind.dateCreated }}</td>
+                  <td>
+                    <span
+                      class="badge-military"
+                      [class.badge-gold]="ind.status === 'Pending HQ Approval'"
+                      [class.badge-success]="ind.status === 'Approved by DGOS' || ind.status === 'Dispatched from COD'"
+                    >
+                      {{ ind.status }}
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ================= 2. CREATE NEW INDENT ================= -->
+      <div *ngIf="activeTab === 'create-indent'" class="unit-pane">
+        <div class="indent-form-card">
+          <div class="form-card-header">
+            <h3>Standard Military Indent Requisition Form</h3>
+            <p>Generate authorized digital voucher for supply replenishment from Command Supply Depot.</p>
+          </div>
+
+          <div *ngIf="indentSuccessMsg" class="alert-success-banner" style="margin: 0 0 20px 0;">
+            {{ indentSuccessMsg }}
+          </div>
+
+          <form (submit)="submitNewIndent(); $event.preventDefault()">
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label">Sustenance Category Class</label>
+                <select [(ngModel)]="newCategory" name="newCategory" class="form-control">
+                  <option value="Class I (Rations)">Class I (Rations & Subsistence)</option>
+                  <option value="Class III (POL)">Class III (POL / Petroleum, Oil & Lubricants)</option>
+                  <option value="Class V (Ammo)">Class V (Ammunition & Explosives)</option>
+                  <option value="Class IX (Spares)">Class IX (Spares & Equipment Parts)</option>
+                  <option value="ECC / Winter Clothing">ECC / Extreme Cold Weather Clothing</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Tactical Operational Urgency</label>
+                <select [(ngModel)]="newUrgency" name="newUrgency" class="form-control">
+                  <option value="Routine">Routine Replenishment</option>
+                  <option value="Operational Priority 1">Operational Priority 1 (Forward Defense)</option>
+                  <option value="SOS Emergency">SOS Emergency (Critical Deficit)</option>
+                </select>
+              </div>
+
+              <div class="form-group full-width">
+                <label class="form-label">Item Description & Defense Part / NATO Code</label>
+                <input
+                  type="text"
+                  [(ngModel)]="newItemDesc"
+                  name="newItemDesc"
+                  placeholder="e.g. Sub-Zero High Speed Diesel (Winter Grade -40°C)"
+                  class="form-control"
+                />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Quantity Required with Units</label>
+                <input
+                  type="text"
+                  [(ngModel)]="newQuantity"
+                  name="newQuantity"
+                  placeholder="e.g. 15,000 Litres or 200 Sets"
+                  class="form-control"
+                />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Delivery Node / Drop Location</label>
+                <input
+                  type="text"
+                  value="14 Rajput Battalion HQ - FSD Shyok"
+                  class="form-control"
+                  readonly
+                />
+              </div>
+
+              <div class="form-group full-width">
+                <label class="form-label">Operational Remarks / Justification</label>
+                <textarea
+                  [(ngModel)]="newRemarks"
+                  name="newRemarks"
+                  rows="3"
+                  class="form-control"
+                  placeholder="Enter situational context, temperature drop, or upcoming tactical exercise requirements..."
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="form-actions-right">
+              <button type="submit" class="btn-army-primary">
+                Sign & Transmit Requisition Voucher
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- ================= 3. INCOMING CONSIGNMENTS ================= -->
+      <div *ngIf="activeTab === 'in-transit'" class="unit-pane">
+        <div class="unit-panel-card">
+          <div class="panel-header">
+            <h3 class="panel-title">In-Transit Convoys Bound for 14 Rajput Sector</h3>
+            <span class="panel-tag">GPS Satellite Tracking Active</span>
+          </div>
+
+          <div class="theaters-table-wrap">
+            <table class="tactical-table">
+              <thead>
+                <tr>
+                  <th>Convoy Callsign</th>
+                  <th>Origin Base</th>
+                  <th>Cargo Manifest</th>
+                  <th>Convoy Strength</th>
+                  <th>Estimated Arrival (ETA)</th>
+                  <th>Escort Commander</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="font-bold">GARUDA-01</td>
+                  <td>COD Pathankot</td>
+                  <td>Class III (Sub-Zero POL) - 320 T</td>
+                  <td>28 ALS Heavy Trucks</td>
+                  <td>
+                    <span class="eta-tag">4 hrs 15 mins</span>
+                  </td>
+                  <td>Subedar R. P. Yadav (ASC)</td>
+                  <td>
+                    <button class="btn-ack" (click)="acknowledgeDelivery('GARUDA-01')">
+                      Acknowledge & Receive
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="font-bold">HIMALAYA-9</td>
+                  <td>21 Adv Base Depot (Udhampur)</td>
+                  <td>Winter Stocking ECC Kits - 420 T</td>
+                  <td>34 6x6 Heavy Trucks</td>
+                  <td>
+                    <span class="eta-tag">7 hrs 10 mins</span>
+                  </td>
+                  <td>Major S. Nambiar (ASC)</td>
+                  <td>
+                    <button class="btn-ack" (click)="acknowledgeDelivery('HIMALAYA-9')">
+                      Acknowledge & Receive
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= 4. EMERGENCY SOS DISPATCH ================= -->
+      <div *ngIf="activeTab === 'emergency-sos'" class="unit-pane">
+        <div class="sos-card-wrapper">
+          <div class="sos-banner">
+            <span class="sos-blink-icon">🚨</span>
+            <div>
+              <h3>HIGH PRIORITY DEFENSE TACTICAL RESUPPLY ESCALATION (SOS)</h3>
+              <p>For immediate aerial casualty evacuation, ammo emergency, or snow avalanche supply drops.</p>
+            </div>
+          </div>
+
+          <div *ngIf="sosSuccess" class="sos-success-alert">
+            <strong>SOS EMERGENCY BROADCAST TRANSMITTED!</strong><br>
+            Tasking order dispatched to 14 Corps Air Wing (Leh Air Base) and DGOS Tactical Operations Cell. An IAF Mi-17V5 emergency drop has been initiated for target coordinates: {{ sosCoordinates }}.
+          </div>
+
+          <form *ngIf="!sosSuccess" (submit)="submitEmergencySos(); $event.preventDefault()" class="sos-form">
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label">Isolated Picket / Post Name</label>
+                <input type="text" [(ngModel)]="sosSector" name="sosSector" class="form-control">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">GPS Coordinates</label>
+                <input type="text" [(ngModel)]="sosCoordinates" name="sosCoordinates" class="form-control">
+              </div>
+
+              <div class="form-group full-width">
+                <label class="form-label">Critical Emergency Supply Needed</label>
+                <input type="text" [(ngModel)]="sosItem" name="sosItem" class="form-control">
+              </div>
+
+              <div class="form-group full-width">
+                <label class="form-label">Field Reason & Battlefield Situation</label>
+                <textarea [(ngModel)]="sosReason" name="sosReason" rows="3" class="form-control"></textarea>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-sos-fire">
+              🚨 TRANSMIT IMMEDIATE AERIAL DROP TASKING (SOS)
+            </button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>

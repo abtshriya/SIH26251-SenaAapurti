@@ -1,0 +1,602 @@
+<div class="dashboard-wrapper">
+
+  <!-- ================= TOP COMMAND READINESS HEADER ================= -->
+  <header class="dash-command-header">
+    <div class="dash-container">
+      <div class="officer-profile-row">
+        <div class="officer-identity">
+          <div class="insignia-badge">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="officer-rank-title">
+              <span class="rank-label">{{ authService.currentUser()?.rank || 'Lieutenant General' }}</span>
+              <span class="user-name">{{ authService.currentUser()?.name || 'Lt Gen V. K. Rawat, PVSM, AVSM' }}</span>
+            </div>
+            <div class="officer-meta">
+              <span>{{ authService.currentUser()?.unit || 'Master General of Sustenance (MGS), Army HQ' }}</span>
+              <span class="meta-sep">•</span>
+              <span class="badge-gold">CLEARANCE: LEVEL 1 (STRATEGIC)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="theater-alert-status">
+          <div class="alert-box defcon-active">
+            <span class="pulse-amber"></span>
+            <div class="alert-info">
+              <span class="alert-tag">THEATER DEFENSE STATE</span>
+              <span class="alert-code">DEFCON 2 - HIGH LOGISTICS READINESS</span>
+            </div>
+          </div>
+          <button class="btn-logout" (click)="authService.logout()">
+            Sign Out
+          </button>
+        </div>
+      </div>
+
+      <!-- Strategic Readiness Scorecards (Class I, III, V, IX) -->
+      <div class="readiness-hud-grid">
+        <div class="hud-card overall-card">
+          <div class="hud-top">
+            <span class="hud-title">National Logistics Readiness</span>
+            <span class="hud-badge-green">Optimal</span>
+          </div>
+          <div class="hud-score">96.8%</div>
+          <div class="progress-bar-wrap">
+            <div class="progress-fill" style="width: 96.8%;"></div>
+          </div>
+          <span class="hud-sub">All 7 Operational Commands Synced</span>
+        </div>
+
+        <div class="hud-card">
+          <div class="hud-top">
+            <span class="hud-title">Class I (Rations & Water)</span>
+            <span class="hud-metric">180 DOS</span>
+          </div>
+          <div class="hud-score-sub">98.2% Buffer</div>
+          <div class="progress-bar-wrap">
+            <div class="progress-fill fill-green" style="width: 98.2%;"></div>
+          </div>
+          <span class="hud-sub">Winter stocking Siachen & Ladakh 100%</span>
+        </div>
+
+        <div class="hud-card">
+          <div class="hud-top">
+            <span class="hud-title">Class III (POL & Aviation Fuel)</span>
+            <span class="hud-metric">94.5% Cap</span>
+          </div>
+          <div class="hud-score-sub">Sub-Zero HSD Secured</div>
+          <div class="progress-bar-wrap">
+            <div class="progress-fill fill-saffron" style="width: 94.5%;"></div>
+          </div>
+          <span class="hud-sub">Underground storage caverns intact</span>
+        </div>
+
+        <div class="hud-card">
+          <div class="hud-top">
+            <span class="hud-title">Class V (Munitions & Missiles)</span>
+            <span class="hud-metric">40 DOF</span>
+          </div>
+          <div class="hud-score-sub">Days of Fire Reserves</div>
+          <div class="progress-bar-wrap">
+            <div class="progress-fill fill-green" style="width: 97%;"></div>
+          </div>
+          <span class="hud-sub">155mm & ATGM stocks at forward nodes</span>
+        </div>
+
+        <div class="hud-card">
+          <div class="hud-top">
+            <span class="hud-title">Class IX (Armor & Vehicle Spares)</span>
+            <span class="hud-metric">89.4% Ready</span>
+          </div>
+          <div class="hud-score-sub">Fleet Readiness</div>
+          <div class="progress-bar-wrap">
+            <div class="progress-fill fill-amber" style="width: 89.4%;"></div>
+          </div>
+          <span class="hud-sub">T-90 & BMP-II tracks under resupply</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= DASHBOARD NAVIGATION TABS ================= -->
+  <div class="dash-tabs-nav">
+    <div class="dash-container tabs-flex">
+      <button
+        type="button"
+        class="dash-tab-btn"
+        [class.active]="activeTab === 'overview'"
+        (click)="setActiveTab('overview')"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7"/>
+          <rect x="14" y="3" width="7" height="7"/>
+          <rect x="14" y="14" width="7" height="7"/>
+          <rect x="3" y="14" width="7" height="7"/>
+        </svg>
+        <span>Strategic Overview</span>
+      </button>
+
+      <button
+        type="button"
+        class="dash-tab-btn"
+        [class.active]="activeTab === 'convoys'"
+        (click)="setActiveTab('convoys')"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.25V3.75a1.125 1.125 0 00-1.125-1.125H3.375A1.125 1.125 0 002.25 3.75v10.5"/>
+        </svg>
+        <span>Live Convoy Telemetry ({{ logisticsService.convoys().length }})</span>
+      </button>
+
+      <button
+        type="button"
+        class="dash-tab-btn"
+        [class.active]="activeTab === 'ai-alerts'"
+        (click)="setActiveTab('ai-alerts')"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
+        </svg>
+        <span>AI Predictive Alerts</span>
+        <span class="badge-count">{{ logisticsService.alerts().length }}</span>
+      </button>
+
+      <button
+        type="button"
+        class="dash-tab-btn"
+        [class.active]="activeTab === 'simulation'"
+        (click)="setActiveTab('simulation')"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"/>
+        </svg>
+        <span>What-If Wargame Simulator</span>
+      </button>
+
+      <button
+        type="button"
+        class="dash-tab-btn"
+        [class.active]="activeTab === 'approvals'"
+        (click)="setActiveTab('approvals')"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <span>Strategic Requisition Queue</span>
+        <span class="badge-count">{{ logisticsService.indents().length }}</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ================= MAIN TAB VIEWS ================= -->
+  <main class="dash-main-body">
+    <div class="dash-container">
+
+      <!-- Alert Action Banner -->
+      <div *ngIf="alertActionSuccess" class="action-feedback-banner">
+        {{ alertActionSuccess }}
+      </div>
+
+      <!-- ================= 1. STRATEGIC OVERVIEW ================= -->
+      <div *ngIf="activeTab === 'overview'" class="tab-pane">
+        <div class="dash-grid-2">
+
+          <!-- Command Theaters Grid -->
+          <div class="panel-card">
+            <div class="panel-header">
+              <h3 class="panel-title">Army Operational Theaters Status</h3>
+              <span class="panel-tag">Real-Time Sensor Sync</span>
+            </div>
+            <div class="theaters-table-wrap">
+              <table class="tactical-table">
+                <thead>
+                  <tr>
+                    <th>Command / HQs</th>
+                    <th>Corps Under Ops</th>
+                    <th>Readiness</th>
+                    <th>Alert State</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let t of theaters">
+                    <td class="font-bold">{{ t.name }}</td>
+                    <td>{{ t.corps }}</td>
+                    <td>
+                      <span class="font-bold text-army">{{ t.readiness }}%</span>
+                    </td>
+                    <td>
+                      <span class="badge-military badge-saffron">{{ t.alertLevel }}</span>
+                    </td>
+                    <td>
+                      <span class="badge-military badge-success">{{ t.status }}</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Central Ordnance Depots (CODs) Status -->
+          <div class="panel-card">
+            <div class="panel-header">
+              <h3 class="panel-title">Central Ordnance Depots (COD) Throughput</h3>
+              <span class="panel-tag">Automated Logistics Nodes</span>
+            </div>
+            <div class="theaters-table-wrap">
+              <table class="tactical-table">
+                <thead>
+                  <tr>
+                    <th>Depot Name</th>
+                    <th>Primary Sustenance Class</th>
+                    <th>Fill Level</th>
+                    <th>Daily Throughput</th>
+                    <th>Node Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let d of depots">
+                    <td class="font-bold">{{ d.name }}</td>
+                    <td>{{ d.classStocked }}</td>
+                    <td>
+                      <div class="depot-fill-bar">
+                        <span>{{ d.stockLevel }}</span>
+                      </div>
+                    </td>
+                    <td>{{ d.throughput }}</td>
+                    <td>
+                      <span class="status-indicator-green">{{ d.status }}</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ================= 2. LIVE CONVOY TELEMETRY ================= -->
+      <div *ngIf="activeTab === 'convoys'" class="tab-pane">
+        <!-- Interactive Convoy Map Board Simulation -->
+        <div class="panel-card map-panel-card">
+          <div class="panel-header">
+            <div class="map-title-row">
+              <span class="live-beacon-dot"></span>
+              <h3 class="panel-title">Tactical Border Transit Map & Waypoint Telemetry</h3>
+            </div>
+            <div class="map-controls">
+              <span class="map-legend-item"><span class="legend-dot green"></span> Clear Route</span>
+              <span class="map-legend-item"><span class="legend-dot amber"></span> Weather Alert</span>
+              <span class="map-legend-item"><span class="legend-dot red"></span> High Altitude Rerouted</span>
+            </div>
+          </div>
+
+          <div class="tactical-map-display">
+            <!-- Simulated Tactical Defense Grid -->
+            <div class="tactical-grid-overlay"></div>
+
+            <!-- Route Axes Visual Lines -->
+            <svg class="map-svg-routes" viewBox="0 0 1000 360" preserveAspectRatio="none">
+              <!-- Northern Axis: Pathankot -> Leh -->
+              <path d="M120 280 L280 200 L440 120 L580 80" stroke="#10b981" stroke-width="4" stroke-dasharray="6,4" fill="none"/>
+              <!-- Zojila Axis: Jammu -> Srinagar -> Kargil -->
+              <path d="M160 310 L300 240 L380 180 L490 140" stroke="#f59e0b" stroke-width="4" stroke-dasharray="6,4" fill="none"/>
+              <!-- Eastern Axis: Guwahati -> Tawang -->
+              <path d="M650 300 L760 210 L840 130" stroke="#10b981" stroke-width="4" stroke-dasharray="6,4" fill="none"/>
+              <!-- Western Axis: Agra -> Jodhpur -->
+              <path d="M350 330 L480 300 L560 320" stroke="#3b82f6" stroke-width="4" stroke-dasharray="6,4" fill="none"/>
+
+              <!-- Mountain Pass Badges -->
+              <circle cx="440" cy="120" r="7" fill="#d4af37"/>
+              <text x="440" y="105" text-anchor="middle" fill="#facc15" font-size="11" font-weight="bold">ATAL TUNNEL</text>
+
+              <circle cx="380" cy="180" r="7" fill="#ef4444"/>
+              <text x="380" y="165" text-anchor="middle" fill="#f87171" font-size="11" font-weight="bold">ZOJILA PASS (BLOCKED)</text>
+
+              <circle cx="760" cy="210" r="7" fill="#10b981"/>
+              <text x="760" y="195" text-anchor="middle" fill="#6ee7b7" font-size="11" font-weight="bold">SELA TUNNEL</text>
+            </svg>
+
+            <!-- Convoy Interactive Blips -->
+            <div
+              *ngFor="let c of logisticsService.convoys()"
+              class="convoy-blip"
+              [style.top]="(c.gpsCoordinates.lat - 25) * 28 + 'px'"
+              [style.left]="(c.gpsCoordinates.lng - 70) * 42 + 'px'"
+              [class.active]="selectedConvoy?.id === c.id"
+              (click)="inspectConvoy(c)"
+              [title]="c.callsign + ' (' + c.cargoType + ')'"
+            >
+              <div class="blip-pulse" [class.danger]="c.riskLevel === 'High'"></div>
+              <div class="blip-badge">{{ c.callsign }}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Convoys Detailed Telemetry Table -->
+        <div class="panel-card" style="margin-top: 24px;">
+          <div class="panel-header">
+            <h3 class="panel-title">Active Convoy Fleet Manifest</h3>
+            <span class="panel-tag">Satellite Transponder Linked</span>
+          </div>
+
+          <div class="theaters-table-wrap">
+            <table class="tactical-table">
+              <thead>
+                <tr>
+                  <th>Convoy Callsign</th>
+                  <th>Origin / Node</th>
+                  <th>Destination Sector</th>
+                  <th>Sustenance Cargo</th>
+                  <th>Vehicles</th>
+                  <th>ETA</th>
+                  <th>Hazard Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let c of logisticsService.convoys()">
+                  <td>
+                    <div class="convoy-callsign-box">
+                      <span class="callsign-text">{{ c.callsign }}</span>
+                      <span class="convoy-id">{{ c.id }}</span>
+                    </div>
+                  </td>
+                  <td>{{ c.source }}</td>
+                  <td class="font-bold">{{ c.destination }}</td>
+                  <td>
+                    <span class="cargo-pill">{{ c.cargoType }}</span>
+                    <span class="tonnage-tag">({{ c.tonnage }} T)</span>
+                  </td>
+                  <td>{{ c.vehiclesCount }} ALS Trucks</td>
+                  <td>
+                    <span class="eta-tag">{{ c.eta }}</span>
+                  </td>
+                  <td>
+                    <div *ngIf="c.weatherAlert" class="alert-inline-box">
+                      <span class="alert-icon">⚠️</span>
+                      <span>{{ c.weatherAlert }}</span>
+                    </div>
+                    <span *ngIf="!c.weatherAlert" class="badge-military badge-success">Clear Route</span>
+                  </td>
+                  <td>
+                    <button
+                      type="button"
+                      class="btn-action-reroute"
+                      (click)="triggerReroute(c)"
+                      title="Activate secondary pass bypass"
+                    >
+                      Reroute via BRO Axis
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= 3. AI PREDICTIVE ALERTS ================= -->
+      <div *ngIf="activeTab === 'ai-alerts'" class="tab-pane">
+        <div class="alerts-stack">
+          <div
+            *ngFor="let a of logisticsService.alerts()"
+            class="ai-alert-card"
+            [class.border-red]="a.severity === 'Red'"
+            [class.border-amber]="a.severity === 'Amber'"
+            [class.border-yellow]="a.severity === 'Yellow'"
+          >
+            <div class="alert-card-top">
+              <div class="alert-top-left">
+                <span class="severity-badge" [class.badge-red]="a.severity === 'Red'" [class.badge-amber]="a.severity === 'Amber'">
+                  {{ a.severity }} THREAT LEVEL
+                </span>
+                <span class="theater-label">{{ a.theater }} • {{ a.sector }}</span>
+              </div>
+              <span class="alert-time">{{ a.timestamp }} hrs</span>
+            </div>
+
+            <h4 class="alert-headline">{{ a.headline }}</h4>
+            <p class="alert-details">{{ a.details }}</p>
+
+            <div class="recommendation-bar">
+              <div class="rec-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+                AI PREEMPTIVE ACTION PLAN:
+              </div>
+              <p class="rec-action-text">{{ a.recommendedAction }}</p>
+              <button
+                type="button"
+                class="btn-army-primary rec-execute-btn"
+                (click)="executeAlertRemedy(a)"
+              >
+                Authorize Pre-Emptive Dispatch Order
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= 4. WHAT-IF WARGAME SIMULATOR ================= -->
+      <div *ngIf="activeTab === 'simulation'" class="tab-pane">
+        <div class="dash-grid-2">
+
+          <!-- Simulation Controls -->
+          <div class="panel-card">
+            <div class="panel-header">
+              <h3 class="panel-title">Crisis Scenario Parameters</h3>
+              <span class="panel-tag">Predictive Neural Engine</span>
+            </div>
+
+            <div class="sim-form">
+              <div class="form-group">
+                <label class="form-label">Tactical Stress Scenario</label>
+                <select [(ngModel)]="selectedScenario" class="form-control">
+                  <option *ngFor="let sc of scenarios" [value]="sc">{{ sc }}</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <div class="slider-header">
+                  <label class="form-label">Weather Hazard / Operational Intensity: {{ simIntensity }}%</label>
+                </div>
+                <input
+                  type="range"
+                  min="20"
+                  max="100"
+                  [(ngModel)]="simIntensity"
+                  class="range-slider"
+                />
+                <div class="slider-scale">
+                  <span>Moderate (20%)</span>
+                  <span>Severe (60%)</span>
+                  <span>Catastrophic (100%)</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="checkbox-label" style="font-weight: 600;">
+                  <input type="checkbox" [(ngModel)]="enableAirlift">
+                  <span>Authorize Emergency IAF Heavy Airlift Sorties (C-17 & C-130J)</span>
+                </label>
+              </div>
+
+              <button
+                type="button"
+                class="btn-saffron-primary full-width"
+                (click)="runScenarioSimulation()"
+              >
+                <span>Run Wargame Simulation & Recalculate Buffers</span>
+                <svg viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Simulation Projected Outcomes -->
+          <div class="panel-card sim-results-card">
+            <div class="panel-header">
+              <h3 class="panel-title">Projected Supply Resilience Metrics</h3>
+              <span class="badge-military badge-gold">AI MODEL CONFIDENCE: 98.4%</span>
+            </div>
+
+            <div class="sim-kpi-grid">
+              <div class="sim-kpi-box">
+                <span class="kpi-label">Simulated Days of Stock</span>
+                <span class="kpi-value text-army">{{ logisticsService.simulationState().simulatedDaysOfStock }} Days</span>
+                <span class="kpi-desc">Minimum defense baseline: 15 Days</span>
+              </div>
+
+              <div class="sim-kpi-box">
+                <span class="kpi-label">Critical Shortfall Countdown</span>
+                <span class="kpi-value text-saffron">{{ logisticsService.simulationState().projectedShortfallHour }} hrs</span>
+                <span class="kpi-desc">Time remaining before forward rations run low</span>
+              </div>
+            </div>
+
+            <div class="sim-recommendation-box">
+              <h4 class="sim-rec-title">AI Remediation Route:</h4>
+              <p class="sim-rec-text">{{ logisticsService.simulationState().remedyRecommendation }}</p>
+            </div>
+
+            <div class="sim-passes-status">
+              <div class="pass-status-pill green">
+                <span>Atal Tunnel Axis:</span> <strong>OPERATIONAL (Heavy Convoys Cleared)</strong>
+              </div>
+              <div class="pass-status-pill amber">
+                <span>Shinku La Bypass:</span> <strong>LIGHT VEHICLES ONLY</strong>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ================= 5. STRATEGIC REQUISITION APPROVALS ================= -->
+      <div *ngIf="activeTab === 'approvals'" class="tab-pane">
+        <div class="panel-card">
+          <div class="panel-header">
+            <h3 class="panel-title">Directorate General of Ordnance Services (DGOS) Indents Queue</h3>
+            <span class="panel-tag">High-Value / Tactical Requisitions</span>
+          </div>
+
+          <div class="theaters-table-wrap">
+            <table class="tactical-table">
+              <thead>
+                <tr>
+                  <th>Indent ID</th>
+                  <th>Requesting Formation</th>
+                  <th>Sustenance Category</th>
+                  <th>Item Description</th>
+                  <th>Quantity</th>
+                  <th>Priority</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let ind of logisticsService.indents()">
+                  <td class="font-bold text-army">{{ ind.id }}</td>
+                  <td>{{ ind.unitName }}</td>
+                  <td>{{ ind.category }}</td>
+                  <td>
+                    <div class="font-bold">{{ ind.itemDescription }}</div>
+                    <span class="table-sub">{{ ind.remarks }}</span>
+                  </td>
+                  <td class="font-bold">{{ ind.requestedQty }}</td>
+                  <td>
+                    <span
+                      class="badge-military"
+                      [class.badge-danger]="ind.urgency === 'Operational Priority 1' || ind.urgency === 'SOS Emergency'"
+                      [class.badge-army]="ind.urgency === 'Routine'"
+                    >
+                      {{ ind.urgency }}
+                    </span>
+                  </td>
+                  <td>
+                    <span
+                      class="badge-military"
+                      [class.badge-gold]="ind.status === 'Pending HQ Approval'"
+                      [class.badge-success]="ind.status === 'Approved by DGOS' || ind.status === 'Dispatched from COD'"
+                    >
+                      {{ ind.status }}
+                    </span>
+                  </td>
+                  <td>
+                    <div class="action-btn-group">
+                      <button
+                        *ngIf="ind.status === 'Pending HQ Approval'"
+                        type="button"
+                        class="btn-approve"
+                        (click)="approveIndent(ind.id)"
+                      >
+                        Approve
+                      </button>
+                      <button
+                        *ngIf="ind.status === 'Approved by DGOS'"
+                        type="button"
+                        class="btn-dispatch"
+                        (click)="dispatchIndent(ind.id)"
+                      >
+                        Issue Dispatch
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>

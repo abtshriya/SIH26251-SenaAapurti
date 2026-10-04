@@ -1,0 +1,104 @@
+<!-- ================= PATRIOTIC TAGLINE STRIP (FROM REFERENCE) ================= -->
+<div class="motto-strip-section">
+  <div class="motto-container">
+    <div class="motto-devanagari">
+      {{ langService.t('footerMotto') }}
+    </div>
+    <div class="motto-english">
+      {{ langService.t('footerSubMotto') }}
+    </div>
+    <div class="tricolor-dash-line">
+      <span class="tricolor-dash saffron"></span>
+      <span class="tricolor-dash white"></span>
+      <span class="tricolor-dash green"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ================= OFFICIAL DEFENSE FOOTER ================= -->
+<footer class="official-footer">
+  <div class="footer-container">
+    <div class="footer-grid">
+      <!-- Col 1: Portal Overview -->
+      <div class="footer-col brand-col">
+        <div class="footer-logo">
+          <span class="f-sena">Sena</span><span class="f-aapurti">Aapurti</span>
+        </div>
+        <p class="footer-desc">
+          Automated Predictive Logistics & Ordnance Sustenance Platform of the Indian Army. Enabling seamless supply synchronization from Strategic Depots to Forward Defended Localities across high-altitude and desert battlefronts.
+        </p>
+        <div class="cert-badges">
+          <span class="cert-pill">CERT-In Compliant</span>
+          <span class="cert-pill">Army Data Centre (ADC)</span>
+          <span class="cert-pill">Govt of India</span>
+        </div>
+      </div>
+
+      <!-- Col 2: Quick Links -->
+      <div class="footer-col">
+        <h4 class="col-title">Navigation & Portals</h4>
+        <ul class="col-links">
+          <li><a routerLink="/">Home Portal</a></li>
+          <li><a routerLink="/about">About SenaAapurti</a></li>
+          <li><a routerLink="/ai-logistics">AI & Predictive Algorithms</a></li>
+          <li><a routerLink="/features">Defense Capabilities</a></li>
+          <li><a routerLink="/auth" [queryParams]="{portal: 'command'}">Command / Admin Portal</a></li>
+          <li><a routerLink="/auth" [queryParams]="{portal: 'unit'}">Unit Requisition Portal</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Guidelines & Circulars -->
+      <div class="footer-col">
+        <h4 class="col-title">Resources & SOPs</h4>
+        <ul class="col-links">
+          <li><a routerLink="/guidelines">Standard Operating Procedures (SOPs)</a></li>
+          <li><a routerLink="/guidelines">Winter Stocking Protocol 2026</a></li>
+          <li><a routerLink="/downloads">Army Logistics Manual v4.2</a></li>
+          <li><a routerLink="/downloads">Field Tablet APK (Offline Client)</a></li>
+          <li><a routerLink="/downloads">Indent Templates & Barcodes</a></li>
+          <li><a routerLink="/support">Logistics Ticket System</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Command Helpdesk & Contact -->
+      <div class="footer-col">
+        <h4 class="col-title">24x7 Logistics Ops Room</h4>
+        <div class="contact-card">
+          <div class="contact-item">
+            <span class="c-label">Helpline:</span>
+            <span class="c-val">1800-11-SENA (7362)</span>
+          </div>
+          <div class="contact-item">
+            <span class="c-label">Army WAN:</span>
+            <span class="c-val">ASCON-NET Node 4481</span>
+          </div>
+          <div class="contact-item">
+            <span class="c-label">HQs:</span>
+            <span class="c-val">Sena Bhawan, New Delhi - 110011</span>
+          </div>
+          <div class="contact-item">
+            <span class="c-label">Email:</span>
+            <span class="c-val">support.aapurti&#64;nic.in</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Copyright & Compliance Bar -->
+    <div class="footer-bottom-bar">
+      <div class="bottom-left">
+        <p>{{ langService.t('copyright') }}</p>
+        <span class="update-tag">Portal Content Managed by DGOS, Indian Army | Last Updated: 04 October 2026</span>
+      </div>
+      <div class="bottom-right">
+        <a routerLink="/support">Terms of Use</a>
+        <span class="dot-sep">•</span>
+        <a routerLink="/support">Privacy Policy</a>
+        <span class="dot-sep">•</span>
+        <a routerLink="/support">Security Guidelines</a>
+        <span class="dot-sep">•</span>
+        <a routerLink="/contact">Contact Webmaster</a>
+      </div>
+    </div>
+  </div>
+</footer>

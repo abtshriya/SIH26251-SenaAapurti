@@ -1,0 +1,237 @@
+/* ================= PATRIOTIC TAGLINE STRIP ================= */
+.motto-strip-section {
+  background: linear-gradient(180deg, #0b160f 0%, #112217 100%);
+  border-top: 1px solid rgba(212, 175, 55, 0.3);
+  padding: 20px 20px 16px;
+  text-align: center;
+  position: relative;
+}
+
+.motto-container {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.motto-devanagari {
+  font-family: 'Tiro Devanagari Hindi', serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.05em;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.motto-english {
+  font-family: var(--font-military);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #d4af37;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.tricolor-dash-line {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.tricolor-dash {
+  width: 40px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.tricolor-dash.saffron { background-color: #f97316; }
+.tricolor-dash.white { background-color: #ffffff; }
+.tricolor-dash.green { background-color: #16a34a; }
+
+/* ================= OFFICIAL DEFENSE FOOTER ================= */
+.official-footer {
+  background-color: #0d1710;
+  color: #d1d5db;
+  padding: 45px 0 25px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.88rem;
+}
+
+.footer-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr 1.2fr 1.6fr;
+  gap: 36px;
+  margin-bottom: 35px;
+}
+
+.brand-col .footer-logo {
+  font-family: var(--font-military);
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.f-sena {
+  color: #ffffff;
+}
+
+.f-aapurti {
+  color: #f59e0b;
+}
+
+.footer-desc {
+  color: #9ca3af;
+  line-height: 1.6;
+  margin-bottom: 18px;
+  font-size: 0.86rem;
+}
+
+.cert-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cert-pill {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  color: #d4af37;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.col-title {
+  color: #ffffff;
+  font-size: 0.98rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  position: relative;
+  padding-bottom: 8px;
+  letter-spacing: 0.03em;
+}
+
+.col-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 28px;
+  height: 2.5px;
+  background: #ea580c;
+  border-radius: 2px;
+}
+
+.col-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.col-links a {
+  color: #9ca3af;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
+}
+
+.col-links a:hover {
+  color: #f97316;
+  transform: translateX(4px);
+}
+
+.contact-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.c-label {
+  font-size: 0.72rem;
+  color: #d4af37;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.c-val {
+  color: #f3f4f6;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* Bottom Bar */
+.footer-bottom-bar {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 0.78rem;
+  color: #9ca3af;
+}
+
+.update-tag {
+  display: block;
+  font-size: 0.72rem;
+  color: #6b7280;
+  margin-top: 3px;
+}
+
+.bottom-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.bottom-right a {
+  color: #9ca3af;
+}
+
+.bottom-right a:hover {
+  color: #ffffff;
+}
+
+.dot-sep {
+  color: #4b5563;
+}
+
+@media (max-width: 992px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer-bottom-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

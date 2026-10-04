@@ -1,0 +1,305 @@
+<main id="main-content" class="home-page-wrapper">
+
+  <!-- ================= HERO CAROUSEL SECTION (MATCHING REFERENCE) ================= -->
+  <section class="hero-carousel-section" (mouseenter)="stopAutoSlide()" (mouseleave)="startAutoSlide()">
+    <!-- Slides Container -->
+    <div class="slides-viewport">
+      <div
+        *ngFor="let slide of slides; let i = index"
+        class="slide-item"
+        [class.active]="currentSlideIndex() === i"
+        [style.backgroundImage]="'url(' + slide.image + ')'"
+      >
+        <div class="slide-overlay-gradient"></div>
+      </div>
+    </div>
+
+    <!-- Carousel Chevrons (< and > from reference image) -->
+    <button type="button" class="carousel-arrow prev-arrow" (click)="prevSlide()" aria-label="Previous Slide">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <button type="button" class="carousel-arrow next-arrow" (click)="nextSlide()" aria-label="Next Slide">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <!-- Centered Hero Branding Overlay (Exact layout as reference) -->
+    <div class="hero-content-center">
+      <div class="hero-brand-title-wrap">
+        <h2 class="hero-logo-main">
+          <span class="hero-sena">Sena</span><span class="hero-aapurti">Aapurti</span>
+        </h2>
+        <div class="hero-tagline-motto">
+          {{ langService.t('heroTagline') }}
+        </div>
+      </div>
+
+      <!-- 4 Capability Badges / Pills (From Reference) -->
+      <div class="hero-pills-grid">
+        <div class="hero-pill-badge">
+          <div class="pill-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <circle cx="12" cy="12" r="6"/>
+              <circle cx="12" cy="12" r="2"/>
+            </svg>
+          </div>
+          <span class="pill-text">{{ langService.t('heroPill1') }}</span>
+        </div>
+
+        <div class="hero-pill-badge">
+          <div class="pill-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.25V3.75a1.125 1.125 0 00-1.125-1.125H3.375A1.125 1.125 0 002.25 3.75v10.5"/>
+            </svg>
+          </div>
+          <span class="pill-text">{{ langService.t('heroPill2') }}</span>
+        </div>
+
+        <div class="hero-pill-badge">
+          <div class="pill-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/>
+            </svg>
+          </div>
+          <span class="pill-text">{{ langService.t('heroPill3') }}</span>
+        </div>
+
+        <div class="hero-pill-badge">
+          <div class="pill-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
+            </svg>
+          </div>
+          <span class="pill-text">{{ langService.t('heroPill4') }}</span>
+        </div>
+      </div>
+
+      <!-- Slide indicator dots -->
+      <div class="carousel-dots-row">
+        <button
+          *ngFor="let s of slides; let idx = index"
+          type="button"
+          class="dot-indicator"
+          [class.active]="currentSlideIndex() === idx"
+          (click)="goToSlide(idx)"
+          [attr.aria-label]="'Go to slide ' + (idx + 1)"
+        ></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MISSION OVERVIEW CARD (FROM REFERENCE) ================= -->
+  <section class="mission-summary-section">
+    <div class="section-container">
+      <div class="mission-box-card">
+        <div class="tricolor-accent-line top-accent"></div>
+        <p class="mission-paragraph">
+          {{ langService.t('missionText') }}
+        </p>
+        <div class="tricolor-accent-line bottom-accent"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DUAL PORTAL ACCESS GATEWAYS (FROM REFERENCE) ================= -->
+  <section class="portals-gateway-section">
+    <div class="section-container">
+      <div class="portals-dual-grid">
+
+        <!-- CARD 1: COMMAND / ADMIN PORTAL -->
+        <div class="portal-card command-card">
+          <!-- Watermark silhouette India Gate / HQ -->
+          <div class="portal-watermark-icon left-wm">
+            <svg viewBox="0 0 100 100" fill="currentColor">
+              <rect x="20" y="80" width="60" height="15" opacity="0.1"/>
+              <rect x="25" y="30" width="16" height="50" opacity="0.1"/>
+              <rect x="59" y="30" width="16" height="50" opacity="0.1"/>
+              <path d="M20 30H80V20H20V30Z" opacity="0.1"/>
+              <path d="M41 40C41 35 59 35 59 40V80H41V40Z" opacity="0.1"/>
+            </svg>
+          </div>
+
+          <div class="portal-card-header">
+            <div class="portal-icon-container command-icon">
+              <!-- Headquarters Building Icon -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M12 21v-4M4 21h16M3 10h18M5 10v11M19 10v11M12 10V6M8 6h8M12 2v4"/>
+                <rect x="7" y="14" width="3" height="3" fill="currentColor"/>
+                <rect x="14" y="14" width="3" height="3" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="portal-info-meta">
+              <h3 class="portal-title">{{ langService.t('commandPortalTitle') }}</h3>
+              <p class="portal-desc">{{ langService.t('commandPortalDesc') }}</p>
+            </div>
+          </div>
+
+          <div class="portal-action-row">
+            <button
+              type="button"
+              class="portal-login-btn command-btn"
+              (click)="navigateToPortal('command')"
+            >
+              <span>{{ langService.t('portalLoginBtn') }}</span>
+              <svg viewBox="0 0 20 20" fill="currentColor" class="arrow-icon">
+                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- CARD 2: UNIT PORTAL -->
+        <div class="portal-card unit-card">
+          <!-- Watermark silhouette Helicopter / Tactical unit -->
+          <div class="portal-watermark-icon right-wm">
+            <svg viewBox="0 0 100 100" fill="currentColor">
+              <path d="M15 45H85M45 45V30H55V45M30 50C30 50 35 65 65 65C80 65 85 55 85 50H30ZM10 40H90" opacity="0.1"/>
+            </svg>
+          </div>
+
+          <div class="portal-card-header">
+            <div class="portal-icon-container unit-icon">
+              <!-- Soldiers Formation Icon -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/>
+              </svg>
+            </div>
+            <div class="portal-info-meta">
+              <h3 class="portal-title">{{ langService.t('unitPortalTitle') }}</h3>
+              <p class="portal-desc">{{ langService.t('unitPortalDesc') }}</p>
+            </div>
+          </div>
+
+          <div class="portal-action-row">
+            <button
+              type="button"
+              class="portal-login-btn unit-btn"
+              (click)="navigateToPortal('unit')"
+            >
+              <span>{{ langService.t('portalLoginBtn') }}</span>
+              <svg viewBox="0 0 20 20" fill="currentColor" class="arrow-icon">
+                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 8 CORE FEATURES STRIP (FROM REFERENCE) ================= -->
+  <section class="features-icons-strip-section">
+    <div class="section-container">
+      <div class="strip-header">
+        <h3 class="strip-title">INTEGRATED LOGISTICS CAPABILITY MATRIX</h3>
+        <p class="strip-subtitle">Real-time modular intelligence powering the defense supply chain</p>
+      </div>
+
+      <div class="features-grid-8">
+        <div
+          *ngFor="let item of featuresList"
+          class="feature-tile-card"
+          (click)="openFeatureModal(item)"
+          title="Click to view operational details"
+        >
+          <div class="feature-icon-wrapper">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path [attr.d]="item.iconSvg" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="feature-tile-name">{{ item.title }}</span>
+          <span class="feature-click-hint">Inspect Details</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= LIVE OPERATIONAL STATS BANNER ================= -->
+  <section class="live-metrics-section">
+    <div class="section-container">
+      <div class="metrics-grid">
+        <div class="metric-item">
+          <div class="metric-value">1,420+</div>
+          <div class="metric-label">Active Army Formations</div>
+          <div class="metric-sub">Connected across all 7 Commands</div>
+        </div>
+
+        <div class="metric-item">
+          <div class="metric-value">3.8M+</div>
+          <div class="metric-label">Tonnes Sustenance Stocked</div>
+          <div class="metric-sub">Rations, POL & Munitions</div>
+        </div>
+
+        <div class="metric-item">
+          <div class="metric-value">99.4%</div>
+          <div class="metric-label">On-Time Convoy Delivery</div>
+          <div class="metric-sub">Even during peak winter closures</div>
+        </div>
+
+        <div class="metric-item">
+          <div class="metric-value">100%</div>
+          <div class="metric-label">Siachen Winter Reserve</div>
+          <div class="metric-sub">Fully pre-positioned buffer</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FLASH NEWS & DEFENSE CIRCULAR TICKER ================= -->
+  <section class="ticker-news-section">
+    <div class="section-container">
+      <div class="ticker-box">
+        <div class="ticker-badge">
+          <span class="pulse-red"></span>
+          OPERATIONAL FLASH
+        </div>
+        <div class="ticker-marquee-text">
+          <span>Winter Stocking protocols for Northern Command (14 & 15 Corps) completed with 100% reserve verification.</span>
+          <span class="ticker-sep">★</span>
+          <span>New AI Route Optimization model activated across Zojila and Sela Tunnel sectors.</span>
+          <span class="ticker-sep">★</span>
+          <span>Field Supply Depots (FSD) migrating to automated QR Indent vouchers under Army Order 42/2026.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= FEATURE INSPECTION MODAL ================= -->
+<div *ngIf="selectedFeature" class="feature-modal-backdrop" (click)="closeFeatureModal()">
+  <div class="feature-modal-card" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div class="modal-badge">{{ selectedFeature.category }}</div>
+      <button class="modal-close-btn" (click)="closeFeatureModal()" aria-label="Close Modal">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-icon-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path [attr.d]="selectedFeature.iconSvg" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3 class="modal-title">{{ selectedFeature.title }}</h3>
+      <p class="modal-description">{{ selectedFeature.description }}</p>
+
+      <div class="modal-intel-box">
+        <h4>Defense Application & Impact:</h4>
+        <ul>
+          <li>Predictive neural networks trained on 15 years of seasonal consumption across border sectors.</li>
+          <li>Direct integration with GS Branch operational forecasts, Border Roads Organisation (BRO) road condition feeds, and IMD satellite weather telemetry.</li>
+          <li>Reduces emergency air-drop costs by 42% through early surface pre-positioning.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn-army-primary" (click)="closeFeatureModal()">
+        Return to Portal
+      </button>
+    </div>
+  </div>
+</div>

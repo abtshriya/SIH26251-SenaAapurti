@@ -1,0 +1,297 @@
+/* ==========================================================================
+   SENAAAPURTI - DEFENSE PREDICTIVE LOGISTICS PORTAL
+   Official Color Palette:
+   - Primary: Olive Green / Dark Army Green (#162a1c, #23452b)
+   - Secondary: Crisp White (#ffffff) & Off-White (#f8fafc)
+   - Accents: Saffron (#f58220, #e05307) & Military Gold (#d4af37, #b89224)
+   ========================================================================== */
+
+:root {
+  /* Army Greens */
+  --army-950: #0a140d;
+  --army-900: #112217;
+  --army-850: #162a1c;
+  --army-800: #1e3825;
+  --army-700: #254a31;
+  --army-600: #2f5d3e;
+  --army-500: #3c734e;
+  --army-400: #528e67;
+  --army-300: #7eb391;
+  --army-100: #d8eadf;
+  --army-50:  #edf6f1;
+
+  /* Saffron & Warm Accents */
+  --saffron-900: #7c2d12;
+  --saffron-700: #c2410c;
+  --saffron-600: #ea580c;
+  --saffron-500: #f97316;
+  --saffron-400: #fb923c;
+  --saffron-300: #fdba74;
+  --saffron-100: #ffedd5;
+  --saffron-50:  #fff7ed;
+
+  /* Military Gold */
+  --gold-900: #713f12;
+  --gold-700: #a16207;
+  --gold-600: #ca8a04;
+  --gold-500: #d4af37;
+  --gold-400: #eab308;
+  --gold-300: #fde047;
+  --gold-100: #fef9c3;
+
+  /* Neutrals & Base */
+  --bg-primary: #f4f6f4;
+  --bg-surface: #ffffff;
+  --bg-secondary: #e9ece9;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
+  --border-light: #e2e8f0;
+  --border-medium: #cbd5e1;
+
+  /* Gradients */
+  --grad-army: linear-gradient(135deg, #112217 0%, #1e3825 50%, #254a31 100%);
+  --grad-saffron: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+  --grad-gold: linear-gradient(135deg, #b89224 0%, #d4af37 50%, #f3df8a 100%);
+  --grad-tricolor: linear-gradient(90deg, #ff9933 0%, #ffffff 50%, #138808 100%);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.08);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
+  --shadow-army: 0 10px 25px -5px rgba(22, 42, 28, 0.35);
+
+  /* Font Scaling Variables */
+  --base-font-size: 16px;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-military: 'Rajdhani', 'Inter', sans-serif;
+  --font-heading: 'Inter', sans-serif;
+  --font-hindi: 'Tiro Devanagari Hindi', 'Inter', sans-serif;
+}
+
+/* Accessibility: Font Size Variants */
+html.font-scale-sm {
+  --base-font-size: 14px;
+}
+html.font-scale-md {
+  --base-font-size: 16px;
+}
+html.font-scale-lg {
+  --base-font-size: 18px;
+}
+
+/* Accessibility: High Contrast Mode */
+html.high-contrast {
+  --bg-primary: #000000;
+  --bg-surface: #121212;
+  --bg-secondary: #1e1e1e;
+  --text-primary: #ffffff;
+  --text-secondary: #e5e5e5;
+  --text-muted: #d4d4d4;
+  --border-light: #525252;
+  --border-medium: #737373;
+  --army-850: #000000;
+  --army-800: #171717;
+  --army-700: #262626;
+  --saffron-500: #ffaa44;
+  --gold-500: #ffd700;
+}
+
+/* CSS Reset & Defaults */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--base-font-size);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* App root container */
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Utility Links & Buttons */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* National Tricolor Line Header/Footer Accent */
+.tricolor-ribbon {
+  height: 4px;
+  background: var(--grad-tricolor);
+  width: 100%;
+}
+
+.tricolor-ribbon-thin {
+  height: 2px;
+  background: var(--grad-tricolor);
+  width: 100%;
+}
+
+/* Military Badges & Pills */
+.badge-military {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: var(--font-military);
+}
+
+.badge-saffron {
+  background-color: var(--saffron-100);
+  color: var(--saffron-900);
+  border: 1px solid var(--saffron-300);
+}
+
+.badge-army {
+  background-color: var(--army-50);
+  color: var(--army-800);
+  border: 1px solid var(--army-300);
+}
+
+.badge-gold {
+  background-color: var(--gold-100);
+  color: var(--gold-900);
+  border: 1px solid var(--gold-400);
+}
+
+.badge-danger {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #f87171;
+}
+
+.badge-success {
+  background-color: #dcfce7;
+  color: #166534;
+  border: 1px solid #86efac;
+}
+
+/* Primary Button Styling */
+.btn-army-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--army-800);
+  color: #ffffff;
+  padding: 10px 22px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-army-primary:hover {
+  background-color: var(--army-700);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-saffron-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #c2410c 0%, #ea580c 100%);
+  color: #ffffff;
+  padding: 10px 22px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
+}
+
+.btn-saffron-primary:hover {
+  background: linear-gradient(135deg, #9a3412 0%, #c2410c 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(234, 88, 12, 0.4);
+}
+
+.btn-outline-army {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: transparent;
+  color: var(--army-800);
+  border: 1.5px solid var(--army-700);
+  padding: 9px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.btn-outline-army:hover {
+  background-color: var(--army-50);
+  border-color: var(--army-900);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* Animations */
+@keyframes pulseSubtle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.02); }
+}
+
+.animate-pulse-subtle {
+  animation: pulseSubtle 3s infinite ease-in-out;
+}

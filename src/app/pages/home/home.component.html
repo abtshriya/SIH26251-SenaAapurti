@@ -1,152 +1,371 @@
 <main id="main-content" class="home-page-wrapper">
 
-  <!-- ================= HERO CAROUSEL SECTION (MATCHING REFERENCE) ================= -->
-  <section class="hero-carousel-section" (mouseenter)="stopAutoSlide()" (mouseleave)="startAutoSlide()">
+  <!-- ================= HERO SECTION ================= -->
+  <section id="hero" class="hero-carousel-section" (mouseenter)="stopAutoSlide()" (mouseleave)="startAutoSlide()">
     <!-- Slides Container -->
     <div class="slides-viewport">
-      <div
-        *ngFor="let slide of slides; let i = index"
-        class="slide-item"
-        [class.active]="currentSlideIndex() === i"
-        [style.backgroundImage]="'url(' + slide.image + ')'"
-      >
+      <div *ngFor="let slide of slides; let i = index" class="slide-item" [class.active]="currentSlideIndex() === i"
+        [style.backgroundImage]="'url(' + slide.image + ')'">
         <div class="slide-overlay-gradient"></div>
       </div>
     </div>
 
-    <!-- Carousel Chevrons (< and > from reference image) -->
-    <button type="button" class="carousel-arrow prev-arrow" (click)="prevSlide()" aria-label="Previous Slide">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
-    <button type="button" class="carousel-arrow next-arrow" (click)="nextSlide()" aria-label="Next Slide">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
 
-    <!-- Centered Hero Branding Overlay (Exact layout as reference) -->
+
+    <!-- Centered Hero Branding Overlay -->
     <div class="hero-content-center">
       <div class="hero-brand-title-wrap">
-        <h2 class="hero-logo-main">
-          <span class="hero-sena">Sena</span><span class="hero-aapurti">Aapurti</span>
-        </h2>
-        <div class="hero-tagline-motto">
-          {{ langService.t('heroTagline') }}
-        </div>
-      </div>
-
-      <!-- 4 Capability Badges / Pills (From Reference) -->
-      <div class="hero-pills-grid">
-        <div class="hero-pill-badge">
-          <div class="pill-icon-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"/>
-              <circle cx="12" cy="12" r="6"/>
-              <circle cx="12" cy="12" r="2"/>
-            </svg>
-          </div>
-          <span class="pill-text">{{ langService.t('heroPill1') }}</span>
+        <div class="hero-logo-box">
+          <h2 class="hero-logo-main">
+            <span class="hero-sena">Sena</span><span class="hero-aapurti">Aapurti</span>
+          </h2>
+          <span class="hero-official-badge">भारतीय सेना आपूर्ति • INDIAN ARMY LOGISTICS</span>
         </div>
 
-        <div class="hero-pill-badge">
-          <div class="pill-icon-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.25V3.75a1.125 1.125 0 00-1.125-1.125H3.375A1.125 1.125 0 002.25 3.75v10.5"/>
-            </svg>
-          </div>
-          <span class="pill-text">{{ langService.t('heroPill2') }}</span>
-        </div>
+        <h1 class="hero-primary-headline">
+          Predictive Logistics & Forward Supply
+        </h1>
 
-        <div class="hero-pill-badge">
-          <div class="pill-icon-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/>
-            </svg>
-          </div>
-          <span class="pill-text">{{ langService.t('heroPill3') }}</span>
-        </div>
-
-        <div class="hero-pill-badge">
-          <div class="pill-icon-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
-            </svg>
-          </div>
-          <span class="pill-text">{{ langService.t('heroPill4') }}</span>
-        </div>
-      </div>
-
-      <!-- Slide indicator dots -->
-      <div class="carousel-dots-row">
-        <button
-          *ngFor="let s of slides; let idx = index"
-          type="button"
-          class="dot-indicator"
-          [class.active]="currentSlideIndex() === idx"
-          (click)="goToSlide(idx)"
-          [attr.aria-label]="'Go to slide ' + (idx + 1)"
-        ></button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= MISSION OVERVIEW CARD (FROM REFERENCE) ================= -->
-  <section class="mission-summary-section">
-    <div class="section-container">
-      <div class="mission-box-card">
-        <div class="tricolor-accent-line top-accent"></div>
-        <p class="mission-paragraph">
-          {{ langService.t('missionText') }}
+        <p class="hero-lead-description">
+          Autonomous AI supply chain intelligence synchronizing Central Ordnance Depots to high-altitude forward pickets.
         </p>
-        <div class="tricolor-accent-line bottom-accent"></div>
+
+        <!-- Hero CTAs -->
+        <div class="hero-cta-group">
+          <a routerLink="/auth/login" class="btn-saffron-primary btn-cta">
+            <span>Access Portal</span>
+            <svg viewBox="0 0 20 20" fill="currentColor" class="cta-arrow">
+              <path fill-rule="evenodd"
+                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                clip-rule="evenodd" />
+            </svg>
+          </a>
+          <button type="button" class="btn-outline-hero" (click)="scrollToSection('core-capabilities')">
+            Explore SenaAapurti
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= STATISTICS / IMPACT (MOVED JUST BELOW HERO BANNER) ================= -->
+  <section class="live-metrics-section">
+    <div class="section-container">
+      <div class="metrics-grid">
+        <div class="metric-item">
+          <div class="metric-value">1,420+</div>
+          <div class="metric-label">Registered Units</div>
+          <div class="metric-sub">Connected across all 7 Commands</div>
+        </div>
+
+        <div class="metric-item">
+          <div class="metric-value">380+</div>
+          <div class="metric-label">Active Logistics Movements</div>
+          <div class="metric-sub">Convoys and air-drops synchronized</div>
+        </div>
+
+        <div class="metric-item">
+          <div class="metric-value">96.8%</div>
+          <div class="metric-label">Supply Readiness</div>
+          <div class="metric-sub">Across all forward formations</div>
+        </div>
+
+        <div class="metric-item">
+          <div class="metric-value">100%</div>
+          <div class="metric-label">Predictive Coverage</div>
+          <div class="metric-sub">Northern & Eastern border defense</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= DUAL PORTAL ACCESS GATEWAYS (FROM REFERENCE) ================= -->
-  <section class="portals-gateway-section">
-    <div class="section-container">
-      <div class="portals-dual-grid">
+  <!-- ================= STRATEGIC MANDATE & CORE DEFENSE PILLARS (COMBINED) ================= -->
+  <section id="core-capabilities" class="mission-pillars-combined">
+    <!-- Anchor support for legacy links to mission-intro -->
+    <div id="mission-intro" class="anchor-offset"></div>
 
+    <div class="section-container">
+      <div class="section-heading-center">
+        <span class="section-tag">STRATEGIC MANDATE & CAPABILITIES</span>
+        <h2 class="section-title">Mission & Four Pillars of Supply Superiority</h2>
+        <p class="section-lead">
+          Bridging the critical divide between Strategic Depots and Forward Localities through autonomous AI orchestration and real-time telemetry
+        </p>
+      </div>
+
+      <!-- Executive Strategic Summary Card -->
+      <div class="executive-mandate-card">
+        <div class="mandate-ethos-row">
+          <div class="mandate-ethos-badge">
+            <span class="motto-hindi">सदैव आपूर्ति • सदैव समर्थन</span>
+            <span class="motto-sep">|</span>
+            <span class="motto-eng">INTELLIGENT SUPPLY • ASSURED READINESS</span>
+          </div>
+          <div class="mandate-defcon-pill">
+            <span class="pulse-green"></span>
+            ACTIVE THEATER READINESS
+          </div>
+        </div>
+
+        <div class="mandate-body-grid">
+          <div class="mandate-text-col">
+            <h3 class="mandate-headline">Anticipatory Combat Sustenance</h3>
+            <p class="mandate-para">
+              <strong>SenaAapurti (सेना आपूर्ति)</strong> is the Indian Army's centralized AI-driven predictive logistics orchestration platform.
+              It eliminates supply chain friction and guarantees uninterrupted combat sustenance across northern and eastern border theaters—automating
+              multi-echelon demand projections for Rations (Class I), POL Fuel (Class III), Munitions (Class V), and Equipment Spares (Class IX).
+            </p>
+          </div>
+
+          <div class="mandate-metrics-col">
+            <div class="mandate-stat-box">
+              <span class="stat-number">100%</span>
+              <span class="stat-label">Multi-Command Visibility</span>
+            </div>
+            <div class="mandate-stat-box">
+              <span class="stat-number">Zero</span>
+              <span class="stat-label">Critical Stockout Tolerance</span>
+            </div>
+            <div class="mandate-stat-box">
+              <span class="stat-number">30–90D</span>
+              <span class="stat-label">Predictive Buffer Warning</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Four Core Pillars Grid -->
+      <div class="combined-pillars-grid">
+        <div class="pillar-card">
+          <div class="pillar-card-header">
+            <div class="pillar-icon-box">
+              <svg class="pillar-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19.07 4.93A10 10 0 0 0 4.93 19.07"/>
+                <path d="M16.24 7.76A6 6 0 0 0 7.76 16.24"/>
+                <path d="M13.41 10.59a2 2 0 0 0-2.82 2.82"/>
+                <line x1="12" y1="12" x2="20" y2="4"/>
+              </svg>
+            </div>
+            <span class="pillar-step-badge">PILLAR 01</span>
+          </div>
+          <div class="pillar-content">
+            <h3 class="pillar-heading">Predict Demand</h3>
+          </div>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-card-header">
+            <div class="pillar-icon-box">
+              <svg class="pillar-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/>
+                <path d="M15 18H9"/>
+                <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"/>
+                <circle cx="17" cy="18" r="2"/>
+                <circle cx="7" cy="18" r="2"/>
+              </svg>
+            </div>
+            <span class="pillar-step-badge">PILLAR 02</span>
+          </div>
+          <div class="pillar-content">
+            <h3 class="pillar-heading">Optimize Movement</h3>
+          </div>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-card-header">
+            <div class="pillar-icon-box">
+              <svg class="pillar-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
+                <path d="m3.3 7 8.7 5 8.7-5"/>
+                <path d="M12 22V12"/>
+              </svg>
+            </div>
+            <span class="pillar-step-badge">PILLAR 03</span>
+          </div>
+          <div class="pillar-content">
+            <h3 class="pillar-heading">Ensure Availability</h3>
+          </div>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-card-header">
+            <div class="pillar-icon-box">
+              <svg class="pillar-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>
+                <path d="m9 12 2 2 4-4"/>
+              </svg>
+            </div>
+            <span class="pillar-step-badge">PILLAR 04</span>
+          </div>
+          <div class="pillar-content">
+            <h3 class="pillar-heading">Strengthen Readiness</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= HOW SENAAAPURTI WORKS (JARVIS STYLE WORKFLOW ANIMATION) ================= -->
+  <section id="how-it-works" class="jarvis-workflow-section">
+    <div class="section-container">
+      <div class="jarvis-hud-header">
+        <div class="jarvis-hud-pill">
+          <span class="hud-core-dot"></span>
+          <span class="hud-pill-text">AUTONOMOUS C4ISR WORKFLOW</span>
+        </div>
+        <h2 class="jarvis-hud-title">How SenaAapurti Operates</h2>
+      </div>
+
+      <!-- Jarvis HUD Animated Buttons Flow -->
+      <div class="jarvis-flow-container">
+        <!-- Laser Energy Conduit Beam -->
+        <div class="jarvis-energy-conduit">
+          <div class="conduit-base-track"></div>
+          <div class="conduit-active-beam" [style.width]="((selectedStageIndex / (workflowStages.length - 1)) * 100) + '%'"></div>
+          <div class="conduit-plasma-core" [style.left]="((selectedStageIndex / (workflowStages.length - 1)) * 100) + '%'"></div>
+        </div>
+
+        <!-- Jarvis HUD Buttons Row -->
+        <div class="jarvis-buttons-row">
+          <button *ngFor="let stage of workflowStages; let idx = index"
+            type="button"
+            class="jarvis-node-btn"
+            [class.active]="selectedStageIndex === idx"
+            [class.completed]="selectedStageIndex > idx"
+            (click)="selectStage(idx)"
+            [attr.aria-label]="'Stage ' + stage.step + ': ' + stage.name">
+
+            <!-- Arc Reactor Outer Spinning Ring -->
+            <div class="jarvis-reactor-ring"></div>
+
+            <!-- Concentric Pulse Ripple (Active Only) -->
+            <div class="jarvis-pulse-ripple" *ngIf="selectedStageIndex === idx"></div>
+
+            <!-- Glowing Energy Core Node -->
+            <div class="jarvis-reactor-core">
+              <span class="jarvis-node-idx">0{{ stage.step }}</span>
+              <svg class="jarvis-node-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <ng-container [ngSwitch]="stage.step">
+                  <ng-container *ngSwitchCase="1">
+                    <path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/>
+                    <path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/>
+                    <circle cx="12" cy="12" r="2" fill="currentColor"/>
+                    <path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/>
+                    <path d="M19.1 4.9C23 8.8 23 15.2 19.1 19.1"/>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="2">
+                    <circle cx="18" cy="5" r="3"/>
+                    <circle cx="6" cy="12" r="3"/>
+                    <circle cx="18" cy="19" r="3"/>
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="3">
+                    <rect x="4" y="4" width="16" height="16" rx="2"/>
+                    <rect x="9" y="9" width="6" height="6"/>
+                    <line x1="9" y1="1" x2="9" y2="4"/>
+                    <line x1="15" y1="1" x2="15" y2="4"/>
+                    <line x1="9" y1="20" x2="9" y2="23"/>
+                    <line x1="15" y1="20" x2="15" y2="23"/>
+                    <line x1="20" y1="9" x2="23" y2="9"/>
+                    <line x1="20" y1="15" x2="23" y2="15"/>
+                    <line x1="1" y1="9" x2="4" y2="9"/>
+                    <line x1="1" y1="15" x2="4" y2="15"/>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="4">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="5">
+                    <polygon points="3 11 22 2 13 21 11 13 3 11"/>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="6">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="22" y1="12" x2="18" y2="12"/>
+                    <line x1="6" y1="12" x2="2" y2="12"/>
+                    <line x1="12" y1="6" x2="12" y2="2"/>
+                    <line x1="12" y1="22" x2="12" y2="18"/>
+                    <path d="m9 12 2 2 4-4"/>
+                  </ng-container>
+                </ng-container>
+              </svg>
+            </div>
+
+            <!-- HUD Button Label -->
+            <div class="jarvis-node-label">
+              <span class="jarvis-label-name">{{ stage.name }}</span>
+              <span class="jarvis-label-status" *ngIf="selectedStageIndex === idx">ACTIVE</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FEATURE OVERVIEW (8 CORE FEATURES) ================= -->
+  <section class="features-overview-section">
+    <div class="section-container">
+      <div class="section-heading-center">
+        <span class="section-tag">COMPREHENSIVE CAPABILITIES</span>
+        <h2 class="section-title">Integrated Feature Matrix</h2>
+        <p class="section-lead">8 modular operational capabilities powering defense replenishment</p>
+      </div>
+
+      <div class="features-grid-8">
+        <div *ngFor="let item of featuresList" class="feature-tile-card" (click)="openFeatureModal(item)"
+          title="Click to view details">
+          <div class="feature-icon-wrapper">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path [attr.d]="item.iconSvg" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </div>
+          <span class="feature-tile-name">{{ item.title }}</span>
+          <span class="feature-click-hint">Inspect Specification</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DUAL PORTAL ACCESS ================= -->
+  <section id="portal-access" class="portals-gateway-section">
+    <div class="section-container">
+      <div class="section-heading-center">
+        <span class="section-tag">SECURE TERMINAL ACCESS</span>
+        <h2 class="section-title">Defense Portal Gateways</h2>
+        <p class="section-lead">Role-based entry for Strategic Command and Tactical Forward Units</p>
+      </div>
+
+      <div class="portals-dual-grid mt-4">
         <!-- CARD 1: COMMAND / ADMIN PORTAL -->
         <div class="portal-card command-card">
-          <!-- Watermark silhouette India Gate / HQ -->
-          <div class="portal-watermark-icon left-wm">
-            <svg viewBox="0 0 100 100" fill="currentColor">
-              <rect x="20" y="80" width="60" height="15" opacity="0.1"/>
-              <rect x="25" y="30" width="16" height="50" opacity="0.1"/>
-              <rect x="59" y="30" width="16" height="50" opacity="0.1"/>
-              <path d="M20 30H80V20H20V30Z" opacity="0.1"/>
-              <path d="M41 40C41 35 59 35 59 40V80H41V40Z" opacity="0.1"/>
-            </svg>
-          </div>
-
           <div class="portal-card-header">
             <div class="portal-icon-container command-icon">
-              <!-- Headquarters Building Icon -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                <path d="M12 21v-4M4 21h16M3 10h18M5 10v11M19 10v11M12 10V6M8 6h8M12 2v4"/>
-                <rect x="7" y="14" width="3" height="3" fill="currentColor"/>
-                <rect x="14" y="14" width="3" height="3" fill="currentColor"/>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="portal-svg-symbol">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
               </svg>
             </div>
             <div class="portal-info-meta">
-              <h3 class="portal-title">{{ langService.t('commandPortalTitle') }}</h3>
-              <p class="portal-desc">{{ langService.t('commandPortalDesc') }}</p>
+              <h3 class="portal-title">COMMAND / ADMIN PORTAL</h3>
+              <p class="portal-desc">Strategic visibility and resource allocation for Army HQ, Commands & Corps</p>
             </div>
           </div>
 
+          <div class="portal-features-list">
+            <div class="pf-item">✓ National Readiness HUD & DEFCON State Tracking</div>
+            <div class="pf-item">✓ Multi-Theater India Logistics GIS Map</div>
+            <div class="pf-item">✓ National Inventory Depots & Redistribution</div>
+            <div class="pf-item">✓ What-If Wargame Simulator & AI Authorizations</div>
+          </div>
+
           <div class="portal-action-row">
-            <button
-              type="button"
-              class="portal-login-btn command-btn"
-              (click)="navigateToPortal('command')"
-            >
-              <span>{{ langService.t('portalLoginBtn') }}</span>
+            <button type="button" class="portal-login-btn command-btn" (click)="navigateToPortal('command')">
+              <span>LOGIN TO COMMAND PORTAL</span>
               <svg viewBox="0 0 20 20" fill="currentColor" class="arrow-icon">
-                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                <path fill-rule="evenodd"
+                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                  clip-rule="evenodd" />
               </svg>
             </button>
           </div>
@@ -154,116 +373,561 @@
 
         <!-- CARD 2: UNIT PORTAL -->
         <div class="portal-card unit-card">
-          <!-- Watermark silhouette Helicopter / Tactical unit -->
-          <div class="portal-watermark-icon right-wm">
-            <svg viewBox="0 0 100 100" fill="currentColor">
-              <path d="M15 45H85M45 45V30H55V45M30 50C30 50 35 65 65 65C80 65 85 55 85 50H30ZM10 40H90" opacity="0.1"/>
-            </svg>
-          </div>
-
           <div class="portal-card-header">
             <div class="portal-icon-container unit-icon">
-              <!-- Soldiers Formation Icon -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                <path d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="portal-svg-symbol">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
               </svg>
             </div>
             <div class="portal-info-meta">
-              <h3 class="portal-title">{{ langService.t('unitPortalTitle') }}</h3>
-              <p class="portal-desc">{{ langService.t('unitPortalDesc') }}</p>
+              <h3 class="portal-title">TACTICAL UNIT PORTAL</h3>
+              <p class="portal-desc">Quartermaster stores ledger and requisition management for Regiments and Brigades
+              </p>
             </div>
           </div>
 
+          <div class="portal-features-list">
+            <div class="pf-item">✓ Regimental Stock & Days of Supply (DOS) Ledger</div>
+            <div class="pf-item">✓ Automated Requisition Indent Generator</div>
+            <div class="pf-item">✓ Inbound Convoy Milestones & ETA Tracker</div>
+            <div class="pf-item">✓ Flash SOS Emergency Air-Drop Requester</div>
+          </div>
+
           <div class="portal-action-row">
-            <button
-              type="button"
-              class="portal-login-btn unit-btn"
-              (click)="navigateToPortal('unit')"
-            >
-              <span>{{ langService.t('portalLoginBtn') }}</span>
+            <button type="button" class="portal-login-btn unit-btn" (click)="navigateToPortal('unit')">
+              <span>LOGIN TO UNIT PORTAL</span>
               <svg viewBox="0 0 20 20" fill="currentColor" class="arrow-icon">
-                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                <path fill-rule="evenodd"
+                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                  clip-rule="evenodd" />
               </svg>
             </button>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- ================= 8 CORE FEATURES STRIP (FROM REFERENCE) ================= -->
-  <section class="features-icons-strip-section">
+
+  <!-- ================= INFORMATION / NEWS SECTION ================= -->
+  <section class="news-information-section">
     <div class="section-container">
-      <div class="strip-header">
-        <h3 class="strip-title">INTEGRATED LOGISTICS CAPABILITY MATRIX</h3>
-        <p class="strip-subtitle">Real-time modular intelligence powering the defense supply chain</p>
+      <div class="section-heading-center">
+        <span class="section-tag">OFFICIAL CIRCULARS</span>
+        <h2 class="section-title">Defense Information & Bulletin</h2>
+        <p class="section-lead">DGOS directives, system enhancements, and critical operational circulars</p>
       </div>
 
-      <div class="features-grid-8">
-        <div
-          *ngFor="let item of featuresList"
-          class="feature-tile-card"
-          (click)="openFeatureModal(item)"
-          title="Click to view operational details"
-        >
-          <div class="feature-icon-wrapper">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path [attr.d]="item.iconSvg" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+      <div class="news-nav-tabs">
+        <button type="button" class="news-tab-btn" [class.active]="activeNewsTab === 'announcements'"
+          (click)="activeNewsTab = 'announcements'">
+          Announcements
+        </button>
+        <button type="button" class="news-tab-btn" [class.active]="activeNewsTab === 'updates'"
+          (click)="activeNewsTab = 'updates'">
+          System Updates
+        </button>
+        <button type="button" class="news-tab-btn" [class.active]="activeNewsTab === 'notices'"
+          (click)="activeNewsTab = 'notices'">
+          Important Notices
+        </button>
+      </div>
+
+      <div class="news-cards-list mt-3">
+        <div *ngIf="activeNewsTab === 'announcements'" class="news-entry-card card-surface">
+          <span class="badge-gold">CIRCULAR 42/2026</span>
+          <h4>Winter Stocking Verification for Northern & Eastern Theaters Completed</h4>
+          <p>The Master General of Sustenance (MGS) branch has certified 100% pre-positioning of Sub-Zero HSD and
+            high-altitude sustenance across 14, 15, 16, and 4 Corps ahead of seasonal mountain pass blockages.</p>
+          <span class="news-date">Published: 04 October 2026 • DGOS Directorate</span>
+        </div>
+
+        <div *ngIf="activeNewsTab === 'updates'" class="news-entry-card card-surface">
+          <span class="badge-blue">SYSTEM RELEASE V4.8</span>
+          <h4>Deployment of Neural Pass Weather Forecasting along Sela Tunnel Axis</h4>
+          <p>SenaAapurti v4.8 activates automated IMD Doppler radar integration predicting black ice and snowfall
+            probabilities 72 hours in advance for Eastern Command convoys.</p>
+          <span class="news-date">Published: 01 October 2026 • Army Cyber Logistics Group</span>
+        </div>
+
+        <div *ngIf="activeNewsTab === 'notices'" class="news-entry-card card-surface">
+          <span class="badge-danger">FLASH NOTICE</span>
+          <h4>Migration of Field Indent Vouchers to Cryptographic ASCON Signatures</h4>
+          <p>All Regimental Quartermasters must file replenishment indents exclusively through the SenaAapurti Unit
+            Portal. Physical handwritten indents stand deprecated under Army Order AO-18/2026.</p>
+          <span class="news-date">Published: 28 September 2026 • Adjutant General's Branch</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ================= 2. AI IN MILITARY LOGISTICS ================= -->
+  <section id="ai-logistics" class="home-info-section alt-bg">
+    <div class="section-container">
+      <div class="section-heading-center">
+        <span class="section-tag">TACTICAL INTELLIGENCE</span>
+        <h2 class="section-title">Artificial Intelligence in Military Logistics</h2>
+        <p class="section-lead">Transforming raw defense telemetry into anticipatory tactical operational superiority</p>
+      </div>
+
+      <div class="ai-features-grid">
+        <div class="ai-feature-card">
+          <div class="ai-icon">📊</div>
+          <h4>1. Predictive Analytics</h4>
+          <p>Continuous ingestion of multi-dimensional signals—past 15-year consumption ledgers, troop numbers, training exercise calendars, altitude profiles, and equipment wear factors—to model dynamic burn rates across varying theater defense states.</p>
+        </div>
+
+        <div class="ai-feature-card">
+          <div class="ai-icon">📈</div>
+          <h4>2. Demand Forecasting</h4>
+          <p>Deep Recurrent Neural Networks (LSTM) model non-linear seasonal consumption surges. When temperatures drop below -25°C, heating kerosene and sub-zero fuel burn rises exponentially; the model projects exact requirements 60 to 90 days ahead.</p>
+        </div>
+
+        <div class="ai-feature-card">
+          <div class="ai-icon">⚠️</div>
+          <h4>3. Risk Prediction & Vulnerability Scoring</h4>
+          <p>Automated Bayesian risk engines calculate stockout probabilities for every forward picket, factoring in road pass closure probabilities, convoy transit times, and current reserve buffers.</p>
+        </div>
+
+        <div class="ai-feature-card">
+          <div class="ai-icon">🗺️</div>
+          <h4>4. Route Intelligence</h4>
+          <p>Real-time pathfinding algorithms integrated with satellite Synthetic Aperture Radar (SAR) imagery and Border Roads Organisation (BRO) ground sensors evaluate road stability, slope gradient, and ice depth to avoid danger sectors.</p>
+        </div>
+
+        <div class="ai-feature-card">
+          <div class="ai-icon">⏱️</div>
+          <h4>5. ETA Prediction Engine</h4>
+          <p>Machine learning models calculate precise convoy arrival times taking into account high-altitude engine de-rating, convoy vehicle density, snow chain mounting delays, and military police checkpoint clearance speeds.</p>
+        </div>
+
+        <div class="ai-feature-card">
+          <div class="ai-icon">💡</div>
+          <h4>6. Explainable Recommendations (XAI)</h4>
+          <p>No "black-box" decision-making. Every recommendation generated by SenaAapurti presents commanders with contributing factors, confidence percentages, expected impacts, and vetted alternatives.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 3. FEATURES & CAPABILITIES ================= -->
+  <section id="features" class="home-info-section">
+    <div class="section-container">
+      <div class="section-heading-center">
+        <span class="section-tag">SYSTEM CAPABILITIES</span>
+        <h2 class="section-title">Defense Logistics Platform Features</h2>
+        <p class="section-lead">The 9 comprehensive modular capabilities powering the Indian Army supply continuum</p>
+      </div>
+
+      <div class="features-detailed-list">
+        <div class="feat-detail-item">
+          <div class="fd-number">01</div>
+          <div class="fd-content">
+            <h4>Predictive Demand Forecasting</h4>
+            <p>Predicts localized demand spikes up to 90 days in advance based on seasonal weather, altitude gradients, and exercise schedules.</p>
           </div>
-          <span class="feature-tile-name">{{ item.title }}</span>
-          <span class="feature-click-hint">Inspect Details</span>
+        </div>
+
+        <div class="feat-detail-item">
+          <div class="fd-number">02</div>
+          <div class="fd-content">
+            <h4>Inventory Intelligence</h4>
+            <p>Real-time ledger visibility across Central Ordnance Depots (CODs) down to Regimental Stores with RFID and QR-coded tracking.</p>
+          </div>
+        </div>
+
+        <div class="feat-detail-item">
+          <div class="fd-number">03</div>
+          <div class="fd-content">
+            <h4>Supply Requests & Automated Indents</h4>
+            <p>Digitally signed requisition vouchers with multi-tier approval workflows from Unit Quartermaster to DGOS Directorate.</p>
+          </div>
+        </div>
+
+        <div class="feat-detail-item">
+          <div class="fd-number">04</div>
+          <div class="fd-content">
+            <h4>Logistics Movement Tracking</h4>
+            <p>Live GPS and ASCON telematics monitoring military columns, vehicle payloads, transit milestones, and driver escorts.</p>
+          </div>
+        </div>
+
+        <div class="feat-detail-item">
+          <div class="fd-number">05</div>
+          <div class="fd-content">
+            <h4>Route Intelligence & Optimization</h4>
+            <p>Automated recalculation of secondary bypass corridors during mountain pass blockages or enemy interdiction risks.</p>
+          </div>
+        </div>
+
+        <div class="feat-detail-item">
+          <div class="fd-number">06</div>
+          <div class="fd-content">
+            <h4>Weather & Terrain Intelligence</h4>
+            <p>Live telemetry from DRDO DGRE avalanche stations, high-altitude passes, and IMD Doppler weather radars.</p>
+          </div>
+        </div>
+
+        <div class="feat-detail-item">
+          <div class="fd-number">07</div>
+          <div class="fd-content">
+            <h4>AI Recommendations</h4>
+            <p>Autonomous remediation suggestions for stock redistribution, convoy rerouting, and emergency air-drop taskings.</p>
+          </div>
+        </div>
+
+        <div class="feat-detail-item">
+          <div class="fd-number">08</div>
+          <div class="fd-content">
+            <h4>What-If Crisis Simulation</h4>
+            <p>Wargame logistical stress under multi-front mobilization, winter road cutoffs, and sudden ammunition surges.</p>
+          </div>
+        </div>
+
+        <div class="feat-detail-item">
+          <div class="fd-number">09</div>
+          <div class="fd-content">
+            <h4>Reports & Analytics</h4>
+            <p>Official audited defense reports, PDF/CSV exports, and executive readiness summaries for Army Commanders.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= LIVE OPERATIONAL STATS BANNER ================= -->
-  <section class="live-metrics-section">
+  <!-- ================= 4. USER GUIDELINES ================= -->
+  <section id="guidelines" class="home-info-section alt-bg">
     <div class="section-container">
-      <div class="metrics-grid">
-        <div class="metric-item">
-          <div class="metric-value">1,420+</div>
-          <div class="metric-label">Active Army Formations</div>
-          <div class="metric-sub">Connected across all 7 Commands</div>
+      <div class="section-heading-center">
+        <span class="section-tag">STANDARD OPERATING PROCEDURES</span>
+        <h2 class="section-title">User Guidelines & Operating Manuals</h2>
+        <p class="section-lead">Comprehensive standard operating procedures for military logisticians and field commanders</p>
+      </div>
+
+      <div class="sop-accordion">
+        <div class="sop-card">
+          <div class="sop-header">
+            <span class="sop-badge">COMMAND</span>
+            <h4>1. Command User Guide</h4>
+          </div>
+          <p>Designed for Army HQ, Theater Commands, and Corps Ordnance Officers. Covers accessing the National Readiness HUD, reviewing theater-wide Days of Supply (DOS), executing inter-depot redistributions, and authorizing AI alert remedies.</p>
         </div>
 
-        <div class="metric-item">
-          <div class="metric-value">3.8M+</div>
-          <div class="metric-label">Tonnes Sustenance Stocked</div>
-          <div class="metric-sub">Rations, POL & Munitions</div>
+        <div class="sop-card">
+          <div class="sop-header">
+            <span class="sop-badge">TACTICAL</span>
+            <h4>2. Unit User Guide</h4>
+          </div>
+          <p>Designed for Regimental Quartermasters (RQM) and Battalion Logistics Officers. Explains recording daily store receipts, auditing ammunition basic loads (UBL), managing winter clothing scales, and dispatching SOS emergency requests.</p>
         </div>
 
-        <div class="metric-item">
-          <div class="metric-value">99.4%</div>
-          <div class="metric-label">On-Time Convoy Delivery</div>
-          <div class="metric-sub">Even during peak winter closures</div>
+        <div class="sop-card">
+          <div class="sop-header">
+            <span class="sop-badge">SECURITY</span>
+            <h4>3. Login & Authentication Guide</h4>
+          </div>
+          <p>Step-by-step instructions for military two-factor authentication (2FA), entering Army Service Numbers (e.g. IC-XXXXXX), verifying security CAPTCHA, and handling forgotten passwords or cryptographic token resets.</p>
         </div>
 
-        <div class="metric-item">
-          <div class="metric-value">100%</div>
-          <div class="metric-label">Siachen Winter Reserve</div>
-          <div class="metric-sub">Fully pre-positioned buffer</div>
+        <div class="sop-card">
+          <div class="sop-header">
+            <span class="sop-badge">SUPPLY</span>
+            <h4>4. Inventory Management Guide</h4>
+          </div>
+          <p>SOP for classifying store ledgers across Class I (Rations), Class III (POL), Class V (Munitions), and Class IX (Armor Spares). Explains setting safety buffers and autonomous reorder thresholds.</p>
+        </div>
+
+        <div class="sop-card">
+          <div class="sop-header">
+            <span class="sop-badge">PROCUREMENT</span>
+            <h4>5. Supply Request Guide</h4>
+          </div>
+          <p>How to draft, submit, and track formal requisition indents. Details urgency classifications: Routine, Operational Priority 1, and Flash SOS Emergency.</p>
+        </div>
+
+        <div class="sop-card">
+          <div class="sop-header">
+            <span class="sop-badge">OPERATIONS</span>
+            <h4>6. Logistics Movement Guide</h4>
+          </div>
+          <p>Guidelines for Convoy Escort Commanders (ASC/AOC), monitoring convoy telematics, reporting road blockage checkpoints, and mounting snow chains along high-altitude passes.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= FLASH NEWS & DEFENSE CIRCULAR TICKER ================= -->
-  <section class="ticker-news-section">
+  <!-- ================= 5. DOWNLOADS ================= -->
+  <section id="downloads" class="home-info-section">
     <div class="section-container">
-      <div class="ticker-box">
-        <div class="ticker-badge">
-          <span class="pulse-red"></span>
-          OPERATIONAL FLASH
+      <div class="section-heading-center">
+        <span class="section-tag">PUBLICATIONS & ASSETS</span>
+        <h2 class="section-title">Official Defense Downloads & Documentation</h2>
+        <p class="section-lead">Download official defense manuals, quick-start setup cards, and tactical mobile applications</p>
+      </div>
+
+      <div class="downloads-list">
+        <div class="download-item-card">
+          <div class="dl-icon">📄</div>
+          <div class="dl-info">
+            <h4>User Manuals: SenaAapurti Comprehensive Manual v4.8</h4>
+            <p>Complete 180-page reference manual for Command and Unit logisticians detailing system operation.</p>
+            <span class="dl-meta">PDF • 8.4 MB • Official Defense Manual</span>
+          </div>
+          <button type="button" class="btn-dl" (click)="downloadManual('SenaAapurti_User_Manual_v4.8.pdf')">
+            Download PDF
+          </button>
         </div>
-        <div class="ticker-marquee-text">
-          <span>Winter Stocking protocols for Northern Command (14 & 15 Corps) completed with 100% reserve verification.</span>
-          <span class="ticker-sep">★</span>
-          <span>New AI Route Optimization model activated across Zojila and Sela Tunnel sectors.</span>
-          <span class="ticker-sep">★</span>
-          <span>Field Supply Depots (FSD) migrating to automated QR Indent vouchers under Army Order 42/2026.</span>
+
+        <div class="download-item-card">
+          <div class="dl-icon">🚀</div>
+          <div class="dl-info">
+            <h4>Quick Start Guide: Tactical Field Terminal Setup</h4>
+            <p>Step-by-step quick guide for setting up field tablet clients and ASCON satellite transponders.</p>
+            <span class="dl-meta">PDF • 2.1 MB • Quick Start Card</span>
+          </div>
+          <button type="button" class="btn-dl" (click)="downloadManual('Tactical_Quick_Start_Guide.pdf')">
+            Download PDF
+          </button>
+        </div>
+
+        <div class="download-item-card">
+          <div class="dl-icon">📱</div>
+          <div class="dl-info">
+            <h4>Mobile App: Ruggedized Android Field Client APK</h4>
+            <p>Official APK for military handheld terminals with offline store scanning capabilities.</p>
+            <span class="dl-meta">APK • 42 MB • Version 3.4.1</span>
+          </div>
+          <button type="button" class="btn-dl" (click)="downloadManual('SenaAapurti_Field_v3.4.apk')">
+            Download APK
+          </button>
+        </div>
+
+        <div class="download-item-card">
+          <div class="dl-icon">📑</div>
+          <div class="dl-info">
+            <h4>Documentation: Technical Architecture & API Whitepaper</h4>
+            <p>Classified technical overview of cryptographic handshakes, ASCON protocols, and database schema.</p>
+            <span class="dl-meta">PDF • 4.8 MB • Army Cyber Logistics</span>
+          </div>
+          <button type="button" class="btn-dl" (click)="downloadManual('Technical_Architecture_Whitepaper.pdf')">
+            Download PDF
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 6. SUPPORT & HELP CENTRE ================= -->
+  <section id="support" class="home-info-section alt-bg">
+    <div class="section-container">
+      <div class="section-heading-center">
+        <span class="section-tag">24x7 TECHNICAL SUPPORT</span>
+        <h2 class="section-title">Support & Help Centre</h2>
+        <p class="section-lead">Round-the-clock defense logistics assistance, issue tracking, and FAQs</p>
+      </div>
+
+      <div *ngIf="ticketSuccess" class="alert-success-banner mb-3">
+        {{ ticketSuccess }}
+      </div>
+
+      <div class="support-split">
+        <!-- Report an Issue Form -->
+        <div class="ticket-form-card">
+          <h3>Report an Operational Issue</h3>
+          <form (submit)="submitTicket(); $event.preventDefault()">
+            <div class="form-group">
+              <label class="form-label">Officer / Operator Name</label>
+              <input type="text" [(ngModel)]="ticketName" name="ticketName" class="form-control" placeholder="e.g. Major Amit Sharma">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Army Service Number</label>
+              <input type="text" [(ngModel)]="ticketServiceNo" name="ticketServiceNo" class="form-control" placeholder="e.g. IC-71044A">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Issue Category</label>
+              <select [(ngModel)]="ticketCategory" name="ticketCategory" class="form-control">
+                <option value="Voucher Tracking">Voucher Tracking / Requisition Delay</option>
+                <option value="Convoy Telemetry">Convoy GPS Telemetry Offline</option>
+                <option value="Stock Reconciliation">Depot Stock Reconciliation Discrepancy</option>
+                <option value="Security Access">Account Security / Access Permissions</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Issue Details & Reference #</label>
+              <textarea [(ngModel)]="ticketMessage" name="ticketMessage" rows="3" class="form-control" placeholder="Describe the issue in detail..."></textarea>
+            </div>
+            <button type="submit" class="btn-army-primary full-width">
+              Submit Support Ticket
+            </button>
+          </form>
+        </div>
+
+        <!-- Help Centre & Technical Hotlines -->
+        <div class="hotline-card">
+          <h3>Help Centre & Technical Support</h3>
+          <div class="hotline-item">
+            <span class="hl-label">Army HQ 24x7 Control Room:</span>
+            <span class="hl-number">1800-11-SENA (7362)</span>
+          </div>
+          <div class="hotline-item">
+            <span class="hl-label">Northern Command Ops Cell:</span>
+            <span class="hl-number">ASCON Ext: 4421 / 4422</span>
+          </div>
+          <div class="hotline-item">
+            <span class="hl-label">Technical Helpdesk (Signal Corps):</span>
+            <span class="hl-number">support.senaaapurti&#64;nic.in</span>
+          </div>
+          <div class="hotline-item">
+            <span class="hl-label">Class V Munitions Emergency Hotline:</span>
+            <span class="hl-number">1800-22-AMMO (2666)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <h3 class="faq-section-title">Frequently Asked Questions (FAQ)</h3>
+      <div class="sop-accordion">
+        <div class="sop-card">
+          <h4>Q: How does SenaAapurti maintain functionality during complete satellite blackout?</h4>
+          <p>A: The platform operates with local encrypted SQLite databases on field terminals. As soon as line-of-sight VHF/UHF or ASCON connectivity is re-established, vouchers auto-reconcile using cryptographic delta merges.</p>
+        </div>
+        <div class="sop-card">
+          <h4>Q: What is the procedure for emergency ammunition replenishment during exercises?</h4>
+          <p>A: Officers with Level 2 clearance can file a Flash SOS requisition directly from the Unit Portal, which automatically alerts DGOS and assigns immediate tasking to nearest depots.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT & OFFICIAL CONTACT DIRECTORY (UNIFIED) ================= -->
+  <section id="about" class="home-info-section about-contact-unified">
+    <!-- Anchor offset for direct #contact navigation -->
+    <div id="contact" class="anchor-offset"></div>
+
+    <div class="section-container">
+      <div class="section-heading-center">
+        <span class="section-tag">DGOS SUSTENANCE MANDATE</span>
+        <h2 class="section-title">About SenaAapurti & Official Contact</h2>
+        <p class="section-lead">The Sovereign AI Predictive Logistics Continuum of the Indian Army</p>
+      </div>
+
+      <div *ngIf="contactSuccess" class="alert-success-banner mb-3">
+        {{ contactSuccess }}
+      </div>
+
+      <div class="about-contact-grid">
+        <!-- Left: About SenaAapurti Summary -->
+        <div class="about-summary-panel">
+          <div class="panel-header-badge">
+            <span class="badge-dot"></span>
+            <span>INTEGRATED HQ OF MoD (ARMY) • MGS BRANCH</span>
+          </div>
+          
+          <h3 class="panel-title">Autonomous Defense Sustenance</h3>
+          
+          <p class="panel-statement">
+            <strong>SenaAapurti (सेना आपूर्ति)</strong> is the centralized AI-powered logistics backbone engineered by the Directorate General of Ordnance Services (DGOS). It connects operational commands, Central Ordnance Depots, and extreme high-altitude forward pickets into a real-time predictive replenishment network.
+          </p>
+
+          <!-- 3 High-Impact Tenets (Crisp & Minimal) -->
+          <div class="tenets-list">
+            <div class="tenet-card">
+              <div class="tenet-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="tenet-svg">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+              <div class="tenet-info">
+                <h4>30–90D Anticipatory Buffers</h4>
+                <p>Neural demand forecasting before winter pass closures</p>
+              </div>
+            </div>
+
+            <div class="tenet-card">
+              <div class="tenet-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="tenet-svg">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+              </div>
+              <div class="tenet-info">
+                <h4>Zero Critical Stockouts</h4>
+                <p>Autonomous inventory rebalancing across Class I to IX stores</p>
+              </div>
+            </div>
+
+            <div class="tenet-card">
+              <div class="tenet-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="tenet-svg">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+              </div>
+              <div class="tenet-info">
+                <h4>ASCON Military Encryption</h4>
+                <p>Certified military-grade telemetry on sovereign infrastructure</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="governance-tags">
+            <span class="gov-tag">DGOS Secretariat</span>
+            <span class="gov-tag">Army Cyber Group</span>
+            <span class="gov-tag">CERT-In Audited</span>
+          </div>
+        </div>
+
+        <!-- Right: Official Secretariat Directory & Quick Dispatch -->
+        <div class="contact-hub-panel">
+          <div class="secretariat-box">
+            <h4 class="hub-subheading">Principal Secretariats</h4>
+            
+            <div class="secretariat-item">
+              <span class="sec-label">Master General of Sustenance (MGS)</span>
+              <p class="sec-text">South Block, Integrated HQ of MoD (Army), New Delhi - 110011</p>
+            </div>
+
+            <div class="secretariat-item">
+              <span class="sec-label">Directorate General of Ordnance Services (DGOS)</span>
+              <p class="sec-text">West Block IV, RK Puram, New Delhi - 110066</p>
+            </div>
+
+            <div class="secretariat-item">
+              <span class="sec-label">24x7 Control Cell & Helpdesk</span>
+              <p class="sec-text">1800-11-SENA (7362) • ASCON-NET Node 4481</p>
+            </div>
+
+            <div class="secretariat-item">
+              <span class="sec-label">Official Electronic Gateways</span>
+              <p class="sec-text">dgos.sec&#64;nic.in • senaaapurti.hq&#64;gov.in</p>
+            </div>
+          </div>
+
+          <!-- Quick Dispatch Form -->
+          <div class="quick-comm-card">
+            <h4 class="hub-subheading">Official Communication Channel</h4>
+            <form (submit)="submitContact(); $event.preventDefault()">
+              <div class="comm-form-row">
+                <div class="form-group flex-1">
+                  <label class="form-label">Full Name & Rank</label>
+                  <input type="text" [(ngModel)]="contactName" name="contactName" class="form-control" placeholder="e.g. Col R. Sharma">
+                </div>
+                <div class="form-group flex-1">
+                  <label class="form-label">Defense Email ID</label>
+                  <input type="email" [(ngModel)]="contactEmail" name="contactEmail" class="form-control" placeholder="officer&#64;army.nic.in">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Message / Query</label>
+                <textarea [(ngModel)]="contactMsg" name="contactMsg" rows="2" class="form-control" placeholder="Enter brief communication..."></textarea>
+              </div>
+              <button type="submit" class="btn-army-primary full-width">
+                Transmit Communication ➔
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -281,17 +945,18 @@
     <div class="modal-body">
       <div class="modal-icon-circle">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path [attr.d]="selectedFeature.iconSvg" stroke-linecap="round" stroke-linejoin="round"/>
+          <path [attr.d]="selectedFeature.iconSvg" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </div>
       <h3 class="modal-title">{{ selectedFeature.title }}</h3>
       <p class="modal-description">{{ selectedFeature.description }}</p>
 
       <div class="modal-intel-box">
-        <h4>Defense Application & Impact:</h4>
+        <h4>Operational Capability & Impact:</h4>
         <ul>
           <li>Predictive neural networks trained on 15 years of seasonal consumption across border sectors.</li>
-          <li>Direct integration with GS Branch operational forecasts, Border Roads Organisation (BRO) road condition feeds, and IMD satellite weather telemetry.</li>
+          <li>Direct integration with GS Branch operational forecasts, Border Roads Organisation (BRO) road condition
+            feeds, and IMD satellite weather telemetry.</li>
           <li>Reduces emergency air-drop costs by 42% through early surface pre-positioning.</li>
         </ul>
       </div>

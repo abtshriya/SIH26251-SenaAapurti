@@ -6,29 +6,37 @@ import { UnitDashboardComponent } from './pages/unit-dashboard/unit-dashboard.co
 import { PublicInfoComponent } from './pages/public-info/public-info.component';
 
 export const routes: Routes = [
-  // 1. MASTER / INTRO WEBSITE
+  // 0. MASTER / INTRO WEBSITE
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
 
-  // 2. PUBLIC INFORMATION PAGES
-  { path: 'about', component: PublicInfoComponent, data: { section: 'about' } },
-  { path: 'ai-logistics', component: PublicInfoComponent, data: { section: 'ai-logistics' } },
-  { path: 'features', component: PublicInfoComponent, data: { section: 'features' } },
-  { path: 'guidelines', component: PublicInfoComponent, data: { section: 'guidelines' } },
-  { path: 'support', component: PublicInfoComponent, data: { section: 'support' } },
-  { path: 'downloads', component: PublicInfoComponent, data: { section: 'downloads' } },
-  { path: 'contact', component: PublicInfoComponent, data: { section: 'contact' } },
+  // Redirect former standalone pages to Home sections
+  { path: 'about', redirectTo: '', pathMatch: 'full' },
+  { path: 'ai-logistics', redirectTo: '', pathMatch: 'full' },
+  { path: 'features', redirectTo: '', pathMatch: 'full' },
+  { path: 'guidelines', redirectTo: '', pathMatch: 'full' },
+  { path: 'downloads', redirectTo: '', pathMatch: 'full' },
+  { path: 'support', redirectTo: '', pathMatch: 'full' },
+  { path: 'contact', redirectTo: '', pathMatch: 'full' },
 
-  // 3. LOGIN / REGISTER PORTAL
-  { path: 'auth', component: AuthComponent },
-  { path: 'login', redirectTo: 'auth', pathMatch: 'full' },
-  { path: 'register', redirectTo: 'auth', pathMatch: 'full' },
+  // ACCESS PORTAL
+  { path: 'auth', redirectTo: 'auth/login', pathMatch: 'full' },
+  { path: 'auth/login', component: AuthComponent, data: { mode: 'login' } },
+  { path: 'auth/register', component: AuthComponent, data: { mode: 'register' } },
+  { path: 'auth/forgot-password', component: AuthComponent, data: { mode: 'forgot-password' } },
+  { path: 'auth/unauthorized', component: AuthComponent, data: { mode: 'unauthorized' } },
+  { path: 'login', redirectTo: 'auth/login', pathMatch: 'full' },
+  { path: 'register', redirectTo: 'auth/register', pathMatch: 'full' },
 
-  // 4. COMMAND / ADMIN DASHBOARD
-  { path: 'command-dashboard', component: CommandDashboardComponent },
+  // 1. COMMAND / ADMIN DASHBOARD
+  { path: 'command', redirectTo: 'command/dashboard', pathMatch: 'full' },
+  { path: 'command/:tab', component: CommandDashboardComponent },
+  { path: 'command-dashboard', redirectTo: 'command/dashboard', pathMatch: 'full' },
 
-  // 5. UNIT DASHBOARD
-  { path: 'unit-dashboard', component: UnitDashboardComponent },
+  // 2. UNIT DASHBOARD
+  { path: 'unit', redirectTo: 'unit/dashboard', pathMatch: 'full' },
+  { path: 'unit/:tab', component: UnitDashboardComponent },
+  { path: 'unit-dashboard', redirectTo: 'unit/dashboard', pathMatch: 'full' },
 
   // Wildcard
   { path: '**', redirectTo: '' }

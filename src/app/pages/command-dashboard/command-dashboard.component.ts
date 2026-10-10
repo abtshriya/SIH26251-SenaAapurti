@@ -1,9 +1,30 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { LogisticsService, ConvoyItem, StrategicAlert } from '../../services/logistics.service';
+import {
+  LogisticsService,
+  ConvoyItem,
+  StrategicAlert,
+  UnitNetworkItem,
+  InventoryItem,
+  WeatherStationData
+} from '../../services/logistics.service';
+
+import { ThemeService, FontSize } from '../../services/theme.service';
+
+export type CommandTab =
+  | 'dashboard'
+  | 'units'
+  | 'inventory'
+  | 'forecasting'
+  | 'logistics'
+  | 'intelligence'
+  | 'recommendations'
+  | 'simulation'
+  | 'reports'
+  | 'settings';
 
 @Component({
   selector: 'app-command-dashboard',
@@ -12,17 +33,92 @@ import { LogisticsService, ConvoyItem, StrategicAlert } from '../../services/log
   templateUrl: './command-dashboard.component.html',
   styleUrl: './command-dashboard.component.css'
 })
-export class CommandDashboardComponent {
+export class CommandDashboardComponent implements OnInit {
   authService = inject(AuthService);
   logisticsService = inject(LogisticsService);
+  themeService = inject(ThemeService);
+  route = inject(ActivatedRoute);
+  router = inject(Router);
 
-  activeTab: 'overview' | 'convoys' | 'ai-alerts' | 'simulation' | 'approvals' = 'overview';
+  setFont(size: FontSize) {
+    this.themeService.setFontSize(size);
+  }
 
-  // Simulator controls
+  // Active Tab
+  activeTab: CommandTab = 'dashboard';
+  sidebarCollapsed = false;
+
+  // Header / System state
+  currentDateTime = '';
+  lastDataSync = 'Just now (ASCON Feed #4182)';
+  searchQuery = '';
+  showNotifications = false;
+  unreadNotificationsCount = 4;
+
+  // 1.1 Dashboard State
+  selectedAlert: StrategicAlert | null = null;
+  mapLayerRoutes = true;
+  mapLayerConvoys = true;
+  mapLayerWeather = true;
+  mapLayerRisks = true;
+  alertActionSuccess = '';
+
+  // 1.2 Unit Network State
+  unitSearch = '';
+  unitRegionFilter = 'All';
+  unitTypeFilter = 'All';
+  unitReadinessFilter = 'All';
+  selectedUnit: UnitNetworkItem | null = null;
+  showAddUnitModal = false;
+  newUnitModel = {
+    id: '',
+    name: '',
+    type: 'Infantry' as any,
+    region: 'Northern Command' as any,
+    location: '',
+    personnel: 750,
+    commander: ''
+  };
+
+  // 1.3 National Inventory State
+  invCategoryFilter = 'All';
+  invRegionFilter = 'All';
+  invSearch = '';
+  selectedInventoryItem: InventoryItem | null = null;
+  showRedistributeModal = false;
+  showReplenishModal = false;
+  showRiskModal = false;
+  actionFeedbackMsg = '';
+
+  // 1.4 Demand & Forecasting State
+  forecastRegion = 'Northern Command';
+  forecastCategory = 'Class III (POL)';
+  forecastPeriod = '30 Days';
+  forecastHorizon = 'Winter Q4 (Nov 2026 - Mar 2027)';
+
+  // 1.5 Logistics Movement State
+  selectedConvoy: ConvoyItem | null = null;
+  convoyFilterStatus = 'All';
+
+  // 1.6 Route & Intelligence State
+  intelLayer = 'All';
+  selectedWeatherStation: WeatherStationData | null = null;
+
+  // 1.7 AI Recommendations State
+  recPriorityFilter = 'All';
+  selectedRecommendation: StrategicAlert | null = null;
+
+  // 1.8 What-If Simulation State
+  simUnit = '14 RAJPUT (MECHANISED)';
+  simSupply = 'Class III (Sub-Zero POL)';
+  simDemandChange = 25; // %
+  simInventoryAdj = -15; // %
+  simVehicleCap = 'Normal (28 Vehicles)';
+  simRouteDisruption = true;
   selectedScenario = 'Zojila Pass Avalanche & Extreme Cold Wave';
   simIntensity = 65;
   enableAirlift = true;
-  simRan = false;
+  simRan = true;
 
   scenarios = [
     'Zojila Pass Avalanche & Extreme Cold Wave',
@@ -31,30 +127,118 @@ export class CommandDashboardComponent {
     'High-Altitude Siachen Forward Picket Replenishment'
   ];
 
-  theaters = [
-    { name: 'Northern Command (Udhampur)', status: 'Optimal', readiness: 97.2, alertLevel: 'DEFCON 2', corps: '14, 15, 16 Corps' },
-    { name: 'Eastern Command (Kolkata)', status: 'Optimal', readiness: 95.8, alertLevel: 'DEFCON 3', corps: '3, 4, 33 Corps' },
-    { name: 'Western Command (Chandimandir)', status: 'Optimal', readiness: 98.1, alertLevel: 'DEFCON 3', corps: '2, 9, 11 Corps' },
-    { name: 'Southern Command (Pune)', status: 'Normal', readiness: 96.0, alertLevel: 'DEFCON 4', corps: '12, 21 Corps' },
-    { name: 'South Western Command (Jaipur)', status: 'Optimal', readiness: 95.4, alertLevel: 'DEFCON 4', corps: '1, 10 Corps' },
-    { name: 'Central Command (Lucknow)', status: 'Normal', readiness: 98.7, alertLevel: 'DEFCON 4', corps: 'Central Depots' }
-  ];
+  // 1.9 Reports & Analytics State
+  reportCategory = 'National Readiness';
+  reportDateRange = 'Last 30 Days';
+  reportRegion = 'All Commands';
+  downloadSuccessNotice = '';
 
-  depots = [
-    { name: 'COD Pathankot', stockLevel: '96%', classStocked: 'Class III & IX', throughput: '1,420 Tons/Day', status: 'Active' },
-    { name: 'COD Agra', stockLevel: '94%', classStocked: 'Class IX Spares & Aerial Drops', throughput: '980 Tons/Day', status: 'Active' },
-    { name: 'COD Jabalpur', stockLevel: '97%', classStocked: 'Class V Heavy Ammunition', throughput: '2,100 Tons/Day', status: 'Active' },
-    { name: 'COD Narangi (Guwahati)', stockLevel: '91%', classStocked: 'Class I, III & V Eastern', throughput: '1,250 Tons/Day', status: 'Active' },
-    { name: 'COD Delhi Cantt', stockLevel: '98%', classStocked: 'Strategic Defense Reserve', throughput: '850 Tons/Day', status: 'Active' }
-  ];
+  // 1.10 Settings State
+  settingsNotificationSms = true;
+  settingsSatcomPriority = true;
+  settingsOfflineSync = true;
+  settingsSessionTimeout = '30 Minutes';
+  settingsThemeMode = 'Tactical Dark';
 
-  selectedConvoy: ConvoyItem | null = null;
-  alertActionSuccess = '';
+  ngOnInit() {
+    this.updateClock();
+    setInterval(() => this.updateClock(), 1000);
 
-  setActiveTab(tab: 'overview' | 'convoys' | 'ai-alerts' | 'simulation' | 'approvals') {
-    this.activeTab = tab;
+    // Read route params
+    this.route.params.subscribe(params => {
+      if (params['tab']) {
+        this.setTab(params['tab'] as CommandTab, false);
+      }
+    });
+
+    // Run initial simulation calculation
+    this.runScenarioSimulation();
   }
 
+  updateClock() {
+    const now = new Date();
+    this.currentDateTime = now.toUTCString().replace('GMT', 'UTC') + ' | ' +
+      now.toLocaleTimeString('en-IN', { hour12: false }) + ' IST';
+  }
+
+  setTab(tab: CommandTab, navigate = true) {
+    this.activeTab = tab;
+    this.actionFeedbackMsg = '';
+    if (navigate) {
+      this.router.navigate(['/command', tab]);
+    }
+  }
+
+  refreshData() {
+    this.lastDataSync = 'Synchronized at ' + new Date().toLocaleTimeString();
+    alert('Real-time ASCON military telemetry feeds refreshed across all 7 Operational Commands.');
+  }
+
+  toggleSidebar() {
+    this.sidebarCollapsed = !this.sidebarCollapsed;
+  }
+
+  // Unit Network methods
+  filteredUnits(): UnitNetworkItem[] {
+    return this.logisticsService.unitNetwork().filter(u => {
+      const matchSearch = !this.unitSearch ||
+        u.name.toLowerCase().includes(this.unitSearch.toLowerCase()) ||
+        u.id.toLowerCase().includes(this.unitSearch.toLowerCase()) ||
+        u.location.toLowerCase().includes(this.unitSearch.toLowerCase());
+      const matchRegion = this.unitRegionFilter === 'All' || u.region === this.unitRegionFilter;
+      const matchType = this.unitTypeFilter === 'All' || u.type === this.unitTypeFilter;
+      const matchReadiness = this.unitReadinessFilter === 'All' ||
+        (this.unitReadinessFilter === 'High' && u.readiness >= 96) ||
+        (this.unitReadinessFilter === 'Medium' && u.readiness < 96);
+      return matchSearch && matchRegion && matchType && matchReadiness;
+    });
+  }
+
+  inspectUnit(unit: UnitNetworkItem) {
+    this.selectedUnit = unit;
+  }
+
+  saveNewUnit() {
+    if (!this.newUnitModel.name || !this.newUnitModel.id) {
+      alert('Please fill Unit Name and Unit ID');
+      return;
+    }
+    const newUnit: UnitNetworkItem = {
+      ...this.newUnitModel,
+      readiness: 98.0,
+      inventoryHealth: 'Healthy',
+      riskLevel: 'Low',
+      pendingRequests: 0,
+      onlineStatus: 'Online',
+      dos: 55
+    };
+    this.logisticsService.unitNetwork.update(list => [newUnit, ...list]);
+    this.showAddUnitModal = false;
+    alert(`Unit ${newUnit.name} successfully registered in National Command Network.`);
+  }
+
+  // Inventory methods
+  filteredInventory(): InventoryItem[] {
+    return this.logisticsService.inventoryCatalog().filter(item => {
+      const matchCat = this.invCategoryFilter === 'All' || item.category === this.invCategoryFilter;
+      const matchSearch = !this.invSearch || item.item.toLowerCase().includes(this.invSearch.toLowerCase());
+      return matchCat && matchSearch;
+    });
+  }
+
+  executeRedistribution() {
+    this.actionFeedbackMsg = 'Redistribution order verified and dispatched to Northern Command Ordnance Officer.';
+    this.showRedistributeModal = false;
+    setTimeout(() => this.actionFeedbackMsg = '', 5000);
+  }
+
+  executeReplenishment() {
+    this.actionFeedbackMsg = 'Urgent replenishment requisition transmitted to COD Jabalpur with Operational Priority 1.';
+    this.showReplenishModal = false;
+    setTimeout(() => this.actionFeedbackMsg = '', 5000);
+  }
+
+  // Logistics Movement methods
   inspectConvoy(convoy: ConvoyItem) {
     this.selectedConvoy = convoy;
   }
@@ -62,28 +246,40 @@ export class CommandDashboardComponent {
   triggerReroute(convoy: ConvoyItem) {
     convoy.status = 'Rerouted';
     convoy.route = convoy.route + ' [Bypass Activated via BRO Secondary Link]';
-    alert(`Rerouting order transmitted to convoy ${convoy.callsign} via ASCON tactical network.`);
+    alert(`Rerouting tactical order transmitted to Convoy ${convoy.callsign} via ASCON.`);
   }
 
-  approveIndent(id: string) {
-    this.logisticsService.approveIndent(id);
-    alert(`Requisition ${id} has been formally authorized by DGOS Directorate.`);
-  }
-
-  dispatchIndent(id: string) {
-    this.logisticsService.dispatchIndent(id);
-    alert(`Consignment dispatch order issued for Requisition ${id}.`);
-  }
-
+  // Simulation methods
   runScenarioSimulation() {
     this.simRan = true;
-    this.logisticsService.runSimulation(this.selectedScenario, this.simIntensity, this.enableAirlift);
+    this.logisticsService.runSimulation(
+      this.selectedScenario,
+      this.simIntensity,
+      this.enableAirlift,
+      this.simDemandChange,
+      this.simInventoryAdj
+    );
   }
 
+  // AI Recommendations
   executeAlertRemedy(alertItem: StrategicAlert) {
-    this.alertActionSuccess = `Automated remediation order dispatched for Alert ${alertItem.id}: "${alertItem.recommendedAction}"`;
+    this.alertActionSuccess = `Automated remediation authorized for Alert ${alertItem.id}: "${alertItem.recommendedAction}"`;
     setTimeout(() => {
       this.alertActionSuccess = '';
     }, 6000);
+  }
+
+  // Reports
+  exportReport(format: 'PDF' | 'CSV' | 'Print') {
+    if (format === 'Print') {
+      window.print();
+      return;
+    }
+    this.downloadSuccessNotice = `Generating classified ${format} export for "${this.reportCategory}" (${this.reportDateRange}). Verification SHA-256 appended.`;
+    setTimeout(() => this.downloadSuccessNotice = '', 5000);
+  }
+
+  saveSettings() {
+    alert('Command Admin settings updated and cryptographically signed.');
   }
 }

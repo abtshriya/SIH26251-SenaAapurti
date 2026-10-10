@@ -18,8 +18,10 @@ export class AuthComponent implements OnInit {
   route = inject(ActivatedRoute);
   router = inject(Router);
 
+  // Current sub-route mode
+  mode: 'login' | 'register' | 'forgot-password' | 'unauthorized' = 'login';
   portalMode: 'command' | 'unit' = 'command';
-  authAction: 'login' | 'register' = 'login';
+  regType: 'unit' | 'admin' = 'unit';
 
   // Login Form Model
   serviceNo = '';
@@ -31,39 +33,84 @@ export class AuthComponent implements OnInit {
   showOtpStep = false;
   otpCode = '';
 
-  // Register Form Model
-  regName = '';
-  regServiceNo = '';
-  regRank = 'Major';
-  regUnit = '';
-  regCommand = 'Northern Command';
-  regEmail = '';
-  regPassword = '';
-  regConfirmPassword = '';
+  // Unit Registration Model
+  unitRegName = '';
+  unitRegId = '';
+  unitRegFormation = 'Northern Command (14 Corps)';
+  unitRegLocation = 'Leh - Ladakh Forward Picket';
+  unitRegAuthOfficer = '';
+  unitRegContact = '';
+  unitRegEmail = '';
+  unitRegUsername = '';
+  unitRegPassword = '';
+  unitRegConfirmPassword = '';
+  unitRegCaptcha = '';
+
+  // Admin Registration Model
+  adminRegId = '';
+  adminRegName = '';
+  adminRegDesignation = 'Director General of Ordnance Services (DGOS)';
+  adminRegCommand = 'Integrated HQ of MoD (Army)';
+  adminRegEmail = '';
+  adminRegContact = '';
+  adminRegUsername = '';
+  adminRegPassword = '';
+  adminRegConfirmPassword = '';
+  adminRegCaptcha = '';
+
+  // Forgot Password Model
+  forgotUsernameEmail = '';
+  forgotCaptcha = '';
+  forgotOtp = '';
+  forgotOtpSent = false;
+  forgotNewPassword = '';
+  forgotConfirmPassword = '';
+  forgotSuccessMsg = '';
+  forgotError = '';
+
   regSuccessMsg = '';
 
-  ranks = [
-    'Captain',
-    'Major',
-    'Lieutenant Colonel',
-    'Colonel',
-    'Brigadier',
-    'Major General',
-    'Lieutenant General',
-    'Subedar Major'
+  formations = [
+    'Northern Command (14 Corps - Leh)',
+    'Northern Command (15 Corps - Srinagar)',
+    'Northern Command (16 Corps - Nagrota)',
+    'Eastern Command (4 Corps - Tezpur)',
+    'Eastern Command (33 Corps - Sukna)',
+    'Western Command (2 Corps - Ambala)',
+    'Southern Command (12 Corps - Jodhpur)',
+    'South Western Command (1 Corps - Mathura)',
+    'Central Command Depots'
   ];
 
-  commands = [
-    'Northern Command (Udhampur)',
-    'Eastern Command (Kolkata)',
-    'Western Command (Chandimandir)',
-    'Southern Command (Pune)',
-    'South Western Command (Jaipur)',
-    'Central Command (Lucknow)',
-    'Army Training Command (ARTRAC)'
+  adminCommands = [
+    'Integrated HQ of MoD (Army) - New Delhi',
+    'DGOS Directorate (Army Ordnance Corps)',
+    'Master General of Sustenance (MGS) Branch',
+    'Northern Command HQ (Udhampur)',
+    'Eastern Command HQ (Kolkata)',
+    'Western Command HQ (Chandimandir)',
+    'Southern Command HQ (Pune)',
+    'South Western Command HQ (Jaipur)',
+    'Central Command HQ (Lucknow)'
   ];
 
   ngOnInit() {
+    // Read route data
+    this.route.data.subscribe(data => {
+      if (data['mode']) {
+        this.mode = data['mode'];
+      }
+    });
+
+    this.route.url.subscribe(segments => {
+      if (segments.length > 0) {
+        const last = segments[segments.length - 1].path;
+        if (['login', 'register', 'forgot-password', 'unauthorized'].includes(last)) {
+          this.mode = last as any;
+        }
+      }
+    });
+
     this.route.queryParams.subscribe(params => {
       if (params['portal'] === 'unit') {
         this.portalMode = 'unit';
@@ -74,16 +121,20 @@ export class AuthComponent implements OnInit {
     });
   }
 
+  setMode(m: 'login' | 'register' | 'forgot-password' | 'unauthorized') {
+    this.mode = m;
+    this.loginError = '';
+    this.regSuccessMsg = '';
+    this.forgotSuccessMsg = '';
+    this.forgotError = '';
+    this.showOtpStep = false;
+    this.router.navigate([`/auth/${m}`]);
+  }
+
   setPortal(mode: 'command' | 'unit') {
     this.portalMode = mode;
     this.loginError = '';
     this.showOtpStep = false;
-  }
-
-  setAction(action: 'login' | 'register') {
-    this.authAction = action;
-    this.loginError = '';
-    this.regSuccessMsg = '';
   }
 
   refreshCaptcha() {
@@ -99,79 +150,132 @@ export class AuthComponent implements OnInit {
   fillDemoCommand() {
     this.portalMode = 'command';
     this.serviceNo = 'IC-48291X';
-    this.password = 'Command@Secure2026';
+    this.password = 'CommandHQ@2026';
     this.captchaInput = this.currentCaptcha;
+    this.loginError = '';
   }
 
   fillDemoUnit() {
     this.portalMode = 'unit';
     this.serviceNo = 'IC-71044A';
-    this.password = 'Unit@Ready2026';
+    this.password = 'RajputRegt@2026';
     this.captchaInput = this.currentCaptcha;
+    this.loginError = '';
   }
 
   submitLogin() {
     this.loginError = '';
 
     if (!this.serviceNo.trim()) {
-      this.loginError = 'Please enter your Army Service Number.';
+      this.loginError = 'Please enter your Official Service Number / User ID.';
       return;
     }
-
     if (!this.password.trim()) {
-      this.loginError = 'Please enter your defense password or security PIN.';
+      this.loginError = 'Please enter your security access password.';
       return;
     }
-
-    if (this.captchaInput.toUpperCase() !== this.currentCaptcha) {
-      this.loginError = 'Security Captcha mismatch. Please re-enter the code.';
+    if (this.captchaInput.trim().toUpperCase() !== this.currentCaptcha.toUpperCase()) {
+      this.loginError = 'Security verification code is incorrect. Please try again.';
       this.refreshCaptcha();
       return;
     }
 
-    // Advance to simulated 2FA OTP
+    // Step 2: 2FA OTP simulation
     this.showOtpStep = true;
-    this.otpCode = '4829'; // Default demo OTP
+    this.otpCode = '4829';
   }
 
   verifyOtpAndLogin() {
+    if (!this.otpCode || this.otpCode.length < 4) {
+      this.loginError = 'Please enter the 4-digit verification code received on defense terminal.';
+      return;
+    }
+
+    const user: MilitaryUser = this.portalMode === 'command' ? {
+      serviceNo: this.serviceNo || 'IC-48291X',
+      name: 'Lt Gen V. K. Rawat, PVSM, AVSM',
+      rank: 'Lieutenant General',
+      role: 'command',
+      unit: 'Master General of Sustenance (MGS), Army HQ',
+      command: 'Integrated HQ of MoD (Army)',
+      clearanceLevel: 'TOP SECRET - STRATEGIC'
+    } : {
+      serviceNo: this.serviceNo || 'IC-71044A',
+      name: 'Major Amit Sharma',
+      rank: 'Major',
+      role: 'unit',
+      unit: '14 RAJPUT (MECHANISED)',
+      command: 'Northern Command (14 Corps - Leh)',
+      clearanceLevel: 'SECRET - OPERATIONAL'
+    };
+
+    this.authService.login(user);
     if (this.portalMode === 'command') {
-      const user: MilitaryUser = {
-        serviceNo: this.serviceNo.trim(),
-        name: this.serviceNo === 'IC-48291X' ? 'Lt Gen V. K. Rawat, PVSM, AVSM' : 'Col R. S. Verma',
-        rank: this.serviceNo === 'IC-48291X' ? 'Lieutenant General' : 'Colonel',
-        unit: 'Master General of Sustenance (MGS) Branch, Army HQ',
-        command: 'Integrated HQ of MoD (Army)',
-        role: 'command',
-        clearanceLevel: 'TOP SECRET - STRATEGIC'
-      };
-      this.authService.login(user);
+      this.router.navigate(['/command/dashboard']);
     } else {
-      const user: MilitaryUser = {
-        serviceNo: this.serviceNo.trim(),
-        name: this.serviceNo === 'IC-71044A' ? 'Major Amit Sharma' : 'Major K. P. Singh',
-        rank: 'Major',
-        unit: '14 RAJPUT (MECHANISED)',
-        command: 'Northern Command (14 Corps - Leh)',
-        role: 'unit',
-        clearanceLevel: 'SECRET - OPERATIONAL'
-      };
-      this.authService.login(user);
+      this.router.navigate(['/unit/dashboard']);
     }
   }
 
-  submitRegister() {
-    if (!this.regName || !this.regServiceNo || !this.regUnit || !this.regEmail || !this.regPassword) {
-      alert('Please fill in all mandatory military registration fields.');
+  submitUnitRegister() {
+    if (!this.unitRegName || !this.unitRegId || !this.unitRegAuthOfficer || !this.unitRegEmail || !this.unitRegPassword) {
+      alert('Please fill in all required fields for Unit Registration.');
       return;
     }
-
-    if (this.regPassword !== this.regConfirmPassword) {
-      alert('Password and Confirm Password do not match.');
+    if (this.unitRegPassword !== this.unitRegConfirmPassword) {
+      alert('Passwords do not match.');
       return;
     }
+    this.regSuccessMsg = `Unit Registration for "${this.unitRegName} (${this.unitRegId})" submitted successfully to DGOS Logistics Cell. Verification email sent to ${this.unitRegEmail}.`;
+    setTimeout(() => {
+      this.setMode('login');
+      this.portalMode = 'unit';
+    }, 2500);
+  }
 
-    this.regSuccessMsg = `Enrollment application registered for ${this.regRank} ${this.regName} (${this.regServiceNo}). Forwarded to Command Security Officer for authorization. You may now test login with the demo credentials.`;
-    this.authAction = 'login';
+  submitAdminRegister() {
+    if (!this.adminRegId || !this.adminRegName || !this.adminRegEmail || !this.adminRegPassword) {
+      alert('Please fill in all required fields for Command/Admin Registration.');
+      return;
+    }
+    if (this.adminRegPassword !== this.adminRegConfirmPassword) {
+      alert('Passwords do not match.');
+      return;
+    }
+    this.regSuccessMsg = `Admin Officer Registration for "${this.adminRegName} (${this.adminRegId})" submitted for clearance authorization. Approval notification will be routed to ${this.adminRegEmail}.`;
+    setTimeout(() => {
+      this.setMode('login');
+      this.portalMode = 'command';
+    }, 2500);
+  }
+
+  requestForgotOtp() {
+    if (!this.forgotUsernameEmail.trim()) {
+      this.forgotError = 'Please provide your registered Username or Official Email ID.';
+      return;
+    }
+    this.forgotError = '';
+    this.forgotOtpSent = true;
+    this.forgotOtp = '7741';
+  }
+
+  submitResetPassword() {
+    if (!this.forgotOtp) {
+      this.forgotError = 'Please enter the verification OTP.';
+      return;
+    }
+    if (!this.forgotNewPassword || this.forgotNewPassword.length < 6) {
+      this.forgotError = 'Password must be at least 6 characters.';
+      return;
+    }
+    if (this.forgotNewPassword !== this.forgotConfirmPassword) {
+      this.forgotError = 'Passwords do not match.';
+      return;
+    }
+    this.forgotError = '';
+    this.forgotSuccessMsg = 'Password successfully reset! You can now log into your defense portal with your new credentials.';
+    setTimeout(() => {
+      this.setMode('login');
+    }, 2000);
   }
 }

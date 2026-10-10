@@ -4,97 +4,121 @@
     <!-- Top Security Header -->
     <div class="auth-banner-header">
       <div class="auth-emblem">
-        <svg class="emblem-svg" viewBox="0 0 100 100" fill="none">
-          <path d="M18 18L82 82M82 18L18 82" stroke="#d4af37" stroke-width="4.5" stroke-linecap="round"/>
-          <path d="M14 14L24 24M86 14L76 24M14 86L24 76M86 86L76 76" stroke="#f59e0b" stroke-width="5" stroke-linecap="round"/>
-          <rect x="42" y="16" width="16" height="24" rx="3" fill="#d4af37"/>
-          <circle cx="50" cy="58" r="14" stroke="#d4af37" stroke-width="3" fill="#162a1c"/>
-          <path d="M50 44V72M36 58H64" stroke="#d4af37" stroke-width="1.5"/>
-        </svg>
+        <img
+          src="/images/sena_official_logo.png"
+          alt="SenaAapurti Official Insignia"
+          class="auth-logo-img"
+        />
       </div>
       <div class="auth-header-text">
         <h2 class="auth-title">
           <span class="text-white">Sena</span><span class="text-saffron">Aapurti</span>
         </h2>
-        <span class="auth-sub">DEFENSE LOGISTICS AUTHENTICATION SYSTEM</span>
+        <span class="auth-sub">DEFENSE LOGISTICS ACCESS & AUTHENTICATION PORTAL</span>
       </div>
     </div>
 
-    <!-- Quick Demo Auto-Fill Strip -->
-    <div class="demo-quick-bar">
-      <span class="demo-tag">Fast Evaluation Shortcuts:</span>
-      <div class="demo-btns-wrap">
-        <button type="button" class="btn-demo command-demo" (click)="fillDemoCommand()">
-          👑 Fill Command Admin (Lt Gen Rawat)
+    <!-- Navigation Sub-Menu Bar for Portal Modes -->
+    <div class="auth-sub-nav">
+      <button
+        type="button"
+        class="auth-sub-nav-btn"
+        [class.active]="mode === 'login'"
+        (click)="setMode('login')"
+      >
+        Sign In
+      </button>
+      <button
+        type="button"
+        class="auth-sub-nav-btn"
+        [class.active]="mode === 'register'"
+        (click)="setMode('register')"
+      >
+        Register New Account
+      </button>
+      <button
+        type="button"
+        class="auth-sub-nav-btn"
+        [class.active]="mode === 'forgot-password'"
+        (click)="setMode('forgot-password')"
+      >
+        Forgot Password
+      </button>
+      <button
+        type="button"
+        class="auth-sub-nav-btn"
+        [class.active]="mode === 'unauthorized'"
+        (click)="setMode('unauthorized')"
+      >
+        Access Denied Test
+      </button>
+    </div>
+
+    <!-- ============================================================= -->
+    <!-- 1. LOGIN VIEW                                                  -->
+    <!-- ============================================================= -->
+    <div *ngIf="mode === 'login'">
+      <!-- Welcome Message & Role Selection -->
+      <div class="auth-welcome-banner">
+        <h3>Official Defense Authentication Gateway</h3>
+        <p>Select your operational echelon to access the authorized logistics command center.</p>
+      </div>
+
+      <!-- Quick Demo Auto-Fill Strip -->
+      <div class="demo-quick-bar">
+        <span class="demo-tag">Fast Evaluation Fill:</span>
+        <div class="demo-btns-wrap">
+          <button type="button" class="btn-demo command-demo" (click)="fillDemoCommand()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="demo-btn-icon">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+            <span>Fill Command Admin (Lt Gen Rawat)</span>
+          </button>
+          <button type="button" class="btn-demo unit-demo" (click)="fillDemoUnit()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="demo-btn-icon">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <span>Fill Unit Officer (Maj Sharma - 14 Rajput)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Role Selection Switcher -->
+      <div class="portal-selector-row">
+        <button
+          type="button"
+          class="portal-tab-btn"
+          [class.active]="portalMode === 'command'"
+          (click)="setPortal('command')"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 21v-4M4 21h16M3 10h18M5 10v11M19 10v11M12 10V6M8 6h8M12 2v4"/>
+          </svg>
+          <span>COMMAND / ADMIN</span>
         </button>
-        <button type="button" class="btn-demo unit-demo" (click)="fillDemoUnit()">
-          🛡️ Fill Unit Officer (Maj Sharma - 14 Rajput)
+
+        <button
+          type="button"
+          class="portal-tab-btn"
+          [class.active]="portalMode === 'unit'"
+          (click)="setPortal('unit')"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0z"/>
+          </svg>
+          <span>UNIT PORTAL</span>
         </button>
       </div>
-    </div>
 
-    <!-- Dual Portal Role Selection Switcher -->
-    <div class="portal-selector-row">
-      <button
-        type="button"
-        class="portal-tab-btn"
-        [class.active]="portalMode === 'command'"
-        (click)="setPortal('command')"
-      >
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M12 21v-4M4 21h16M3 10h18M5 10v11M19 10v11M12 10V6M8 6h8M12 2v4"/>
-        </svg>
-        <span>COMMAND / ADMIN PORTAL</span>
-      </button>
+      <!-- Error Message Banner -->
+      <div *ngIf="loginError" class="alert-danger-banner">
+        {{ loginError }}
+      </div>
 
-      <button
-        type="button"
-        class="portal-tab-btn"
-        [class.active]="portalMode === 'unit'"
-        (click)="setPortal('unit')"
-      >
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0z"/>
-        </svg>
-        <span>UNIT LOGISTICS PORTAL</span>
-      </button>
-    </div>
-
-    <!-- Success Message Banner -->
-    <div *ngIf="regSuccessMsg" class="alert-success-banner">
-      {{ regSuccessMsg }}
-    </div>
-
-    <!-- Error Message Banner -->
-    <div *ngIf="loginError" class="alert-danger-banner">
-      {{ loginError }}
-    </div>
-
-    <!-- Tabs: Login vs Register -->
-    <div class="auth-action-tabs">
-      <button
-        type="button"
-        class="action-tab"
-        [class.active]="authAction === 'login'"
-        (click)="setAction('login')"
-      >
-        Officer Sign In
-      </button>
-      <button
-        type="button"
-        class="action-tab"
-        [class.active]="authAction === 'register'"
-        (click)="setAction('register')"
-      >
-        Unit / Officer Registration
-      </button>
-    </div>
-
-    <!-- ================= LOGIN FORM ================= -->
-    <div *ngIf="authAction === 'login'" class="form-content">
-      <div *ngIf="!showOtpStep">
+      <!-- Step 1: Credentials Form -->
+      <div *ngIf="!showOtpStep" class="form-content">
         <div class="form-group">
-          <label class="form-label" for="serviceNo">Army Service Number / ID</label>
+          <label class="form-label" for="serviceNo">User ID / Official Service Number</label>
           <div class="input-with-icon">
             <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
@@ -108,11 +132,11 @@
               autocomplete="username"
             />
           </div>
-          <span class="field-help">Registered Army Officers & authorized JCOs only</span>
+          <span class="field-help">Commissioned Officers, JCOs & authorized Logisticians</span>
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="password">Defense Access Password / PIN</label>
+          <label class="form-label" for="password">Password</label>
           <div class="input-with-icon">
             <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/>
@@ -128,9 +152,9 @@
           </div>
         </div>
 
-        <!-- Captcha Row -->
+        <!-- Captcha / Security Verification -->
         <div class="form-group">
-          <label class="form-label">Security Verification Code</label>
+          <label class="form-label">CAPTCHA / Security Verification</label>
           <div class="captcha-row">
             <div class="captcha-badge" title="Military Security Captcha">
               <span class="captcha-chars">{{ currentCaptcha }}</span>
@@ -151,9 +175,11 @@
         <div class="form-row-between">
           <label class="checkbox-label">
             <input type="checkbox" [(ngModel)]="rememberMe">
-            <span>Remember terminal session</span>
+            <span>Remember Me</span>
           </label>
-          <a routerLink="/support" class="forgot-link">Forgot Password / Token?</a>
+          <button type="button" class="link-btn-text" (click)="setMode('forgot-password')">
+            Forgot Password?
+          </button>
         </div>
 
         <button
@@ -163,23 +189,27 @@
           [class.unit-submit]="portalMode === 'unit'"
           (click)="submitLogin()"
         >
-          <span>Continue to 2FA Authentication</span>
+          <span>LOGIN</span>
           <svg viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
           </svg>
         </button>
+
+        <div class="back-home-wrap">
+          <a routerLink="/" class="back-home-link">← Back to Main Website</a>
+        </div>
       </div>
 
-      <!-- OTP Step (2-Factor Authentication) -->
+      <!-- Step 2: 2FA OTP Screen -->
       <div *ngIf="showOtpStep" class="otp-verification-box">
         <div class="otp-icon-header">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"/>
           </svg>
         </div>
-        <h4 class="otp-title">Army 2FA Verification</h4>
+        <h4 class="otp-title">Defense 2-Factor Authentication</h4>
         <p class="otp-desc">
-          A one-time tactical authorization code has been dispatched to the defense registered mobile linked to <strong>{{ serviceNo }}</strong>.
+          A secure authorization code has been dispatched to the defense terminal registered under <strong>{{ serviceNo }}</strong>.
         </p>
 
         <div class="form-group">
@@ -208,65 +238,278 @@
       </div>
     </div>
 
-    <!-- ================= REGISTRATION FORM ================= -->
-    <div *ngIf="authAction === 'register'" class="form-content">
-      <div class="form-grid-2">
+    <!-- ============================================================= -->
+    <!-- 2. REGISTER VIEW                                               -->
+    <!-- ============================================================= -->
+    <div *ngIf="mode === 'register'" class="form-content">
+      <div class="auth-welcome-banner">
+        <h3>Select Registration Type</h3>
+        <p>Register a forward tactical unit or a headquarters logistics administration account.</p>
+      </div>
+
+      <!-- Toggle: Command / Admin vs Unit -->
+      <div class="reg-type-selector">
+        <button
+          type="button"
+          class="reg-type-btn"
+          [class.active]="regType === 'unit'"
+          (click)="regType = 'unit'"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="reg-btn-icon">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <span>Unit Registration</span>
+        </button>
+        <button
+          type="button"
+          class="reg-type-btn"
+          [class.active]="regType === 'admin'"
+          (click)="regType = 'admin'"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="reg-btn-icon">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+          <span>Admin Registration</span>
+        </button>
+      </div>
+
+      <!-- Success Notice -->
+      <div *ngIf="regSuccessMsg" class="alert-success-banner">
+        {{ regSuccessMsg }}
+      </div>
+
+      <!-- A. UNIT REGISTRATION -->
+      <div *ngIf="regType === 'unit'">
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Unit Name</label>
+            <input type="text" [(ngModel)]="unitRegName" placeholder="e.g. 14 RAJPUT (MECHANISED)" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Unit ID</label>
+            <input type="text" [(ngModel)]="unitRegId" placeholder="e.g. UN-14RM-LEH" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Formation / Region</label>
+            <select [(ngModel)]="unitRegFormation" class="form-control">
+              <option *ngFor="let f of formations" [value]="f">{{ f }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Location / Forward Sector</label>
+            <input type="text" [(ngModel)]="unitRegLocation" placeholder="e.g. FDL Shyok Valley - 14 Corps" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Authorized Officer</label>
+            <input type="text" [(ngModel)]="unitRegAuthOfficer" placeholder="e.g. Major Amit Sharma" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Contact Details</label>
+            <input type="text" [(ngModel)]="unitRegContact" placeholder="e.g. +91 94190 XXXXX / ASCON 2841" class="form-control">
+          </div>
+          <div class="form-group full-width">
+            <label class="form-label">Official Email</label>
+            <input type="email" [(ngModel)]="unitRegEmail" placeholder="officer.unit&#64;army.nic.in" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Username</label>
+            <input type="text" [(ngModel)]="unitRegUsername" placeholder="e.g. IC-71044A" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <input type="password" [(ngModel)]="unitRegPassword" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Confirm Password</label>
+            <input type="password" [(ngModel)]="unitRegConfirmPassword" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Verification Code (Enter 7K9X2)</label>
+            <input type="text" [(ngModel)]="unitRegCaptcha" placeholder="7K9X2" class="form-control">
+          </div>
+        </div>
+
+        <button type="button" class="btn-submit-login unit-submit mt-3" (click)="submitUnitRegister()">
+          <span>REGISTER UNIT</span>
+        </button>
+      </div>
+
+      <!-- B. ADMIN REGISTRATION -->
+      <div *ngIf="regType === 'admin'">
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Official ID / Service No</label>
+            <input type="text" [(ngModel)]="adminRegId" placeholder="e.g. IC-48291X" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" [(ngModel)]="adminRegName" placeholder="e.g. Lt Gen V. K. Rawat" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Designation</label>
+            <input type="text" [(ngModel)]="adminRegDesignation" placeholder="e.g. DGOS Directorate / MGS Branch" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Command / Organization</label>
+            <select [(ngModel)]="adminRegCommand" class="form-control">
+              <option *ngFor="let ac of adminCommands" [value]="ac">{{ ac }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Official Email</label>
+            <input type="email" [(ngModel)]="adminRegEmail" placeholder="admin.dgos&#64;nic.in" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Contact</label>
+            <input type="text" [(ngModel)]="adminRegContact" placeholder="e.g. +91 11 2301 XXXX" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Username</label>
+            <input type="text" [(ngModel)]="adminRegUsername" placeholder="e.g. rawat.vk" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <input type="password" [(ngModel)]="adminRegPassword" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Confirm Password</label>
+            <input type="password" [(ngModel)]="adminRegConfirmPassword" class="form-control">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Verification Code (Enter 7K9X2)</label>
+            <input type="text" [(ngModel)]="adminRegCaptcha" placeholder="7K9X2" class="form-control">
+          </div>
+        </div>
+
+        <button type="button" class="btn-submit-login command-submit mt-3" (click)="submitAdminRegister()">
+          <span>REGISTER ADMIN</span>
+        </button>
+      </div>
+
+      <div class="back-home-wrap">
+        <button type="button" class="link-btn-text" (click)="setMode('login')">
+          Already registered? Back to Sign In
+        </button>
+      </div>
+    </div>
+
+    <!-- ============================================================= -->
+    <!-- 3. FORGOT PASSWORD VIEW                                        -->
+    <!-- ============================================================= -->
+    <div *ngIf="mode === 'forgot-password'" class="form-content">
+      <div class="auth-welcome-banner">
+        <h3>Reset Defense Terminal Password</h3>
+        <p>Recover access to your account via official defense registered email or service credentials.</p>
+      </div>
+
+      <div *ngIf="forgotSuccessMsg" class="alert-success-banner">
+        {{ forgotSuccessMsg }}
+      </div>
+      <div *ngIf="forgotError" class="alert-danger-banner">
+        {{ forgotError }}
+      </div>
+
+      <div *ngIf="!forgotOtpSent">
         <div class="form-group">
-          <label class="form-label">Officer Full Name</label>
-          <input type="text" [(ngModel)]="regName" placeholder="e.g. Major Amit Sharma" class="form-control">
+          <label class="form-label">Username / Official Email</label>
+          <input
+            type="text"
+            [(ngModel)]="forgotUsernameEmail"
+            placeholder="e.g. IC-48291X or officer&#64;army.nic.in"
+            class="form-control"
+          />
         </div>
 
         <div class="form-group">
-          <label class="form-label">Army Service Number</label>
-          <input type="text" [(ngModel)]="regServiceNo" placeholder="e.g. IC-71044A" class="form-control">
+          <label class="form-label">Verification Code</label>
+          <div class="captcha-row">
+            <div class="captcha-badge">
+              <span class="captcha-chars">{{ currentCaptcha }}</span>
+            </div>
+            <input
+              type="text"
+              [(ngModel)]="forgotCaptcha"
+              placeholder="Enter code"
+              class="form-control captcha-input"
+            />
+          </div>
         </div>
 
+        <button type="button" class="btn-army-primary full-width-btn" (click)="requestForgotOtp()">
+          Dispatch Verification OTP
+        </button>
+      </div>
+
+      <div *ngIf="forgotOtpSent">
         <div class="form-group">
-          <label class="form-label">Commissioned Rank</label>
-          <select [(ngModel)]="regRank" class="form-control">
-            <option *ngFor="let r of ranks" [value]="r">{{ r }}</option>
-          </select>
+          <label class="form-label">Enter 4-Digit OTP (Simulated: 7741)</label>
+          <input type="text" [(ngModel)]="forgotOtp" placeholder="7741" class="form-control">
         </div>
-
         <div class="form-group">
-          <label class="form-label">Unit / Formation Designation</label>
-          <input type="text" [(ngModel)]="regUnit" placeholder="e.g. 14 RAJPUT (MECH)" class="form-control">
+          <label class="form-label">New Password</label>
+          <input type="password" [(ngModel)]="forgotNewPassword" class="form-control">
         </div>
-
-        <div class="form-group full-width">
-          <label class="form-label">Command / Theater Jurisdiction</label>
-          <select [(ngModel)]="regCommand" class="form-control">
-            <option *ngFor="let c of commands" [value]="c">{{ c }}</option>
-          </select>
-        </div>
-
-        <div class="form-group full-width">
-          <label class="form-label">Official Defense Email ID</label>
-          <input type="email" [(ngModel)]="regEmail" placeholder="officer.name&#64;nic.in or &#64;gov.in" class="form-control">
-        </div>
-
         <div class="form-group">
-          <label class="form-label">Create Password</label>
-          <input type="password" [(ngModel)]="regPassword" class="form-control">
+          <label class="form-label">Confirm New Password</label>
+          <input type="password" [(ngModel)]="forgotConfirmPassword" class="form-control">
         </div>
 
-        <div class="form-group">
-          <label class="form-label">Confirm Password</label>
-          <input type="password" [(ngModel)]="regConfirmPassword" class="form-control">
+        <button type="button" class="btn-submit-login command-submit" (click)="submitResetPassword()">
+          RESET PASSWORD
+        </button>
+      </div>
+
+      <div class="back-home-wrap">
+        <button type="button" class="link-btn-text" (click)="setMode('login')">
+          ← Back to Sign In
+        </button>
+      </div>
+    </div>
+
+    <!-- ============================================================= -->
+    <!-- 4. UNAUTHORIZED / ACCESS DENIED VIEW                           -->
+    <!-- ============================================================= -->
+    <div *ngIf="mode === 'unauthorized'" class="unauthorized-box">
+      <div class="unauth-shield-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 9v3.75m0-10.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
+        </svg>
+      </div>
+
+      <h3 class="unauth-code">403 - ACCESS RESTRICTED</h3>
+      <h4 class="unauth-headline">INSUFFICIENT SECURITY CLEARANCE LEVEL</h4>
+
+      <div class="unauth-role-card">
+        <div class="role-item">
+          <span class="role-label">Your Authenticated Role:</span>
+          <span class="role-val">{{ authService.currentUser()?.role || 'UNAUTHENTICATED / GUEST' }}</span>
+        </div>
+        <div class="role-item">
+          <span class="role-label">Required Theater Clearance:</span>
+          <span class="role-val text-red">SECRET / DEFCON-1 LEVEL AUTHORIZATION</span>
+        </div>
+        <div class="role-item">
+          <span class="role-label">Terminal Identity:</span>
+          <span class="role-val">{{ authService.currentUser()?.serviceNo || 'SEC-ANON-TERM-92' }}</span>
         </div>
       </div>
 
-      <button type="button" class="btn-submit-login unit-submit" (click)="submitRegister()">
-        <span>Submit Defense Enrollment Request</span>
-      </button>
+      <p class="unauth-explain">
+        This resource is segregated under Military Cryptographic Policy. Your identity does not possess the operational credentials required for this sector.
+      </p>
+
+      <div class="unauth-actions">
+        <a routerLink="/" class="btn-outline-army">Return to Home</a>
+        <a routerLink="/command/dashboard" class="btn-army-primary">Return to Dashboard</a>
+      </div>
     </div>
 
-    <!-- Security Compliance Disclaimer -->
+    <!-- Security Compliance Footer Note -->
     <div class="auth-security-notice">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M12 9v3.75m0-10.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
       </svg>
-      <span>Restricted Official Defense Network. All IP logs and cryptographic session handshakes are recorded under the Official Secrets Act 1923.</span>
+      <span>Restricted Official Defense Network. All terminal transactions are cryptographically recorded under the Official Secrets Act 1923.</span>
     </div>
 
   </div>

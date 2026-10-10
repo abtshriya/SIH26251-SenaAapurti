@@ -21,7 +21,7 @@ export class LanguageService {
       // Brand Header
       titleSena: 'Sena',
       titleAapurti: 'Aapurti',
-      subtitle: 'Predictive Logistics for a Stronger Tomorrow',
+      subtitle: 'Predictive Logistics & Forward Supply',
       authority: 'INDIAN ARMY | GOVERNMENT OF INDIA',
       searchPlaceholder: 'Search...',
       searchBtn: 'Search',
@@ -29,6 +29,7 @@ export class LanguageService {
       // Navigation
       navHome: 'Home',
       navAbout: 'About SenaAapurti',
+      navAboutContact: 'About & Contact',
       navAiLogistics: 'AI in Military Logistics',
       navFeatures: 'Features',
       navGuidelines: 'User Guidelines',
@@ -71,7 +72,7 @@ export class LanguageService {
       // Brand Header
       titleSena: 'सेना',
       titleAapurti: 'आपूर्ति',
-      subtitle: 'सशक्त कल के लिए पूर्वानुमानित रसद प्रणाली',
+      subtitle: 'पूर्वानुमानित रसद एवं अग्रिम आपूर्ति',
       authority: 'भारतीय सेना | भारत सरकार',
       searchPlaceholder: 'खोजें...',
       searchBtn: 'खोजें',
@@ -79,6 +80,7 @@ export class LanguageService {
       // Navigation
       navHome: 'होम',
       navAbout: 'सेना आपूर्ति के बारे में',
+      navAboutContact: 'परिचय एवं संपर्क सूत्र',
       navAiLogistics: 'सैन्य रसद में एआई',
       navFeatures: 'विशेषताएं',
       navGuidelines: 'उपयोगकर्ता दिशानिर्देश',

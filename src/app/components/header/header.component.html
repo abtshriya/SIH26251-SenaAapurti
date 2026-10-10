@@ -2,43 +2,35 @@
 <div class="top-utility-bar">
   <div class="utility-container">
     <div class="utility-left">
-      <a routerLink="/contact" class="utility-link">{{ langService.t('contactUs') }}</a>
+      <a href="javascript:void(0)" (click)="scrollToSection('about')" class="utility-link">{{ langService.t('navAboutContact') }}</a>
       <span class="utility-sep">|</span>
-      <a routerLink="/support" class="utility-link">{{ langService.t('feedback') }}</a>
+      <a href="javascript:void(0)" (click)="scrollToSection('support')" class="utility-link">{{ langService.t('feedback') }}</a>
       <span class="utility-sep">|</span>
-      <a routerLink="/guidelines" class="utility-link">{{ langService.t('sitemap') }}</a>
+      <a href="javascript:void(0)" (click)="scrollToSection('guidelines')" class="utility-link">{{ langService.t('sitemap') }}</a>
     </div>
 
     <div class="utility-right">
       <a href="#main-content" class="utility-link skip-link">{{ langService.t('skipContent') }}</a>
       <span class="utility-sep">|</span>
-      <a routerLink="/support" class="utility-link">{{ langService.t('screenReader') }}</a>
+      <a href="javascript:void(0)" (click)="scrollToSection('support')" class="utility-link">{{ langService.t('screenReader') }}</a>
       <span class="utility-sep">|</span>
 
       <!-- Font Size Scaler -->
-      <div class="font-controls" title="Adjust Font Size">
-        <button type="button" (click)="setFont('sm')" [class.active]="themeService.fontSize() === 'sm'">A-</button>
-        <button type="button" (click)="setFont('md')" [class.active]="themeService.fontSize() === 'md'">A</button>
-        <button type="button" (click)="setFont('lg')" [class.active]="themeService.fontSize() === 'lg'">A+</button>
+      <div class="font-controls" role="group" aria-label="Font size adjustment controls" title="Adjust Font Size">
+        <button type="button" (click)="setFont('sm')" [class.active]="themeService.fontSize() === 'sm'"
+          aria-label="Decrease Font Size" title="Decrease Font Size (A-)">A-</button>
+        <button type="button" (click)="setFont('md')" [class.active]="themeService.fontSize() === 'md'"
+          aria-label="Default Font Size" title="Standard Font Size (A)">A</button>
+        <button type="button" (click)="setFont('lg')" [class.active]="themeService.fontSize() === 'lg'"
+          aria-label="Increase Font Size" title="Enlarge Font Size (A+)">A+</button>
       </div>
 
-      <!-- High Contrast Toggle -->
-      <button type="button" class="contrast-btn" (click)="toggleContrast()" [class.active]="themeService.highContrast()" title="Toggle High Contrast">
-        A
-      </button>
       <span class="utility-sep">|</span>
 
       <!-- Language Switcher -->
-      <button type="button" class="lang-btn" (click)="toggleLang()">
+      <button type="button" class="lang-btn" (click)="toggleLang()" title="Toggle Language (English / हिन्दी)">
         <span class="lang-text">{{ langService.t('langToggle') }}</span>
       </button>
-
-      <div class="lang-dropdown">
-        <span class="selected-lang">{{ langService.currentLang() === 'en' ? 'English' : 'हिन्दी' }}</span>
-        <svg class="dropdown-caret" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-        </svg>
-      </div>
     </div>
   </div>
 </div>
@@ -47,57 +39,83 @@
 <div class="tricolor-ribbon"></div>
 
 <!-- ================= MAIN BRAND DEFENSE HEADER ================= -->
-<header class="main-defense-header">
+<header class="main-defense-header" [style.backgroundImage]="'url(' + headerBgImage() + ')'">
   <div class="header-container">
-    <!-- Left: Indian Army Insignia & Brand Name -->
-    <div class="brand-block">
-      <!-- Indian Army Crossed Swords Emblem SVG -->
-      <a routerLink="/" class="army-emblem-wrap" title="Indian Army Logistics Portal">
-        <div class="emblem-svg-box">
-          <svg class="crossed-swords-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Crossed Swords -->
-            <path d="M18 18L82 82M82 18L18 82" stroke="#d4af37" stroke-width="4.5" stroke-linecap="round"/>
-            <path d="M14 14L24 24M86 14L76 24M14 86L24 76M86 86L76 76" stroke="#f59e0b" stroke-width="5" stroke-linecap="round"/>
-            <!-- Sword Guards -->
-            <path d="M22 14L14 22M78 14L86 22M22 86L14 78M78 86L86 78" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round"/>
-            <!-- Ashoka Lion Emblem silhouette representation -->
-            <rect x="42" y="16" width="16" height="24" rx="3" fill="#d4af37"/>
-            <circle cx="50" cy="22" r="5" fill="#162a1c"/>
-            <path d="M44 40H56L54 48H46L44 40Z" fill="#d4af37"/>
-            <!-- Ashoka Chakra wheel -->
-            <circle cx="50" cy="58" r="14" stroke="#d4af37" stroke-width="3" fill="#162a1c"/>
-            <circle cx="50" cy="58" r="3" fill="#d4af37"/>
-            <path d="M50 44V72M36 58H64M40 48L60 68M40 68L60 48" stroke="#d4af37" stroke-width="1.5"/>
-            <!-- Banner Ribbon with Satyameva Jayate text indication -->
-            <path d="M30 78H70L65 86H35L30 78Z" fill="#b89224"/>
-          </svg>
-          <span class="motto-text">सत्यमेव जयते</span>
-        </div>
-      </a>
+    <!-- Left: Connected Insignia Logo & Brand Name (hover together with subtle glow) -->
+    <a routerLink="/" (click)="scrollToSection('hero')" class="brand-block-link" title="SenaAapurti">
+      <div class="sena-logo-wrap">
+        <img
+          src="/images/sena_official_logo.png"
+          alt="SenaAapurti Official Insignia"
+          class="sena-logo-img"
+        />
+      </div>
 
-      <!-- Title & Subtitles -->
+      <!-- Brand Title, Subtitles, Authority Badge and Tricolour Slash -->
       <div class="brand-text">
-        <a routerLink="/" class="title-link">
-          <h1 class="logo-title">
-            <span class="sena-part">{{ langService.t('titleSena') }}</span><span class="aapurti-part">{{ langService.t('titleAapurti') }}</span>
-          </h1>
-        </a>
-        <p class="logo-tagline">{{ langService.t('subtitle') }}</p>
-        <div class="authority-badge">
+        <h1 class="logo-title">
+          <span class="sena-part">{{ langService.t('titleSena') }}</span><span class="aapurti-part">{{ langService.t('titleAapurti') }}</span>
+        </h1>
+        
+        <!-- Contextual Subtitle by Portal Mode -->
+        <p class="logo-tagline" *ngIf="portalMode() === 'public'">{{ langService.t('subtitle') }}</p>
+        <p class="logo-tagline" *ngIf="portalMode() === 'command'">HQ Strategic Defense Logistics & C4ISR Command Center</p>
+        <p class="logo-tagline" *ngIf="portalMode() === 'unit'">{{ unitDbService.selectedUnit().name }} • {{ unitDbService.selectedUnit().id }}</p>
+
+        <!-- Contextual Authority Badge by Portal Mode -->
+        <div class="authority-badge" *ngIf="portalMode() === 'public'">
           <span class="ia-text">{{ langService.t('authority') }}</span>
         </div>
+        <div class="authority-badge command-authority-badge" *ngIf="portalMode() === 'command'">
+          <span class="ia-text">INTEGRATED HQ OF MoD (ARMY) • SENA BHAWAN, NEW DELHI</span>
+        </div>
+        <div class="authority-badge unit-authority-badge" *ngIf="portalMode() === 'unit'">
+          <span class="ia-text">{{ unitDbService.selectedUnit().corps }} • {{ unitDbService.selectedUnit().station }}</span>
+        </div>
       </div>
-    </div>
+    </a>
 
-    <!-- Center Silhouette Graphic / Tactical Backdrop -->
-    <div class="tactical-backdrop-silhouette">
-      <!-- Military Tower and Radio Mast Silhouette -->
-      <svg class="tower-svg" viewBox="0 0 120 100" fill="currentColor">
-        <path d="M55 95V30H65V95H55Z" opacity="0.15"/>
-        <path d="M45 95L58 10L62 10L75 95H70L60 25L50 95H45Z" opacity="0.25"/>
-        <circle cx="60" cy="10" r="4" opacity="0.4"/>
-        <path d="M48 40H72M52 65H68" stroke="currentColor" stroke-width="2" opacity="0.2"/>
-        <path d="M80 70C88 60 92 48 90 35M95 72C105 58 108 42 104 25" stroke="currentColor" stroke-width="2" stroke-dasharray="3 3" opacity="0.18"/>
+    <!-- Futuristic Tactical Map Web Lines Overlay (Interactive C4ISR Telemetry) -->
+    <div class="futuristic-map-web-overlay" aria-hidden="true">
+      <svg class="map-web-svg" viewBox="0 0 540 120" preserveAspectRatio="none" fill="none">
+        <!-- Digital Grid Lines -->
+        <line x1="20" y1="20" x2="520" y2="20" stroke="rgba(56, 189, 248, 0.18)" stroke-width="1" stroke-dasharray="4 6" />
+        <line x1="20" y1="60" x2="520" y2="60" stroke="rgba(56, 189, 248, 0.18)" stroke-width="1" stroke-dasharray="4 6" />
+        <line x1="20" y1="100" x2="520" y2="100" stroke="rgba(56, 189, 248, 0.18)" stroke-width="1" stroke-dasharray="4 6" />
+        
+        <line x1="90" y1="10" x2="90" y2="110" stroke="rgba(56, 189, 248, 0.12)" stroke-width="1" stroke-dasharray="2 5" />
+        <line x1="200" y1="10" x2="200" y2="110" stroke="rgba(56, 189, 248, 0.12)" stroke-width="1" stroke-dasharray="2 5" />
+        <line x1="310" y1="10" x2="310" y2="110" stroke="rgba(56, 189, 248, 0.12)" stroke-width="1" stroke-dasharray="2 5" />
+        <line x1="420" y1="10" x2="420" y2="110" stroke="rgba(56, 189, 248, 0.12)" stroke-width="1" stroke-dasharray="2 5" />
+
+        <!-- Constellation Web Lines connecting nodes across mountain axes -->
+        <path d="M 50 80 L 120 38 L 210 82 L 310 32 L 400 72 L 490 28" stroke="rgba(56, 189, 248, 0.55)" stroke-width="1.5" class="pulsing-web-line" />
+        <path d="M 120 38 L 220 28 L 310 32 L 390 85 L 470 70" stroke="rgba(245, 158, 11, 0.45)" stroke-width="1.2" stroke-dasharray="4 3" />
+        <path d="M 70 95 L 160 98 L 210 82 L 330 92 L 430 78" stroke="rgba(74, 222, 128, 0.4)" stroke-width="1.2" />
+
+        <!-- Telemetry Nodes with Pulsing Rings -->
+        <circle cx="50" cy="80" r="3.5" fill="#38bdf8" />
+        <circle cx="50" cy="80" r="7.5" stroke="#38bdf8" stroke-width="1" class="node-ring" opacity="0.7" />
+
+        <circle cx="120" cy="38" r="4" fill="#f59e0b" />
+        <circle cx="120" cy="38" r="9" stroke="#f59e0b" stroke-width="1" class="node-ring delay-1" opacity="0.8" />
+
+        <circle cx="210" cy="82" r="3.5" fill="#38bdf8" />
+        <circle cx="210" cy="82" r="8" stroke="#38bdf8" stroke-width="1" class="node-ring delay-2" opacity="0.7" />
+
+        <circle cx="310" cy="32" r="4.5" fill="#22c55e" />
+        <circle cx="310" cy="32" r="10" stroke="#22c55e" stroke-width="1.2" class="node-ring" opacity="0.85" />
+
+        <circle cx="400" cy="72" r="3.5" fill="#38bdf8" />
+        <circle cx="400" cy="72" r="7.5" stroke="#38bdf8" stroke-width="1" class="node-ring delay-1" opacity="0.7" />
+
+        <circle cx="490" cy="28" r="4" fill="#f59e0b" />
+        <circle cx="490" cy="28" r="8.5" stroke="#f59e0b" stroke-width="1" class="node-ring delay-2" opacity="0.8" />
+
+        <!-- Tactical HUD Coordinates & Reticles -->
+        <text x="55" y="98" fill="rgba(56, 189, 248, 0.85)" font-size="8" font-family="'Rajdhani', monospace" font-weight="700" letter-spacing="1">GRID 34°07'N 77°35'E</text>
+        <text x="215" y="99" fill="rgba(245, 158, 11, 0.85)" font-size="8" font-family="'Rajdhani', monospace" font-weight="700" letter-spacing="1">NORTHERN COMMAND C2</text>
+        <text x="405" y="90" fill="rgba(74, 222, 128, 0.85)" font-size="8" font-family="'Rajdhani', monospace" font-weight="700" letter-spacing="1">ASCON LINK • 100%</text>
       </svg>
     </div>
 
@@ -106,54 +124,62 @@
       <!-- Search Box with Saffron Button -->
       <form class="search-form" (submit)="onSearch(); $event.preventDefault()">
         <div class="search-input-wrap">
-          <input
-            type="text"
-            [(ngModel)]="searchQuery"
-            name="searchQuery"
-            [placeholder]="langService.t('searchPlaceholder')"
-            class="header-search-input"
-            aria-label="Search Army Logistics Knowledgebase"
-          />
+          <input type="text" [(ngModel)]="searchQuery" name="searchQuery"
+            [placeholder]="langService.t('searchPlaceholder')" class="header-search-input"
+            aria-label="Search Army Logistics Knowledgebase" />
           <button type="submit" class="header-search-btn">
             {{ langService.t('searchBtn') }}
           </button>
         </div>
       </form>
 
+      <!-- Unit Station Live Selector Trigger (Visible in Unit Portal mode) -->
+      <div *ngIf="portalMode() === 'unit'" class="unit-station-header-pill" (click)="toggleUnitSelector()" title="Switch Army Unit Station across India">
+        <div class="pill-station-dot"></div>
+        <div class="pill-station-info">
+          <span class="pill-station-label">ACTIVE STATION</span>
+          <span class="pill-station-title">{{ unitDbService.selectedUnit().station }}</span>
+        </div>
+        <button type="button" class="btn-change-station">
+          Switch ▾
+        </button>
+      </div>
+
       <!-- Social Media Icons (Government Defense Channels) -->
-      <div class="social-links-bar">
+      <div class="social-links-bar" *ngIf="portalMode() === 'public'">
         <a href="javascript:void(0)" class="social-icon fb" title="Facebook">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
+          </svg>
         </a>
         <a href="javascript:void(0)" class="social-icon tw" title="Twitter / X">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
         </a>
         <a href="javascript:void(0)" class="social-icon yt" title="YouTube">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+          </svg>
         </a>
         <a href="javascript:void(0)" class="social-icon in" title="Instagram">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+          </svg>
         </a>
       </div>
 
       <!-- State Emblem of India (Ashoka Lion Capital) -->
-      <div class="state-emblem-wrap" title="National Emblem of India">
-        <svg class="ashoka-lions-svg" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Lion Capital Silhouette -->
-          <path d="M30 42C30 32 38 22 50 22C62 22 70 32 70 42C70 54 64 64 50 68C36 64 30 54 30 42Z" fill="#d4af37"/>
-          <!-- Crown profile lions -->
-          <circle cx="36" cy="34" r="8" fill="#eab308"/>
-          <circle cx="64" cy="34" r="8" fill="#eab308"/>
-          <circle cx="50" cy="30" r="10" fill="#facc15"/>
-          <!-- Center Abacus & Chakra -->
-          <rect x="25" y="70" width="50" height="12" rx="2" fill="#d4af37"/>
-          <circle cx="50" cy="76" r="4.5" fill="#162a1c" stroke="#d4af37" stroke-width="1.5"/>
-          <!-- Base Bell Lotus -->
-          <path d="M32 82C32 82 38 94 50 94C62 94 68 82 68 82H32Z" fill="#ca8a04"/>
-          <rect x="20" y="96" width="60" height="7" rx="1.5" fill="#b89224"/>
-          <!-- Satyameva Jayate Devnagari label -->
-          <text x="50" y="114" text-anchor="middle" font-size="9" font-family="'Tiro Devanagari Hindi', serif" fill="#d4af37" font-weight="bold">सत्यमेव जयते</text>
-        </svg>
+      <div class="state-emblem-wrap" title="State Emblem of India (National Emblem)">
+        <img
+          src="/images/indian_emblem_white.png"
+          alt="State Emblem of India"
+          class="ashoka-emblem-img"
+        />
       </div>
     </div>
   </div>
@@ -165,86 +191,194 @@
     <!-- Mobile Hamburger Toggle -->
     <button class="mobile-toggle" (click)="toggleMobileMenu()" aria-label="Toggle Navigation Menu">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <path *ngIf="!mobileMenuOpen" d="M4 6h16M4 12h16M4 18h16"/>
-        <path *ngIf="mobileMenuOpen" d="M6 18L18 6M6 6l12 12"/>
+        <path *ngIf="!mobileMenuOpen" d="M4 6h16M4 12h16M4 18h16" />
+        <path *ngIf="mobileMenuOpen" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
 
-    <!-- Nav Links (Matching reference navbar exactly) -->
-    <ul class="nav-links" [class.open]="mobileMenuOpen">
+    <!-- 1. PUBLIC NAV LINKS -->
+    <ul class="nav-links" [class.open]="mobileMenuOpen" *ngIf="portalMode() === 'public'">
       <li class="nav-item">
-        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="mobileMenuOpen=false">
+        <a href="javascript:void(0)" (click)="scrollToSection('hero')">
           {{ langService.t('navHome') }}
         </a>
       </li>
       <li class="nav-item">
-        <a routerLink="/about" routerLinkActive="active" (click)="mobileMenuOpen=false">
-          {{ langService.t('navAbout') }}
-        </a>
-      </li>
-      <li class="nav-item">
-        <a routerLink="/ai-logistics" routerLinkActive="active" (click)="mobileMenuOpen=false">
+        <a href="javascript:void(0)" (click)="scrollToSection('ai-logistics')">
           {{ langService.t('navAiLogistics') }}
         </a>
       </li>
       <li class="nav-item">
-        <a routerLink="/features" routerLinkActive="active" (click)="mobileMenuOpen=false">
+        <a href="javascript:void(0)" (click)="scrollToSection('features')">
           {{ langService.t('navFeatures') }}
         </a>
       </li>
       <li class="nav-item">
-        <a routerLink="/guidelines" routerLinkActive="active" (click)="mobileMenuOpen=false">
+        <a href="javascript:void(0)" (click)="scrollToSection('guidelines')">
           {{ langService.t('navGuidelines') }}
         </a>
       </li>
       <li class="nav-item">
-        <a routerLink="/support" routerLinkActive="active" (click)="mobileMenuOpen=false">
+        <a href="javascript:void(0)" (click)="scrollToSection('support')">
           {{ langService.t('navSupport') }}
         </a>
       </li>
       <li class="nav-item">
-        <a routerLink="/downloads" routerLinkActive="active" (click)="mobileMenuOpen=false">
+        <a href="javascript:void(0)" (click)="scrollToSection('downloads')">
           {{ langService.t('navDownloads') }}
         </a>
       </li>
       <li class="nav-item">
-        <a routerLink="/contact" routerLinkActive="active" (click)="mobileMenuOpen=false">
-          {{ langService.t('navContact') }}
+        <a href="javascript:void(0)" (click)="scrollToSection('about')">
+          {{ langService.t('navAboutContact') }}
         </a>
       </li>
     </ul>
 
+    <!-- 2. COMMAND PORTAL NAV LINKS -->
+    <ul class="nav-links portal-mode-nav" [class.open]="mobileMenuOpen" *ngIf="portalMode() === 'command'">
+      <li class="nav-item"><a routerLink="/command/dashboard" routerLinkActive="active-tab">Command Dashboard</a></li>
+      <li class="nav-item"><a routerLink="/command/units" routerLinkActive="active-tab">Unit Network</a></li>
+      <li class="nav-item"><a routerLink="/command/inventory" routerLinkActive="active-tab">National Inventory</a></li>
+      <li class="nav-item"><a routerLink="/command/forecasting" routerLinkActive="active-tab">Demand & Forecast</a></li>
+      <li class="nav-item"><a routerLink="/command/logistics" routerLinkActive="active-tab">Logistics Movement</a></li>
+      <li class="nav-item"><a routerLink="/command/intelligence" routerLinkActive="active-tab">Route Intel</a></li>
+      <li class="nav-item"><a routerLink="/command/simulation" routerLinkActive="active-tab">Simulation</a></li>
+    </ul>
+
+    <!-- 3. UNIT PORTAL NAV LINKS -->
+    <ul class="nav-links portal-mode-nav" [class.open]="mobileMenuOpen" *ngIf="portalMode() === 'unit'">
+      <li class="nav-item"><a routerLink="/unit/dashboard" routerLinkActive="active-tab">Unit Dashboard</a></li>
+      <li class="nav-item"><a routerLink="/unit/inventory" routerLinkActive="active-tab">Unit Stores</a></li>
+      <li class="nav-item"><a routerLink="/unit/consumption" routerLinkActive="active-tab">Consumption & DOS</a></li>
+      <li class="nav-item"><a routerLink="/unit/requests" routerLinkActive="active-tab">Supply Requests</a></li>
+      <li class="nav-item"><a routerLink="/unit/logistics" routerLinkActive="active-tab">Incoming Convoys</a></li>
+      <li class="nav-item"><a routerLink="/unit/route-weather" routerLinkActive="active-tab">Route & Weather</a></li>
+      <li class="nav-item"><a routerLink="/unit/ai-insights" routerLinkActive="active-tab">Predictive Intel</a></li>
+    </ul>
+
     <!-- Right Side: Fast Portals Access / User Session Indicator -->
     <div class="nav-user-actions">
-      <ng-container *ngIf="!authService.isLoggedIn(); else loggedInBlock">
+      <!-- Public mode actions -->
+      <ng-container *ngIf="portalMode() === 'public'">
+        <ng-container *ngIf="!authService.isLoggedIn(); else loggedInBlock">
+          <div class="portal-cta-group">
+            <a routerLink="/auth" [queryParams]="{portal: 'command'}" class="nav-portal-btn command-btn">
+              <span class="pulse-dot"></span>
+              Command Portal
+            </a>
+            <a routerLink="/auth" [queryParams]="{portal: 'unit'}" class="nav-portal-btn unit-btn">
+              Unit Portal
+            </a>
+          </div>
+        </ng-container>
+
+        <ng-template #loggedInBlock>
+          <div class="authenticated-badge">
+            <div class="auth-info">
+              <span class="auth-rank">{{ authService.currentUser()?.rank }}</span>
+              <span class="auth-name">{{ authService.currentUser()?.name }}</span>
+            </div>
+            <a [routerLink]="authService.isCommandAdmin() ? '/command/dashboard' : '/unit/dashboard'"
+              class="dashboard-nav-link">
+              Go to Dashboard
+            </a>
+            <button class="logout-btn" (click)="authService.logout()" title="Secure Logout">
+              Logout
+            </button>
+          </div>
+        </ng-template>
+      </ng-container>
+
+      <!-- Command mode actions -->
+      <ng-container *ngIf="portalMode() === 'command'">
         <div class="portal-cta-group">
-          <a routerLink="/auth" [queryParams]="{portal: 'command'}" class="nav-portal-btn command-btn">
-            <span class="pulse-dot"></span>
-            Command Portal
-          </a>
-          <a routerLink="/auth" [queryParams]="{portal: 'unit'}" class="nav-portal-btn unit-btn">
-            Unit Portal
-          </a>
+          <a routerLink="/" class="nav-portal-btn home-switch-btn" title="Return to Public Website">Public Home</a>
+          <a routerLink="/unit/dashboard" class="nav-portal-btn unit-btn" title="Switch to Unit Portal">Switch to Unit</a>
+          <button class="logout-btn" (click)="authService.logout()" title="Secure Logout">Sign Out</button>
         </div>
       </ng-container>
 
-      <ng-template #loggedInBlock>
-        <div class="authenticated-badge">
-          <div class="auth-info">
-            <span class="auth-rank">{{ authService.currentUser()?.rank }}</span>
-            <span class="auth-name">{{ authService.currentUser()?.name }}</span>
-          </div>
-          <a
-            [routerLink]="authService.isCommandAdmin() ? '/command-dashboard' : '/unit-dashboard'"
-            class="dashboard-nav-link"
-          >
-            Go to Dashboard
-          </a>
-          <button class="logout-btn" (click)="authService.logout()" title="Secure Logout">
-            Logout
+      <!-- Unit mode actions -->
+      <ng-container *ngIf="portalMode() === 'unit'">
+        <div class="portal-cta-group">
+          <button type="button" class="nav-portal-btn station-switch-btn" (click)="toggleUnitSelector()" title="Switch Unit Station">
+            📍 {{ unitDbService.selectedUnit().station.split(',')[0] }}
           </button>
+          <a routerLink="/" class="nav-portal-btn home-switch-btn" title="Return to Public Website">Public Home</a>
+          <a routerLink="/command/dashboard" class="nav-portal-btn command-btn" title="Switch to Command Portal">Switch to Command</a>
+          <button class="logout-btn" (click)="authService.logout()" title="Secure Logout">Sign Out</button>
         </div>
-      </ng-template>
+      </ng-container>
     </div>
   </div>
 </nav>
+
+<!-- ================= INDIAN ARMY UNITS OF INDIA SELECTOR MODAL ================= -->
+<div class="unit-modal-backdrop" *ngIf="showUnitSelectorModal" (click)="showUnitSelectorModal = false">
+  <div class="unit-modal-container" (click)="$event.stopPropagation()">
+    <div class="unit-modal-header">
+      <div class="modal-title-wrap">
+        <span class="modal-tag">INDIAN ARMY FORMATIONS DIRECTORY</span>
+        <h3 class="modal-title">Select Unit Station & Headquarters</h3>
+        <p class="modal-sub">Choose any operational unit across India to dynamically update the Unit Portal header background and logistics telemetry.</p>
+      </div>
+      <button type="button" class="btn-modal-close" (click)="showUnitSelectorModal = false">✕</button>
+    </div>
+
+    <div class="unit-cards-grid">
+      <div
+        *ngFor="let unit of unitDbService.allUnits"
+        class="unit-station-card"
+        [class.selected]="unitDbService.selectedUnit().id === unit.id"
+        (click)="selectUnit(unit)"
+      >
+        <div class="station-card-media" [style.backgroundImage]="'url(' + unit.bgImage + ')'">
+          <span class="station-command-pill">{{ unit.command }}</span>
+          <span class="station-readiness-pill">{{ unit.readiness }}% READINESS</span>
+        </div>
+        <div class="station-card-body">
+          <h4 class="station-name">{{ unit.name }}</h4>
+          <span class="station-corps">{{ unit.corps }}</span>
+          <div class="station-location-row">
+            <svg class="location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            <span>{{ unit.station }}</span>
+          </div>
+          <p class="station-address">{{ unit.address }}</p>
+          <div class="station-footer-meta">
+            <span class="station-pincode">PIN: {{ unit.pincode }}</span>
+            <span class="station-select-cta" *ngIf="unitDbService.selectedUnit().id !== unit.id">Activate Station →</span>
+            <span class="station-active-badge" *ngIf="unitDbService.selectedUnit().id === unit.id">✓ ACTIVE</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- National Tricolour Accent Bar Under Navigation -->
+<div class="nav-tricolor-bar" aria-hidden="true"></div>
+
+<!-- Live Updates Marquee Right Below Navigation Sub Header -->
+<div class="header-ticker-strip" role="region" aria-label="Operational Logistics Updates">
+  <div class="ticker-inner-wrap">
+    <div class="ticker-label-badge">
+      <span class="ticker-pulse-beacon"></span>
+      <span class="ticker-label-text">LIVE UPDATES</span>
+    </div>
+    <div class="ticker-track-container">
+      <div class="ticker-marquee-track">
+        <span class="ticker-item"><strong>Northern Command:</strong> Zojila Axis Convoy Column 42 cleared for high-altitude transit with continuous GPS telemetry</span>
+        <span class="ticker-dot">•</span>
+        <span class="ticker-item"><strong>Central Ordnance:</strong> Automated Class V munitions replenishment vouchers dispatched to Eastern theater</span>
+        <span class="ticker-dot">•</span>
+        <span class="ticker-item"><strong>POL Reserves:</strong> Advance winter fuel stocking at Siachen staging bases verified at 100% capacity</span>
+        <span class="ticker-dot">•</span>
+        <span class="ticker-item"><strong>SenaAapurti C4ISR:</strong> 7 Operational Commands interconnected on secure edge network • 24x7 Control Room Active</span>
+      </div>
+    </div>
+  </div>
+</div>

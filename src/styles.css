@@ -64,21 +64,44 @@
 
   /* Font Scaling Variables */
   --base-font-size: 16px;
+  --font-scale-factor: 1;
+
+  /* Typography System (Requested: Primary - Rajdhani, Secondary - Barlow Semi Condensed, Body - Inter) */
+  --font-primary: 'Rajdhani', sans-serif;
+  --font-secondary: 'Barlow Semi Condensed', sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-military: 'Rajdhani', 'Inter', sans-serif;
-  --font-heading: 'Inter', sans-serif;
+
+  /* Semantic Typography Aliases */
+  --font-military: var(--font-primary);
+  --font-heading: var(--font-primary);
+  --font-subheading: var(--font-secondary);
+  --font-nav: var(--font-secondary);
   --font-hindi: 'Tiro Devanagari Hindi', 'Inter', sans-serif;
 }
 
-/* Accessibility: Font Size Variants */
+/* Root HTML font-size definition for rem-based dynamic scaling */
+html {
+  font-size: 16px;
+  transition: font-size 0.2s ease;
+}
+
+/* Accessibility: Font Size Variants (GIGW 3.0 Compliance) */
 html.font-scale-sm {
-  --base-font-size: 14px;
+  font-size: 13.5px !important;
+  --base-font-size: 13.5px !important;
+  --font-scale-factor: 0.84 !important;
 }
+
 html.font-scale-md {
-  --base-font-size: 16px;
+  font-size: 16px !important;
+  --base-font-size: 16px !important;
+  --font-scale-factor: 1.0 !important;
 }
+
 html.font-scale-lg {
-  --base-font-size: 18px;
+  font-size: 19.5px !important;
+  --base-font-size: 19.5px !important;
+  --font-scale-factor: 1.22 !important;
 }
 
 /* Accessibility: High Contrast Mode */
@@ -118,6 +141,33 @@ body {
   flex-direction: column;
 }
 
+/* Global Typography Hierarchy */
+h1, h2, h3 {
+  font-family: var(--font-primary);
+  letter-spacing: 0.02em;
+}
+
+h4, h5, h6 {
+  font-family: var(--font-secondary);
+  letter-spacing: 0.02em;
+}
+
+p, span, li, td, th {
+  font-family: var(--font-body);
+}
+
+.font-primary {
+  font-family: var(--font-primary) !important;
+}
+
+.font-secondary {
+  font-family: var(--font-secondary) !important;
+}
+
+.font-body {
+  font-family: var(--font-body) !important;
+}
+
 /* App root container */
 app-root {
   display: flex;
@@ -147,8 +197,9 @@ input, select, textarea {
 
 /* National Tricolor Line Header/Footer Accent */
 .tricolor-ribbon {
-  height: 4px;
-  background: var(--grad-tricolor);
+  height: 4.5px;
+  background: linear-gradient(90deg, #ff9933 0%, #ff9933 33.3%, #ffffff 33.3%, #ffffff 66.6%, #138808 66.6%, #138808 100%);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4), 0 0 10px rgba(255, 153, 51, 0.55), 0 0 10px rgba(19, 136, 8, 0.55);
   width: 100%;
 }
 
@@ -294,4 +345,31 @@ input, select, textarea {
 
 .animate-pulse-subtle {
   animation: pulseSubtle 3s infinite ease-in-out;
+}
+
+/* Global Uniform Vector Icons for Dashboards */
+.side-svg-icon {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+.c2-avatar-svg {
+  width: 20px;
+  height: 20px;
+  color: #d4af37;
+}
+
+.topbar-icon-svg {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.sos-icon-svg {
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  vertical-align: middle;
 }

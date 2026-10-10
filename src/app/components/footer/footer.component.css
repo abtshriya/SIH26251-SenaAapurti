@@ -102,23 +102,27 @@
 }
 
 .cert-pill {
+  font-family: var(--font-secondary);
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(212, 175, 55, 0.3);
   color: #d4af37;
-  font-size: 0.72rem;
-  font-weight: 600;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   padding: 3px 8px;
   border-radius: 4px;
 }
 
 .col-title {
+  font-family: var(--font-secondary);
   color: #ffffff;
-  font-size: 0.98rem;
+  font-size: 1.05rem;
   font-weight: 700;
   margin-bottom: 16px;
   position: relative;
   padding-bottom: 8px;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .col-title::after {

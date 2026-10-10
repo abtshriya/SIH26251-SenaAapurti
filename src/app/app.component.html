@@ -1,5 +1,5 @@
 <app-header></app-header>
-<main class="app-main-content">
+<main class="app-main-content" [class.dashboard-full]="isDashboard">
   <router-outlet></router-outlet>
 </main>
-<app-footer></app-footer>
+<app-footer *ngIf="!isDashboard"></app-footer>

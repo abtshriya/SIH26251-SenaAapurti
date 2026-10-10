@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Router } from '@angular/router';
+import { RouterModule, Router, ActivatedRoute } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { LanguageService } from '../../services/language.service';
 import { AuthService } from '../../services/auth.service';
 
@@ -20,10 +21,20 @@ interface FeatureItem {
   category: string;
 }
 
+interface WorkflowStage {
+  step: number;
+  name: string;
+  icon: string;
+  tagline: string;
+  inputs: string;
+  algorithm: string;
+  output: string;
+}
+
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -31,6 +42,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   langService = inject(LanguageService);
   authService = inject(AuthService);
   router = inject(Router);
+  route = inject(ActivatedRoute);
 
   // Carousel State
   currentSlideIndex = signal<number>(0);
@@ -39,20 +51,69 @@ export class HomeComponent implements OnInit, OnDestroy {
   slides: CarouselSlide[] = [
     {
       id: 0,
+      image: '/images/sena_convoy_ladakh.jpg',
+      title: 'HIGH-ALTITUDE CONVOY SURVEILLANCE',
+      subtitle: 'All-terrain Stallion logistical columns navigating high-altitude Himalayan mountain passes with real-time GPS telemetry',
+      tag: 'NORTHERN COMMAND'
+    },
+    {
+      id: 1,
+      image: '/images/sena_depot_ammo.jpg',
+      title: 'STRATEGIC ORDNANCE MUNITIONS DEPOT',
+      subtitle: 'Automated Class V munitions and ordnance staging with digital vault tracking and secure inventory controls',
+      tag: 'CENTRAL ORDNANCE'
+    },
+    {
+      id: 2,
+      image: '/images/sena_air_drop.jpg',
+      title: 'TACTICAL AIR-DROP & HELILIFT MISSIONS',
+      subtitle: 'Rotary-wing precision resupply drops sustaining isolated Siachen glacier pickets and extreme forward outposts',
+      tag: 'AIR RESUPPLY'
+    },
+    {
+      id: 3,
+      image: '/images/sena_pol_refuel.jpg',
+      title: 'FORWARD COMBAT REFUELLING & POL RESUPPLY',
+      subtitle: 'Army Service Corps high-capacity bowsers ensuring uninterrupted fuel reserves for mechanized combat formations',
+      tag: 'POL LOGISTICS'
+    },
+    {
+      id: 4,
+      image: '/images/sena_bridge_convoy.jpg',
+      title: 'ENGINEER BRIDGING & MOBILITY AXIS',
+      subtitle: 'Heavy recovery vehicles and bridging trains breaching fast-flowing Himalayan rivers to maintain forward supply routes',
+      tag: 'MOBILITY CORRIDORS'
+    },
+    {
+      id: 5,
+      image: '/images/sena_winter_stocking.jpg',
+      title: 'ADVANCE WINTER STOCKING & SENSOR AUDIT',
+      subtitle: 'Pre-winter high-altitude stockpile audits with mobile rugged terminals across Eastern and Northern theaters',
+      tag: 'WINTER STOCKING'
+    },
+    {
+      id: 6,
+      image: '/images/sena_eme_workshop.jpg',
+      title: 'CORPS OF EME FORWARD REPAIR DEPOT',
+      subtitle: 'Mobile technical maintenance echelons providing continuous operational readiness and heavy engine overhauls',
+      tag: 'EME SUSTENANCE'
+    },
+    {
+      id: 7,
       image: '/images/sena_hero_convoy.jpg',
       title: 'INTELLIGENT SUPPLY. ASSURED READINESS.',
       subtitle: 'Synchronizing Northern & Eastern Theater Forward Formations with Real-Time Predictive Telematics',
       tag: 'OPERATIONAL LOGISTICS'
     },
     {
-      id: 1,
+      id: 8,
       image: '/images/sena_depot_smart.jpg',
       title: 'DIGITAL ORDNANCE DEPOTS & INVENTORY INTEL',
       subtitle: 'Automated Class I to IX inventory management with RFID, AGVs and zero-delay issue vouchers',
       tag: 'SMART DEPOTS'
     },
     {
-      id: 2,
+      id: 9,
       image: '/images/sena_winter_convoy.jpg',
       title: 'EXTREME HIGH-ALTITUDE WINTER STOCKING',
       subtitle: 'AI-driven weather hazard avoidance for Siachen, Zojila, Kargil and Ladakh supply corridors',
@@ -60,7 +121,72 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   ];
 
-  // 8 Core Features from Reference Image
+  // Mission / Introduction Active Tab
+  activeMissionTab: 'what-is' | 'problem' | 'mission' | 'readiness' = 'what-is';
+
+  // How SenaAapurti Works - Animated & Minimal Pipeline
+  selectedStageIndex = 0;
+  private workflowAnimTimer: any;
+  isWorkflowPlaying = signal<boolean>(true);
+
+  workflowStages: WorkflowStage[] = [
+    {
+      step: 1,
+      name: 'Unit Telemetry',
+      icon: '🛡️',
+      tagline: 'Forward Unit Ingestion',
+      inputs: 'Forward regiment inventory & burn rate sensors',
+      algorithm: 'Cryptographic ASCON Edge Telemetry Sync',
+      output: 'Live unit burn rates'
+    },
+    {
+      step: 2,
+      name: 'Data Fusion',
+      icon: '🔀',
+      tagline: 'Battlefield Intel Fusion',
+      inputs: 'Satellite feeds, IMD weather radar & BRO pass closures',
+      algorithm: 'Geospatial Alignment & Signal Normalization',
+      output: 'Common Operating Logistics Picture'
+    },
+    {
+      step: 3,
+      name: 'AI Forecasting',
+      icon: '🧠',
+      tagline: 'Neural Demand Projection',
+      inputs: '15-year seasonal curves & cold-wave mobilization scale',
+      algorithm: 'Deep LSTM Neural Demand Engine',
+      output: '30–90 day forward buffer reserves'
+    },
+    {
+      step: 4,
+      name: 'Risk Analysis',
+      icon: '⚠️',
+      tagline: 'Choke Point & Hazard AI',
+      inputs: 'Snow depth, avalanche risks & route bottlenecks',
+      algorithm: 'Dynamic Bayesian Risk Scoring',
+      output: 'Prioritized defense risk matrix'
+    },
+    {
+      step: 5,
+      name: 'Route Dispatch',
+      icon: '⚡',
+      tagline: 'Convoy Fleet Optimizer',
+      inputs: 'Vehicle tonnages, pass transit windows & fuel capacity',
+      algorithm: 'MILP Multi-Echelon Routing Heuristic',
+      output: 'Optimized convoy transit corridors'
+    },
+    {
+      step: 6,
+      name: 'Assured Delivery',
+      icon: '🎯',
+      tagline: 'Picket Sustenance Assurance',
+      inputs: 'Automated COD release vouchers & forward delivery',
+      algorithm: 'Autonomous Military Supply Assurance',
+      output: 'Zero critical stockout fulfillment'
+    }
+  ];
+
+  // 8 Core Features
   featuresList: FeatureItem[] = [
     {
       id: 'demand',
@@ -122,18 +248,68 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   selectedFeature: FeatureItem | null = null;
 
+  // News / Information Section Active Tab
+  activeNewsTab: 'announcements' | 'updates' | 'notices' = 'announcements';
+
+  // Support Ticket Form Model
+  ticketName = '';
+  ticketServiceNo = '';
+  ticketCategory = 'Voucher Tracking';
+  ticketMessage = '';
+  ticketSuccess = '';
+
+  // Contact Form Model
+  contactName = '';
+  contactEmail = '';
+  contactSubject = '';
+  contactMsg = '';
+  contactSuccess = '';
+
   ngOnInit() {
     this.startAutoSlide();
+    this.startWorkflowAnimation();
+    this.route.fragment.subscribe(fragment => {
+      if (fragment) {
+        setTimeout(() => {
+          this.scrollToSection(fragment);
+        }, 100);
+      }
+    });
   }
 
   ngOnDestroy() {
     this.stopAutoSlide();
+    this.stopWorkflowAnimation();
+  }
+
+  startWorkflowAnimation() {
+    this.stopWorkflowAnimation();
+    this.workflowAnimTimer = setInterval(() => {
+      if (this.isWorkflowPlaying()) {
+        this.selectedStageIndex = (this.selectedStageIndex + 1) % this.workflowStages.length;
+      }
+    }, 3200);
+  }
+
+  stopWorkflowAnimation() {
+    if (this.workflowAnimTimer) {
+      clearInterval(this.workflowAnimTimer);
+    }
+  }
+
+  selectStage(idx: number) {
+    this.selectedStageIndex = idx;
+  }
+
+  toggleWorkflowPlay() {
+    this.isWorkflowPlaying.update(p => !p);
   }
 
   startAutoSlide() {
+    this.stopAutoSlide();
     this.autoSlideTimer = setInterval(() => {
       this.nextSlide();
-    }, 6000);
+    }, 120000); // Dynamic transition automatically every 2 minutes
   }
 
   stopAutoSlide() {
@@ -159,12 +335,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   navigateToPortal(portal: 'command' | 'unit') {
     if (this.authService.isLoggedIn()) {
       if (portal === 'command') {
-        this.router.navigate(['/command-dashboard']);
+        this.router.navigate(['/command/dashboard']);
       } else {
-        this.router.navigate(['/unit-dashboard']);
+        this.router.navigate(['/unit/dashboard']);
       }
     } else {
-      this.router.navigate(['/auth'], { queryParams: { portal } });
+      this.router.navigate(['/auth/login'], { queryParams: { portal } });
     }
   }
 
@@ -174,5 +350,38 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   closeFeatureModal() {
     this.selectedFeature = null;
+  }
+
+  scrollToSection(sectionId: string) {
+    const el = document.getElementById(sectionId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  submitTicket() {
+    if (!this.ticketName || !this.ticketServiceNo || !this.ticketMessage) {
+      alert('Please fill in your name, service number, and query details.');
+      return;
+    }
+    const ticketId = 'TKT-LOG-' + Math.floor(10000 + Math.random() * 90000);
+    this.ticketSuccess = `Helpdesk Ticket #${ticketId} registered with the 24x7 Army Logistics Control Cell. An automated priority SMS has been dispatched.`;
+    this.ticketMessage = '';
+  }
+
+  submitContact() {
+    if (!this.contactName || !this.contactEmail || !this.contactMsg) {
+      alert('Please fill in all mandatory contact form fields.');
+      return;
+    }
+    this.contactSuccess = 'Thank you for contacting Integrated HQ of MoD (Army). Your communication has been dispatched to the DGOS Secretariat.';
+    this.contactName = '';
+    this.contactEmail = '';
+    this.contactSubject = '';
+    this.contactMsg = '';
+  }
+
+  downloadManual(filename: string) {
+    alert(`Initiating secure download of official defense document: "${filename}". Verification hash matched.`);
   }
 }

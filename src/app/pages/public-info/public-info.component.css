@@ -487,3 +487,64 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Info Subblock & Architecture */
+.info-subblock {
+  margin-bottom: 28px;
+}
+
+.info-subblock h3 {
+  font-family: var(--font-military);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #112217;
+  border-left: 3px solid #d4af37;
+  padding-left: 10px;
+  margin-bottom: 10px;
+}
+
+.info-subblock p {
+  font-size: 0.92rem;
+  color: #334155;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.info-subblock ul {
+  padding-left: 20px;
+  font-size: 0.9rem;
+  color: #334155;
+  line-height: 1.6;
+}
+
+.architecture-diagram-card {
+  background: #f1f5f1;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.arch-box {
+  background: #ffffff;
+  border: 1px solid #162a1c;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #162a1c;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.arch-arrow {
+  font-size: 1rem;
+  color: #ea580c;
+  font-weight: bold;
+}
+

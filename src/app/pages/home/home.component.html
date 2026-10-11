@@ -304,111 +304,6 @@
     </div>
   </section>
 
-  <!-- ================= FEATURE OVERVIEW (8 CORE FEATURES) ================= -->
-  <section class="features-overview-section">
-    <div class="section-container">
-      <div class="section-heading-center">
-        <span class="section-tag">COMPREHENSIVE CAPABILITIES</span>
-        <h2 class="section-title">Integrated Feature Matrix</h2>
-        <p class="section-lead">8 modular operational capabilities powering defense replenishment</p>
-      </div>
-
-      <div class="features-grid-8">
-        <div *ngFor="let item of featuresList" class="feature-tile-card" (click)="openFeatureModal(item)"
-          title="Click to view details">
-          <div class="feature-icon-wrapper">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path [attr.d]="item.iconSvg" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </div>
-          <span class="feature-tile-name">{{ item.title }}</span>
-          <span class="feature-click-hint">Inspect Specification</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= DUAL PORTAL ACCESS ================= -->
-  <section id="portal-access" class="portals-gateway-section">
-    <div class="section-container">
-      <div class="section-heading-center">
-        <span class="section-tag">SECURE TERMINAL ACCESS</span>
-        <h2 class="section-title">Defense Portal Gateways</h2>
-        <p class="section-lead">Role-based entry for Strategic Command and Tactical Forward Units</p>
-      </div>
-
-      <div class="portals-dual-grid mt-4">
-        <!-- CARD 1: COMMAND / ADMIN PORTAL -->
-        <div class="portal-card command-card">
-          <div class="portal-card-header">
-            <div class="portal-icon-container command-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="portal-svg-symbol">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-              </svg>
-            </div>
-            <div class="portal-info-meta">
-              <h3 class="portal-title">COMMAND / ADMIN PORTAL</h3>
-              <p class="portal-desc">Strategic visibility and resource allocation for Army HQ, Commands & Corps</p>
-            </div>
-          </div>
-
-          <div class="portal-features-list">
-            <div class="pf-item">✓ National Readiness HUD & DEFCON State Tracking</div>
-            <div class="pf-item">✓ Multi-Theater India Logistics GIS Map</div>
-            <div class="pf-item">✓ National Inventory Depots & Redistribution</div>
-            <div class="pf-item">✓ What-If Wargame Simulator & AI Authorizations</div>
-          </div>
-
-          <div class="portal-action-row">
-            <button type="button" class="portal-login-btn command-btn" (click)="navigateToPortal('command')">
-              <span>LOGIN TO COMMAND PORTAL</span>
-              <svg viewBox="0 0 20 20" fill="currentColor" class="arrow-icon">
-                <path fill-rule="evenodd"
-                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                  clip-rule="evenodd" />
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        <!-- CARD 2: UNIT PORTAL -->
-        <div class="portal-card unit-card">
-          <div class="portal-card-header">
-            <div class="portal-icon-container unit-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="portal-svg-symbol">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              </svg>
-            </div>
-            <div class="portal-info-meta">
-              <h3 class="portal-title">TACTICAL UNIT PORTAL</h3>
-              <p class="portal-desc">Quartermaster stores ledger and requisition management for Regiments and Brigades
-              </p>
-            </div>
-          </div>
-
-          <div class="portal-features-list">
-            <div class="pf-item">✓ Regimental Stock & Days of Supply (DOS) Ledger</div>
-            <div class="pf-item">✓ Automated Requisition Indent Generator</div>
-            <div class="pf-item">✓ Inbound Convoy Milestones & ETA Tracker</div>
-            <div class="pf-item">✓ Flash SOS Emergency Air-Drop Requester</div>
-          </div>
-
-          <div class="portal-action-row">
-            <button type="button" class="portal-login-btn unit-btn" (click)="navigateToPortal('unit')">
-              <span>LOGIN TO UNIT PORTAL</span>
-              <svg viewBox="0 0 20 20" fill="currentColor" class="arrow-icon">
-                <path fill-rule="evenodd"
-                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                  clip-rule="evenodd" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
   <!-- ================= INFORMATION / NEWS SECTION ================= -->
   <section class="news-information-section">
     <div class="section-container">
@@ -461,203 +356,6 @@
     </div>
   </section>
 
-
-
-  <!-- ================= 2. AI IN MILITARY LOGISTICS ================= -->
-  <section id="ai-logistics" class="home-info-section alt-bg">
-    <div class="section-container">
-      <div class="section-heading-center">
-        <span class="section-tag">TACTICAL INTELLIGENCE</span>
-        <h2 class="section-title">Artificial Intelligence in Military Logistics</h2>
-        <p class="section-lead">Transforming raw defense telemetry into anticipatory tactical operational superiority</p>
-      </div>
-
-      <div class="ai-features-grid">
-        <div class="ai-feature-card">
-          <div class="ai-icon">📊</div>
-          <h4>1. Predictive Analytics</h4>
-          <p>Continuous ingestion of multi-dimensional signals—past 15-year consumption ledgers, troop numbers, training exercise calendars, altitude profiles, and equipment wear factors—to model dynamic burn rates across varying theater defense states.</p>
-        </div>
-
-        <div class="ai-feature-card">
-          <div class="ai-icon">📈</div>
-          <h4>2. Demand Forecasting</h4>
-          <p>Deep Recurrent Neural Networks (LSTM) model non-linear seasonal consumption surges. When temperatures drop below -25°C, heating kerosene and sub-zero fuel burn rises exponentially; the model projects exact requirements 60 to 90 days ahead.</p>
-        </div>
-
-        <div class="ai-feature-card">
-          <div class="ai-icon">⚠️</div>
-          <h4>3. Risk Prediction & Vulnerability Scoring</h4>
-          <p>Automated Bayesian risk engines calculate stockout probabilities for every forward picket, factoring in road pass closure probabilities, convoy transit times, and current reserve buffers.</p>
-        </div>
-
-        <div class="ai-feature-card">
-          <div class="ai-icon">🗺️</div>
-          <h4>4. Route Intelligence</h4>
-          <p>Real-time pathfinding algorithms integrated with satellite Synthetic Aperture Radar (SAR) imagery and Border Roads Organisation (BRO) ground sensors evaluate road stability, slope gradient, and ice depth to avoid danger sectors.</p>
-        </div>
-
-        <div class="ai-feature-card">
-          <div class="ai-icon">⏱️</div>
-          <h4>5. ETA Prediction Engine</h4>
-          <p>Machine learning models calculate precise convoy arrival times taking into account high-altitude engine de-rating, convoy vehicle density, snow chain mounting delays, and military police checkpoint clearance speeds.</p>
-        </div>
-
-        <div class="ai-feature-card">
-          <div class="ai-icon">💡</div>
-          <h4>6. Explainable Recommendations (XAI)</h4>
-          <p>No "black-box" decision-making. Every recommendation generated by SenaAapurti presents commanders with contributing factors, confidence percentages, expected impacts, and vetted alternatives.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= 3. FEATURES & CAPABILITIES ================= -->
-  <section id="features" class="home-info-section">
-    <div class="section-container">
-      <div class="section-heading-center">
-        <span class="section-tag">SYSTEM CAPABILITIES</span>
-        <h2 class="section-title">Defense Logistics Platform Features</h2>
-        <p class="section-lead">The 9 comprehensive modular capabilities powering the Indian Army supply continuum</p>
-      </div>
-
-      <div class="features-detailed-list">
-        <div class="feat-detail-item">
-          <div class="fd-number">01</div>
-          <div class="fd-content">
-            <h4>Predictive Demand Forecasting</h4>
-            <p>Predicts localized demand spikes up to 90 days in advance based on seasonal weather, altitude gradients, and exercise schedules.</p>
-          </div>
-        </div>
-
-        <div class="feat-detail-item">
-          <div class="fd-number">02</div>
-          <div class="fd-content">
-            <h4>Inventory Intelligence</h4>
-            <p>Real-time ledger visibility across Central Ordnance Depots (CODs) down to Regimental Stores with RFID and QR-coded tracking.</p>
-          </div>
-        </div>
-
-        <div class="feat-detail-item">
-          <div class="fd-number">03</div>
-          <div class="fd-content">
-            <h4>Supply Requests & Automated Indents</h4>
-            <p>Digitally signed requisition vouchers with multi-tier approval workflows from Unit Quartermaster to DGOS Directorate.</p>
-          </div>
-        </div>
-
-        <div class="feat-detail-item">
-          <div class="fd-number">04</div>
-          <div class="fd-content">
-            <h4>Logistics Movement Tracking</h4>
-            <p>Live GPS and ASCON telematics monitoring military columns, vehicle payloads, transit milestones, and driver escorts.</p>
-          </div>
-        </div>
-
-        <div class="feat-detail-item">
-          <div class="fd-number">05</div>
-          <div class="fd-content">
-            <h4>Route Intelligence & Optimization</h4>
-            <p>Automated recalculation of secondary bypass corridors during mountain pass blockages or enemy interdiction risks.</p>
-          </div>
-        </div>
-
-        <div class="feat-detail-item">
-          <div class="fd-number">06</div>
-          <div class="fd-content">
-            <h4>Weather & Terrain Intelligence</h4>
-            <p>Live telemetry from DRDO DGRE avalanche stations, high-altitude passes, and IMD Doppler weather radars.</p>
-          </div>
-        </div>
-
-        <div class="feat-detail-item">
-          <div class="fd-number">07</div>
-          <div class="fd-content">
-            <h4>AI Recommendations</h4>
-            <p>Autonomous remediation suggestions for stock redistribution, convoy rerouting, and emergency air-drop taskings.</p>
-          </div>
-        </div>
-
-        <div class="feat-detail-item">
-          <div class="fd-number">08</div>
-          <div class="fd-content">
-            <h4>What-If Crisis Simulation</h4>
-            <p>Wargame logistical stress under multi-front mobilization, winter road cutoffs, and sudden ammunition surges.</p>
-          </div>
-        </div>
-
-        <div class="feat-detail-item">
-          <div class="fd-number">09</div>
-          <div class="fd-content">
-            <h4>Reports & Analytics</h4>
-            <p>Official audited defense reports, PDF/CSV exports, and executive readiness summaries for Army Commanders.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= 4. USER GUIDELINES ================= -->
-  <section id="guidelines" class="home-info-section alt-bg">
-    <div class="section-container">
-      <div class="section-heading-center">
-        <span class="section-tag">STANDARD OPERATING PROCEDURES</span>
-        <h2 class="section-title">User Guidelines & Operating Manuals</h2>
-        <p class="section-lead">Comprehensive standard operating procedures for military logisticians and field commanders</p>
-      </div>
-
-      <div class="sop-accordion">
-        <div class="sop-card">
-          <div class="sop-header">
-            <span class="sop-badge">COMMAND</span>
-            <h4>1. Command User Guide</h4>
-          </div>
-          <p>Designed for Army HQ, Theater Commands, and Corps Ordnance Officers. Covers accessing the National Readiness HUD, reviewing theater-wide Days of Supply (DOS), executing inter-depot redistributions, and authorizing AI alert remedies.</p>
-        </div>
-
-        <div class="sop-card">
-          <div class="sop-header">
-            <span class="sop-badge">TACTICAL</span>
-            <h4>2. Unit User Guide</h4>
-          </div>
-          <p>Designed for Regimental Quartermasters (RQM) and Battalion Logistics Officers. Explains recording daily store receipts, auditing ammunition basic loads (UBL), managing winter clothing scales, and dispatching SOS emergency requests.</p>
-        </div>
-
-        <div class="sop-card">
-          <div class="sop-header">
-            <span class="sop-badge">SECURITY</span>
-            <h4>3. Login & Authentication Guide</h4>
-          </div>
-          <p>Step-by-step instructions for military two-factor authentication (2FA), entering Army Service Numbers (e.g. IC-XXXXXX), verifying security CAPTCHA, and handling forgotten passwords or cryptographic token resets.</p>
-        </div>
-
-        <div class="sop-card">
-          <div class="sop-header">
-            <span class="sop-badge">SUPPLY</span>
-            <h4>4. Inventory Management Guide</h4>
-          </div>
-          <p>SOP for classifying store ledgers across Class I (Rations), Class III (POL), Class V (Munitions), and Class IX (Armor Spares). Explains setting safety buffers and autonomous reorder thresholds.</p>
-        </div>
-
-        <div class="sop-card">
-          <div class="sop-header">
-            <span class="sop-badge">PROCUREMENT</span>
-            <h4>5. Supply Request Guide</h4>
-          </div>
-          <p>How to draft, submit, and track formal requisition indents. Details urgency classifications: Routine, Operational Priority 1, and Flash SOS Emergency.</p>
-        </div>
-
-        <div class="sop-card">
-          <div class="sop-header">
-            <span class="sop-badge">OPERATIONS</span>
-            <h4>6. Logistics Movement Guide</h4>
-          </div>
-          <p>Guidelines for Convoy Escort Commanders (ASC/AOC), monitoring convoy telematics, reporting road blockage checkpoints, and mounting snow chains along high-altitude passes.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ================= 5. DOWNLOADS ================= -->
   <section id="downloads" class="home-info-section">
     <div class="section-container">
@@ -669,7 +367,6 @@
 
       <div class="downloads-list">
         <div class="download-item-card">
-          <div class="dl-icon">📄</div>
           <div class="dl-info">
             <h4>User Manuals: SenaAapurti Comprehensive Manual v4.8</h4>
             <p>Complete 180-page reference manual for Command and Unit logisticians detailing system operation.</p>
@@ -681,7 +378,6 @@
         </div>
 
         <div class="download-item-card">
-          <div class="dl-icon">🚀</div>
           <div class="dl-info">
             <h4>Quick Start Guide: Tactical Field Terminal Setup</h4>
             <p>Step-by-step quick guide for setting up field tablet clients and ASCON satellite transponders.</p>
@@ -693,7 +389,6 @@
         </div>
 
         <div class="download-item-card">
-          <div class="dl-icon">📱</div>
           <div class="dl-info">
             <h4>Mobile App: Ruggedized Android Field Client APK</h4>
             <p>Official APK for military handheld terminals with offline store scanning capabilities.</p>
@@ -705,7 +400,6 @@
         </div>
 
         <div class="download-item-card">
-          <div class="dl-icon">📑</div>
           <div class="dl-info">
             <h4>Documentation: Technical Architecture & API Whitepaper</h4>
             <p>Classified technical overview of cryptographic handshakes, ASCON protocols, and database schema.</p>
@@ -783,19 +477,6 @@
             <span class="hl-label">Class V Munitions Emergency Hotline:</span>
             <span class="hl-number">1800-22-AMMO (2666)</span>
           </div>
-        </div>
-      </div>
-
-      <!-- FAQ Section -->
-      <h3 class="faq-section-title">Frequently Asked Questions (FAQ)</h3>
-      <div class="sop-accordion">
-        <div class="sop-card">
-          <h4>Q: How does SenaAapurti maintain functionality during complete satellite blackout?</h4>
-          <p>A: The platform operates with local encrypted SQLite databases on field terminals. As soon as line-of-sight VHF/UHF or ASCON connectivity is re-established, vouchers auto-reconcile using cryptographic delta merges.</p>
-        </div>
-        <div class="sop-card">
-          <h4>Q: What is the procedure for emergency ammunition replenishment during exercises?</h4>
-          <p>A: Officers with Level 2 clearance can file a Flash SOS requisition directly from the Unit Portal, which automatically alerts DGOS and assigns immediate tasking to nearest depots.</p>
         </div>
       </div>
     </div>
@@ -962,6 +643,9 @@
       </div>
     </div>
     <div class="modal-footer">
+      <a routerLink="/faq/platform-features" (click)="closeFeatureModal()" class="btn-modal-faq">
+        Explore Related FAQs ➔
+      </a>
       <button type="button" class="btn-army-primary" (click)="closeFeatureModal()">
         Return to Portal
       </button>

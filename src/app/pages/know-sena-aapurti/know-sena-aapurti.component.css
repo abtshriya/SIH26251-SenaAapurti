@@ -1,0 +1,135 @@
+/* Traditional Indian Army / Ministry of Defence Informational Article Layout */
+
+.article-page {
+  background-color: #ffffff;
+  color: #1e293b;
+  min-height: 80vh;
+  padding: 40px 20px 60px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.7;
+}
+
+.article-container {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+/* Header & Title */
+.article-header {
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: 0.5px;
+  margin: 0 0 12px 0;
+  text-transform: uppercase;
+}
+
+.title-divider {
+  height: 3px;
+  background-color: #1b4332; /* Deep olive/army green accent line */
+  width: 100%;
+  max-width: 120px;
+}
+
+/* Article Body & Typography */
+.article-body {
+  font-size: 1.05rem;
+  color: #334155;
+}
+
+.article-section {
+  margin-bottom: 36px;
+}
+
+.section-heading {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 16px 0;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.sub-heading {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 18px 0 10px 0;
+}
+
+p {
+  margin: 0 0 16px 0;
+  text-align: justify;
+}
+
+/* Bullet Points */
+.article-list {
+  margin: 0 0 20px 24px;
+  padding: 0;
+}
+
+.article-list li {
+  margin-bottom: 10px;
+  padding-left: 4px;
+}
+
+.article-list li strong {
+  color: #0f172a;
+}
+
+/* Centered Moderate-sized Photographs */
+.article-figure {
+  margin: 24px auto;
+  text-align: center;
+  max-width: 580px;
+}
+
+.article-image {
+  width: 100%;
+  height: auto;
+  max-height: 360px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+  border: 1px solid #cbd5e1;
+}
+
+.article-caption {
+  font-size: 0.875rem;
+  color: #64748b;
+  font-style: italic;
+  margin-top: 8px;
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .article-page {
+    padding: 24px 16px 40px;
+  }
+
+  .page-title {
+    font-size: 1.6rem;
+  }
+
+  .section-heading {
+    font-size: 1.25rem;
+  }
+
+  .article-body {
+    font-size: 1rem;
+  }
+
+  p {
+    text-align: left;
+  }
+
+  .article-figure {
+    max-width: 100%;
+  }
+}

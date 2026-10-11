@@ -4,11 +4,23 @@ import { AuthComponent } from './pages/auth/auth.component';
 import { CommandDashboardComponent } from './pages/command-dashboard/command-dashboard.component';
 import { UnitDashboardComponent } from './pages/unit-dashboard/unit-dashboard.component';
 import { PublicInfoComponent } from './pages/public-info/public-info.component';
+import { FaqComponent } from './pages/faq/faq.component';
+import { KnowSenaAapurtiComponent } from './pages/know-sena-aapurti/know-sena-aapurti.component';
 
 export const routes: Routes = [
   // 0. MASTER / INTRO WEBSITE
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
+  { path: 'know-sena-aapurti', component: KnowSenaAapurtiComponent },
+
+  // FAQ & HELP CENTER DEDICATED ROUTES
+  { path: 'faq', redirectTo: 'faq/general', pathMatch: 'full' },
+  { path: 'faq/general', component: FaqComponent, data: { categoryId: 'general' } },
+  { path: 'faq/platform-features', component: FaqComponent, data: { categoryId: 'platform-features' } },
+  { path: 'faq/ai-intelligence', component: FaqComponent, data: { categoryId: 'ai-intelligence' } },
+  { path: 'faq/logistics-operations', component: FaqComponent, data: { categoryId: 'logistics-operations' } },
+  { path: 'faq/user-guidelines', component: FaqComponent, data: { categoryId: 'user-guidelines' } },
+  { path: 'faq/support', component: FaqComponent, data: { categoryId: 'support' } },
 
   // Redirect former standalone pages to Home sections
   { path: 'about', redirectTo: '', pathMatch: 'full' },

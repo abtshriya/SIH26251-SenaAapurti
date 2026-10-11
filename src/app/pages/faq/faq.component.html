@@ -1,0 +1,278 @@
+<div class="faq-page-wrapper">
+
+  <!-- ================= PAGE TOP BANNER & BREADCRUMBS ================= -->
+  <header class="faq-top-banner">
+    <div class="faq-container">
+      <nav class="breadcrumb-trail" aria-label="Breadcrumb">
+        <a routerLink="/" class="bc-link">Home</a>
+        <span class="bc-sep">/</span>
+        <span class="bc-link">FAQ</span>
+        <span class="bc-sep">/</span>
+        <span class="bc-current">{{ activeCategory.title }}</span>
+      </nav>
+
+      <div class="banner-content-row">
+        <div class="banner-title-col">
+          <div class="banner-tag-badge">
+            <span class="tag-dot"></span>
+            <span>{{ activeCategory.tagline }}</span>
+          </div>
+          <h1 class="faq-main-heading">{{ activeCategory.title }}</h1>
+          <p class="faq-lead-subtitle">{{ activeCategory.description }}</p>
+        </div>
+
+        <div class="banner-stats-pill">
+          <span class="stats-num">{{ activeCategory.items.length }}</span>
+          <span class="stats-lbl">Verified FAQs in Section</span>
+        </div>
+      </div>
+
+      <!-- ================= PROMINENT SEARCH BAR ================= -->
+      <div class="faq-search-wrapper" role="search">
+        <div class="faq-search-box">
+          <span class="search-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </span>
+          <input
+            type="text"
+            class="faq-search-input"
+            [(ngModel)]="searchQuery"
+            (ngModelChange)="onSearchChange()"
+            placeholder="Search all 6 FAQ categories (e.g., DOS, Indent, 2FA, Weather, Winter Stocking, SOS)..."
+            aria-label="Search FAQ questions and answers across all categories"
+          />
+          <button 
+            *ngIf="searchQuery" 
+            type="button" 
+            class="search-clear-btn" 
+            (click)="clearSearch()" 
+            aria-label="Clear search input">
+            ✕
+          </button>
+        </div>
+
+        <div class="search-hint-bar" *ngIf="!isSearching">
+          <span class="hint-label">Common Topics:</span>
+          <button type="button" class="hint-chip" (click)="searchQuery = 'DOS'; onSearchChange()">Days of Supply</button>
+          <button type="button" class="hint-chip" (click)="searchQuery = 'Winter'; onSearchChange()">Winter Stocking</button>
+          <button type="button" class="hint-chip" (click)="searchQuery = 'Indent'; onSearchChange()">Automated Indents</button>
+          <button type="button" class="hint-chip" (click)="searchQuery = '2FA'; onSearchChange()">Login & 2FA</button>
+          <button type="button" class="hint-chip" (click)="searchQuery = 'SOS'; onSearchChange()">Flash SOS</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= MAIN CONTENT GRID (SIDEBAR + ACCORDIONS) ================= -->
+  <div class="faq-container content-grid-layout">
+
+    <!-- ================= LEFT SIDEBAR (INDIAN ARMY STYLE) ================= -->
+    <aside class="sidebar-category-card" aria-label="FAQ Categories Navigation">
+      <div class="sidebar-header">
+        <span class="sidebar-flag-stripe"></span>
+        <h2 class="sidebar-title">FAQ CATEGORIES</h2>
+      </div>
+
+      <nav class="sidebar-nav-list" role="navigation">
+        <button
+          *ngFor="let cat of categories"
+          type="button"
+          class="cat-nav-btn"
+          [class.active]="activeCategory.id === cat.id && !isSearching"
+          (click)="navigateToCategory(cat)"
+          [attr.aria-current]="activeCategory.id === cat.id && !isSearching ? 'page' : null">
+          <span class="cat-label">{{ cat.title }}</span>
+          <span class="cat-badge">{{ cat.items.length }}</span>
+          <span class="cat-arrow" aria-hidden="true">›</span>
+        </button>
+      </nav>
+
+      <!-- Verified 24x7 Support Card -->
+      <div class="sidebar-support-card">
+        <div class="support-card-head">
+          <span class="support-badge">24x7 HELPDESK</span>
+          <h4>Official Support</h4>
+        </div>
+        <p class="support-card-text">Need immediate operational assistance or technical escalation?</p>
+        <div class="support-direct-items">
+          <div class="sup-item">
+            <span class="sup-lbl">Army HQ Control Room:</span>
+            <span class="sup-val">1800-11-SENA (7362)</span>
+          </div>
+          <div class="sup-item">
+            <span class="sup-lbl">Northern Ops Cell:</span>
+            <span class="sup-val">ASCON Ext: 4421</span>
+          </div>
+          <div class="sup-item">
+            <span class="sup-lbl">Technical Helpdesk:</span>
+            <span class="sup-val">support.senaaapurti&#64;nic.in</span>
+          </div>
+        </div>
+        <a routerLink="/" fragment="support" class="btn-sidebar-ticket">
+          Report Issue Form ➔
+        </a>
+      </div>
+    </aside>
+
+    <!-- ================= RIGHT MAIN AREA ================= -->
+    <main class="faq-main-content" role="main">
+
+      <!-- ================= CASE 1: SEARCH ACTIVE ================= -->
+      <section *ngIf="isSearching" class="search-results-section" aria-live="polite">
+        <div class="search-results-header">
+          <h2 class="results-heading">
+            Search Results for "<span class="search-term-highlight">{{ searchQuery }}</span>"
+          </h2>
+          <span class="results-count-badge">
+            {{ searchResults.length }} {{ searchResults.length === 1 ? 'match' : 'matches' }} found across all categories
+          </span>
+        </div>
+
+        <!-- No Results Found Message -->
+        <div *ngIf="searchResults.length === 0" class="no-results-card">
+          <div class="no-results-icon" aria-hidden="true">🔍</div>
+          <h3 class="no-results-title">No matching questions found</h3>
+          <p class="no-results-desc">
+            We couldn't find any questions or answers matching "{{ searchQuery }}". Please check your spelling, try broader military keywords (e.g. <em>Rations</em>, <em>Convoy</em>, <em>Telemetry</em>, <em>Password</em>), or browse by category from the left menu.
+          </p>
+          <button type="button" class="btn-clear-search" (click)="clearSearch()">
+            Clear Search & Browse All Categories
+          </button>
+        </div>
+
+        <!-- Search Results List -->
+        <div *ngIf="searchResults.length > 0" class="search-cards-list">
+          <div
+            *ngFor="let res of searchResults"
+            class="search-result-card"
+            (click)="selectSearchResult(res)">
+            <div class="result-meta-row">
+              <span class="result-cat-pill">{{ res.category.title }}</span>
+              <span *ngIf="res.item.badge" class="result-item-badge">{{ res.item.badge }}</span>
+            </div>
+            <h3 class="result-question">{{ res.item.question }}</h3>
+            <p class="result-snippet">{{ res.item.answer }}</p>
+            <div class="result-action-hint">
+              <span>View full answer in {{ res.category.title }}</span>
+              <span class="action-arrow">➔</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= CASE 2: REGULAR CATEGORY ACCORDION VIEW ================= -->
+      <section *ngIf="!isSearching" class="category-faq-section">
+
+        <!-- Controls Toolbar -->
+        <div class="faq-controls-bar">
+          <div class="controls-left">
+            <span class="section-indicator">
+              Category: <strong>{{ activeCategory.title }}</strong>
+            </span>
+            <span class="section-count">({{ activeCategory.items.length }} Questions)</span>
+          </div>
+          <div class="controls-right">
+            <button type="button" class="btn-toggle-all" (click)="expandAll()" title="Expand all answers in this category">
+              <span>Expand All</span>
+            </button>
+            <span class="toolbar-sep">|</span>
+            <button type="button" class="btn-toggle-all" (click)="collapseAll()" title="Collapse all answers">
+              <span>Collapse All</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Accordion List -->
+        <div class="accordion-list">
+          <article
+            *ngFor="let item of activeCategory.items; let i = index"
+            [id]="'faq-' + item.id"
+            class="faq-accordion-item"
+            [class.expanded]="isExpanded(item.id)">
+            
+            <!-- Accordion Header Button -->
+            <button
+              type="button"
+              class="accordion-trigger"
+              (click)="toggleItem(item.id)"
+              [attr.aria-expanded]="isExpanded(item.id)"
+              [attr.aria-controls]="'answer-' + item.id">
+              
+              <div class="trigger-left">
+                <span class="question-number">Q{{ i + 1 }}</span>
+                <span *ngIf="item.badge" class="question-badge">{{ item.badge }}</span>
+                <h3 class="question-title">{{ item.question }}</h3>
+              </div>
+
+              <div class="trigger-right">
+                <span class="expand-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="chevron-svg">
+                    <polyline points="6 9 12 15 18 9"/>
+                  </svg>
+                </span>
+              </div>
+            </button>
+
+            <!-- Accordion Collapsible Body -->
+            <div
+              [id]="'answer-' + item.id"
+              class="accordion-panel"
+              [class.open]="isExpanded(item.id)"
+              [attr.aria-hidden]="!isExpanded(item.id)">
+              <div class="panel-inner-content">
+                <p class="answer-main-text">{{ item.answer }}</p>
+
+                <!-- Bullet Points List -->
+                <ul *ngIf="item.points && item.points.length > 0" class="answer-points-list">
+                  <li *ngFor="let pt of item.points">
+                    <span class="bullet-check" aria-hidden="true">✓</span>
+                    <span>{{ pt }}</span>
+                  </li>
+                </ul>
+
+                <!-- Operational Note / Advisory Callout -->
+                <div *ngIf="item.note" class="operational-note-box">
+                  <span class="note-icon" aria-hidden="true">ℹ️</span>
+                  <div class="note-content">
+                    <strong>Operational Note:</strong> {{ item.note }}
+                  </div>
+                </div>
+
+                <!-- Related Page Link if present -->
+                <div *ngIf="item.relatedLink" class="related-link-row">
+                  <a [routerLink]="item.relatedLink.route" [fragment]="item.relatedLink.fragment" class="related-page-link">
+                    <span>{{ item.relatedLink.label }}</span>
+                    <span class="link-arrow">➔</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Category Bottom Transition Helper -->
+        <div class="category-footer-helper">
+          <p class="helper-text">Looking for other topics?</p>
+          <div class="helper-chips-row">
+            <ng-container *ngFor="let cat of categories">
+              <button
+                *ngIf="cat.id !== activeCategory.id"
+                type="button"
+                class="btn-helper-chip"
+                (click)="navigateToCategory(cat)">
+                <span>{{ cat.title }}</span>
+              </button>
+            </ng-container>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+</div>

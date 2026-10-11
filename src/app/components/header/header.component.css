@@ -161,12 +161,12 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, 
-      rgba(6, 14, 9, 0.97) 0%, 
-      rgba(6, 14, 9, 0.82) 20%, 
-      rgba(6, 14, 9, 0.48) 45%, 
-      rgba(6, 14, 9, 0.48) 55%, 
-      rgba(6, 14, 9, 0.82) 80%, 
+    linear-gradient(90deg,
+      rgba(6, 14, 9, 0.97) 0%,
+      rgba(6, 14, 9, 0.82) 20%,
+      rgba(6, 14, 9, 0.48) 45%,
+      rgba(6, 14, 9, 0.48) 55%,
+      rgba(6, 14, 9, 0.82) 80%,
       rgba(6, 14, 9, 0.97) 100%),
     radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(3, 8, 5, 0.7) 100%),
     radial-gradient(rgba(56, 189, 248, 0.04) 1px, transparent 0);
@@ -386,10 +386,12 @@
     r: 4;
     opacity: 0.9;
   }
+
   50% {
     r: 9;
     opacity: 0.4;
   }
+
   100% {
     r: 13;
     opacity: 0;
@@ -401,6 +403,7 @@
     stroke: rgba(56, 189, 248, 0.4);
     filter: drop-shadow(0 0 2px rgba(56, 189, 248, 0.3));
   }
+
   100% {
     stroke: rgba(56, 189, 248, 0.85);
     filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.8));
@@ -540,7 +543,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1050;
 }
 
 .nav-container {
@@ -572,7 +575,8 @@
   gap: 2px;
 }
 
-.nav-item a {
+.nav-item a,
+.nav-item .nav-link-btn {
   display: block;
   font-family: var(--font-secondary);
   color: #e2e8f0;
@@ -583,9 +587,15 @@
   position: relative;
   transition: all 0.2s ease;
   white-space: nowrap;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  line-height: normal;
 }
 
-.nav-item a:hover {
+.nav-item a:hover,
+.nav-item .nav-link-btn:hover {
   color: #ffffff;
   background-color: rgba(255, 255, 255, 0.08);
 }
@@ -607,6 +617,223 @@
   background: linear-gradient(90deg, #ea580c 0%, #f59e0b 100%);
   border-radius: 2px 2px 0 0;
   box-shadow: 0 0 6px rgba(249, 115, 22, 0.6);
+}
+
+/* ================= FAQ & IMPORTANT LINKS DROPDOWN MENUS (INDIAN ARMY STYLE) ================= */
+.faq-dropdown-item,
+.links-dropdown-item {
+  position: relative;
+}
+
+/* Hover bridge between trigger and menu to guarantee zero pointer gap */
+.faq-dropdown-item::after,
+.links-dropdown-item::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: transparent;
+  pointer-events: auto;
+}
+
+.faq-nav-trigger,
+.links-nav-trigger {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  cursor: pointer;
+  font-family: var(--font-secondary) !important;
+  font-size: 0.94rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+  padding: 8px 12px !important;
+  line-height: normal !important;
+  color: #e2e8f0;
+  vertical-align: middle !important;
+  text-decoration: none;
+}
+
+.faq-nav-trigger span,
+.links-nav-trigger span {
+  font-family: inherit !important;
+  font-size: 0.94rem !important;
+  font-weight: inherit !important;
+  letter-spacing: inherit !important;
+  line-height: inherit !important;
+  color: inherit !important;
+  pointer-events: none;
+}
+
+.faq-dropdown-item:hover .faq-nav-trigger,
+.faq-dropdown-item.dropdown-active .faq-nav-trigger,
+.links-dropdown-item:hover .links-nav-trigger,
+.links-dropdown-item.dropdown-active .links-nav-trigger {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.dropdown-caret {
+  width: 14px;
+  height: 14px;
+  color: #94a3b8;
+  transition: transform 0.25s ease, color 0.2s ease;
+  flex-shrink: 0;
+  margin-top: 1px;
+  pointer-events: none;
+}
+
+.dropdown-caret.rotated,
+.faq-dropdown-item:hover .dropdown-caret,
+.links-dropdown-item:hover .dropdown-caret {
+  transform: rotate(180deg);
+  color: #f59e0b;
+}
+
+.faq-dropdown-menu,
+.links-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 290px;
+  background: #0d1a10;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-top: 3px solid #ea580c;
+  border-radius: 0 0 6px 6px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.65), 0 4px 10px rgba(0, 0, 0, 0.4);
+  padding: 6px 0;
+  margin: 0;
+  list-style: none;
+  z-index: 1250;
+  display: none;
+  pointer-events: auto !important;
+  animation: ddFadeDown 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.links-dropdown-menu {
+  min-width: 320px;
+}
+
+/* Invisible top extension to guarantee zero mouseleave gap */
+.faq-dropdown-menu::before,
+.links-dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: transparent;
+}
+
+.faq-dropdown-menu.show,
+.faq-dropdown-item:hover .faq-dropdown-menu,
+.links-dropdown-menu.show,
+.links-dropdown-item:hover .links-dropdown-menu {
+  display: block;
+}
+
+@keyframes ddFadeDown {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.dd-li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.faq-dropdown-link {
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 18px !important;
+  color: #e2e8f0 !important;
+  font-family: var(--font-secondary) !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+.faq-dropdown-link:hover {
+  background-color: #1a3322 !important;
+  color: #ffffff !important;
+  border-left-color: #ea580c !important;
+  padding-left: 22px !important;
+}
+
+.faq-dropdown-link.active-dd-link {
+  background: linear-gradient(90deg, #162a1c 0%, #1e3825 100%) !important;
+  color: #fde68a !important;
+  border-left-color: #f59e0b !important;
+  font-weight: 700 !important;
+}
+
+.dd-icon {
+  font-size: 1.05rem;
+  line-height: 1;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+.dd-title {
+  flex: 1;
+  letter-spacing: 0.01em;
+  pointer-events: none;
+}
+
+.dd-arrow {
+  color: #64748b;
+  font-size: 1.1rem;
+  font-weight: 700;
+  transition: transform 0.18s ease;
+  pointer-events: none;
+}
+
+.faq-dropdown-link:hover .dd-arrow {
+  color: #f59e0b;
+  transform: translateX(3px);
+}
+
+.faq-dropdown-link.disabled-dd-link {
+  color: #64748b !important;
+  cursor: not-allowed !important;
+  opacity: 0.65;
+  background: transparent !important;
+  border-left-color: transparent !important;
+  padding-left: 18px !important;
+  user-select: none;
+}
+
+.faq-dropdown-link.disabled-dd-link:hover {
+  background: transparent !important;
+  color: #64748b !important;
+  border-left-color: transparent !important;
+  padding-left: 18px !important;
+}
+
+.dd-badge-disabled {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #94a3b8;
+  background: rgba(148, 163, 184, 0.12);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  padding: 1px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 /* Right Nav CTA */
@@ -734,7 +961,7 @@
   background: linear-gradient(90deg, #ff7700 0%, #ff9933 22%, #ffffff 50%, #22c55e 78%, #138808 100%);
   box-shadow: 0 0 10px rgba(255, 120, 31, 0.65), 0 0 10px rgba(34, 197, 94, 0.65);
   position: relative;
-  z-index: 101;
+  z-index: 100;
 }
 
 /* Live Updates Marquee Strip Below Navigation */
@@ -744,7 +971,7 @@
   padding: 6px 0;
   overflow: hidden;
   position: relative;
-  z-index: 100;
+  z-index: 90;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
@@ -817,8 +1044,13 @@
 }
 
 @keyframes headerTickerScroll {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 /* Responsive */
@@ -827,9 +1059,15 @@
     display: none;
   }
 
-  .nav-item a {
-    padding: 8px 7px;
-    font-size: 0.82rem;
+  .nav-item a,
+  .nav-item .nav-link-btn,
+  .faq-nav-trigger {
+    padding: 8px 7px !important;
+    font-size: 0.82rem !important;
+  }
+
+  .faq-nav-trigger span {
+    font-size: 0.82rem !important;
   }
 }
 
@@ -860,9 +1098,36 @@
     width: 100%;
   }
 
-  .nav-item a {
-    padding: 12px 24px;
+  .nav-item a,
+  .nav-item .nav-link-btn,
+  .faq-nav-trigger,
+  .links-nav-trigger {
+    padding: 12px 24px !important;
     width: 100%;
+  }
+
+  .faq-dropdown-menu,
+  .links-dropdown-menu {
+    display: none !important;
+    position: static;
+    min-width: 100%;
+    background: rgba(0, 0, 0, 0.35);
+    border: none;
+    border-left: 3px solid #ea580c;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 2px 0 6px 20px;
+    padding: 2px 0;
+  }
+
+  .faq-dropdown-menu.show,
+  .links-dropdown-menu.show {
+    display: block !important;
+  }
+
+  .faq-dropdown-link {
+    padding: 10px 18px !important;
+    font-size: 0.88rem !important;
   }
 
   .header-container {

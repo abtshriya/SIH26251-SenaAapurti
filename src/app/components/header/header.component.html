@@ -2,17 +2,21 @@
 <div class="top-utility-bar">
   <div class="utility-container">
     <div class="utility-left">
-      <a href="javascript:void(0)" (click)="scrollToSection('about')" class="utility-link">{{ langService.t('navAboutContact') }}</a>
+      <a href="javascript:void(0)" (click)="scrollToSection('about')" class="utility-link">{{
+        langService.t('navAboutContact') }}</a>
       <span class="utility-sep">|</span>
-      <a href="javascript:void(0)" (click)="scrollToSection('support')" class="utility-link">{{ langService.t('feedback') }}</a>
+      <a href="javascript:void(0)" (click)="scrollToSection('support')" class="utility-link">{{
+        langService.t('feedback') }}</a>
       <span class="utility-sep">|</span>
-      <a href="javascript:void(0)" (click)="scrollToSection('guidelines')" class="utility-link">{{ langService.t('sitemap') }}</a>
+      <a href="javascript:void(0)" (click)="scrollToSection('guidelines')" class="utility-link">{{
+        langService.t('sitemap') }}</a>
     </div>
 
     <div class="utility-right">
       <a href="#main-content" class="utility-link skip-link">{{ langService.t('skipContent') }}</a>
       <span class="utility-sep">|</span>
-      <a href="javascript:void(0)" (click)="scrollToSection('support')" class="utility-link">{{ langService.t('screenReader') }}</a>
+      <a href="javascript:void(0)" (click)="scrollToSection('support')" class="utility-link">{{
+        langService.t('screenReader') }}</a>
       <span class="utility-sep">|</span>
 
       <!-- Font Size Scaler -->
@@ -44,23 +48,22 @@
     <!-- Left: Connected Insignia Logo & Brand Name (hover together with subtle glow) -->
     <a routerLink="/" (click)="scrollToSection('hero')" class="brand-block-link" title="SenaAapurti">
       <div class="sena-logo-wrap">
-        <img
-          src="/images/sena_official_logo.png"
-          alt="SenaAapurti Official Insignia"
-          class="sena-logo-img"
-        />
+        <img src="/images/sena_official_logo.png" alt="SenaAapurti Official Insignia" class="sena-logo-img" />
       </div>
 
       <!-- Brand Title, Subtitles, Authority Badge and Tricolour Slash -->
       <div class="brand-text">
         <h1 class="logo-title">
-          <span class="sena-part">{{ langService.t('titleSena') }}</span><span class="aapurti-part">{{ langService.t('titleAapurti') }}</span>
+          <span class="sena-part">{{ langService.t('titleSena') }}</span><span class="aapurti-part">{{
+            langService.t('titleAapurti') }}</span>
         </h1>
-        
+
         <!-- Contextual Subtitle by Portal Mode -->
         <p class="logo-tagline" *ngIf="portalMode() === 'public'">{{ langService.t('subtitle') }}</p>
-        <p class="logo-tagline" *ngIf="portalMode() === 'command'">HQ Strategic Defense Logistics & C4ISR Command Center</p>
-        <p class="logo-tagline" *ngIf="portalMode() === 'unit'">{{ unitDbService.selectedUnit().name }} • {{ unitDbService.selectedUnit().id }}</p>
+        <p class="logo-tagline" *ngIf="portalMode() === 'command'">HQ Strategic Defense Logistics & C4ISR Command Center
+        </p>
+        <p class="logo-tagline" *ngIf="portalMode() === 'unit'">{{ unitDbService.selectedUnit().name }} • {{
+          unitDbService.selectedUnit().id }}</p>
 
         <!-- Contextual Authority Badge by Portal Mode -->
         <div class="authority-badge" *ngIf="portalMode() === 'public'">
@@ -70,7 +73,8 @@
           <span class="ia-text">INTEGRATED HQ OF MoD (ARMY) • SENA BHAWAN, NEW DELHI</span>
         </div>
         <div class="authority-badge unit-authority-badge" *ngIf="portalMode() === 'unit'">
-          <span class="ia-text">{{ unitDbService.selectedUnit().corps }} • {{ unitDbService.selectedUnit().station }}</span>
+          <span class="ia-text">{{ unitDbService.selectedUnit().corps }} • {{ unitDbService.selectedUnit().station
+            }}</span>
         </div>
       </div>
     </a>
@@ -79,18 +83,27 @@
     <div class="futuristic-map-web-overlay" aria-hidden="true">
       <svg class="map-web-svg" viewBox="0 0 540 120" preserveAspectRatio="none" fill="none">
         <!-- Digital Grid Lines -->
-        <line x1="20" y1="20" x2="520" y2="20" stroke="rgba(56, 189, 248, 0.18)" stroke-width="1" stroke-dasharray="4 6" />
-        <line x1="20" y1="60" x2="520" y2="60" stroke="rgba(56, 189, 248, 0.18)" stroke-width="1" stroke-dasharray="4 6" />
-        <line x1="20" y1="100" x2="520" y2="100" stroke="rgba(56, 189, 248, 0.18)" stroke-width="1" stroke-dasharray="4 6" />
-        
-        <line x1="90" y1="10" x2="90" y2="110" stroke="rgba(56, 189, 248, 0.12)" stroke-width="1" stroke-dasharray="2 5" />
-        <line x1="200" y1="10" x2="200" y2="110" stroke="rgba(56, 189, 248, 0.12)" stroke-width="1" stroke-dasharray="2 5" />
-        <line x1="310" y1="10" x2="310" y2="110" stroke="rgba(56, 189, 248, 0.12)" stroke-width="1" stroke-dasharray="2 5" />
-        <line x1="420" y1="10" x2="420" y2="110" stroke="rgba(56, 189, 248, 0.12)" stroke-width="1" stroke-dasharray="2 5" />
+        <line x1="20" y1="20" x2="520" y2="20" stroke="rgba(56, 189, 248, 0.18)" stroke-width="1"
+          stroke-dasharray="4 6" />
+        <line x1="20" y1="60" x2="520" y2="60" stroke="rgba(56, 189, 248, 0.18)" stroke-width="1"
+          stroke-dasharray="4 6" />
+        <line x1="20" y1="100" x2="520" y2="100" stroke="rgba(56, 189, 248, 0.18)" stroke-width="1"
+          stroke-dasharray="4 6" />
+
+        <line x1="90" y1="10" x2="90" y2="110" stroke="rgba(56, 189, 248, 0.12)" stroke-width="1"
+          stroke-dasharray="2 5" />
+        <line x1="200" y1="10" x2="200" y2="110" stroke="rgba(56, 189, 248, 0.12)" stroke-width="1"
+          stroke-dasharray="2 5" />
+        <line x1="310" y1="10" x2="310" y2="110" stroke="rgba(56, 189, 248, 0.12)" stroke-width="1"
+          stroke-dasharray="2 5" />
+        <line x1="420" y1="10" x2="420" y2="110" stroke="rgba(56, 189, 248, 0.12)" stroke-width="1"
+          stroke-dasharray="2 5" />
 
         <!-- Constellation Web Lines connecting nodes across mountain axes -->
-        <path d="M 50 80 L 120 38 L 210 82 L 310 32 L 400 72 L 490 28" stroke="rgba(56, 189, 248, 0.55)" stroke-width="1.5" class="pulsing-web-line" />
-        <path d="M 120 38 L 220 28 L 310 32 L 390 85 L 470 70" stroke="rgba(245, 158, 11, 0.45)" stroke-width="1.2" stroke-dasharray="4 3" />
+        <path d="M 50 80 L 120 38 L 210 82 L 310 32 L 400 72 L 490 28" stroke="rgba(56, 189, 248, 0.55)"
+          stroke-width="1.5" class="pulsing-web-line" />
+        <path d="M 120 38 L 220 28 L 310 32 L 390 85 L 470 70" stroke="rgba(245, 158, 11, 0.45)" stroke-width="1.2"
+          stroke-dasharray="4 3" />
         <path d="M 70 95 L 160 98 L 210 82 L 330 92 L 430 78" stroke="rgba(74, 222, 128, 0.4)" stroke-width="1.2" />
 
         <!-- Telemetry Nodes with Pulsing Rings -->
@@ -113,9 +126,12 @@
         <circle cx="490" cy="28" r="8.5" stroke="#f59e0b" stroke-width="1" class="node-ring delay-2" opacity="0.8" />
 
         <!-- Tactical HUD Coordinates & Reticles -->
-        <text x="55" y="98" fill="rgba(56, 189, 248, 0.85)" font-size="8" font-family="'Rajdhani', monospace" font-weight="700" letter-spacing="1">GRID 34°07'N 77°35'E</text>
-        <text x="215" y="99" fill="rgba(245, 158, 11, 0.85)" font-size="8" font-family="'Rajdhani', monospace" font-weight="700" letter-spacing="1">NORTHERN COMMAND C2</text>
-        <text x="405" y="90" fill="rgba(74, 222, 128, 0.85)" font-size="8" font-family="'Rajdhani', monospace" font-weight="700" letter-spacing="1">ASCON LINK • 100%</text>
+        <text x="55" y="98" fill="rgba(56, 189, 248, 0.85)" font-size="8" font-family="'Rajdhani', monospace"
+          font-weight="700" letter-spacing="1">GRID 34°07'N 77°35'E</text>
+        <text x="215" y="99" fill="rgba(245, 158, 11, 0.85)" font-size="8" font-family="'Rajdhani', monospace"
+          font-weight="700" letter-spacing="1">NORTHERN COMMAND C2</text>
+        <text x="405" y="90" fill="rgba(74, 222, 128, 0.85)" font-size="8" font-family="'Rajdhani', monospace"
+          font-weight="700" letter-spacing="1">ASCON LINK • 100%</text>
       </svg>
     </div>
 
@@ -134,7 +150,8 @@
       </form>
 
       <!-- Unit Station Live Selector Trigger (Visible in Unit Portal mode) -->
-      <div *ngIf="portalMode() === 'unit'" class="unit-station-header-pill" (click)="toggleUnitSelector()" title="Switch Army Unit Station across India">
+      <div *ngIf="portalMode() === 'unit'" class="unit-station-header-pill" (click)="toggleUnitSelector()"
+        title="Switch Army Unit Station across India">
         <div class="pill-station-dot"></div>
         <div class="pill-station-info">
           <span class="pill-station-label">ACTIVE STATION</span>
@@ -175,11 +192,7 @@
 
       <!-- State Emblem of India (Ashoka Lion Capital) -->
       <div class="state-emblem-wrap" title="State Emblem of India (National Emblem)">
-        <img
-          src="/images/indian_emblem_white.png"
-          alt="State Emblem of India"
-          class="ashoka-emblem-img"
-        />
+        <img src="/images/indian_emblem_white.png" alt="State Emblem of India" class="ashoka-emblem-img" />
       </div>
     </div>
   </div>
@@ -199,24 +212,40 @@
     <!-- 1. PUBLIC NAV LINKS -->
     <ul class="nav-links" [class.open]="mobileMenuOpen" *ngIf="portalMode() === 'public'">
       <li class="nav-item">
-        <a href="javascript:void(0)" (click)="scrollToSection('hero')">
+        <a routerLink="/" (click)="scrollToSection('hero')">
           {{ langService.t('navHome') }}
         </a>
       </li>
       <li class="nav-item">
-        <a href="javascript:void(0)" (click)="scrollToSection('ai-logistics')">
-          {{ langService.t('navAiLogistics') }}
+        <a routerLink="/know-sena-aapurti" routerLinkActive="active" class="nav-link-btn" aria-label="Know SenaAapurti">
+          Know SenaAapurti
         </a>
       </li>
-      <li class="nav-item">
-        <a href="javascript:void(0)" (click)="scrollToSection('features')">
-          {{ langService.t('navFeatures') }}
+      <!-- FAQ DROPDOWN (INDIAN ARMY STYLE) -->
+      <li class="nav-item faq-dropdown-item" [class.dropdown-active]="faqDropdownOpen || isFaqActive()">
+        <a href="javascript:void(0)" class="faq-nav-trigger" [class.active]="isFaqActive()"
+          (click)="toggleFaqDropdown($event)" (keydown.enter)="toggleFaqDropdown($event)"
+          (keydown.space)="toggleFaqDropdown($event)" (keydown.escape)="closeFaqDropdown()" aria-haspopup="true"
+          [attr.aria-expanded]="faqDropdownOpen" role="button" tabindex="0">
+          <span>{{ langService.t('navFaq') }}</span>
+          <svg class="dropdown-caret" viewBox="0 0 20 20" fill="currentColor" [class.rotated]="faqDropdownOpen"
+            aria-hidden="true">
+            <path fill-rule="evenodd"
+              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+              clip-rule="evenodd" />
+          </svg>
         </a>
-      </li>
-      <li class="nav-item">
-        <a href="javascript:void(0)" (click)="scrollToSection('guidelines')">
-          {{ langService.t('navGuidelines') }}
-        </a>
+
+        <!-- Dropdown Menu -->
+        <ul class="faq-dropdown-menu" [class.show]="faqDropdownOpen" role="menu" aria-label="FAQ Categories">
+          <li *ngFor="let cat of faqCategories" role="none" class="dd-li">
+            <a [routerLink]="cat.route" (click)="onFaqSelect($event)" class="faq-dropdown-link" role="menuitem"
+              routerLinkActive="active-dd-link">
+              <span class="dd-title">{{ cat.title }}</span>
+              <span class="dd-arrow" aria-hidden="true">›</span>
+            </a>
+          </li>
+        </ul>
       </li>
       <li class="nav-item">
         <a href="javascript:void(0)" (click)="scrollToSection('support')">
@@ -227,6 +256,37 @@
         <a href="javascript:void(0)" (click)="scrollToSection('downloads')">
           {{ langService.t('navDownloads') }}
         </a>
+      </li>
+      <!-- IMPORTANT LINKS DROPDOWN -->
+      <li class="nav-item links-dropdown-item" [class.dropdown-active]="importantLinksOpen">
+        <a href="javascript:void(0)" class="links-nav-trigger"
+          (click)="toggleImportantLinks($event)" (keydown.enter)="toggleImportantLinks($event)"
+          (keydown.space)="toggleImportantLinks($event)" (keydown.escape)="closeImportantLinks()" aria-haspopup="true"
+          [attr.aria-expanded]="importantLinksOpen" role="button" tabindex="0">
+          <span>Important Links</span>
+          <svg class="dropdown-caret" viewBox="0 0 20 20" fill="currentColor" [class.rotated]="importantLinksOpen"
+            aria-hidden="true">
+            <path fill-rule="evenodd"
+              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+              clip-rule="evenodd" />
+          </svg>
+        </a>
+
+        <!-- Dropdown Menu -->
+        <ul class="links-dropdown-menu" [class.show]="importantLinksOpen" role="menu" aria-label="Important Links">
+          <li *ngFor="let item of importantLinks" role="none" class="dd-li">
+            <a *ngIf="item.url" [href]="item.url" target="_blank" rel="noopener noreferrer"
+              class="faq-dropdown-link" role="menuitem">
+              <span class="dd-title">{{ item.title }}</span>
+              <span class="dd-arrow" aria-hidden="true">›</span>
+            </a>
+            <span *ngIf="!item.url" class="faq-dropdown-link disabled-dd-link" role="menuitem" aria-disabled="true"
+              title="Official portal unlisted">
+              <span class="dd-title">{{ item.title }}</span>
+              <span class="dd-badge-disabled" aria-hidden="true">Unlisted</span>
+            </span>
+          </li>
+        </ul>
       </li>
       <li class="nav-item">
         <a href="javascript:void(0)" (click)="scrollToSection('about')">
@@ -294,7 +354,8 @@
       <ng-container *ngIf="portalMode() === 'command'">
         <div class="portal-cta-group">
           <a routerLink="/" class="nav-portal-btn home-switch-btn" title="Return to Public Website">Public Home</a>
-          <a routerLink="/unit/dashboard" class="nav-portal-btn unit-btn" title="Switch to Unit Portal">Switch to Unit</a>
+          <a routerLink="/unit/dashboard" class="nav-portal-btn unit-btn" title="Switch to Unit Portal">Switch to
+            Unit</a>
           <button class="logout-btn" (click)="authService.logout()" title="Secure Logout">Sign Out</button>
         </div>
       </ng-container>
@@ -302,11 +363,13 @@
       <!-- Unit mode actions -->
       <ng-container *ngIf="portalMode() === 'unit'">
         <div class="portal-cta-group">
-          <button type="button" class="nav-portal-btn station-switch-btn" (click)="toggleUnitSelector()" title="Switch Unit Station">
+          <button type="button" class="nav-portal-btn station-switch-btn" (click)="toggleUnitSelector()"
+            title="Switch Unit Station">
             📍 {{ unitDbService.selectedUnit().station.split(',')[0] }}
           </button>
           <a routerLink="/" class="nav-portal-btn home-switch-btn" title="Return to Public Website">Public Home</a>
-          <a routerLink="/command/dashboard" class="nav-portal-btn command-btn" title="Switch to Command Portal">Switch to Command</a>
+          <a routerLink="/command/dashboard" class="nav-portal-btn command-btn" title="Switch to Command Portal">Switch
+            to Command</a>
           <button class="logout-btn" (click)="authService.logout()" title="Secure Logout">Sign Out</button>
         </div>
       </ng-container>
@@ -321,18 +384,15 @@
       <div class="modal-title-wrap">
         <span class="modal-tag">INDIAN ARMY FORMATIONS DIRECTORY</span>
         <h3 class="modal-title">Select Unit Station & Headquarters</h3>
-        <p class="modal-sub">Choose any operational unit across India to dynamically update the Unit Portal header background and logistics telemetry.</p>
+        <p class="modal-sub">Choose any operational unit across India to dynamically update the Unit Portal header
+          background and logistics telemetry.</p>
       </div>
       <button type="button" class="btn-modal-close" (click)="showUnitSelectorModal = false">✕</button>
     </div>
 
     <div class="unit-cards-grid">
-      <div
-        *ngFor="let unit of unitDbService.allUnits"
-        class="unit-station-card"
-        [class.selected]="unitDbService.selectedUnit().id === unit.id"
-        (click)="selectUnit(unit)"
-      >
+      <div *ngFor="let unit of unitDbService.allUnits" class="unit-station-card"
+        [class.selected]="unitDbService.selectedUnit().id === unit.id" (click)="selectUnit(unit)">
         <div class="station-card-media" [style.backgroundImage]="'url(' + unit.bgImage + ')'">
           <span class="station-command-pill">{{ unit.command }}</span>
           <span class="station-readiness-pill">{{ unit.readiness }}% READINESS</span>
@@ -342,15 +402,16 @@
           <span class="station-corps">{{ unit.corps }}</span>
           <div class="station-location-row">
             <svg class="location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/>
-              <circle cx="12" cy="10" r="3"/>
+              <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z" />
+              <circle cx="12" cy="10" r="3" />
             </svg>
             <span>{{ unit.station }}</span>
           </div>
           <p class="station-address">{{ unit.address }}</p>
           <div class="station-footer-meta">
             <span class="station-pincode">PIN: {{ unit.pincode }}</span>
-            <span class="station-select-cta" *ngIf="unitDbService.selectedUnit().id !== unit.id">Activate Station →</span>
+            <span class="station-select-cta" *ngIf="unitDbService.selectedUnit().id !== unit.id">Activate Station
+              →</span>
             <span class="station-active-badge" *ngIf="unitDbService.selectedUnit().id === unit.id">✓ ACTIVE</span>
           </div>
         </div>
@@ -371,13 +432,17 @@
     </div>
     <div class="ticker-track-container">
       <div class="ticker-marquee-track">
-        <span class="ticker-item"><strong>Northern Command:</strong> Zojila Axis Convoy Column 42 cleared for high-altitude transit with continuous GPS telemetry</span>
+        <span class="ticker-item"><strong>Northern Command:</strong> Zojila Axis Convoy Column 42 cleared for
+          high-altitude transit with continuous GPS telemetry</span>
         <span class="ticker-dot">•</span>
-        <span class="ticker-item"><strong>Central Ordnance:</strong> Automated Class V munitions replenishment vouchers dispatched to Eastern theater</span>
+        <span class="ticker-item"><strong>Central Ordnance:</strong> Automated Class V munitions replenishment vouchers
+          dispatched to Eastern theater</span>
         <span class="ticker-dot">•</span>
-        <span class="ticker-item"><strong>POL Reserves:</strong> Advance winter fuel stocking at Siachen staging bases verified at 100% capacity</span>
+        <span class="ticker-item"><strong>POL Reserves:</strong> Advance winter fuel stocking at Siachen staging bases
+          verified at 100% capacity</span>
         <span class="ticker-dot">•</span>
-        <span class="ticker-item"><strong>SenaAapurti C4ISR:</strong> 7 Operational Commands interconnected on secure edge network • 24x7 Control Room Active</span>
+        <span class="ticker-item"><strong>SenaAapurti C4ISR:</strong> 7 Operational Commands interconnected on secure
+          edge network • 24x7 Control Room Active</span>
       </div>
     </div>
   </div>

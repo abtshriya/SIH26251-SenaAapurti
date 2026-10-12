@@ -1,107 +1,10 @@
 <div class="c2-layout-wrapper">
 
-  <!-- ================= GLOBAL ADMIN TOP NAV ================= -->
-  <header class="c2-topbar">
-    <div class="topbar-left">
-      <button type="button" class="sidebar-toggle-btn" (click)="toggleSidebar()" title="Toggle Tactical Menu">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
-        </svg>
-      </button>
-
-      <div class="brand-badge-box">
-        <a routerLink="/" class="c2-brand-link" title="Return to Public Portal">
-          <span class="brand-sena">SENA</span><span class="brand-aapurti">AAPURTI</span>
-        </a>
-        <span class="role-badge-c2">COMMAND / ADMIN HQ</span>
-      </div>
-    </div>
-
-    <!-- Global Tactical Search -->
-    <div class="topbar-search">
-      <svg class="search-icon" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
-      </svg>
-      <input
-        type="text"
-        [(ngModel)]="searchQuery"
-        placeholder="Search units, convoys, ordnance depots, munitions..."
-        class="search-input"
-      />
-    </div>
-
-    <div class="topbar-right">
-      <!-- Font Size Scaler -->
-      <div class="font-controls" role="group" aria-label="Font size adjustment" title="Adjust Font Size">
-        <button type="button" (click)="setFont('sm')" [class.active]="themeService.fontSize() === 'sm'" title="Decrease Font Size (A-)">A-</button>
-        <button type="button" (click)="setFont('md')" [class.active]="themeService.fontSize() === 'md'" title="Normal Font Size (A)">A</button>
-        <button type="button" (click)="setFont('lg')" [class.active]="themeService.fontSize() === 'lg'" title="Increase Font Size (A+)">A+</button>
-      </div>
-
-      <!-- System Status Indicator -->
-      <div class="telemetry-status-box" title="Encrypted Military Data Feed Status">
-        <span class="status-dot-pulse"></span>
-        <div class="status-texts">
-          <span class="status-headline">ASCON TACTICAL GRID</span>
-          <span class="status-sub">ONLINE • DEFCON 2</span>
-        </div>
-      </div>
-
-      <!-- Notifications Bell -->
-      <div class="notif-wrapper">
-        <button type="button" class="btn-icon" (click)="showNotifications = !showNotifications" title="Strategic Alerts">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"/>
-          </svg>
-          <span *ngIf="unreadNotificationsCount > 0" class="notif-badge">{{ unreadNotificationsCount }}</span>
-        </button>
-
-        <!-- Dropdown Panel -->
-        <div *ngIf="showNotifications" class="notif-popover">
-          <div class="notif-pop-header">
-            <h4>Live Tactical Alerts</h4>
-            <span class="badge-danger">4 ACTIVE</span>
-          </div>
-          <div class="notif-pop-list">
-            <div *ngFor="let alt of logisticsService.alerts()" class="notif-pop-item" (click)="setTab('recommendations')">
-              <span class="notif-sev" [class.sev-crit]="alt.severity === 'Critical'" [class.sev-high]="alt.severity === 'High'">
-                {{ alt.severity }}
-              </span>
-              <div class="notif-pop-body">
-                <strong>{{ alt.headline }}</strong>
-                <span>{{ alt.timestamp }} • {{ alt.theater }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Officer Profile & Logout -->
-      <div class="officer-identity-pill">
-        <div class="officer-avatar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="c2-avatar-svg"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-        </div>
-        <div class="officer-meta-txt">
-          <span class="officer-name">{{ authService.currentUser()?.name || 'Lt Gen V. K. Rawat, PVSM' }}</span>
-          <span class="officer-role">{{ authService.currentUser()?.unit || 'Master General of Sustenance (MGS)' }}</span>
-        </div>
-      </div>
-
-      <button type="button" class="btn-settings-top" (click)="setTab('settings')" title="Admin Settings">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="topbar-icon-svg"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-      </button>
-
-      <button type="button" class="btn-logout-c2" (click)="authService.logout()">
-        Sign Out
-      </button>
-    </div>
-  </header>
-
   <!-- ================= MAIN C2 BODY WITH SIDEBAR ================= -->
   <div class="c2-body-container">
 
     <!-- SIDEBAR NAVIGATION -->
-    <aside class="c2-sidebar" [class.collapsed]="sidebarCollapsed">
+    <aside class="c2-sidebar" [class.collapsed]="layoutService.sidebarCollapsed()">
       <div class="sidebar-menu-title">TACTICAL MODULES</div>
       <nav class="sidebar-nav">
         <button
@@ -259,49 +162,73 @@
         <!-- 8 KPI CARDS -->
         <div class="kpi-grid-8">
           <div class="kpi-card" (click)="setTab('units')">
-            <div class="kpi-label">TOTAL UNITS</div>
+            <div class="kpi-header">
+              <span class="kpi-label">TOTAL UNITS</span>
+              <span class="kpi-badge-dot dot-gold"></span>
+            </div>
             <div class="kpi-value text-gold">1,420</div>
             <div class="kpi-sub">Across 7 Commands</div>
           </div>
 
           <div class="kpi-card">
-            <div class="kpi-label">SUPPLY READINESS</div>
+            <div class="kpi-header">
+              <span class="kpi-label">SUPPLY READINESS</span>
+              <span class="kpi-badge-dot dot-green"></span>
+            </div>
             <div class="kpi-value text-green">96.8%</div>
             <div class="kpi-sub">Optimal Status</div>
           </div>
 
           <div class="kpi-card">
-            <div class="kpi-label">CRITICAL LOCATIONS</div>
+            <div class="kpi-header">
+              <span class="kpi-label">CRITICAL LOCATIONS</span>
+              <span class="kpi-badge-dot dot-red"></span>
+            </div>
             <div class="kpi-value text-red">14</div>
             <div class="kpi-sub">High-Altitude Picked</div>
           </div>
 
           <div class="kpi-card" (click)="setTab('logistics')">
-            <div class="kpi-label">ACTIVE CONVOYS</div>
+            <div class="kpi-header">
+              <span class="kpi-label">ACTIVE CONVOYS</span>
+              <span class="kpi-badge-dot dot-blue"></span>
+            </div>
             <div class="kpi-value text-blue">38</div>
             <div class="kpi-sub">5,200+ Tonnes Rolling</div>
           </div>
 
           <div class="kpi-card">
-            <div class="kpi-label">DELAYED CONVOYS</div>
+            <div class="kpi-header">
+              <span class="kpi-label">DELAYED CONVOYS</span>
+              <span class="kpi-badge-dot dot-amber"></span>
+            </div>
             <div class="kpi-value text-amber">2</div>
             <div class="kpi-sub">Weather Choke Points</div>
           </div>
 
           <div class="kpi-card" (click)="setTab('intelligence')">
-            <div class="kpi-label">ROUTE RISKS</div>
+            <div class="kpi-header">
+              <span class="kpi-label">ROUTE RISKS</span>
+              <span class="kpi-badge-dot dot-amber"></span>
+            </div>
             <div class="kpi-value text-amber">5</div>
             <div class="kpi-sub">Zojila & Baralacha</div>
           </div>
 
           <div class="kpi-card" (click)="setTab('intelligence')">
-            <div class="kpi-label">WEATHER ALERTS</div>
+            <div class="kpi-header">
+              <span class="kpi-label">WEATHER ALERTS</span>
+              <span class="kpi-badge-dot dot-red"></span>
+            </div>
             <div class="kpi-value text-red">3</div>
             <div class="kpi-sub">Avalanche Grade 4</div>
           </div>
 
           <div class="kpi-card">
-            <div class="kpi-label">OFFLINE UNITS</div>
+            <div class="kpi-header">
+              <span class="kpi-label">OFFLINE UNITS</span>
+              <span class="kpi-badge-dot dot-neutral"></span>
+            </div>
             <div class="kpi-value text-neutral">1</div>
             <div class="kpi-sub">On SATCOM Fallback</div>
           </div>
@@ -314,94 +241,44 @@
             <div class="panel-header-between">
               <div>
                 <h3 class="panel-heading">India Military Logistics Map</h3>
-                <span class="panel-hint">Live strategic deployment corridors & convoy telematics</span>
+                <span class="panel-hint">Live strategic deployment corridors, formation telemetry & convoy movement</span>
               </div>
-              <div class="map-layer-toggles">
-                <label class="toggle-pill" [class.active]="mapLayerRoutes">
-                  <input type="checkbox" [(ngModel)]="mapLayerRoutes"> Routes
-                </label>
-                <label class="toggle-pill" [class.active]="mapLayerConvoys">
-                  <input type="checkbox" [(ngModel)]="mapLayerConvoys"> Convoys
-                </label>
-                <label class="toggle-pill" [class.active]="mapLayerWeather">
-                  <input type="checkbox" [(ngModel)]="mapLayerWeather"> Weather
-                </label>
-                <label class="toggle-pill" [class.active]="mapLayerRisks">
-                  <input type="checkbox" [(ngModel)]="mapLayerRisks"> Risk Zones
-                </label>
+              <div class="map-controls-toolbar">
+                <div class="basemap-selector-group">
+                  <span class="toolbar-label">TERRAIN:</span>
+                  <button type="button" class="basemap-btn" [class.active]="currentBasemap === 'topo'" (click)="setBasemap('topo')" title="Topographic Mountain Relief & Elevations (Zero API Keys)">Topographic</button>
+                  <button type="button" class="basemap-btn" [class.active]="currentBasemap === 'imagery'" (click)="setBasemap('imagery')" title="Satellite Terrain Photography (Zero API Keys)">Satellite</button>
+                  <button type="button" class="basemap-btn" [class.active]="currentBasemap === 'dark'" (click)="setBasemap('dark')" title="Tactical Military Dark Canvas (Zero API Keys)">Dark Canvas</button>
+                  <button type="button" class="basemap-btn" [class.active]="currentBasemap === 'osm'" (click)="setBasemap('osm')" title="OpenStreetMap Topography (Zero API Keys)">Streets</button>
+                </div>
+                <div class="map-layer-toggles">
+                  <label class="toggle-pill" [class.active]="mapLayerRoutes">
+                    <input type="checkbox" [(ngModel)]="mapLayerRoutes" (change)="toggleMapLayer('routes')"> Routes
+                  </label>
+                  <label class="toggle-pill" [class.active]="mapLayerConvoys">
+                    <input type="checkbox" [(ngModel)]="mapLayerConvoys" (change)="toggleMapLayer('convoys')"> Convoys
+                  </label>
+                  <label class="toggle-pill" [class.active]="mapLayerWeather">
+                    <input type="checkbox" [(ngModel)]="mapLayerWeather" (change)="toggleMapLayer('weather')"> Weather
+                  </label>
+                  <label class="toggle-pill" [class.active]="mapLayerRisks">
+                    <input type="checkbox" [(ngModel)]="mapLayerRisks" (change)="toggleMapLayer('risks')"> Risk Zones
+                  </label>
+                </div>
               </div>
             </div>
 
-            <!-- Interactive Map Graphic Representation -->
-            <div class="military-map-svg-wrap">
-              <svg viewBox="0 0 800 600" class="strategic-map-svg">
-                <!-- Map Background Grid -->
-                <defs>
-                  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#254a31" stroke-width="0.5" opacity="0.3"/>
-                  </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="#0a140d"/>
-                <rect width="100%" height="100%" fill="url(#grid)"/>
-
-                <!-- India Silhouette Representation Boundaries -->
-                <path d="M 320 60 L 380 40 L 440 90 L 460 140 L 520 180 L 680 180 L 720 220 L 710 270 L 620 260 L 530 280 L 480 340 L 420 460 L 370 540 L 350 510 L 320 380 L 260 300 L 220 240 L 240 180 L 300 120 Z"
-                      fill="#162a1c" stroke="#528e67" stroke-width="2" opacity="0.8"/>
-
-                <!-- Command Boundary Overlays -->
-                <text x="330" y="110" fill="#d4af37" font-size="12" font-weight="bold">NORTHERN COMMAND</text>
-                <text x="540" y="220" fill="#d4af37" font-size="12" font-weight="bold">EASTERN COMMAND</text>
-                <text x="250" y="260" fill="#d4af37" font-size="12" font-weight="bold">WESTERN COMMAND</text>
-                <text x="320" y="440" fill="#d4af37" font-size="12" font-weight="bold">SOUTHERN COMMAND</text>
-
-                <!-- Supply Routes (Green/Amber lines) -->
-                <g *ngIf="mapLayerRoutes">
-                  <!-- Pathankot to Leh -->
-                  <path d="M 330 150 Q 350 110 380 80" stroke="#22c55e" stroke-width="3" stroke-dasharray="6 4" fill="none"/>
-                  <!-- Guwahati to Tawang -->
-                  <path d="M 640 240 L 620 190" stroke="#22c55e" stroke-width="3" stroke-dasharray="6 4" fill="none"/>
-                  <!-- Udhampur to Zojila (Risk) -->
-                  <path d="M 320 130 L 350 100" stroke="#f59e0b" stroke-width="3" stroke-dasharray="4 4" fill="none"/>
-                  <!-- Agra to Jodhpur -->
-                  <path d="M 360 250 L 280 270" stroke="#22c55e" stroke-width="3" fill="none"/>
-                </g>
-
-                <!-- Weather Overlay -->
-                <g *ngIf="mapLayerWeather">
-                  <circle cx="380" cy="80" r="35" fill="rgba(59, 130, 246, 0.25)" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="4 2"/>
-                  <text x="390" y="70" fill="#93c5fd" font-size="10">❄ -26°C Snow</text>
-                </g>
-
-                <!-- Risk Zones Overlay -->
-                <g *ngIf="mapLayerRisks">
-                  <circle cx="350" cy="100" r="28" fill="rgba(239, 68, 68, 0.25)" stroke="#ef4444" stroke-width="1.5"/>
-                  <text x="355" y="105" fill="#fca5a5" font-size="10">⚠ Avalanche Zone</text>
-                </g>
-
-                <!-- Convoy Markers -->
-                <g *ngIf="mapLayerConvoys">
-                  <g *ngFor="let c of logisticsService.convoys()">
-                    <circle [attr.cx]="c.gpsCoordinates.lng * 6.5 - 200" [attr.cy]="600 - (c.gpsCoordinates.lat * 15)" r="7" fill="#f59e0b" stroke="#ffffff" stroke-width="2"/>
-                    <text [attr.x]="c.gpsCoordinates.lng * 6.5 - 190" [attr.y]="600 - (c.gpsCoordinates.lat * 15) + 4" fill="#ffffff" font-size="10" font-weight="bold">
-                      {{ c.callsign }}
-                    </text>
-                  </g>
-                </g>
-
-                <!-- Unit Post Markers -->
-                <circle cx="380" cy="80" r="6" fill="#22c55e"/>
-                <text x="375" y="70" fill="#86efac" font-size="10">14 RAJPUT (LEH)</text>
-
-                <circle cx="620" cy="190" r="6" fill="#22c55e"/>
-                <text x="615" y="180" fill="#86efac" font-size="10">8 GARHWAL (TAWANG)</text>
-              </svg>
+            <!-- Interactive Enlarged Military Leaflet Map API -->
+            <div class="military-map-container">
+              <div id="indianLogisticsMap" class="military-leaflet-map"></div>
 
               <!-- Map Legend Overlay -->
               <div class="map-legend-overlay">
-                <div class="legend-item"><span class="legend-box green"></span> Optimal Route</div>
-                <div class="legend-item"><span class="legend-box amber"></span> Choke Point / Bypass</div>
-                <div class="legend-item"><span class="legend-box blue"></span> Weather Risk Zone</div>
-                <div class="legend-item"><span class="legend-box red"></span> Landslide / Avalanche</div>
+                <div class="legend-item"><span class="legend-symbol blue-star">★</span> HQ Commands (Blue)</div>
+                <div class="legend-item"><span class="legend-circle green"></span> Sufficient (>45 DOS)</div>
+                <div class="legend-item"><span class="legend-circle yellow"></span> Depleting (20-45 DOS)</div>
+                <div class="legend-item"><span class="legend-circle red"></span> Critical (&lt;20 DOS)</div>
+                <div class="legend-item"><span class="legend-triangle">▲</span> Extreme Frontier</div>
               </div>
             </div>
           </div>
@@ -415,40 +292,40 @@
               <div class="health-item">
                 <div class="health-row-head">
                   <span class="health-name text-green">● Healthy (> 45 Days DOS)</span>
-                  <span class="health-pct">82.4%</span>
+                  <span class="health-pct font-mono">82.4%</span>
                 </div>
                 <div class="progress-bar-wrap">
-                  <div class="progress-fill fill-green" style="width: 82.4%;"></div>
+                  <div class="progress-fill fill-green" style="--target-width: 82.4%; width: 82.4%;"></div>
                 </div>
               </div>
 
               <div class="health-item">
                 <div class="health-row-head">
                   <span class="health-name text-amber">● Warning (20 - 45 Days DOS)</span>
-                  <span class="health-pct">11.6%</span>
+                  <span class="health-pct font-mono">11.6%</span>
                 </div>
                 <div class="progress-bar-wrap">
-                  <div class="progress-fill fill-amber" style="width: 11.6%;"></div>
+                  <div class="progress-fill fill-amber" style="--target-width: 11.6%; width: 11.6%;"></div>
                 </div>
               </div>
 
               <div class="health-item">
                 <div class="health-row-head">
                   <span class="health-name text-red">● Critical (10 - 20 Days DOS)</span>
-                  <span class="health-pct">4.2%</span>
+                  <span class="health-pct font-mono">4.2%</span>
                 </div>
                 <div class="progress-bar-wrap">
-                  <div class="progress-fill fill-red" style="width: 4.2%;"></div>
+                  <div class="progress-fill fill-red" style="--target-width: 4.2%; width: 4.2%;"></div>
                 </div>
               </div>
 
               <div class="health-item">
                 <div class="health-row-head">
                   <span class="health-name text-red">● Stockout Risk (&lt; 10 Days)</span>
-                  <span class="health-pct">1.8%</span>
+                  <span class="health-pct font-mono">1.8%</span>
                 </div>
                 <div class="progress-bar-wrap">
-                  <div class="progress-fill fill-red" style="width: 1.8%;"></div>
+                  <div class="progress-fill fill-red" style="--target-width: 1.8%; width: 1.8%;"></div>
                 </div>
               </div>
             </div>
@@ -520,60 +397,313 @@
 
           <!-- NATIONAL DEMAND FORECAST & RECENT ACTIVITY -->
           <div class="card-surface forecast-panel">
-            <h3 class="panel-heading">National Demand Forecast & Telemetry Activity</h3>
-            <span class="panel-hint">AI 30-Day predictive projection across forward nodes</span>
-
-            <!-- Mini SVG Forecast Curve with Confidence Band -->
-            <div class="forecast-chart-box mt-3">
-              <div class="chart-legend-row">
-                <span class="c-leg text-blue">━ Historical Consumption</span>
-                <span class="c-leg text-gold">━ Predicted Demand</span>
-                <span class="c-leg text-neutral">░ 95% Confidence Band</span>
+            <div class="panel-header-between">
+              <div>
+                <h3 class="panel-heading">National Demand Forecast & Telemetry Activity</h3>
+                <span class="panel-hint">AI 30-Day predictive projection across forward nodes</span>
               </div>
-              <svg viewBox="0 0 500 150" class="mini-forecast-svg">
-                <!-- Confidence Band Shading -->
-                <path d="M 0 100 Q 120 85 240 70 Q 360 45 500 35 L 500 75 Q 360 90 240 105 Q 120 115 0 120 Z"
-                      fill="rgba(212, 175, 55, 0.15)"/>
-                <!-- Historical Demand Line (solid blue) -->
-                <path d="M 0 110 Q 60 100 120 95 Q 180 88 240 85"
-                      fill="none" stroke="#3b82f6" stroke-width="2.5"/>
-                <!-- Predicted Demand Line (dashed gold) -->
-                <path d="M 240 85 Q 320 65 400 58 Q 460 50 500 45"
-                      fill="none" stroke="#d4af37" stroke-width="2.5" stroke-dasharray="5 3"/>
-                <circle cx="240" cy="85" r="4" fill="#d4af37"/>
-                <text x="245" y="80" fill="#ffffff" font-size="10">Today</text>
-              </svg>
+              <div class="forecast-category-pills">
+                <button type="button" class="fc-pill" [class.active]="selectedForecastClass === 'POL'" (click)="setForecastClass('POL')">
+                  Class III (POL)
+                </button>
+                <button type="button" class="fc-pill" [class.active]="selectedForecastClass === 'AMMO'" (click)="setForecastClass('AMMO')">
+                  Class V (Munitions)
+                </button>
+                <button type="button" class="fc-pill" [class.active]="selectedForecastClass === 'RATIONS'" (click)="setForecastClass('RATIONS')">
+                  Class I (Rations)
+                </button>
+              </div>
             </div>
 
-            <!-- RECENT ACTIVITY FEED -->
-            <h4 class="subpanel-title mt-4">Recent Tactical Activity:</h4>
-            <div class="activity-timeline-feed">
-              <div class="act-item">
-                <div class="act-icon bg-green">✓</div>
-                <div class="act-body">
-                  <strong>Requisition Approved:</strong> 18,000L Sub-Zero HSD for 14 RAJPUT by DGOS.
-                  <span class="act-time">22 mins ago</span>
+            <!-- Glassmorphic Key Metric Ribbon -->
+            <div class="forecast-metrics-ribbon mt-2">
+              <div class="fc-metric-card">
+                <span class="fc-metric-lbl">CURRENT CONSUMPTION</span>
+                <span class="fc-metric-val text-blue font-mono">{{ getForecastMetrics().current }}</span>
+                <span class="fc-metric-sub">Real-Time Sensor Telemetry</span>
+              </div>
+              <div class="fc-metric-card">
+                <span class="fc-metric-lbl">PROJECTED 30-DAY PEAK</span>
+                <span class="fc-metric-val text-gold font-mono">{{ getForecastMetrics().peak }}</span>
+                <span class="fc-metric-sub text-amber">{{ getForecastMetrics().surge }}</span>
+              </div>
+              <div class="fc-metric-card">
+                <span class="fc-metric-lbl">AI NEURAL ACCURACY</span>
+                <span class="fc-metric-val text-green font-mono">96.4%</span>
+                <span class="fc-metric-sub">R² = 0.982 • LSTM Ensemble</span>
+              </div>
+              <div class="fc-metric-card">
+                <span class="fc-metric-lbl">BUFFER ADEQUACY</span>
+                <span class="fc-metric-val text-green font-mono">100% OK</span>
+                <span class="fc-metric-sub">Pre-Winter Stocking Complete</span>
+              </div>
+            </div>
+
+            <!-- Actual Graph Container with Real Data & Glassmorphism -->
+            <div class="forecast-chart-box mt-3">
+              <!-- Top Legend Row -->
+              <div class="chart-legend-row">
+                <div class="leg-item"><span class="leg-indicator blue-line"></span> Historical Actuals (ASCON Sensor Feed)</div>
+                <div class="leg-item"><span class="leg-indicator gold-dash"></span> AI Predictive Projection (Next 30 Days)</div>
+                <div class="leg-item"><span class="leg-indicator amber-band"></span> 95% Confidence Band (±10%)</div>
+                <div class="leg-item right-pill"><span class="model-badge">ARIMA-LSTM HYBRID V3.2</span></div>
+              </div>
+
+              <!-- High-Fidelity Tactical Telemetry SVG Graph -->
+              <div class="svg-graph-wrapper">
+                <svg viewBox="0 0 760 250" class="actual-forecast-svg" preserveAspectRatio="none">
+                  <defs>
+                    <!-- Background Grid Pattern -->
+                    <pattern id="chartGrid" width="60" height="38" patternUnits="userSpaceOnUse">
+                      <path d="M 60 0 L 0 0 0 38" fill="none" stroke="rgba(255, 255, 255, 0.05)" stroke-width="0.8"/>
+                    </pattern>
+
+                    <!-- Historical Area Gradient (Electric Cyan/Blue to Transparent) -->
+                    <linearGradient id="histAreaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.32"/>
+                      <stop offset="60%" stop-color="#2563eb" stop-opacity="0.10"/>
+                      <stop offset="100%" stop-color="#1e3a8a" stop-opacity="0"/>
+                    </linearGradient>
+
+                    <!-- Confidence Band Gradient (Translucent Gold/Amber) -->
+                    <linearGradient id="confBandGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.22"/>
+                      <stop offset="50%" stop-color="#d97706" stop-opacity="0.12"/>
+                      <stop offset="100%" stop-color="#b45309" stop-opacity="0.04"/>
+                    </linearGradient>
+
+                    <!-- Glow Filters -->
+                    <filter id="goldGlow" x="-20%" y="-20%" width="140%" height="140%">
+                      <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#f59e0b" flood-opacity="0.8"/>
+                    </filter>
+                    <filter id="blueGlow" x="-20%" y="-20%" width="140%" height="140%">
+                      <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#38bdf8" flood-opacity="0.8"/>
+                    </filter>
+                  </defs>
+
+                  <!-- Tactical Chart Background & Grid -->
+                  <rect width="100%" height="100%" fill="#07130a" rx="6"/>
+                  <rect x="52" y="20" width="690" height="190" fill="url(#chartGrid)"/>
+
+                  <!-- Horizontal Guide Lines & Y-Axis Labels -->
+                  <g class="y-axis-guides" stroke="rgba(255, 255, 255, 0.08)" stroke-dasharray="2 3">
+                    <!-- 100k line -->
+                    <line x1="52" y1="28" x2="742" y2="28"/>
+                    <text x="44" y="32" fill="#94a3b8" font-size="9" text-anchor="end" font-family="'Rajdhani', monospace">100k</text>
+
+                    <!-- 80k line -->
+                    <line x1="52" y1="66" x2="742" y2="66"/>
+                    <text x="44" y="70" fill="#94a3b8" font-size="9" text-anchor="end" font-family="'Rajdhani', monospace">80k</text>
+
+                    <!-- 60k line -->
+                    <line x1="52" y1="104" x2="742" y2="104"/>
+                    <text x="44" y="108" fill="#94a3b8" font-size="9" text-anchor="end" font-family="'Rajdhani', monospace">60k</text>
+
+                    <!-- 40k line -->
+                    <line x1="52" y1="142" x2="742" y2="142"/>
+                    <text x="44" y="146" fill="#94a3b8" font-size="9" text-anchor="end" font-family="'Rajdhani', monospace">40k</text>
+
+                    <!-- 20k line -->
+                    <line x1="52" y1="180" x2="742" y2="180"/>
+                    <text x="44" y="184" fill="#94a3b8" font-size="9" text-anchor="end" font-family="'Rajdhani', monospace">20k</text>
+
+                    <!-- Base 0 line -->
+                    <line x1="52" y1="210" x2="742" y2="210" stroke="rgba(255, 255, 255, 0.2)" stroke-dasharray="0"/>
+                  </g>
+
+                  <!-- 95% Confidence Band Polygon (From Today X=340 to Day+30 X=730) -->
+                  <polygon points="
+                    340,107
+                    410,90
+                    480,74
+                    550,58
+                    630,44
+                    730,36
+                    730,82
+                    630,90
+                    550,101
+                    480,114
+                    410,122
+                    340,107"
+                    fill="url(#confBandGrad)"
+                    stroke="rgba(245, 158, 11, 0.4)"
+                    stroke-width="1"
+                    stroke-dasharray="3 3"/>
+
+                  <!-- Historical Area Fill (Day -15 to Today) -->
+                  <polygon points="
+                    60,210
+                    60,148
+                    110,142
+                    165,134
+                    220,126
+                    280,116
+                    340,107
+                    340,210"
+                    fill="url(#histAreaGrad)"/>
+
+                  <!-- Historical Actual Curve (Solid Cyan) -->
+                  <path d="M 60,148 Q 110,142 165,134 T 280,116 T 340,107"
+                    fill="none" stroke="#38bdf8" stroke-width="3" filter="url(#blueGlow)"/>
+
+                  <!-- Predicted Demand Curve (Dashed Amber Surging Upwards) -->
+                  <path d="M 340,107 Q 410,100 480,88 T 630,62 T 730,52"
+                    fill="none" stroke="#f59e0b" stroke-width="3" stroke-dasharray="7 5" filter="url(#goldGlow)"/>
+
+                  <!-- Historical Data Nodes -->
+                  <circle cx="60" cy="148" r="3.5" fill="#38bdf8"/>
+                  <circle cx="165" cy="134" r="3.5" fill="#38bdf8"/>
+                  <circle cx="280" cy="116" r="3.5" fill="#38bdf8"/>
+
+                  <!-- Today Vertical Cadence Divider Line -->
+                  <line x1="340" y1="18" x2="340" y2="210" stroke="#f59e0b" stroke-width="1.8" stroke-dasharray="4 3"/>
+                  
+                  <!-- Today Pulse Beacon -->
+                  <circle cx="340" cy="107" r="8" fill="rgba(245, 158, 11, 0.3)" class="beacon-wave"/>
+                  <circle cx="340" cy="107" r="4.5" fill="#f59e0b" stroke="#ffffff" stroke-width="2"/>
+
+                  <!-- Today Label Badge -->
+                  <rect x="312" y="8" width="56" height="17" rx="3" fill="#1e293b" stroke="#f59e0b" stroke-width="1"/>
+                  <text x="340" y="20" fill="#fde047" font-size="9" font-weight="bold" text-anchor="middle" font-family="'Rajdhani', sans-serif">TODAY</text>
+
+                  <!-- Forecast Future Nodes -->
+                  <circle cx="480" cy="88" r="4" fill="#f59e0b" stroke="#ffffff" stroke-width="1.5"/>
+                  <text x="480" y="78" fill="#fbbf24" font-size="9" font-weight="bold" text-anchor="middle" font-family="'Rajdhani', sans-serif">+12d (74k)</text>
+
+                  <circle cx="630" cy="62" r="4" fill="#f59e0b" stroke="#ffffff" stroke-width="1.5"/>
+                  <text x="630" y="52" fill="#fbbf24" font-size="9" font-weight="bold" text-anchor="middle" font-family="'Rajdhani', sans-serif">+20d (84k)</text>
+
+                  <circle cx="730" cy="52" r="4.5" fill="#ef4444" stroke="#ffffff" stroke-width="1.5"/>
+                  <text x="702" y="42" fill="#f87171" font-size="9" font-weight="bold" text-anchor="middle" font-family="'Rajdhani', sans-serif">Peak (86.2k)</text>
+
+                  <!-- X-Axis Timeline Labels -->
+                  <g class="x-axis-labels" fill="#94a3b8" font-size="9" font-family="'Rajdhani', monospace">
+                    <text x="60" y="228" text-anchor="middle">-15 Days</text>
+                    <text x="165" y="228" text-anchor="middle">-10 Days</text>
+                    <text x="280" y="228" text-anchor="middle">-5 Days</text>
+                    <text x="340" y="228" text-anchor="middle" fill="#fde047" font-weight="bold">TODAY</text>
+                    <text x="480" y="228" text-anchor="middle">+10 Days</text>
+                    <text x="630" y="228" text-anchor="middle">+20 Days</text>
+                    <text x="730" y="228" text-anchor="middle" fill="#f87171">+30 Days</text>
+                  </g>
+                </svg>
+              </div>
+
+              <!-- Interactive Telemetry Data Strip Beneath Graph -->
+              <div class="chart-summary-strip">
+                <div class="summary-pill">
+                  <span class="dot-indicator blue"></span>
+                  <span>Avg Baseline: <strong>51,200 L/Day</strong></span>
+                </div>
+                <div class="summary-pill">
+                  <span class="dot-indicator amber"></span>
+                  <span>Seasonal Surge: <strong>+43.9% (Cold Wave & High-Altitude)</strong></span>
+                </div>
+                <div class="summary-pill">
+                  <span class="dot-indicator green"></span>
+                  <span>Inventory Coverage: <strong>62 Days Reserve Available</strong></span>
                 </div>
               </div>
-              <div class="act-item">
-                <div class="act-icon bg-blue">🚛</div>
-                <div class="act-body">
-                  <strong>Convoy GARUDA-01 Dispatched:</strong> Passed Manali North Portal en route to Leh.
-                  <span class="act-time">1 hr ago</span>
+            </div>
+
+            <!-- RECENT TACTICAL ACTIVITY FEED (NEAT GLASSMORPHIC CARDS WITHOUT EMOJIS) -->
+            <div class="act-header-between mt-4">
+              <h4 class="subpanel-title">Recent Tactical Activity & Telemetry Feed</h4>
+              <span class="badge-gold">ENCRYPTED MILITARY LOG</span>
+            </div>
+
+            <div class="tactical-activity-grid mt-2">
+              <!-- Item 1: Requisition Approved -->
+              <div class="tactical-act-card card-green">
+                <div class="act-icon-box box-green">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="act-svg">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div class="act-content">
+                  <div class="act-header-row">
+                    <span class="act-tag tag-green">REQUISITION APPROVED</span>
+                    <span class="act-timestamp">22 mins ago</span>
+                  </div>
+                  <h5 class="act-title">18,000L Sub-Zero HSD for 14 RAJPUT</h5>
+                  <p class="act-desc">Direct requisition sanctioned by DGOS Army HQ • Dispatched from Pathankot Advance Supply Depot to Leh Forward Picket.</p>
+                  <div class="act-meta-footer">
+                    <span>Voucher #DGOS-8841-A</span>
+                    <span class="sep">•</span>
+                    <span>Northern Theater • Ladakh Sector</span>
+                  </div>
                 </div>
               </div>
-              <div class="act-item">
-                <div class="act-icon bg-amber">⚡</div>
-                <div class="act-body">
-                  <strong>Bypass Rerouting:</strong> Convoy HIMALAYA-9 rerouted via Nilgrath tunnel.
-                  <span class="act-time">2 hrs ago</span>
+
+              <!-- Item 2: Convoy Dispatched -->
+              <div class="tactical-act-card card-blue">
+                <div class="act-icon-box box-blue">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="act-svg">
+                    <rect x="1" y="3" width="15" height="13"/>
+                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                    <circle cx="5.5" cy="18.5" r="2.5"/>
+                    <circle cx="18.5" cy="18.5" r="2.5"/>
+                  </svg>
+                </div>
+                <div class="act-content">
+                  <div class="act-header-row">
+                    <span class="act-tag tag-blue">CONVOY DISPATCHED</span>
+                    <span class="act-timestamp">1 hr ago</span>
+                  </div>
+                  <h5 class="act-title">Convoy Column GARUDA-01 En Route to Leh</h5>
+                  <p class="act-desc">Passed Manali North Portal (Atal Tunnel Axis) with continuous telemetry • 24 heavy vehicles transporting Arctic grade rations and fuel.</p>
+                  <div class="act-meta-footer">
+                    <span>Callsign: GARUDA-01</span>
+                    <span class="sep">•</span>
+                    <span>Speed: 38 km/h • GPS Link 100%</span>
+                  </div>
                 </div>
               </div>
-              <div class="act-item">
-                <div class="act-icon bg-green">📦</div>
-                <div class="act-body">
-                  <strong>Consignment Delivered:</strong> 210 Tonnes Spares received at Jodhpur Depot.
-                  <span class="act-time">3 hrs ago</span>
+
+              <!-- Item 3: Bypass Rerouting -->
+              <div class="tactical-act-card card-amber">
+                <div class="act-icon-box box-amber">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="act-svg">
+                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                    <polyline points="17 6 23 6 23 12"/>
+                  </svg>
+                </div>
+                <div class="act-content">
+                  <div class="act-header-row">
+                    <span class="act-tag tag-amber">TACTICAL REROUTE</span>
+                    <span class="act-timestamp">2 hrs ago</span>
+                  </div>
+                  <h5 class="act-title">Convoy HIMALAYA-9 Diverted via Nilgrath Tunnel</h5>
+                  <p class="act-desc">Automated AI rerouting engaged due to Grade 4 avalanche risk on Zojila main axis • Safe passage ensured over BRO all-weather link.</p>
+                  <div class="act-meta-footer">
+                    <span>Callsign: HIMALAYA-9</span>
+                    <span class="sep">•</span>
+                    <span>Delay: +1.2 hrs • Risk Mitigated</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item 4: Consignment Delivered -->
+              <div class="tactical-act-card card-emerald">
+                <div class="act-icon-box box-emerald">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="act-svg">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                    <line x1="12" y1="22.08" x2="12" y2="12"/>
+                  </svg>
+                </div>
+                <div class="act-content">
+                  <div class="act-header-row">
+                    <span class="act-tag tag-emerald">CONSIGNMENT DELIVERED</span>
+                    <span class="act-timestamp">3 hrs ago</span>
+                  </div>
+                  <h5 class="act-title">210 Tonnes Spares Received at Jodhpur Depot</h5>
+                  <p class="act-desc">T-90 Bhishma engine components & BMP-II transmission kits securely unloaded • QR-coded inventory ledgers updated and verified.</p>
+                  <div class="act-meta-footer">
+                    <span>Depot: COD Jodhpur</span>
+                    <span class="sep">•</span>
+                    <span>Southern Command • Armoured Echelon</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -597,27 +727,36 @@
         <div class="filter-strip card-surface mt-3">
           <div class="filter-col">
             <label class="filter-label">Search Unit</label>
-            <input type="text" [(ngModel)]="unitSearch" placeholder="Search by name, ID, sector..." class="form-control-sm">
+            <input type="text" [(ngModel)]="unitSearch" placeholder="Search by name, ID, sector, station..." class="form-control-sm">
           </div>
           <div class="filter-col">
             <label class="filter-label">Command / Region</label>
             <select [(ngModel)]="unitRegionFilter" class="form-control-sm">
-              <option value="All">All Commands</option>
-              <option value="Northern Command">Northern Command</option>
-              <option value="Eastern Command">Eastern Command</option>
-              <option value="Western Command">Western Command</option>
-              <option value="Southern Command">Southern Command</option>
+              <option value="All">All Commands (9 Theaters)</option>
+              <option value="Northern Command">Northern Command (Param Utkarsh)</option>
+              <option value="Western Command">Western Command (Sarvada Vijayi)</option>
+              <option value="Eastern Command">Eastern Command (Veerta Aur Shaurya)</option>
+              <option value="Southern Command">Southern Command (Sarvada Vijayee)</option>
+              <option value="South Western Command">South Western Command (Sapta Shakti)</option>
+              <option value="Central Command">Central Command (Surya Command)</option>
+              <option value="Army Training Command">Army Training Command (ARTRAC)</option>
+              <option value="Andaman & Nicobar Command">Andaman & Nicobar Command (ANC)</option>
+              <option value="Army Headquarters">Integrated Defence HQ / Army HQ</option>
             </select>
           </div>
           <div class="filter-col">
-            <label class="filter-label">Unit Type</label>
+            <label class="filter-label">Unit Type / Arm</label>
             <select [(ngModel)]="unitTypeFilter" class="form-control-sm">
-              <option value="All">All Types</option>
+              <option value="All">All Arms & Services</option>
               <option value="Infantry">Infantry</option>
-              <option value="Mechanised">Mechanised</option>
-              <option value="Armoured">Armoured</option>
-              <option value="Artillery">Artillery</option>
-              <option value="Engineers">Engineers</option>
+              <option value="Mechanised">Mechanised Infantry</option>
+              <option value="Armoured">Armoured Corps (Tanks)</option>
+              <option value="Artillery">Regiment of Artillery</option>
+              <option value="Special Forces">Para (Special Forces)</option>
+              <option value="Engineers">Corps of Engineers (Sappers)</option>
+              <option value="Ordnance">Army Ordnance Corps (AOC)</option>
+              <option value="ASC">Army Service Corps (ASC)</option>
+              <option value="EME">Corps of EME</option>
             </select>
           </div>
           <div class="filter-col">
@@ -667,7 +806,7 @@
                   </span>
                 </td>
                 <td>
-                  <span class="badge-risk" [class.badge-danger]="u.riskLevel === 'High'" [class.badge-gold]="u.riskLevel === 'Moderate'" [class.badge-success]="u.riskLevel === 'Low'">
+                  <span class="badge-risk" [class.badge-critical]="u.riskLevel === 'Critical'" [class.badge-high]="u.riskLevel === 'High'" [class.badge-gold]="u.riskLevel === 'Moderate'" [class.badge-success]="u.riskLevel === 'Low'">
                     {{ u.riskLevel }}
                   </span>
                 </td>
@@ -882,7 +1021,7 @@
                 <td class="font-bold text-green">{{ item.available }}</td>
                 <td>{{ item.daysOfSupply }} DOS</td>
                 <td>
-                  <span class="badge-risk" [class.badge-danger]="item.stockoutRisk === 'High' || item.stockoutRisk === 'Critical'" [class.badge-gold]="item.stockoutRisk === 'Moderate'" [class.badge-success]="item.stockoutRisk === 'Low'">
+                  <span class="badge-risk" [class.badge-critical]="item.stockoutRisk === 'Critical'" [class.badge-high]="item.stockoutRisk === 'High'" [class.badge-gold]="item.stockoutRisk === 'Moderate'" [class.badge-success]="item.stockoutRisk === 'Low'">
                     {{ item.stockoutRisk }}
                   </span>
                 </td>
@@ -937,9 +1076,16 @@
               <div class="form-group mb-2">
                 <label class="form-label">Target Depot</label>
                 <select class="form-control">
-                  <option>COD Pathankot (Northern Command)</option>
-                  <option>COD Narangi (Eastern Command)</option>
-                  <option>COD Jabalpur (Munitions)</option>
+                  <option>COD Pathankot (Northern Command - 21 Base Depot)</option>
+                  <option>COD Udhampur (Northern Command Strategic Hub)</option>
+                  <option>FOD Leh (High-Altitude Forward Ordnance Depot)</option>
+                  <option>COD Agra (Central Command - Air Drop Reserve)</option>
+                  <option>COD Delhi Cantt (Integrated Army HQ Depot)</option>
+                  <option>COD Narangi / Guwahati (Eastern Command Depot)</option>
+                  <option>224 ABOD Panagarh (Eastern Strike Reserve)</option>
+                  <option>COD Jabalpur (Munitions & Fighting Vehicle Depot)</option>
+                  <option>COD Kandivli / Mumbai (Southern Command Maritime Link)</option>
+                  <option>COD Bhatinda (South Western Command Armoured Buffer)</option>
                 </select>
               </div>
               <div class="form-group mb-2">
@@ -991,29 +1137,40 @@
         <!-- FILTERS -->
         <div class="filter-strip card-surface mt-3">
           <div class="filter-col">
-            <label class="filter-label">Region</label>
+            <label class="filter-label">Region / Theater Command</label>
             <select [(ngModel)]="forecastRegion" class="form-control-sm">
-              <option>Northern Command</option>
-              <option>Eastern Command</option>
-              <option>Western Command</option>
+              <option value="All Commands">National Strategic (All 9 Theaters)</option>
+              <option value="Northern Command">Northern Command (Param Utkarsh - J&K, Ladakh)</option>
+              <option value="Western Command">Western Command (Sarvada Vijayi - Punjab, Rajasthan)</option>
+              <option value="Eastern Command">Eastern Command (Veerta Aur Shaurya - Sikkim, Arunachal)</option>
+              <option value="Southern Command">Southern Command (Sarvada Vijayee - Peninsular)</option>
+              <option value="South Western Command">South Western Command (Sapta Shakti - Jaipur Axis)</option>
+              <option value="Central Command">Central Command (Surya Command - UP, MP, Uttarakhand)</option>
+              <option value="Army Training Command">Army Training Command (ARTRAC - Shimla)</option>
+              <option value="Andaman & Nicobar Command">Andaman & Nicobar Command (ANC Tri-Service)</option>
+              <option value="Army Headquarters">Integrated Defence HQ / Army HQ (New Delhi)</option>
             </select>
           </div>
           <div class="filter-col">
             <label class="filter-label">Supply Category</label>
             <select [(ngModel)]="forecastCategory" class="form-control-sm">
-              <option>Class I (Rations)</option>
-              <option>Class III (POL)</option>
-              <option>Class V (Munitions)</option>
-              <option>Class IX (Spares)</option>
+              <option>Class III (Sub-Zero POL & Arctic Aviation Fuel)</option>
+              <option>Class I (Rations & Extreme Cold Subsistence)</option>
+              <option>Class V (Ammunition, Artillery Shells & ATGMs)</option>
+              <option>Class IX (T-90, BMP & High-Mobility Vehicle Spares)</option>
+              <option>Class VIII (High-Altitude Medical & Oxygen Cannisters)</option>
+              <option>Class II (Extreme Cold Weather Clothing - ECC)</option>
             </select>
           </div>
           <div class="filter-col">
             <label class="filter-label">Forecast Horizon</label>
             <select [(ngModel)]="forecastPeriod" class="form-control-sm">
-              <option>15 Days</option>
-              <option>30 Days</option>
-              <option>60 Days</option>
-              <option>90 Days (Full Winter)</option>
+              <option>7 Days (Tactical Sprint)</option>
+              <option>15 Days (Operational Horizon)</option>
+              <option>30 Days (Monthly Deployment Cycle)</option>
+              <option>60 Days (Bi-Monthly Replenishment)</option>
+              <option>90 Days (Full High-Altitude Winter Closure)</option>
+              <option>180 Days (Strategic Annual Reserve Horizon)</option>
             </select>
           </div>
         </div>
@@ -1023,10 +1180,10 @@
           <div class="panel-header-between">
             <div>
               <h3 class="panel-heading">Demand Trend & Predictive Curve ({{ forecastCategory }})</h3>
-              <span class="panel-hint">Trained on 15 years historical data + terrain and meteorological models</span>
+              <span class="panel-hint">Trained on 15 years historical ASCON telemetry + meteorological elevation models</span>
             </div>
             <div class="chart-indicators">
-              <span class="c-leg text-blue">● Historical Actuals</span>
+              <span class="c-leg text-blue">● Historical Actuals ({{ getForecastChartData().unit }})</span>
               <span class="c-leg text-gold">-- AI Predicted Demand</span>
               <span class="c-leg text-neutral">░ 95% Confidence Interval</span>
             </div>
@@ -1034,41 +1191,106 @@
 
           <div class="chart-large-wrap mt-3">
             <svg viewBox="0 0 900 260" class="demand-trend-large-svg">
-              <!-- Grid lines -->
-              <line x1="60" y1="30" x2="860" y2="30" stroke="#1e3825" stroke-width="1"/>
-              <line x1="60" y1="90" x2="860" y2="90" stroke="#1e3825" stroke-width="1"/>
-              <line x1="60" y1="150" x2="860" y2="150" stroke="#1e3825" stroke-width="1"/>
-              <line x1="60" y1="210" x2="860" y2="210" stroke="#1e3825" stroke-width="1"/>
+              <defs>
+                <linearGradient id="foreConfBandGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.12"/>
+                  <stop offset="50%" stop-color="#f59e0b" stop-opacity="0.22"/>
+                  <stop offset="100%" stop-color="#ef4444" stop-opacity="0.15"/>
+                </linearGradient>
+                <linearGradient id="foreHistAreaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.25"/>
+                  <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.02"/>
+                </linearGradient>
+                <filter id="foreBlueGlow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="3" result="blur"/>
+                  <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                </filter>
+                <filter id="foreGoldGlow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="3" result="blur"/>
+                  <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                </filter>
+              </defs>
 
-              <!-- Labels -->
-              <text x="15" y="35" fill="#64748b" font-size="11">50,000</text>
-              <text x="15" y="95" fill="#64748b" font-size="11">35,000</text>
-              <text x="15" y="155" fill="#64748b" font-size="11">20,000</text>
-              <text x="15" y="215" fill="#64748b" font-size="11">5,000</text>
+              <!-- Grid horizontal lines -->
+              <line x1="60" y1="30" x2="860" y2="30" stroke="rgba(255, 255, 255, 0.08)" stroke-dasharray="3 3"/>
+              <line x1="60" y1="90" x2="860" y2="90" stroke="rgba(255, 255, 255, 0.08)" stroke-dasharray="3 3"/>
+              <line x1="60" y1="150" x2="860" y2="150" stroke="rgba(255, 255, 255, 0.08)" stroke-dasharray="3 3"/>
+              <line x1="60" y1="210" x2="860" y2="210" stroke="rgba(255, 255, 255, 0.15)"/>
 
-              <!-- Confidence Band Area -->
-              <path d="M 60 170 Q 240 150 420 120 Q 600 80 860 40 L 860 95 Q 600 130 420 160 Q 240 180 60 195 Z"
-                    fill="rgba(212, 175, 55, 0.18)"/>
+              <!-- Axis Labels -->
+              <text x="15" y="34" fill="#64748b" font-size="10" font-family="'Rajdhani', monospace">Peak</text>
+              <text x="15" y="94" fill="#64748b" font-size="10" font-family="'Rajdhani', monospace">High</text>
+              <text x="15" y="154" fill="#64748b" font-size="10" font-family="'Rajdhani', monospace">Normal</text>
+              <text x="15" y="214" fill="#64748b" font-size="10" font-family="'Rajdhani', monospace">Base</text>
 
-              <!-- Historical Actual Demand Line -->
-              <path d="M 60 185 Q 150 175 240 160 Q 330 148 420 140"
-                    fill="none" stroke="#3b82f6" stroke-width="3.5"/>
+              <!-- 95% Confidence Band Polygon -->
+              <polygon [attr.points]="getForecastChartData().confBand"
+                       fill="url(#foreConfBandGrad)"
+                       stroke="rgba(245, 158, 11, 0.35)"
+                       stroke-width="1"
+                       stroke-dasharray="3 3"/>
+
+              <!-- Historical Fill Area -->
+              <polygon [attr.points]="getForecastChartData().histArea"
+                       fill="url(#foreHistAreaGrad)"/>
+
+              <!-- Historical Actual Line -->
+              <path [attr.d]="getForecastChartData().histPath"
+                    fill="none" stroke="#38bdf8" stroke-width="3.5" filter="url(#foreBlueGlow)"/>
 
               <!-- Predicted Demand Line -->
-              <path d="M 420 140 Q 530 115 640 95 Q 750 75 860 65"
-                    fill="none" stroke="#d4af37" stroke-width="3.5" stroke-dasharray="6 4"/>
+              <path [attr.d]="getForecastChartData().predPath"
+                    fill="none" stroke="#f59e0b" stroke-width="3.5" stroke-dasharray="7 5" filter="url(#foreGoldGlow)"/>
+
+              <!-- Historical Data Nodes -->
+              <g *ngFor="let p of getForecastChartData().histPoints">
+                <circle [attr.cx]="p.x" [attr.cy]="p.y" r="4.5" fill="#38bdf8" stroke="#ffffff" stroke-width="1.5"/>
+                <text [attr.x]="p.x" [attr.y]="p.y - 12" fill="#7dd3fc" font-size="10" font-weight="bold" text-anchor="middle" font-family="'Rajdhani', monospace">{{ p.val }}</text>
+              </g>
 
               <!-- Dividing Marker Today -->
-              <line x1="420" y1="20" x2="420" y2="230" stroke="#ef4444" stroke-width="2" stroke-dasharray="4 2"/>
-              <text x="425" y="25" fill="#ef4444" font-size="11" font-weight="bold">TODAY (DEFCON 2)</text>
+              <line [attr.x1]="getForecastChartData().todayX" y1="20" [attr.x2]="getForecastChartData().todayX" y2="210" stroke="#f59e0b" stroke-width="2" stroke-dasharray="4 3"/>
+              
+              <!-- Today Pulse Beacon -->
+              <circle [attr.cx]="getForecastChartData().todayX" [attr.cy]="getForecastChartData().todayY" r="9" fill="rgba(245, 158, 11, 0.3)" class="beacon-wave"/>
+              <circle [attr.cx]="getForecastChartData().todayX" [attr.cy]="getForecastChartData().todayY" r="5" fill="#f59e0b" stroke="#ffffff" stroke-width="2"/>
+              
+              <!-- Today Badge -->
+              <rect [attr.x]="getForecastChartData().todayX - 30" y="8" width="60" height="18" rx="4" fill="#0f172a" stroke="#f59e0b" stroke-width="1.2"/>
+              <text [attr.x]="getForecastChartData().todayX" y="21" fill="#fde047" font-size="9" font-weight="bold" text-anchor="middle" font-family="'Rajdhani', sans-serif">TODAY</text>
+
+              <!-- Forecast Future Nodes -->
+              <g *ngFor="let p of getForecastChartData().predPoints">
+                <circle [attr.cx]="p.x" [attr.cy]="p.y" r="5" fill="#f59e0b" stroke="#ffffff" stroke-width="1.5"/>
+                <text [attr.x]="p.x" [attr.y]="p.y - 12" fill="#fbbf24" font-size="10" font-weight="bold" text-anchor="middle" font-family="'Rajdhani', monospace">{{ p.val }}</text>
+              </g>
 
               <!-- Axis Months -->
-              <text x="80" y="245" fill="#94a3b8" font-size="11">Aug 2026</text>
-              <text x="240" y="245" fill="#94a3b8" font-size="11">Sep 2026</text>
-              <text x="410" y="245" fill="#94a3b8" font-size="11">Oct 2026</text>
-              <text x="580" y="245" fill="#94a3b8" font-size="11">Nov 2026 (Winter Peak)</text>
-              <text x="760" y="245" fill="#94a3b8" font-size="11">Dec 2026</text>
+              <g fill="#94a3b8" font-size="11" font-family="'Rajdhani', monospace">
+                <text x="80" y="235" text-anchor="middle">Aug 2026</text>
+                <text x="230" y="235" text-anchor="middle">Sep 2026</text>
+                <text [attr.x]="getForecastChartData().todayX" y="235" text-anchor="middle" fill="#fde047" font-weight="bold">TODAY (Oct)</text>
+                <text x="530" y="235" text-anchor="middle">Nov 2026</text>
+                <text x="680" y="235" text-anchor="middle" fill="#f87171" font-weight="bold">Dec 2026 (Peak)</text>
+                <text x="820" y="235" text-anchor="middle">Jan 2027</text>
+              </g>
             </svg>
+          </div>
+
+          <!-- Interactive Telemetry Data Strip Beneath Graph -->
+          <div class="chart-summary-strip mt-3">
+            <div class="summary-pill">
+              <span class="dot-indicator blue"></span>
+              <span>Avg Baseline: <strong>{{ getForecastChartData().baseline }} / Day</strong></span>
+            </div>
+            <div class="summary-pill">
+              <span class="dot-indicator amber"></span>
+              <span>Seasonal Surge: <strong>{{ getForecastChartData().surge }}</strong></span>
+            </div>
+            <div class="summary-pill">
+              <span class="dot-indicator green"></span>
+              <span>Strategic Reserve: <strong>{{ getForecastChartData().coverage }}</strong></span>
+            </div>
           </div>
         </div>
 
@@ -1291,42 +1513,232 @@
           <span class="badge-gold">EXPLAINABLE AI ENGINE V3</span>
         </div>
 
-        <!-- RECS LIST -->
+        <!-- Feedback Notification Toast -->
+        <div *ngIf="alertActionSuccess" class="alert-success-glass-toast mt-2">
+          <div class="toast-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="toast-svg">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+          </div>
+          <div class="toast-msg">{{ alertActionSuccess }}</div>
+          <button type="button" class="toast-dismiss" (click)="alertActionSuccess = ''">✕</button>
+        </div>
+
+        <!-- Glassmorphic Recommendations Overview Ribbon -->
+        <div class="rec-overview-ribbon mt-3">
+          <div class="rec-metric-card">
+            <span class="rec-m-lbl">ACTIVE STRATEGIC ALERTS</span>
+            <span class="rec-m-val text-gold font-mono">{{ logisticsService.alerts().length }} PENDING</span>
+            <span class="rec-m-sub">Autonomous AI Monitoring</span>
+          </div>
+          <div class="rec-metric-card">
+            <span class="rec-m-lbl">CRITICAL PRIORITY THREATS</span>
+            <span class="rec-m-val text-red font-mono">1 IMMEDIATE</span>
+            <span class="rec-m-sub text-red">Siachen - DBO Highway</span>
+          </div>
+          <div class="rec-metric-card">
+            <span class="rec-m-lbl">AI NEURAL ACCURACY</span>
+            <span class="rec-m-val text-green font-mono">96.4%</span>
+            <span class="rec-m-sub">R² = 0.982 • LSTM Ensemble</span>
+          </div>
+          <div class="rec-metric-card">
+            <span class="rec-m-lbl">REMEDIATION READINESS</span>
+            <span class="rec-m-val text-blue font-mono">100% READY</span>
+            <span class="rec-m-sub">DGOS Authorization Armed</span>
+          </div>
+        </div>
+
+        <!-- Priority Filter Pills -->
+        <div class="rec-filter-bar mt-3">
+          <span class="filter-bar-lbl">FILTER BY PRIORITY:</span>
+          <div class="filter-pill-group">
+            <button type="button" class="rec-filter-pill" [class.active]="recPriorityFilter === 'All'" (click)="setRecPriorityFilter('All')">
+              All Alerts ({{ logisticsService.alerts().length }})
+            </button>
+            <button type="button" class="rec-filter-pill pill-red" [class.active]="recPriorityFilter === 'Critical'" (click)="setRecPriorityFilter('Critical')">
+              Critical (1)
+            </button>
+            <button type="button" class="rec-filter-pill pill-orange" [class.active]="recPriorityFilter === 'High'" (click)="setRecPriorityFilter('High')">
+              High Priority (1)
+            </button>
+            <button type="button" class="rec-filter-pill pill-blue" [class.active]="recPriorityFilter === 'Medium'" (click)="setRecPriorityFilter('Medium')">
+              Medium Priority (1)
+            </button>
+          </div>
+        </div>
+
+        <!-- RECS LIST (STRUCTURED GLASSMORPHIC CARDS) -->
         <div class="recommendations-container mt-3">
-          <div *ngFor="let alt of logisticsService.alerts()" class="rec-card card-surface mb-3">
-            <div class="rec-header">
-              <div class="rec-badge-col">
-                <span class="badge-military" [class.badge-danger]="alt.severity === 'Critical'" [class.badge-gold]="alt.severity === 'High'">
-                  {{ alt.severity }} PRIORITY
+          <div *ngFor="let alt of filteredAlerts()" class="rec-glass-card mb-4" [ngClass]="'card-border-' + alt.severity.toLowerCase()">
+            
+            <!-- 1. Top HUD Classification Strip -->
+            <div class="rec-hud-strip">
+              <div class="hud-left-group">
+                <span class="badge-priority" [ngClass]="'priority-' + alt.severity.toLowerCase()">
+                  <span class="priority-pulse-dot"></span>
+                  {{ alt.severity | uppercase }} PRIORITY
                 </span>
-                <span class="rec-id font-mono">{{ alt.id }}</span>
+                <span class="rec-id-tag font-mono">#{{ alt.id }}</span>
+                <span class="rec-type-tag">{{ alt.type }}</span>
               </div>
-              <span class="rec-theater">{{ alt.theater }} • {{ alt.sector }}</span>
-            </div>
-
-            <h3 class="rec-title">{{ alt.headline }}</h3>
-            <p class="rec-details">{{ alt.details }}</p>
-
-            <div class="rec-factors-box">
-              <strong>Key Contributing Factors Identified:</strong>
-              <ul>
-                <li *ngFor="let fac of alt.contributingFactors">{{ fac }}</li>
-              </ul>
-            </div>
-
-            <div class="rec-explain-box">
-              <strong>Neural Network Reasoning & Explainability:</strong>
-              <p>{{ alt.aiExplanation }}</p>
-            </div>
-
-            <div class="rec-actions-footer">
-              <div class="action-target">
-                <strong>Recommended Action:</strong> {{ alt.recommendedAction }}
+              <div class="hud-right-group">
+                <span class="hud-timestamp">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="hud-clock-svg">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                  </svg>
+                  {{ alt.timestamp }}
+                </span>
+                <span class="hud-status-badge">AWAITING AUTHORIZATION</span>
               </div>
-              <button type="button" class="btn-army-primary" (click)="executeAlertRemedy(alt)">
-                Authorize Recommended Action
-              </button>
             </div>
+
+            <!-- 2. Location Box / Button Structure -->
+            <div class="rec-location-box mt-3">
+              <div class="loc-bubble-col">
+                <div class="loc-icon-bubble">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="loc-pin-svg">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                  </svg>
+                </div>
+                <div class="loc-text-col">
+                  <span class="loc-hud-tag">OPERATIONAL LOCATION & THEATER AXIS</span>
+                  <div class="loc-name-row">
+                    <span class="loc-theater">{{ alt.theater }}</span>
+                    <span class="loc-sep">•</span>
+                    <span class="loc-sector">{{ alt.sector }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="loc-unit-chip" *ngIf="alt.affectedUnit">
+                <span class="unit-lbl">TARGET FORMATION:</span>
+                <span class="unit-val">{{ alt.affectedUnit }}</span>
+              </div>
+            </div>
+
+            <!-- 3. Issue Box / Button Structure -->
+            <div class="rec-issue-box mt-3" [ngClass]="'issue-' + alt.severity.toLowerCase()">
+              <div class="issue-header-row">
+                <div class="issue-tag-group">
+                  <span class="issue-hazard-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="hazard-svg">
+                      <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                      <line x1="12" y1="9" x2="12" y2="13"/>
+                      <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                  </span>
+                  <span class="issue-type-name">OPERATIONAL ISSUE / THREAT INTEL</span>
+                </div>
+                <span class="issue-threat-tag">TELEMETRY FLAG</span>
+              </div>
+              
+              <h3 class="issue-headline">{{ alt.headline }}</h3>
+              
+              <div class="issue-desc-panel">
+                <p class="issue-desc-text">{{ alt.details }}</p>
+              </div>
+
+              <div class="issue-commodity-strip" *ngIf="alt.affectedSupply">
+                <span class="sup-lbl">AFFECTED COMMODITY / MATERIEL:</span>
+                <span class="sup-val">{{ alt.affectedSupply }}</span>
+              </div>
+            </div>
+
+            <!-- 4. Details & Explanation Unified Section -->
+            <div class="rec-details-explain-section mt-3">
+              <div class="section-title-strip">
+                <div class="strip-left">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="strip-svg">
+                    <rect x="4" y="4" width="16" height="16" rx="2"/>
+                    <rect x="9" y="9" width="6" height="6"/>
+                    <line x1="9" y1="1" x2="9" y2="4"/>
+                    <line x1="15" y1="1" x2="15" y2="4"/>
+                    <line x1="9" y1="20" x2="9" y2="23"/>
+                    <line x1="15" y1="20" x2="15" y2="23"/>
+                    <line x1="20" y1="9" x2="23" y2="9"/>
+                    <line x1="20" y1="14" x2="23" y2="14"/>
+                    <line x1="1" y1="9" x2="4" y2="9"/>
+                    <line x1="1" y1="14" x2="4" y2="14"/>
+                  </svg>
+                  <span class="strip-title">DETAILS & NEURAL EXPLAINABILITY AUDIT</span>
+                </div>
+                <span class="strip-badge">ARIMA-LSTM ENSEMBLE (15-YR TELEMETRY)</span>
+              </div>
+
+              <div class="details-explain-grid">
+                <!-- Left Column: Key Contributing Factors -->
+                <div class="factors-card-box">
+                  <div class="box-header">
+                    <span class="box-title">KEY CONTRIBUTING FACTORS</span>
+                    <span class="box-count">{{ alt.contributingFactors?.length || 0 }} TRIGGERS</span>
+                  </div>
+                  <div class="factors-chips-container">
+                    <div *ngFor="let fac of alt.contributingFactors; let idx = index" class="factor-chip">
+                      <span class="factor-index">#{{ idx + 1 }}</span>
+                      <span class="factor-text">{{ fac }}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Right Column: AI Reasoning & Confidence -->
+                <div class="reasoning-card-box">
+                  <div class="box-header">
+                    <span class="box-title">NEURAL NETWORK REASONING</span>
+                    <span class="ai-prob-badge">92% CONFIDENCE</span>
+                  </div>
+                  <div class="reasoning-body">
+                    <div class="confidence-bar-container">
+                      <div class="conf-labels">
+                        <span>Predictive Likelihood</span>
+                        <span class="conf-pct">92.4% PROBABILITY</span>
+                      </div>
+                      <div class="conf-progress-track">
+                        <div class="conf-progress-fill" style="width: 92%;"></div>
+                      </div>
+                    </div>
+                    <p class="ai-reasoning-para">{{ alt.aiExplanation }}</p>
+                    <div class="impact-callout" *ngIf="alt.expectedImpact">
+                      <span class="impact-tag">STRATEGIC IMPACT:</span>
+                      <span class="impact-text">{{ alt.expectedImpact }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5. Recommended Action & Remediation Deck -->
+            <div class="rec-action-deck mt-3">
+              <div class="remedy-content-row">
+                <div class="remedy-icon-box">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="remedy-svg">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <path d="M9 12l2 2 4-4"/>
+                  </svg>
+                </div>
+                <div class="remedy-text-col">
+                  <div class="remedy-header-row">
+                    <span class="remedy-title">RECOMMENDED STRATEGIC ACTION</span>
+                    <span class="remedy-urgency-tag">AUTOMATED PROTOCOL READY</span>
+                  </div>
+                  <p class="remedy-action-text">{{ alt.recommendedAction }}</p>
+                  <div class="remedy-alternatives" *ngIf="alt.alternativeActions && alt.alternativeActions.length > 0">
+                    <span class="alt-label">FALLBACK CONTINGENCY:</span>
+                    <span class="alt-chip" *ngFor="let a of alt.alternativeActions">{{ a }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="remedy-btn-col">
+                <button type="button" class="btn-authorize-remedy" (click)="executeAlertRemedy(alt)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="auth-btn-svg">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                  </svg>
+                  <span>Authorize Recommended Action</span>
+                </button>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>

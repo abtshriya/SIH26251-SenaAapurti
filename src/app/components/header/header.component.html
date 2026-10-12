@@ -44,7 +44,7 @@
 
 <!-- ================= MAIN BRAND DEFENSE HEADER ================= -->
 <header class="main-defense-header" [style.backgroundImage]="'url(' + headerBgImage() + ')'">
-  <div class="header-container">
+  <div class="header-container" [class.command-header-container]="portalMode() === 'command'">
     <!-- Left: Connected Insignia Logo & Brand Name (hover together with subtle glow) -->
     <a routerLink="/" (click)="scrollToSection('hero')" class="brand-block-link" title="SenaAapurti">
       <div class="sena-logo-wrap">
@@ -53,10 +53,13 @@
 
       <!-- Brand Title, Subtitles, Authority Badge and Tricolour Slash -->
       <div class="brand-text">
-        <h1 class="logo-title">
-          <span class="sena-part">{{ langService.t('titleSena') }}</span><span class="aapurti-part">{{
-            langService.t('titleAapurti') }}</span>
-        </h1>
+        <div class="brand-title-row">
+          <h1 class="logo-title">
+            <span class="sena-part">{{ langService.t('titleSena') }}</span><span class="aapurti-part">{{
+              langService.t('titleAapurti') }}</span>
+          </h1>
+          <span class="role-badge-c2" *ngIf="portalMode() === 'command'">COMMAND / ADMIN HQ</span>
+        </div>
 
         <!-- Contextual Subtitle by Portal Mode -->
         <p class="logo-tagline" *ngIf="portalMode() === 'public'">{{ langService.t('subtitle') }}</p>
@@ -79,8 +82,8 @@
       </div>
     </a>
 
-    <!-- Futuristic Tactical Map Web Lines Overlay (Interactive C4ISR Telemetry) -->
-    <div class="futuristic-map-web-overlay" aria-hidden="true">
+    <!-- Futuristic Tactical Map Web Lines Overlay (Interactive C4ISR Telemetry) - Hidden in Command Portal -->
+    <div *ngIf="portalMode() !== 'command'" class="futuristic-map-web-overlay" aria-hidden="true">
       <svg class="map-web-svg" viewBox="0 0 540 120" preserveAspectRatio="none" fill="none">
         <!-- Digital Grid Lines -->
         <line x1="20" y1="20" x2="520" y2="20" stroke="rgba(56, 189, 248, 0.18)" stroke-width="1"
@@ -135,10 +138,10 @@
       </svg>
     </div>
 
-    <!-- Right: Search Bar, Social Icons, National Emblem of India -->
-    <div class="header-right-zone">
-      <!-- Search Box with Saffron Button -->
-      <form class="search-form" (submit)="onSearch(); $event.preventDefault()">
+    <!-- Right: Search Bar, Social Icons, Tactical Telemetry, State Emblem of India -->
+    <div class="header-right-zone" [class.command-right-zone]="portalMode() === 'command'">
+      <!-- Search Box with Saffron Button (Public / Unit Mode) -->
+      <form class="search-form" *ngIf="portalMode() !== 'command'" (submit)="onSearch(); $event.preventDefault()">
         <div class="search-input-wrap">
           <input type="text" [(ngModel)]="searchQuery" name="searchQuery"
             [placeholder]="langService.t('searchPlaceholder')" class="header-search-input"
@@ -148,6 +151,79 @@
           </button>
         </div>
       </form>
+
+      <!-- ================= COMMAND PORTAL COMPONENTS ================= -->
+      <ng-container *ngIf="portalMode() === 'command'">
+        <!-- System Status Indicator: ASCON TACTICAL GRID -->
+        <div class="telemetry-status-box" title="Encrypted Military Data Feed Status">
+          <span class="status-dot-pulse"></span>
+          <div class="status-texts">
+            <span class="status-headline">ASCON TACTICAL GRID</span>
+            <span class="status-sub">ONLINE • DEFCON 2</span>
+          </div>
+        </div>
+
+        <!-- Notifications Bell with Live Alerts Popover -->
+        <div class="notif-wrapper">
+          <button type="button" class="btn-icon" (click)="toggleNotifications($event)" title="Live Strategic Alerts">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"/>
+            </svg>
+            <span *ngIf="unreadNotificationsCount > 0" class="notif-badge">{{ unreadNotificationsCount }}</span>
+          </button>
+
+          <!-- Dropdown Panel -->
+          <div *ngIf="showNotifications" class="notif-popover" (click)="$event.stopPropagation()">
+            <div class="notif-pop-header">
+              <h4>Live Tactical Alerts</h4>
+              <span class="badge-danger">4 ACTIVE</span>
+            </div>
+            <div class="notif-pop-list">
+              <div *ngFor="let alt of logisticsService.alerts()" class="notif-pop-item" (click)="goToAlerts()">
+                <span class="notif-sev" [class.sev-crit]="alt.severity === 'Critical'" [class.sev-high]="alt.severity === 'High'">
+                  {{ alt.severity }}
+                </span>
+                <div class="notif-pop-body">
+                  <strong>{{ alt.headline }}</strong>
+                  <span>{{ alt.timestamp }} • {{ alt.theater }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Officer Profile Identity Pill -->
+        <div class="officer-identity-pill" title="Master General of Sustenance (MGS), Army HQ">
+          <div class="officer-avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="c2-avatar-svg">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <div class="officer-meta-txt">
+            <span class="officer-name">{{ authService.currentUser()?.name || 'Lt Gen V. K. Rawat, PVSM, AVSM' }}</span>
+            <span class="officer-role">{{ authService.currentUser()?.unit || 'Master General of Sustenance (MGS), Army HQ' }}</span>
+          </div>
+        </div>
+
+        <!-- Portal Quick Jump Buttons (Public Home & Switch to Unit) in Top Header -->
+        <div class="top-header-portal-btns">
+          <a routerLink="/" class="btn-top-portal-jump home-jump-btn" title="Return to Public Website">Public Home</a>
+          <a routerLink="/unit/dashboard" class="btn-top-portal-jump unit-jump-btn" title="Switch to Unit Portal">Switch to Unit</a>
+        </div>
+
+        <!-- Settings Button -->
+        <button type="button" class="btn-settings-top" (click)="goToSettings()" title="Admin Settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="topbar-icon-svg">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+
+        <!-- Red Military Sign Out Button -->
+        <button type="button" class="btn-logout-c2" (click)="authService.logout()" title="Secure Logout">
+          Sign Out
+        </button>
+      </ng-container>
 
       <!-- Unit Station Live Selector Trigger (Visible in Unit Portal mode) -->
       <div *ngIf="portalMode() === 'unit'" class="unit-station-header-pill" (click)="toggleUnitSelector()"
@@ -199,8 +275,16 @@
 </header>
 
 <!-- ================= MAIN NAVIGATION BAR ================= -->
-<nav class="main-navbar" aria-label="Main Navigation">
-  <div class="nav-container">
+<nav class="main-navbar" aria-label="Main Navigation" *ngIf="portalMode() !== 'command'">
+  <div class="nav-container" [class.command-nav-container]="portalMode() === 'command'">
+    <!-- Command Portal Sidebar Toggle Button -->
+    <button *ngIf="portalMode() === 'command'" type="button" class="sidebar-toggle-btn command-toggle-btn"
+      (click)="toggleSidebar()" title="Toggle Tactical Modules Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+      </svg>
+    </button>
+
     <!-- Mobile Hamburger Toggle -->
     <button class="mobile-toggle" (click)="toggleMobileMenu()" aria-label="Toggle Navigation Menu">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -295,16 +379,30 @@
       </li>
     </ul>
 
-    <!-- 2. COMMAND PORTAL NAV LINKS -->
-    <ul class="nav-links portal-mode-nav" [class.open]="mobileMenuOpen" *ngIf="portalMode() === 'command'">
-      <li class="nav-item"><a routerLink="/command/dashboard" routerLinkActive="active-tab">Command Dashboard</a></li>
-      <li class="nav-item"><a routerLink="/command/units" routerLinkActive="active-tab">Unit Network</a></li>
-      <li class="nav-item"><a routerLink="/command/inventory" routerLinkActive="active-tab">National Inventory</a></li>
-      <li class="nav-item"><a routerLink="/command/forecasting" routerLinkActive="active-tab">Demand & Forecast</a></li>
-      <li class="nav-item"><a routerLink="/command/logistics" routerLinkActive="active-tab">Logistics Movement</a></li>
-      <li class="nav-item"><a routerLink="/command/intelligence" routerLinkActive="active-tab">Route Intel</a></li>
-      <li class="nav-item"><a routerLink="/command/simulation" routerLinkActive="active-tab">Simulation</a></li>
-    </ul>
+    <!-- 2. COMMAND PORTAL NAV LINKS & TACTICAL SEARCH -->
+    <div class="command-nav-group" *ngIf="portalMode() === 'command'">
+      <ul class="nav-links portal-mode-nav" [class.open]="mobileMenuOpen">
+        <li class="nav-item"><a routerLink="/command/dashboard" routerLinkActive="active-tab">Command Dashboard</a></li>
+        <li class="nav-item"><a routerLink="/command/units" routerLinkActive="active-tab">Unit Network</a></li>
+        <li class="nav-item"><a routerLink="/command/inventory" routerLinkActive="active-tab">National Inventory</a></li>
+        <li class="nav-item"><a routerLink="/command/forecasting" routerLinkActive="active-tab">Demand & Forecast</a></li>
+        <li class="nav-item"><a routerLink="/command/logistics" routerLinkActive="active-tab">Logistics Movement</a></li>
+        <li class="nav-item"><a routerLink="/command/intelligence" routerLinkActive="active-tab">Route Intel</a></li>
+        <li class="nav-item"><a routerLink="/command/simulation" routerLinkActive="active-tab">Simulation</a></li>
+      </ul>
+
+      <!-- Global Tactical Search Bar -->
+      <div class="topbar-search nav-tactical-search">
+        <svg class="search-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+            clip-rule="evenodd" />
+        </svg>
+        <input type="text" [(ngModel)]="searchQuery" name="commandNavSearch"
+          placeholder="Search units, convoys, ordnance depots, munitions..." class="search-input"
+          (keyup.enter)="onSearch()" />
+      </div>
+    </div>
 
     <!-- 3. UNIT PORTAL NAV LINKS -->
     <ul class="nav-links portal-mode-nav" [class.open]="mobileMenuOpen" *ngIf="portalMode() === 'unit'">
@@ -350,15 +448,7 @@
         </ng-template>
       </ng-container>
 
-      <!-- Command mode actions -->
-      <ng-container *ngIf="portalMode() === 'command'">
-        <div class="portal-cta-group">
-          <a routerLink="/" class="nav-portal-btn home-switch-btn" title="Return to Public Website">Public Home</a>
-          <a routerLink="/unit/dashboard" class="nav-portal-btn unit-btn" title="Switch to Unit Portal">Switch to
-            Unit</a>
-          <button class="logout-btn" (click)="authService.logout()" title="Secure Logout">Sign Out</button>
-        </div>
-      </ng-container>
+      <!-- Command mode actions: Cleanly moved to top header -->
 
       <!-- Unit mode actions -->
       <ng-container *ngIf="portalMode() === 'unit'">
@@ -382,22 +472,44 @@
   <div class="unit-modal-container" (click)="$event.stopPropagation()">
     <div class="unit-modal-header">
       <div class="modal-title-wrap">
-        <span class="modal-tag">INDIAN ARMY FORMATIONS DIRECTORY</span>
-        <h3 class="modal-title">Select Unit Station & Headquarters</h3>
-        <p class="modal-sub">Choose any operational unit across India to dynamically update the Unit Portal header
-          background and logistics telemetry.</p>
+        <span class="modal-tag">INDIAN ARMED FORCES • ALL THEATERS & COMMANDS DIRECTORY</span>
+        <h3 class="modal-title">National Units & Formations Database</h3>
+        <p class="modal-sub">Explore and activate any operational unit across all 7 Indian Army Commands, Tri-Service ANC, and Apex Headquarters.</p>
       </div>
       <button type="button" class="btn-modal-close" (click)="showUnitSelectorModal = false">✕</button>
     </div>
 
+    <!-- Command Filters Toolbar & Search -->
+    <div class="modal-filter-toolbar">
+      <div class="modal-search-wrap">
+        <svg class="search-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+        </svg>
+        <input type="text" [(ngModel)]="modalSearchQuery" placeholder="Search by unit name, station, sector, arm, or corps..." class="modal-search-input">
+      </div>
+      <div class="modal-cmd-pills">
+        <button type="button" class="cmd-pill" [class.active]="modalSelectedCommand === 'All'" (click)="modalSelectedCommand = 'All'">All Commands ({{ unitDbService.allUnits.length }})</button>
+        <button type="button" class="cmd-pill" [class.active]="modalSelectedCommand === 'Northern Command'" (click)="modalSelectedCommand = 'Northern Command'">Northern (NC)</button>
+        <button type="button" class="cmd-pill" [class.active]="modalSelectedCommand === 'Western Command'" (click)="modalSelectedCommand = 'Western Command'">Western (WC)</button>
+        <button type="button" class="cmd-pill" [class.active]="modalSelectedCommand === 'Eastern Command'" (click)="modalSelectedCommand = 'Eastern Command'">Eastern (EC)</button>
+        <button type="button" class="cmd-pill" [class.active]="modalSelectedCommand === 'Southern Command'" (click)="modalSelectedCommand = 'Southern Command'">Southern (SC)</button>
+        <button type="button" class="cmd-pill" [class.active]="modalSelectedCommand === 'South Western Command'" (click)="modalSelectedCommand = 'South Western Command'">South Western (SWC)</button>
+        <button type="button" class="cmd-pill" [class.active]="modalSelectedCommand === 'Central Command'" (click)="modalSelectedCommand = 'Central Command'">Central (CC)</button>
+        <button type="button" class="cmd-pill" [class.active]="modalSelectedCommand === 'Army Training Command'" (click)="modalSelectedCommand = 'Army Training Command'">Training (ARTRAC)</button>
+        <button type="button" class="cmd-pill" [class.active]="modalSelectedCommand === 'Andaman & Nicobar Command'" (click)="modalSelectedCommand = 'Andaman & Nicobar Command'">ANC Tri-Service</button>
+        <button type="button" class="cmd-pill" [class.active]="modalSelectedCommand === 'Army Headquarters'" (click)="modalSelectedCommand = 'Army Headquarters'">Army HQ (AHQ)</button>
+      </div>
+    </div>
+
     <div class="unit-cards-grid">
-      <div *ngFor="let unit of unitDbService.allUnits" class="unit-station-card"
+      <div *ngFor="let unit of modalFilteredUnits()" class="unit-station-card"
         [class.selected]="unitDbService.selectedUnit().id === unit.id" (click)="selectUnit(unit)">
         <div class="station-card-media" [style.backgroundImage]="'url(' + unit.bgImage + ')'">
           <span class="station-command-pill">{{ unit.command }}</span>
           <span class="station-readiness-pill">{{ unit.readiness }}% READINESS</span>
         </div>
         <div class="station-card-body">
+          <div class="station-type-tag">{{ unit.type }} • {{ unit.formation }}</div>
           <h4 class="station-name">{{ unit.name }}</h4>
           <span class="station-corps">{{ unit.corps }}</span>
           <div class="station-location-row">
@@ -407,14 +519,18 @@
             </svg>
             <span>{{ unit.station }}</span>
           </div>
+          <p class="station-sector-sub">{{ unit.sector }}</p>
           <p class="station-address">{{ unit.address }}</p>
           <div class="station-footer-meta">
-            <span class="station-pincode">PIN: {{ unit.pincode }}</span>
-            <span class="station-select-cta" *ngIf="unitDbService.selectedUnit().id !== unit.id">Activate Station
-              →</span>
+            <span class="station-officer">OC: {{ unit.officerName }}</span>
+            <span class="station-select-cta" *ngIf="unitDbService.selectedUnit().id !== unit.id">Activate Station →</span>
             <span class="station-active-badge" *ngIf="unitDbService.selectedUnit().id === unit.id">✓ ACTIVE</span>
           </div>
         </div>
+      </div>
+      <div *ngIf="modalFilteredUnits().length === 0" class="no-units-found">
+        <p>No units match the filter "{{ modalSearchQuery }}" in {{ modalSelectedCommand }}.</p>
+        <button type="button" class="btn-reset-filters" (click)="modalSearchQuery = ''; modalSelectedCommand = 'All'">Reset Filters</button>
       </div>
     </div>
   </div>

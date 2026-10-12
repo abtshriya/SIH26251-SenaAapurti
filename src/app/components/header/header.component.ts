@@ -6,6 +6,8 @@ import { LanguageService } from '../../services/language.service';
 import { ThemeService, FontSize } from '../../services/theme.service';
 import { AuthService } from '../../services/auth.service';
 import { UnitDatabaseService, ArmyUnit } from '../../services/unit-database.service';
+import { LayoutService } from '../../services/layout.service';
+import { LogisticsService } from '../../services/logistics.service';
 import { FAQ_CATEGORIES } from '../../data/faq.data';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map, filter } from 'rxjs/operators';
@@ -22,6 +24,8 @@ export class HeaderComponent {
   themeService = inject(ThemeService);
   authService = inject(AuthService);
   unitDbService = inject(UnitDatabaseService);
+  layoutService = inject(LayoutService);
+  logisticsService = inject(LogisticsService);
   router = inject(Router);
 
   constructor() {
@@ -31,6 +35,7 @@ export class HeaderComponent {
       this.faqDropdownOpen = false;
       this.importantLinksOpen = false;
       this.mobileMenuOpen = false;
+      this.showNotifications = false;
     });
   }
 
@@ -38,9 +43,25 @@ export class HeaderComponent {
   showPortalMenu = false;
   mobileMenuOpen = false;
   showUnitSelectorModal = false;
+  modalSearchQuery = '';
+  modalSelectedCommand = 'All';
   faqDropdownOpen = false;
   faqCategories = FAQ_CATEGORIES;
   importantLinksOpen = false;
+  showNotifications = false;
+  unreadNotificationsCount = 4;
+
+  modalFilteredUnits(): ArmyUnit[] {
+    return this.unitDbService.allUnits.filter(u => {
+      const matchCmd = this.modalSelectedCommand === 'All' || u.command.toLowerCase().includes(this.modalSelectedCommand.toLowerCase());
+      const matchSearch = !this.modalSearchQuery || 
+        u.name.toLowerCase().includes(this.modalSearchQuery.toLowerCase()) ||
+        u.station.toLowerCase().includes(this.modalSearchQuery.toLowerCase()) ||
+        u.sector.toLowerCase().includes(this.modalSearchQuery.toLowerCase()) ||
+        u.corps.toLowerCase().includes(this.modalSearchQuery.toLowerCase());
+      return matchCmd && matchSearch;
+    });
+  }
   importantLinks = [
     { title: 'Indian Army', url: 'https://indianarmy.nic.in' },
     { title: 'Army Ordnance Corps (AOC)', url: 'https://aocrecruitment.gov.in/' },
@@ -181,6 +202,32 @@ export class HeaderComponent {
     }, 120);
   }
 
+  toggleSidebar() {
+    this.layoutService.toggleSidebar();
+  }
+
+  toggleNotifications(event?: Event) {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    this.showNotifications = !this.showNotifications;
+  }
+
+  closeNotifications() {
+    this.showNotifications = false;
+  }
+
+  goToAlerts() {
+    this.showNotifications = false;
+    this.router.navigate(['/command', 'recommendations']);
+  }
+
+  goToSettings() {
+    this.showNotifications = false;
+    this.router.navigate(['/command', 'settings']);
+  }
+
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
@@ -190,11 +237,16 @@ export class HeaderComponent {
     if (!target.closest('.links-dropdown-item')) {
       this.importantLinksOpen = false;
     }
+    if (!target.closest('.notif-wrapper')) {
+      this.showNotifications = false;
+    }
   }
 
   @HostListener('document:keydown.escape')
   onEscapeKey() {
     this.faqDropdownOpen = false;
     this.importantLinksOpen = false;
+    this.showNotifications = false;
   }
 }
+

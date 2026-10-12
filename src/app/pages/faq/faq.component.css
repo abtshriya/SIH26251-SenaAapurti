@@ -273,22 +273,27 @@
   align-items: start;
 }
 
-/* ================= SIDEBAR CATEGORY CARD ================= */
+/* ================= SIDEBAR CATEGORY CARD (GLASSMORPHISM) ================= */
 .sidebar-category-card {
-  background: #ffffff;
-  border: 1px solid #cbd5e1;
-  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px) saturate(190%);
+  -webkit-backdrop-filter: blur(20px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 12px;
   padding: 0;
-  box-shadow: 0 4px 12px -2px rgba(17, 34, 23, 0.08);
+  box-shadow: 0 10px 36px -4px rgba(17, 34, 23, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.95);
   position: sticky;
   top: 76px;
   overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .sidebar-header {
   position: relative;
   padding: 16px 20px 14px;
-  background: #f8fafc;
+  background: rgba(248, 250, 252, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 2px solid var(--army-800);
 }
 
@@ -331,21 +336,24 @@
   text-align: left;
   cursor: pointer;
   border-left: 4px solid transparent;
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
 }
 
 .cat-nav-btn:hover {
-  background-color: #f1f5f9;
+  background-color: rgba(241, 245, 249, 0.85);
   color: #0f172a;
+  transform: translateX(3px);
 }
 
 .cat-nav-btn.active {
-  background: linear-gradient(90deg, #162a1c 0%, #1e3825 100%);
+  background: linear-gradient(90deg, rgba(22, 42, 28, 0.94) 0%, rgba(30, 56, 37, 0.94) 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   color: #ffffff;
   border-left-color: #ea580c;
   font-weight: 700;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .cat-icon {
@@ -390,9 +398,12 @@
 .sidebar-support-card {
   margin: 16px;
   padding: 16px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
+  background: rgba(248, 250, 252, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.95);
 }
 
 .support-card-head {

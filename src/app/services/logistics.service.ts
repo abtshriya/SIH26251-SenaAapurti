@@ -1,4 +1,5 @@
 import { Injectable, signal } from '@angular/core';
+import { ALL_INDIAN_ARMY_UNITS } from '../data/indian-army-commands-database';
 
 export interface ConvoyItem {
   id: string;
@@ -55,8 +56,8 @@ export interface StrategicAlert {
 export interface UnitNetworkItem {
   id: string;
   name: string;
-  type: 'Infantry' | 'Mechanised' | 'Armoured' | 'Artillery' | 'Air Defence' | 'Engineers';
-  region: 'Northern Command' | 'Eastern Command' | 'Western Command' | 'Southern Command' | 'South Western' | 'Central Command';
+  type: 'Infantry' | 'Mechanised' | 'Armoured' | 'Artillery' | 'Air Defence' | 'Engineers' | 'Signals' | 'Special Forces' | 'Aviation' | 'Ordnance' | 'ASC' | 'EME';
+  region: string;
   location: string;
   personnel: number;
   readiness: number;
@@ -216,114 +217,24 @@ export class LogisticsService {
     }
   ]);
 
-  // Unit Network Database
-  unitNetwork = signal<UnitNetworkItem[]>([
-    {
-      id: 'UN-14RM-LEH',
-      name: '14 RAJPUT (MECHANISED)',
-      type: 'Mechanised',
-      region: 'Northern Command',
-      location: 'Forward Defended Locality - Leh Sector (14 Corps)',
-      personnel: 840,
-      readiness: 97.4,
-      inventoryHealth: 'Healthy',
-      riskLevel: 'Moderate',
-      pendingRequests: 2,
-      onlineStatus: 'Online',
-      dos: 48,
-      commander: 'Col R. S. Shekhawat'
-    },
-    {
-      id: 'UN-03PF-SIA',
-      name: '3 PARA (SPECIAL FORCES)',
-      type: 'Infantry',
-      region: 'Northern Command',
-      location: 'Siachen Glacier Base Camp (Partapur)',
-      personnel: 620,
-      readiness: 98.6,
-      inventoryHealth: 'Healthy',
-      riskLevel: 'High',
-      pendingRequests: 1,
-      onlineStatus: 'Online',
-      dos: 52,
-      commander: 'Col Vikramaditya Katoch, SC'
-    },
-    {
-      id: 'UN-19AR-KRG',
-      name: '19 ARTILLERY REGIMENT',
-      type: 'Artillery',
-      region: 'Northern Command',
-      location: 'Drass-Kargil High Altitude Gun Positions',
-      personnel: 710,
-      readiness: 96.2,
-      inventoryHealth: 'Warning',
-      riskLevel: 'Moderate',
-      pendingRequests: 1,
-      onlineStatus: 'Online',
-      dos: 34,
-      commander: 'Col Anupam Trivedi'
-    },
-    {
-      id: 'UN-08GAR-TWN',
-      name: '8 GARHWAL RIFLES',
-      type: 'Infantry',
-      region: 'Eastern Command',
-      location: 'Tawang Sector (4 Corps)',
-      personnel: 890,
-      readiness: 95.8,
-      inventoryHealth: 'Healthy',
-      riskLevel: 'Moderate',
-      pendingRequests: 0,
-      onlineStatus: 'Online',
-      dos: 45,
-      commander: 'Col D. S. Negi'
-    },
-    {
-      id: 'UN-02AC-DES',
-      name: '2 ARMOURED REGIMENT (DESERT)',
-      type: 'Armoured',
-      region: 'Southern Command',
-      location: 'Jaisalmer Strike Sector (12 Corps)',
-      personnel: 650,
-      readiness: 98.1,
-      inventoryHealth: 'Healthy',
-      riskLevel: 'Low',
-      pendingRequests: 0,
-      onlineStatus: 'Online',
-      dos: 60,
-      commander: 'Col Baljit Singh Dhillon'
-    },
-    {
-      id: 'UN-07SUL-KUP',
-      name: '7 SIKH LIGHT INFANTRY',
-      type: 'Infantry',
-      region: 'Northern Command',
-      location: 'Kupwara LC Forward Posts (15 Corps)',
-      personnel: 830,
-      readiness: 94.5,
-      inventoryHealth: 'Warning',
-      riskLevel: 'High',
-      pendingRequests: 2,
-      onlineStatus: 'SATCOM Only',
-      dos: 29,
-      commander: 'Col Gurpreet S. Virk'
-    },
-    {
-      id: 'UN-11EN-SIL',
-      name: '11 ENGINEER REGIMENT (BOMBAY SAPPERS)',
-      type: 'Engineers',
-      region: 'Eastern Command',
-      location: 'Siliguri Corridor Transit Node',
-      personnel: 760,
-      readiness: 99.0,
-      inventoryHealth: 'Healthy',
-      riskLevel: 'Low',
-      pendingRequests: 0,
-      onlineStatus: 'Online',
-      dos: 70,
-      commander: 'Col M. K. Pillai'
-    }
-  ]);
+  // Comprehensive National Unit Network across all Commands of India
+  unitNetwork = signal<UnitNetworkItem[]>(
+    ALL_INDIAN_ARMY_UNITS.map(u => ({
+      id: u.id,
+      name: u.name,
+      type: u.type,
+      region: u.command,
+      location: `${u.station} • ${u.sector}`,
+      personnel: u.personnel,
+      readiness: u.readiness,
+      inventoryHealth: u.inventoryHealth,
+      riskLevel: u.riskLevel,
+      pendingRequests: u.activeIndents,
+      onlineStatus: u.onlineStatus,
+      dos: u.daysOfSupply,
+      commander: u.commanderRankName || u.officerName
+    }))
+  );
 
   // National Inventory Catalog
   inventoryCatalog = signal<InventoryItem[]>([

@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, inject } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, inject, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -35,7 +35,8 @@ export type CommandTab =
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './command-dashboard.component.html',
-  styleUrl: './command-dashboard.component.css'
+  styleUrl: './command-dashboard.component.css',
+  encapsulation: ViewEncapsulation.None
 })
 export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   authService = inject(AuthService);
@@ -71,7 +72,7 @@ export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestr
   mapLayerRisks = true;
   alertActionSuccess = '';
 
-  currentBasemap: 'topo' | 'imagery' | 'dark' | 'osm' = 'topo';
+  currentBasemap: 'dark' | 'imagery' | 'dark_canvas' | 'topo' = 'dark';
   private map: any = null;
   private basemapTileLayer: any = null;
   private routesLayer: any = null;
@@ -187,6 +188,31 @@ export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestr
     'Monsoon Landslide & High-Altitude Bridge Washout (Joshimath Axis)',
     'Simultaneous Dual-Theater Defense Mobilization (Northern + Eastern Commands)'
   ];
+
+  simPresetChips = [
+    { label: '❄️ Zojila Avalanche', query: 'Zojila' },
+    { label: '⚔️ LAC Escalation', query: 'Sela' },
+    { label: '🌪️ Desert Sandstorm', query: 'Desert' },
+    { label: '🏔️ Siachen Picket', query: 'Siachen' },
+    { label: '🚧 Bridge Washout', query: 'Washout' }
+  ];
+
+  simMitigationSuccess = '';
+
+  selectPresetChip(query: string) {
+    const match = this.scenarios.find(s => s.toLowerCase().includes(query.toLowerCase()));
+    if (match) {
+      this.selectedScenario = match;
+      this.runScenarioSimulation();
+    }
+  }
+
+  authorizeSimMitigation() {
+    this.simMitigationSuccess = 'Tactical Mitigation Authorized: C-130J sorties dispatched & reserve buffer released with ASCON signature.';
+    setTimeout(() => {
+      this.simMitigationSuccess = '';
+    }, 6000);
+  }
 
   getForecastChartData() {
     const cat = this.forecastCategory;
@@ -378,7 +404,7 @@ export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestr
     );
   }
 
-  setBasemap(type: 'topo' | 'imagery' | 'dark' | 'osm') {
+  setBasemap(type: 'dark' | 'imagery' | 'dark_canvas' | 'topo') {
     if (!this.map) return;
     this.currentBasemap = type;
     if (this.basemapTileLayer) {
@@ -386,31 +412,36 @@ export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestr
     }
 
     let tileUrl = '';
-    let maxZoom = 18;
+    let maxZoom = 19;
     let attribution = '';
+    let subdomains: string[] | string = 'abc';
 
-    if (type === 'topo') {
-      // Esri World Topo Map: Rich mountain contours, relief shading, elevations, rivers, borders, zero API keys
-      tileUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}';
-      attribution = 'Esri World Topo Map | Strategic Logistics C2 Grid';
+    if (type === 'dark') {
+      // CartoDB Dark Matter: High-contrast military tactical dark backdrop with luminous roads & boundaries, zero API keys
+      tileUrl = 'https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png';
+      attribution = '&copy; OpenStreetMap contributors &copy; CARTO | ASCON Tactical Dark';
+      subdomains = 'abcd';
+      maxZoom = 20;
     } else if (type === 'imagery') {
       // Esri World Imagery: Real satellite terrain photography, zero API keys
       tileUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
       attribution = 'Esri World Imagery | High-Res Earth Observation';
-    } else if (type === 'dark') {
+      maxZoom = 18;
+    } else if (type === 'dark_canvas') {
       // Esri Dark Gray Canvas: High-contrast military tactical dark backdrop, zero API keys
       tileUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}';
       attribution = 'Esri Dark Canvas | ASCON Defense Command';
       maxZoom = 16;
     } else {
-      // OpenStreetMap: High-fidelity street & topography, zero API keys
-      tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-      attribution = 'OpenStreetMap Contributors';
-      maxZoom = 19;
+      // Esri World Topo Map: Rich mountain contours & relief elevations
+      tileUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}';
+      attribution = 'Esri World Topo Map | Strategic Logistics C2 Grid';
+      maxZoom = 18;
     }
 
     this.basemapTileLayer = L.tileLayer(tileUrl, {
       maxZoom,
+      subdomains,
       attribution
     }).addTo(this.map);
   }
@@ -536,6 +567,8 @@ export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestr
       const isExtreme = this.isExtremeArea(unit);
       const dos = unit.daysOfSupply;
       const color = dos >= 45 ? 'green' : (dos >= 20 ? 'yellow' : 'red');
+      const fillColor = color === 'green' ? '#16a34a' : (color === 'yellow' ? '#ca8a04' : '#dc2626');
+      const strokeColor = color === 'green' ? '#86efac' : (color === 'yellow' ? '#fef08a' : '#fca5a5');
 
       let iconHtml = '';
       if (isExtreme) {
@@ -545,9 +578,9 @@ export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestr
             <div class="buzzing-hazard-triangle ${color}"></div>
             <div class="unit-triangle-shape ${color}">
               <svg viewBox="0 0 24 24" class="hazard-tri-svg">
-                <polygon points="12,2 23,21 1,21" />
+                <polygon points="12,2 23,21 1,21" fill="${fillColor}" stroke="${strokeColor}" stroke-width="2" />
               </svg>
-              <span class="tri-symbol">▲</span>
+              <span class="tri-symbol" style="color: #ffffff;">▲</span>
             </div>
             <div class="unit-quick-label">${unit.station.split(',')[0]}</div>
           </div>
@@ -558,7 +591,7 @@ export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestr
           <div class="unit-marker-wrap unit-circle-wrap ${color}" title="${unit.name} (${dos} DOS • Sufficient/Operational)">
             <div class="buzzing-radar-ring ring-1 ${color}"></div>
             <div class="buzzing-radar-ring ring-2 ${color}"></div>
-            <div class="unit-circle-core ${color}">
+            <div class="unit-circle-core ${color}" style="background-color: ${fillColor}; border: 2px solid ${strokeColor};">
               <span class="core-dot"></span>
             </div>
             <div class="unit-quick-label">${unit.station.split(',')[0]}</div>

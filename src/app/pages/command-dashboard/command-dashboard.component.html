@@ -234,169 +234,171 @@
           </div>
         </div>
 
-        <!-- GRID: MAP + NATIONAL SUPPLY HEALTH -->
+        <!-- MASTER 2-COLUMN DASHBOARD GRID -->
         <div class="dash-2col-layout mt-4">
-          <!-- INDIA LOGISTICS MAP -->
-          <div class="card-surface map-panel">
-            <div class="panel-header-between">
-              <div>
-                <h3 class="panel-heading">India Military Logistics Map</h3>
-                <span class="panel-hint">Live strategic deployment corridors, formation telemetry & convoy movement</span>
-              </div>
-              <div class="map-controls-toolbar">
-                <div class="basemap-selector-group">
-                  <span class="toolbar-label">TERRAIN:</span>
-                  <button type="button" class="basemap-btn" [class.active]="currentBasemap === 'topo'" (click)="setBasemap('topo')" title="Topographic Mountain Relief & Elevations (Zero API Keys)">Topographic</button>
-                  <button type="button" class="basemap-btn" [class.active]="currentBasemap === 'imagery'" (click)="setBasemap('imagery')" title="Satellite Terrain Photography (Zero API Keys)">Satellite</button>
-                  <button type="button" class="basemap-btn" [class.active]="currentBasemap === 'dark'" (click)="setBasemap('dark')" title="Tactical Military Dark Canvas (Zero API Keys)">Dark Canvas</button>
-                  <button type="button" class="basemap-btn" [class.active]="currentBasemap === 'osm'" (click)="setBasemap('osm')" title="OpenStreetMap Topography (Zero API Keys)">Streets</button>
+          <!-- LEFT COLUMN: MAP + CRITICAL ALERTS -->
+          <div class="dash-col-left">
+            <!-- INDIA LOGISTICS MAP -->
+            <div class="card-surface map-panel">
+              <div class="panel-header-between">
+                <div>
+                  <h3 class="panel-heading">India Military Logistics Map</h3>
+                  <span class="panel-hint">Live strategic deployment corridors, formation telemetry & convoy movement</span>
                 </div>
-                <div class="map-layer-toggles">
-                  <label class="toggle-pill" [class.active]="mapLayerRoutes">
-                    <input type="checkbox" [(ngModel)]="mapLayerRoutes" (change)="toggleMapLayer('routes')"> Routes
-                  </label>
-                  <label class="toggle-pill" [class.active]="mapLayerConvoys">
-                    <input type="checkbox" [(ngModel)]="mapLayerConvoys" (change)="toggleMapLayer('convoys')"> Convoys
-                  </label>
-                  <label class="toggle-pill" [class.active]="mapLayerWeather">
-                    <input type="checkbox" [(ngModel)]="mapLayerWeather" (change)="toggleMapLayer('weather')"> Weather
-                  </label>
-                  <label class="toggle-pill" [class.active]="mapLayerRisks">
-                    <input type="checkbox" [(ngModel)]="mapLayerRisks" (change)="toggleMapLayer('risks')"> Risk Zones
-                  </label>
+                <div class="map-controls-toolbar">
+                  <div class="basemap-selector-group">
+                    <span class="toolbar-label">TERRAIN:</span>
+                    <button type="button" class="basemap-btn" [class.active]="currentBasemap === 'dark'" (click)="setBasemap('dark')" title="Tactical Military Dark Matter (Zero API Keys)">Tactical Dark</button>
+                    <button type="button" class="basemap-btn" [class.active]="currentBasemap === 'imagery'" (click)="setBasemap('imagery')" title="Satellite Terrain Photography (Zero API Keys)">Satellite</button>
+                    <button type="button" class="basemap-btn" [class.active]="currentBasemap === 'dark_canvas'" (click)="setBasemap('dark_canvas')" title="Esri Dark Gray Canvas (Zero API Keys)">Dark Canvas</button>
+                    <button type="button" class="basemap-btn" [class.active]="currentBasemap === 'topo'" (click)="setBasemap('topo')" title="Topographic Mountain Relief & Elevations (Zero API Keys)">Topographic</button>
+                  </div>
+                  <div class="map-layer-toggles">
+                    <label class="toggle-pill" [class.active]="mapLayerRoutes">
+                      <input type="checkbox" [(ngModel)]="mapLayerRoutes" (change)="toggleMapLayer('routes')"> Routes
+                    </label>
+                    <label class="toggle-pill" [class.active]="mapLayerConvoys">
+                      <input type="checkbox" [(ngModel)]="mapLayerConvoys" (change)="toggleMapLayer('convoys')"> Convoys
+                    </label>
+                    <label class="toggle-pill" [class.active]="mapLayerWeather">
+                      <input type="checkbox" [(ngModel)]="mapLayerWeather" (change)="toggleMapLayer('weather')"> Weather
+                    </label>
+                    <label class="toggle-pill" [class.active]="mapLayerRisks">
+                      <input type="checkbox" [(ngModel)]="mapLayerRisks" (change)="toggleMapLayer('risks')"> Risk Zones
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Interactive Enlarged Military Leaflet Map API -->
+              <div class="military-map-container">
+                <div id="indianLogisticsMap" class="military-leaflet-map"></div>
+
+                <!-- Map Legend Overlay -->
+                <div class="map-legend-overlay">
+                  <div class="legend-item"><span class="legend-symbol blue-star">★</span> HQ Commands (Blue)</div>
+                  <div class="legend-item"><span class="legend-circle green"></span> Sufficient (>45 DOS)</div>
+                  <div class="legend-item"><span class="legend-circle yellow"></span> Depleting (20-45 DOS)</div>
+                  <div class="legend-item"><span class="legend-circle red"></span> Critical (&lt;20 DOS)</div>
+                  <div class="legend-item"><span class="legend-triangle">▲</span> Extreme Frontier</div>
                 </div>
               </div>
             </div>
 
-            <!-- Interactive Enlarged Military Leaflet Map API -->
-            <div class="military-map-container">
-              <div id="indianLogisticsMap" class="military-leaflet-map"></div>
-
-              <!-- Map Legend Overlay -->
-              <div class="map-legend-overlay">
-                <div class="legend-item"><span class="legend-symbol blue-star">★</span> HQ Commands (Blue)</div>
-                <div class="legend-item"><span class="legend-circle green"></span> Sufficient (>45 DOS)</div>
-                <div class="legend-item"><span class="legend-circle yellow"></span> Depleting (20-45 DOS)</div>
-                <div class="legend-item"><span class="legend-circle red"></span> Critical (&lt;20 DOS)</div>
-                <div class="legend-item"><span class="legend-triangle">▲</span> Extreme Frontier</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- NATIONAL SUPPLY HEALTH -->
-          <div class="card-surface health-panel">
-            <h3 class="panel-heading">National Supply Health & Stock Echelon</h3>
-            <span class="panel-hint">Aggregated posture across all Strategic Central Ordnance Depots</span>
-
-            <div class="health-breakdown-list mt-3">
-              <div class="health-item">
-                <div class="health-row-head">
-                  <span class="health-name text-green">● Healthy (> 45 Days DOS)</span>
-                  <span class="health-pct font-mono">82.4%</span>
-                </div>
-                <div class="progress-bar-wrap">
-                  <div class="progress-fill fill-green" style="--target-width: 82.4%; width: 82.4%;"></div>
-                </div>
+            <!-- CRITICAL ALERTS -->
+            <div class="card-surface alerts-panel">
+              <div class="panel-header-between">
+                <h3 class="panel-heading">Critical Logistics Alerts ({{ logisticsService.alerts().length }})</h3>
+                <span class="badge-danger">ACTION REQUIRED</span>
               </div>
 
-              <div class="health-item">
-                <div class="health-row-head">
-                  <span class="health-name text-amber">● Warning (20 - 45 Days DOS)</span>
-                  <span class="health-pct font-mono">11.6%</span>
-                </div>
-                <div class="progress-bar-wrap">
-                  <div class="progress-fill fill-amber" style="--target-width: 11.6%; width: 11.6%;"></div>
-                </div>
-              </div>
-
-              <div class="health-item">
-                <div class="health-row-head">
-                  <span class="health-name text-red">● Critical (10 - 20 Days DOS)</span>
-                  <span class="health-pct font-mono">4.2%</span>
-                </div>
-                <div class="progress-bar-wrap">
-                  <div class="progress-fill fill-red" style="--target-width: 4.2%; width: 4.2%;"></div>
-                </div>
-              </div>
-
-              <div class="health-item">
-                <div class="health-row-head">
-                  <span class="health-name text-red">● Stockout Risk (&lt; 10 Days)</span>
-                  <span class="health-pct font-mono">1.8%</span>
-                </div>
-                <div class="progress-bar-wrap">
-                  <div class="progress-fill fill-red" style="--target-width: 1.8%; width: 1.8%;"></div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Strategic Reserves By Class -->
-            <h4 class="subpanel-title mt-4">Buffer Coverage by Defense Class:</h4>
-            <div class="class-reserves-grid">
-              <div class="reserve-box">
-                <span class="r-class">Class I (Rations)</span>
-                <span class="r-metric text-green">180 DOS</span>
-                <span class="r-note">100% Pre-winter stocked</span>
-              </div>
-              <div class="reserve-box">
-                <span class="r-class">Class III (POL)</span>
-                <span class="r-metric text-green">62 DOS</span>
-                <span class="r-note">Sub-zero grades sealed</span>
-              </div>
-              <div class="reserve-box">
-                <span class="r-class">Class V (Munitions)</span>
-                <span class="r-metric text-green">42 DOF</span>
-                <span class="r-note">Forward dumps pre-positioned</span>
-              </div>
-              <div class="reserve-box">
-                <span class="r-class">Class IX (Spares)</span>
-                <span class="r-metric text-amber">26 DOS</span>
-                <span class="r-note">T-90 & BMP-II under replenish</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ROW: CRITICAL ALERTS + AI RECOMMENDATIONS -->
-        <div class="dash-2col-layout mt-4">
-          <!-- CRITICAL ALERTS -->
-          <div class="card-surface alerts-panel">
-            <div class="panel-header-between">
-              <h3 class="panel-heading">Critical Logistics Alerts ({{ logisticsService.alerts().length }})</h3>
-              <span class="badge-danger">ACTION REQUIRED</span>
-            </div>
-
-            <div class="alerts-feed-list mt-3">
-              <div
-                *ngFor="let alt of logisticsService.alerts()"
-                class="alert-entry-card"
-                [class.border-red]="alt.severity === 'Critical'"
-                [class.border-amber]="alt.severity === 'High'"
-              >
-                <div class="alt-top-row">
-                  <span class="alt-type-badge">{{ alt.type }}</span>
-                  <span class="alt-sev-pill" [class.bg-red]="alt.severity === 'Critical'">{{ alt.severity }}</span>
-                  <span class="alt-theater">{{ alt.theater }} • {{ alt.sector }}</span>
-                </div>
-                <h4 class="alt-headline">{{ alt.headline }}</h4>
-                <p class="alt-details">{{ alt.details }}</p>
-                <div class="alt-action-box">
-                  <strong>Recommended Action:</strong> {{ alt.recommendedAction }}
-                </div>
-                <div class="alt-btn-row">
-                  <button type="button" class="btn-army-sm" (click)="executeAlertRemedy(alt)">
-                    Authorize Suggested Action
-                  </button>
-                  <button type="button" class="btn-outline-sm" (click)="setTab('recommendations')">
-                    View Explanation Panel
-                  </button>
+              <div class="alerts-feed-list mt-3">
+                <div
+                  *ngFor="let alt of logisticsService.alerts()"
+                  class="alert-entry-card"
+                  [class.border-red]="alt.severity === 'Critical'"
+                  [class.border-amber]="alt.severity === 'High'"
+                >
+                  <div class="alt-top-row">
+                    <span class="alt-type-badge">{{ alt.type }}</span>
+                    <span class="alt-sev-pill" [class.bg-red]="alt.severity === 'Critical'">{{ alt.severity }}</span>
+                    <span class="alt-theater">{{ alt.theater }} • {{ alt.sector }}</span>
+                  </div>
+                  <h4 class="alt-headline">{{ alt.headline }}</h4>
+                  <p class="alt-details">{{ alt.details }}</p>
+                  <div class="alt-action-box">
+                    <strong>Recommended Action:</strong> {{ alt.recommendedAction }}
+                  </div>
+                  <div class="alt-btn-row">
+                    <button type="button" class="btn-army-sm" (click)="executeAlertRemedy(alt)">
+                      Authorize Suggested Action
+                    </button>
+                    <button type="button" class="btn-outline-sm" (click)="setTab('recommendations')">
+                      View Explanation Panel
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- NATIONAL DEMAND FORECAST & RECENT ACTIVITY -->
-          <div class="card-surface forecast-panel">
+          <!-- RIGHT COLUMN: NATIONAL SUPPLY HEALTH + DEMAND FORECAST -->
+          <div class="dash-col-right">
+            <!-- NATIONAL SUPPLY HEALTH -->
+            <div class="card-surface health-panel">
+              <h3 class="panel-heading">National Supply Health & Stock Echelon</h3>
+              <span class="panel-hint">Aggregated posture across all Strategic Central Ordnance Depots</span>
+
+              <div class="health-breakdown-list mt-3">
+                <div class="health-item">
+                  <div class="health-row-head">
+                    <span class="health-name text-green">● Healthy (> 45 Days DOS)</span>
+                    <span class="health-pct font-mono">82.4%</span>
+                  </div>
+                  <div class="progress-bar-wrap">
+                    <div class="progress-fill fill-green" style="--target-width: 82.4%; width: 82.4%;"></div>
+                  </div>
+                </div>
+
+                <div class="health-item">
+                  <div class="health-row-head">
+                    <span class="health-name text-amber">● Warning (20 - 45 Days DOS)</span>
+                    <span class="health-pct font-mono">11.6%</span>
+                  </div>
+                  <div class="progress-bar-wrap">
+                    <div class="progress-fill fill-amber" style="--target-width: 11.6%; width: 11.6%;"></div>
+                  </div>
+                </div>
+
+                <div class="health-item">
+                  <div class="health-row-head">
+                    <span class="health-name text-red">● Critical (10 - 20 Days DOS)</span>
+                    <span class="health-pct font-mono">4.2%</span>
+                  </div>
+                  <div class="progress-bar-wrap">
+                    <div class="progress-fill fill-red" style="--target-width: 4.2%; width: 4.2%;"></div>
+                  </div>
+                </div>
+
+                <div class="health-item">
+                  <div class="health-row-head">
+                    <span class="health-name text-red">● Stockout Risk (&lt; 10 Days)</span>
+                    <span class="health-pct font-mono">1.8%</span>
+                  </div>
+                  <div class="progress-bar-wrap">
+                    <div class="progress-fill fill-red" style="--target-width: 1.8%; width: 1.8%;"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Strategic Reserves By Class -->
+              <h4 class="subpanel-title mt-4">Buffer Coverage by Defense Class:</h4>
+              <div class="class-reserves-grid">
+                <div class="reserve-box">
+                  <span class="r-class">Class I (Rations)</span>
+                  <span class="r-metric text-green">180 DOS</span>
+                  <span class="r-note">100% Pre-winter stocked</span>
+                </div>
+                <div class="reserve-box">
+                  <span class="r-class">Class III (POL)</span>
+                  <span class="r-metric text-green">62 DOS</span>
+                  <span class="r-note">Sub-zero grades sealed</span>
+                </div>
+                <div class="reserve-box">
+                  <span class="r-class">Class V (Munitions)</span>
+                  <span class="r-metric text-green">42 DOF</span>
+                  <span class="r-note">Forward dumps pre-positioned</span>
+                </div>
+                <div class="reserve-box">
+                  <span class="r-class">Class IX (Spares)</span>
+                  <span class="r-metric text-amber">26 DOS</span>
+                  <span class="r-note">T-90 & BMP-II under replenish</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- NATIONAL DEMAND FORECAST & RECENT ACTIVITY -->
+            <div class="card-surface forecast-panel">
             <div class="panel-header-between">
               <div>
                 <h3 class="panel-heading">National Demand Forecast & Telemetry Activity</h3>
@@ -607,7 +609,7 @@
             </div>
 
             <!-- RECENT TACTICAL ACTIVITY FEED (NEAT GLASSMORPHIC CARDS WITHOUT EMOJIS) -->
-            <div class="act-header-between mt-4">
+            <div class="act-header-between mt-3">
               <h4 class="subpanel-title">Recent Tactical Activity & Telemetry Feed</h4>
               <span class="badge-gold">ENCRYPTED MILITARY LOG</span>
             </div>
@@ -709,7 +711,8 @@
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
       <!-- ================= 1.2 UNIT NETWORK ================= -->
       <section *ngIf="activeTab === 'units'" class="c2-tab-content">
@@ -1376,36 +1379,36 @@
           <table class="c2-table">
             <thead>
               <tr>
-                <th>Convoy ID</th>
-                <th>Callsign</th>
-                <th>Origin Depot</th>
-                <th>Destination</th>
-                <th>Supply Cargo</th>
-                <th>Vehicles</th>
-                <th>Tonnage</th>
-                <th>Departure</th>
-                <th>ETA</th>
-                <th>Status</th>
-                <th>Actions</th>
+                <th class="text-nowrap">Convoy ID</th>
+                <th class="text-nowrap">Callsign</th>
+                <th class="text-nowrap">Origin Depot</th>
+                <th class="text-nowrap">Destination</th>
+                <th class="text-nowrap">Supply Cargo</th>
+                <th class="text-nowrap">Vehicles</th>
+                <th class="text-nowrap">Tonnage</th>
+                <th class="text-nowrap">Departure</th>
+                <th class="text-nowrap">ETA</th>
+                <th class="text-nowrap">Status</th>
+                <th class="text-nowrap">Actions</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let c of logisticsService.convoys()">
-                <td class="font-mono text-gold font-bold">{{ c.id }}</td>
-                <td><strong>{{ c.callsign }}</strong></td>
+                <td class="font-mono text-gold font-bold text-nowrap">{{ c.id }}</td>
+                <td class="text-nowrap"><strong>{{ c.callsign }}</strong></td>
                 <td>{{ c.source }}</td>
                 <td>{{ c.destination }}</td>
-                <td><span class="badge-military">{{ c.cargoType }}</span></td>
-                <td>{{ c.vehiclesCount }} Trucks</td>
-                <td>{{ c.tonnage }} T</td>
-                <td>{{ c.departureTime }}</td>
-                <td class="text-green font-bold">{{ c.eta }}</td>
-                <td>
+                <td class="text-nowrap"><span class="badge-military">{{ c.cargoType }}</span></td>
+                <td class="text-nowrap">{{ c.vehiclesCount }} Trucks</td>
+                <td class="text-nowrap">{{ c.tonnage }} T</td>
+                <td class="text-nowrap">{{ c.departureTime }}</td>
+                <td class="text-green font-bold text-nowrap">{{ c.eta }}</td>
+                <td class="text-nowrap">
                   <span class="badge-status" [class.badge-success]="c.status === 'In-Transit'" [class.badge-danger]="c.status === 'Delayed'" [class.badge-gold]="c.status === 'Rerouted'">
                     {{ c.status }}
                   </span>
                 </td>
-                <td>
+                <td class="text-nowrap">
                   <div class="btn-group-sm">
                     <button type="button" class="btn-inspect" (click)="inspectConvoy(c)">Inspect</button>
                     <button *ngIf="c.riskLevel === 'High'" type="button" class="btn-danger-sm" (click)="triggerReroute(c)">Reroute</button>
@@ -1756,83 +1759,272 @@
         <div class="sim-grid-layout mt-3">
           <!-- SIMULATION SETUP CONTROLS -->
           <div class="card-surface sim-controls-card">
-            <h3 class="panel-heading">Simulation Parameters</h3>
-
-            <div class="form-group mb-3">
-              <label class="form-label">Scenario Preset</label>
-              <select [(ngModel)]="selectedScenario" class="form-control" (change)="runScenarioSimulation()">
-                <option *ngFor="let sc of scenarios" [value]="sc">{{ sc }}</option>
-              </select>
+            <div class="sim-card-header">
+              <div>
+                <h3 class="panel-heading">Simulation Parameters & Stress Inputs</h3>
+                <span class="panel-hint">Configure battlefield shocks, supply choke points & aerial bridge assets</span>
+              </div>
+              <span class="badge-gold">WARGAME ENGINE</span>
             </div>
 
-            <div class="form-group mb-3">
-              <label class="form-label">Theater Intensity Stress ({{ simIntensity }}%)</label>
-              <input type="range" min="10" max="100" [(ngModel)]="simIntensity" class="slider" (input)="runScenarioSimulation()">
-            </div>
-
-            <div class="form-group mb-3">
-              <label class="form-label">Demand Surge Multiplier (+{{ simDemandChange }}%)</label>
-              <input type="range" min="0" max="100" [(ngModel)]="simDemandChange" class="slider" (input)="runScenarioSimulation()">
-            </div>
-
-            <div class="form-group mb-3">
-              <label class="form-label">Inventory Pre-reduction ({{ simInventoryAdj }}%)</label>
-              <input type="range" min="-50" max="0" [(ngModel)]="simInventoryAdj" class="slider" (input)="runScenarioSimulation()">
-            </div>
-
-            <div class="form-group mb-3">
-              <label class="checkbox-label">
-                <input type="checkbox" [(ngModel)]="enableAirlift" (change)="runScenarioSimulation()">
-                <span>Enable Emergency IAF Airlift Sorties (C-17 & AN-32)</span>
+            <!-- SCENARIO SELECTOR WITH QUICK CHIPS -->
+            <div class="form-group mt-3">
+              <label class="sim-control-label">
+                <span>SCENARIO CRISIS PRESET</span>
+                <span class="badge-subtle">7 ACTIVE THEATERS</span>
               </label>
+              <div class="sim-select-wrapper">
+                <select [(ngModel)]="selectedScenario" class="sim-select-control" (change)="runScenarioSimulation()">
+                  <option *ngFor="let sc of scenarios" [value]="sc">{{ sc }}</option>
+                </select>
+                <div class="select-chevron">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="chevron-svg"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+              </div>
+              <!-- Quick Preset Pills -->
+              <div class="sim-chips-row mt-2">
+                <button
+                  type="button"
+                  *ngFor="let chip of simPresetChips"
+                  class="sim-chip-btn"
+                  [class.active]="selectedScenario.includes(chip.query)"
+                  (click)="selectPresetChip(chip.query)"
+                >
+                  {{ chip.label }}
+                </button>
+              </div>
             </div>
 
-            <button type="button" class="btn-army-primary full-width" (click)="runScenarioSimulation()">
-              ▶ Re-run Simulation
+            <!-- TACTICAL RANGE SLIDERS -->
+            <div class="sim-sliders-container mt-3">
+              <!-- Slider 1: Intensity Stress -->
+              <div class="sim-slider-group">
+                <div class="sim-slider-head">
+                  <div class="sim-slider-title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.2" class="slider-svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    <span>Theater Intensity Stress</span>
+                  </div>
+                  <span class="sim-val-badge badge-amber">{{ simIntensity }}% CRISIS</span>
+                </div>
+                <div class="slider-track-wrap">
+                  <input
+                    type="range"
+                    min="10"
+                    max="100"
+                    [(ngModel)]="simIntensity"
+                    class="tactical-slider"
+                    (input)="runScenarioSimulation()"
+                    [style.--slider-pct]="simIntensity + '%'"
+                  >
+                </div>
+                <span class="slider-desc">Simulates road closure & avalanche disruption across mountain axis</span>
+              </div>
+
+              <!-- Slider 2: Demand Surge -->
+              <div class="sim-slider-group">
+                <div class="sim-slider-head">
+                  <div class="sim-slider-title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.2" class="slider-svg"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                    <span>Demand Surge Multiplier</span>
+                  </div>
+                  <span class="sim-val-badge badge-blue">+{{ simDemandChange }}% SURGE</span>
+                </div>
+                <div class="slider-track-wrap">
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    [(ngModel)]="simDemandChange"
+                    class="tactical-slider"
+                    (input)="runScenarioSimulation()"
+                    [style.--slider-pct]="simDemandChange + '%'"
+                  >
+                </div>
+                <span class="slider-desc">Accelerated wartime ammunition burn & arctic heating fuel depletion</span>
+              </div>
+
+              <!-- Slider 3: Inventory Pre-Reduction -->
+              <div class="sim-slider-group">
+                <div class="sim-slider-head">
+                  <div class="sim-slider-title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.2" class="slider-svg"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+                    <span>Inventory Pre-Reduction</span>
+                  </div>
+                  <span class="sim-val-badge badge-red">{{ simInventoryAdj }}% INITIAL DRAW</span>
+                </div>
+                <div class="slider-track-wrap">
+                  <input
+                    type="range"
+                    min="-50"
+                    max="0"
+                    [(ngModel)]="simInventoryAdj"
+                    class="tactical-slider"
+                    (input)="runScenarioSimulation()"
+                    [style.--slider-pct]="((simInventoryAdj + 50) * 2) + '%'"
+                  >
+                </div>
+                <span class="slider-desc">Simulates pre-strike buffer depletion or enemy convoy interdiction</span>
+              </div>
+            </div>
+
+            <!-- TACTICAL ASSET AIRLIFT TOGGLE CARD -->
+            <div class="sim-asset-toggle-card mt-3" [class.active]="enableAirlift" (click)="enableAirlift = !enableAirlift; runScenarioSimulation()">
+              <div class="asset-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="asset-svg">
+                  <path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3.5c-.5-.5-2.5 0-4 1.5L13.5 8.5 5.3 6.7c-.9-.2-1.8.2-2.3.9-.6.8-.4 1.9.4 2.5l5.5 4.3-2.4 2.4-3.3-.3c-.5-.1-1 .2-1.3.6-.3.4-.3.9 0 1.3l2.2 2.2 2.2 2.2c.4.3.9.3 1.3 0 .4-.3.7-.8.6-1.3l-.3-3.3 2.4-2.4 4.3 5.5c.6.8 1.7 1 2.5.4.7-.5 1.1-1.4.9-2.3z"/>
+                </svg>
+              </div>
+              <div class="asset-text-col">
+                <span class="asset-title">Emergency IAF Airlift Sorties (C-17 & AN-32)</span>
+                <span class="asset-desc">Task 2x Strategic Air Command heavy transport squadrons (+6 Days buffer stability)</span>
+              </div>
+              <div class="tactical-switch" [class.on]="enableAirlift">
+                <div class="switch-knob"></div>
+              </div>
+            </div>
+
+            <!-- EXECUTION BUTTON -->
+            <button type="button" class="btn-run-simulation mt-3" (click)="runScenarioSimulation()">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="run-btn-svg"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <span>RUN CRISIS WARGAME SIMULATION</span>
             </button>
+
+            <!-- MODEL TELEMETRY STRIP (FILLS PREVIOUS EMPTY VOID) -->
+            <div class="sim-telemetry-hud mt-3">
+              <div class="tel-head">
+                <div class="tel-live-indicator"><span class="beacon-dot"></span> NEURAL WARGAME ENGINE TELEMETRY</div>
+                <span class="tel-secure">ASCON-128 AUTH</span>
+              </div>
+              <div class="tel-grid mt-2">
+                <div class="tel-stat"><span class="tel-lbl">ALGORITHM</span><strong class="tel-val text-green">ARIMA-LSTM ENSEMBLE</strong></div>
+                <div class="tel-stat"><span class="tel-lbl">MONTE CARLO</span><strong class="tel-val text-gold">10,000 ITERATIONS</strong></div>
+                <div class="tel-stat"><span class="tel-lbl">CONFIDENCE</span><strong class="tel-val text-blue">98.4% (R²=0.982)</strong></div>
+                <div class="tel-stat"><span class="tel-lbl">STATUS</span><strong class="tel-val text-green">ONLINE • DEFCON 1</strong></div>
+              </div>
+            </div>
           </div>
 
           <!-- SIMULATION RESULTS -->
           <div class="card-surface sim-results-card">
-            <h3 class="panel-heading">Simulation Outcome & Before vs After</h3>
+            <div class="sim-card-header">
+              <div>
+                <h3 class="panel-heading">Simulation Outcome & Resilience Posture</h3>
+                <span class="panel-hint">AI-derived predictive vulnerability, days of supply & remediation protocol</span>
+              </div>
+              <span class="badge-gold">PROJECTION COMPLETE</span>
+            </div>
 
             <div class="sim-kpi-row mt-3">
-              <div class="sim-metric-box">
-                <span class="s-label">Projected Days of Supply</span>
-                <span class="s-val text-gold">{{ logisticsService.simulationState().simulatedDaysOfStock }} Days</span>
-                <span class="s-sub">Baseline: 34 Days</span>
+              <!-- KPI 1 -->
+              <div class="sim-metric-box box-gold">
+                <div class="s-box-top">
+                  <span class="s-label">Projected Supply</span>
+                  <span class="s-icon">📦</span>
+                </div>
+                <div class="s-val text-gold font-mono">{{ logisticsService.simulationState().simulatedDaysOfStock }} Days</div>
+                <div class="s-metric-meta">
+                  <span class="s-badge-baseline">Baseline: 34 Days</span>
+                  <span class="s-delta-tag text-amber">-{{ 34 - logisticsService.simulationState().simulatedDaysOfStock }}D Delta</span>
+                </div>
+                <div class="s-mini-track mt-2">
+                  <div class="s-mini-fill fill-gold" [style.width.%]="(logisticsService.simulationState().simulatedDaysOfStock / 34) * 100"></div>
+                </div>
               </div>
-              <div class="sim-metric-box">
-                <span class="s-label">Time to Shortfall</span>
-                <span class="s-val text-red">{{ logisticsService.simulationState().projectedShortfallHour }} Hours</span>
-                <span class="s-sub">Without resupply</span>
+
+              <!-- KPI 2 -->
+              <div class="sim-metric-box box-red">
+                <div class="s-box-top">
+                  <span class="s-label">Time to Shortfall</span>
+                  <span class="s-icon">⏳</span>
+                </div>
+                <div class="s-val text-red font-mono">{{ logisticsService.simulationState().projectedShortfallHour }} Hours</div>
+                <div class="s-metric-meta">
+                  <span class="s-badge-danger">Zero-Resupply Axis</span>
+                </div>
+                <span class="s-sub mt-2">Without IAF / Depot surge</span>
               </div>
-              <div class="sim-metric-box">
-                <span class="s-label">Stockout Risk Level</span>
-                <span class="s-val" [class.text-red]="logisticsService.simulationState().stockoutRisk.includes('High')" [class.text-green]="!logisticsService.simulationState().stockoutRisk.includes('High')">
-                  {{ logisticsService.simulationState().stockoutRisk }}
-                </span>
+
+              <!-- KPI 3 -->
+              <div class="sim-metric-box box-risk">
+                <div class="s-box-top">
+                  <span class="s-label">Stockout Risk Level</span>
+                  <span class="s-icon">🛡️</span>
+                </div>
+                <div class="s-risk-badge-wrap">
+                  <span
+                    class="s-risk-pill"
+                    [class.risk-high]="logisticsService.simulationState().stockoutRisk.includes('High')"
+                    [class.risk-moderate]="logisticsService.simulationState().stockoutRisk.includes('Moderate') || logisticsService.simulationState().stockoutRisk.includes('Medium')"
+                    [class.risk-low]="logisticsService.simulationState().stockoutRisk.includes('Low')"
+                  >
+                    <span class="pulse-beacon-dot"></span>
+                    {{ logisticsService.simulationState().stockoutRisk }}
+                  </span>
+                </div>
+                <span class="s-sub mt-2">Forward Pickets & Depots</span>
               </div>
             </div>
 
-            <h4 class="mt-4 mb-2">Before vs After Stress Posture:</h4>
+            <!-- BEFORE VS AFTER STRESS POSTURE -->
+            <div class="posture-header-row">
+              <h4 class="subpanel-title">Before vs After Stress Posture:</h4>
+              <span class="badge-gold">DELTA: -22.6% POSTURE SHIFT</span>
+            </div>
             <div class="comparison-bar-grid">
               <div class="comp-col">
+                <span class="comp-badge badge-normal">BASELINE</span>
                 <span class="comp-title">Normal Baseline</span>
-                <div class="comp-bar-shell"><div class="comp-bar-fill fill-green" style="height: 96%;"></div></div>
-                <span class="comp-score">96.8%</span>
+                <div class="comp-bar-shell"><div class="comp-bar-fill fill-green" style="height: 96.8%;"></div></div>
+                <span class="comp-score text-green">96.8%</span>
+                <span class="comp-caption text-neutral">34 Days Buffer Nominal</span>
+              </div>
+              <div class="comp-vs-divider">
+                <span class="comp-vs-badge">VS</span>
               </div>
               <div class="comp-col">
+                <span class="comp-badge badge-stress">SIMULATION</span>
                 <span class="comp-title">Under Simulation Stress</span>
-                <div class="comp-bar-shell"><div class="comp-bar-fill fill-amber" style="height: 74%;"></div></div>
-                <span class="comp-score">74.2%</span>
+                <div class="comp-bar-shell"><div class="comp-bar-fill fill-amber" style="height: 74.2%;"></div></div>
+                <span class="comp-score text-amber">74.2%</span>
+                <span class="comp-caption text-amber">Resilience Deficit (-22.6%)</span>
               </div>
             </div>
 
-            <div class="sim-remedy-box mt-4">
-              <strong>AI Recommended Mitigation:</strong>
-              <p>{{ logisticsService.simulationState().remedyRecommendation }}</p>
-              <span class="text-xs text-gold">Required Buffer: {{ logisticsService.simulationState().requiredBuffer }}</span>
+            <!-- AI RECOMMENDED MITIGATION PANEL -->
+            <div class="sim-remedy-deck mt-3">
+              <div class="remedy-badge-row">
+                <div class="remedy-badge-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="remedy-shield-svg">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  </svg>
+                </div>
+                <div class="remedy-badge-text">
+                  <span class="remedy-tag">AI STRATEGIC MITIGATION PROTOCOL</span>
+                  <span class="remedy-urgency">HIGH PRIORITY DEFENSE DIRECTIVE</span>
+                </div>
+              </div>
+
+              <p class="remedy-directive-text mt-2">
+                {{ logisticsService.simulationState().remedyRecommendation }}
+              </p>
+
+              <div class="remedy-buffer-strip mt-2">
+                <span class="buf-lbl">REQUIRED BUFFER:</span>
+                <strong class="buf-val">{{ logisticsService.simulationState().requiredBuffer }}</strong>
+              </div>
+
+              <div class="remedy-actions-row mt-3">
+                <button type="button" class="btn-authorize-sim" (click)="authorizeSimMitigation()">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="btn-check-svg">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  <span>Authorize & Deploy Recommended Mitigation</span>
+                </button>
+              </div>
+
+              <div *ngIf="simMitigationSuccess" class="sim-success-alert mt-2">
+                ✓ {{ simMitigationSuccess }}
+              </div>
             </div>
           </div>
         </div>
@@ -1946,7 +2138,7 @@
             <h2 class="module-title">1.10 Command Admin & System Security Settings</h2>
             <p class="module-subtitle">Configure ASCON credentials, satellite relay priorities, and cryptographic session policies</p>
           </div>
-          <button type="button" class="btn-army-primary" (click)="saveSettings()">Save Configuration</button>
+          <button type="button" class="btn-army-primary" (click)="saveSettings()">💾 Save Configuration</button>
         </div>
 
         <div class="card-surface mt-3 p-4">

@@ -305,10 +305,14 @@
   </section>
 
   <!-- ================= INFORMATION / NEWS SECTION ================= -->
+  <!-- ================= INFORMATION / NEWS SECTION ================= -->
   <section class="news-information-section">
     <div class="section-container">
       <div class="section-heading-center">
-        <span class="section-tag">OFFICIAL CIRCULARS</span>
+        <span class="section-tag">
+          <span class="tag-pulse-dot orange"></span>
+          OFFICIAL CIRCULARS
+        </span>
         <h2 class="section-title">Defense Information & Bulletin</h2>
         <p class="section-lead">DGOS directives, system enhancements, and critical operational circulars</p>
       </div>
@@ -316,97 +320,184 @@
       <div class="news-nav-tabs">
         <button type="button" class="news-tab-btn" [class.active]="activeNewsTab === 'announcements'"
           (click)="activeNewsTab = 'announcements'">
+          <span class="tab-dot" *ngIf="activeNewsTab === 'announcements'"></span>
           Announcements
         </button>
         <button type="button" class="news-tab-btn" [class.active]="activeNewsTab === 'updates'"
           (click)="activeNewsTab = 'updates'">
+          <span class="tab-dot" *ngIf="activeNewsTab === 'updates'"></span>
           System Updates
         </button>
         <button type="button" class="news-tab-btn" [class.active]="activeNewsTab === 'notices'"
           (click)="activeNewsTab = 'notices'">
+          <span class="tab-dot" *ngIf="activeNewsTab === 'notices'"></span>
           Important Notices
         </button>
       </div>
 
       <div class="news-cards-list mt-3">
         <div *ngIf="activeNewsTab === 'announcements'" class="news-entry-card card-surface">
-          <span class="badge-gold">CIRCULAR 42/2026</span>
+          <div class="news-card-top-row">
+            <span class="badge-gold">CIRCULAR 42/2026</span>
+            <span class="news-clearance-stamp">UNCLASSIFIED // DEFENSE WIDE</span>
+          </div>
           <h4>Winter Stocking Verification for Northern & Eastern Theaters Completed</h4>
           <p>The Master General of Sustenance (MGS) branch has certified 100% pre-positioning of Sub-Zero HSD and
             high-altitude sustenance across 14, 15, 16, and 4 Corps ahead of seasonal mountain pass blockages.</p>
-          <span class="news-date">Published: 04 October 2026 • DGOS Directorate</span>
+          <div class="news-card-footer">
+            <span class="news-date">
+              <svg class="news-meta-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
+              </svg>
+              Published: 04 October 2026 • DGOS Directorate
+            </span>
+            <span class="news-auth-tag">VERIFIED BY MGS HQ</span>
+          </div>
         </div>
 
         <div *ngIf="activeNewsTab === 'updates'" class="news-entry-card card-surface">
-          <span class="badge-blue">SYSTEM RELEASE V4.8</span>
+          <div class="news-card-top-row">
+            <span class="badge-blue">SYSTEM RELEASE V4.8</span>
+            <span class="news-clearance-stamp">ASCON C4ISR PROTOCOL</span>
+          </div>
           <h4>Deployment of Neural Pass Weather Forecasting along Sela Tunnel Axis</h4>
           <p>SenaAapurti v4.8 activates automated IMD Doppler radar integration predicting black ice and snowfall
             probabilities 72 hours in advance for Eastern Command convoys.</p>
-          <span class="news-date">Published: 01 October 2026 • Army Cyber Logistics Group</span>
+          <div class="news-card-footer">
+            <span class="news-date">
+              <svg class="news-meta-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
+              </svg>
+              Published: 01 October 2026 • Army Cyber Logistics Group
+            </span>
+            <span class="news-auth-tag">SYSTEM UPGRADE APPLIED</span>
+          </div>
         </div>
 
         <div *ngIf="activeNewsTab === 'notices'" class="news-entry-card card-surface">
-          <span class="badge-danger">FLASH NOTICE</span>
+          <div class="news-card-top-row">
+            <span class="badge-danger">FLASH NOTICE</span>
+            <span class="news-clearance-stamp urgent">MANDATORY COMPLIANCE</span>
+          </div>
           <h4>Migration of Field Indent Vouchers to Cryptographic ASCON Signatures</h4>
           <p>All Regimental Quartermasters must file replenishment indents exclusively through the SenaAapurti Unit
             Portal. Physical handwritten indents stand deprecated under Army Order AO-18/2026.</p>
-          <span class="news-date">Published: 28 September 2026 • Adjutant General's Branch</span>
+          <div class="news-card-footer">
+            <span class="news-date">
+              <svg class="news-meta-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
+              </svg>
+              Published: 28 September 2026 • Adjutant General's Branch
+            </span>
+            <span class="news-auth-tag urgent">STATUTORY DIRECTIVE</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ================= 5. DOWNLOADS ================= -->
-  <section id="downloads" class="home-info-section">
+  <section id="downloads" class="home-info-section dark-vault-section">
     <div class="section-container">
       <div class="section-heading-center">
-        <span class="section-tag">PUBLICATIONS & ASSETS</span>
-        <h2 class="section-title">Official Defense Downloads & Documentation</h2>
-        <p class="section-lead">Download official defense manuals, quick-start setup cards, and tactical mobile applications</p>
+        <span class="section-tag">
+          <span class="tag-pulse-dot orange"></span>
+          PUBLICATIONS & ASSETS
+        </span>
+        <h2 class="section-title dark-text-white">Official Defense Downloads & Documentation</h2>
+        <p class="section-lead dark-lead">Download official defense manuals, quick-start setup cards, and tactical mobile applications</p>
       </div>
 
       <div class="downloads-list">
         <div class="download-item-card">
+          <div class="dl-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="dl-svg">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+          </div>
           <div class="dl-info">
             <h4>User Manuals: SenaAapurti Comprehensive Manual v4.8</h4>
             <p>Complete 180-page reference manual for Command and Unit logisticians detailing system operation.</p>
             <span class="dl-meta">PDF • 8.4 MB • Official Defense Manual</span>
           </div>
           <button type="button" class="btn-dl" (click)="downloadManual('SenaAapurti_User_Manual_v4.8.pdf')">
-            Download PDF
+            <svg viewBox="0 0 20 20" fill="currentColor" class="btn-dl-svg">
+              <path fill-rule="evenodd" d="M3 17a1 1 0 001 1h12a1 1 0 100-2H4a1 1 0 00-1 1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+            <span>Download PDF</span>
           </button>
         </div>
 
         <div class="download-item-card">
+          <div class="dl-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="dl-svg">
+              <rect x="4" y="4" width="16" height="16" rx="2" ry="2"/>
+              <rect x="9" y="9" width="6" height="6"/>
+              <line x1="9" y1="1" x2="9" y2="4"/>
+              <line x1="15" y1="1" x2="15" y2="4"/>
+              <line x1="9" y1="20" x2="9" y2="23"/>
+              <line x1="15" y1="20" x2="15" y2="23"/>
+              <line x1="20" y1="9" x2="23" y2="9"/>
+              <line x1="20" y1="15" x2="23" y2="15"/>
+              <line x1="1" y1="9" x2="4" y2="9"/>
+              <line x1="1" y1="15" x2="4" y2="15"/>
+            </svg>
+          </div>
           <div class="dl-info">
             <h4>Quick Start Guide: Tactical Field Terminal Setup</h4>
             <p>Step-by-step quick guide for setting up field tablet clients and ASCON satellite transponders.</p>
             <span class="dl-meta">PDF • 2.1 MB • Quick Start Card</span>
           </div>
           <button type="button" class="btn-dl" (click)="downloadManual('Tactical_Quick_Start_Guide.pdf')">
-            Download PDF
+            <svg viewBox="0 0 20 20" fill="currentColor" class="btn-dl-svg">
+              <path fill-rule="evenodd" d="M3 17a1 1 0 001 1h12a1 1 0 100-2H4a1 1 0 00-1 1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+            <span>Download PDF</span>
           </button>
         </div>
 
         <div class="download-item-card">
+          <div class="dl-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="dl-svg">
+              <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+              <line x1="12" y1="18" x2="12.01" y2="18"/>
+            </svg>
+          </div>
           <div class="dl-info">
             <h4>Mobile App: Ruggedized Android Field Client APK</h4>
             <p>Official APK for military handheld terminals with offline store scanning capabilities.</p>
             <span class="dl-meta">APK • 42 MB • Version 3.4.1</span>
           </div>
           <button type="button" class="btn-dl" (click)="downloadManual('SenaAapurti_Field_v3.4.apk')">
-            Download APK
+            <svg viewBox="0 0 20 20" fill="currentColor" class="btn-dl-svg">
+              <path fill-rule="evenodd" d="M3 17a1 1 0 001 1h12a1 1 0 100-2H4a1 1 0 00-1 1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+            <span>Download APK</span>
           </button>
         </div>
 
         <div class="download-item-card">
+          <div class="dl-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="dl-svg">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+              <polyline points="2 17 12 22 22 17"/>
+              <polyline points="2 12 12 17 22 12"/>
+            </svg>
+          </div>
           <div class="dl-info">
             <h4>Documentation: Technical Architecture & API Whitepaper</h4>
             <p>Classified technical overview of cryptographic handshakes, ASCON protocols, and database schema.</p>
             <span class="dl-meta">PDF • 4.8 MB • Army Cyber Logistics</span>
           </div>
           <button type="button" class="btn-dl" (click)="downloadManual('Technical_Architecture_Whitepaper.pdf')">
-            Download PDF
+            <svg viewBox="0 0 20 20" fill="currentColor" class="btn-dl-svg">
+              <path fill-rule="evenodd" d="M3 17a1 1 0 001 1h12a1 1 0 100-2H4a1 1 0 00-1 1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+            <span>Download PDF</span>
           </button>
         </div>
       </div>
@@ -414,22 +505,30 @@
   </section>
 
   <!-- ================= 6. SUPPORT & HELP CENTRE ================= -->
-  <section id="support" class="home-info-section alt-bg">
+  <section id="support" class="home-info-section support-ops-section">
     <div class="section-container">
       <div class="section-heading-center">
-        <span class="section-tag">24x7 TECHNICAL SUPPORT</span>
+        <span class="section-tag">
+          <span class="tag-pulse-dot green"></span>
+          24x7 TECHNICAL SUPPORT
+        </span>
         <h2 class="section-title">Support & Help Centre</h2>
-        <p class="section-lead">Round-the-clock defense logistics assistance, issue tracking, and FAQs</p>
+        <p class="section-lead">Round-the-clock defense logistics assistance, issue tracking, and automated response hotlines</p>
       </div>
 
       <div *ngIf="ticketSuccess" class="alert-success-banner mb-3">
-        {{ ticketSuccess }}
+        <span class="success-icon">✓</span> {{ ticketSuccess }}
       </div>
 
       <div class="support-split">
         <!-- Report an Issue Form -->
         <div class="ticket-form-card">
-          <h3>Report an Operational Issue</h3>
+          <div class="card-header-flex">
+            <h3>Report an Operational Issue</h3>
+            <span class="card-status-badge green">
+              <span class="pulse-green"></span> ASCON DESK ONLINE
+            </span>
+          </div>
           <form (submit)="submitTicket(); $event.preventDefault()">
             <div class="form-group">
               <label class="form-label">Officer / Operator Name</label>
@@ -452,30 +551,75 @@
               <label class="form-label">Issue Details & Reference #</label>
               <textarea [(ngModel)]="ticketMessage" name="ticketMessage" rows="3" class="form-control" placeholder="Describe the issue in detail..."></textarea>
             </div>
-            <button type="submit" class="btn-army-primary full-width">
-              Submit Support Ticket
+            <button type="submit" class="btn-saffron-primary full-width">
+              <span>Submit Support Ticket ➔</span>
             </button>
           </form>
         </div>
 
         <!-- Help Centre & Technical Hotlines -->
         <div class="hotline-card">
-          <h3>Help Centre & Technical Support</h3>
-          <div class="hotline-item">
-            <span class="hl-label">Army HQ 24x7 Control Room:</span>
-            <span class="hl-number">1800-11-SENA (7362)</span>
+          <div class="card-header-flex">
+            <h3>Help Centre & Technical Hotlines</h3>
+            <span class="card-status-badge red">
+              <span class="pulse-red"></span> 24x7 ACTIVE
+            </span>
           </div>
-          <div class="hotline-item">
-            <span class="hl-label">Northern Command Ops Cell:</span>
-            <span class="hl-number">ASCON Ext: 4421 / 4422</span>
-          </div>
-          <div class="hotline-item">
-            <span class="hl-label">Technical Helpdesk (Signal Corps):</span>
-            <span class="hl-number">support.senaaapurti&#64;nic.in</span>
-          </div>
-          <div class="hotline-item">
-            <span class="hl-label">Class V Munitions Emergency Hotline:</span>
-            <span class="hl-number">1800-22-AMMO (2666)</span>
+          <div class="hotline-grid-items">
+            <div class="hotline-item">
+              <div class="hl-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+              </div>
+              <div class="hl-content">
+                <span class="hl-label">Army HQ 24x7 Control Room</span>
+                <span class="hl-number">1800-11-SENA (7362)</span>
+                <span class="hl-sub">Toll-free across all military circles</span>
+              </div>
+            </div>
+
+            <div class="hotline-item">
+              <div class="hl-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="2" y1="12" x2="22" y2="12"/>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+              </div>
+              <div class="hl-content">
+                <span class="hl-label">Northern Command Ops Cell</span>
+                <span class="hl-number">ASCON Node 4421 / 4422</span>
+                <span class="hl-sub">Dedicated secure defense exchange</span>
+              </div>
+            </div>
+
+            <div class="hotline-item">
+              <div class="hl-icon-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <div class="hl-content">
+                <span class="hl-label">Technical Helpdesk (Signal Corps)</span>
+                <span class="hl-number email">support.senaaapurti&#64;nic.in</span>
+                <span class="hl-sub">Ticketing response SLA: &lt; 30 mins</span>
+              </div>
+            </div>
+
+            <div class="hotline-item urgent-hl">
+              <div class="hl-icon-box danger">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+              </div>
+              <div class="hl-content">
+                <span class="hl-label">Class V Munitions Emergency Hotline</span>
+                <span class="hl-number danger">1800-22-AMMO (2666)</span>
+                <span class="hl-sub">Immediate replenishment authorization</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -489,13 +633,16 @@
 
     <div class="section-container">
       <div class="section-heading-center">
-        <span class="section-tag">DGOS SUSTENANCE MANDATE</span>
-        <h2 class="section-title">About SenaAapurti & Official Contact</h2>
-        <p class="section-lead">The Sovereign AI Predictive Logistics Continuum of the Indian Army</p>
+        <span class="section-tag">
+          <span class="tag-pulse-dot orange"></span>
+          DGOS SUSTENANCE MANDATE
+        </span>
+        <h2 class="section-title dark-text-white">About SenaAapurti & Official Contact</h2>
+        <p class="section-lead dark-lead">The Sovereign AI Predictive Logistics Continuum of the Indian Army</p>
       </div>
 
       <div *ngIf="contactSuccess" class="alert-success-banner mb-3">
-        {{ contactSuccess }}
+        <span class="success-icon">✓</span> {{ contactSuccess }}
       </div>
 
       <div class="about-contact-grid">
@@ -604,8 +751,8 @@
                 <label class="form-label">Message / Query</label>
                 <textarea [(ngModel)]="contactMsg" name="contactMsg" rows="2" class="form-control" placeholder="Enter brief communication..."></textarea>
               </div>
-              <button type="submit" class="btn-army-primary full-width">
-                Transmit Communication ➔
+              <button type="submit" class="btn-saffron-primary full-width">
+                <span>Transmit Communication ➔</span>
               </button>
             </form>
           </div>

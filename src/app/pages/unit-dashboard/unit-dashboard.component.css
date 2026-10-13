@@ -620,6 +620,39 @@
 .kpi-card:has(.text-gold)::before {
   background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.6) 50%, transparent 100%);
 }
+.kpi-card:has(.text-green)::before {
+  background: linear-gradient(90deg, transparent 0%, rgba(34, 197, 94, 0.6) 50%, transparent 100%);
+}
+.kpi-card:has(.text-blue)::before {
+  background: linear-gradient(90deg, transparent 0%, rgba(59, 130, 246, 0.6) 50%, transparent 100%);
+}
+.kpi-card:has(.text-amber)::before {
+  background: linear-gradient(90deg, transparent 0%, rgba(245, 158, 11, 0.6) 50%, transparent 100%);
+}
+
+/* Compact KPI Button/Card for 2-item cards (No Subtitle) */
+.kpi-grid-5 .kpi-card,
+.kpi-card:not(:has(.kpi-sub)) {
+  min-height: 68px;
+  height: auto;
+  justify-content: flex-start;
+  gap: 3px;
+  padding: 10px 14px 10px;
+}
+
+.kpi-grid-5 .kpi-card .kpi-label,
+.kpi-card:not(:has(.kpi-sub)) .kpi-label {
+  min-height: auto;
+  margin-bottom: 2px;
+  line-height: 1.2;
+}
+
+.kpi-grid-5 .kpi-card .kpi-value,
+.kpi-card:not(:has(.kpi-sub)) .kpi-value {
+  margin: 0;
+  line-height: 1.1;
+  font-size: 1.55rem;
+}
 
 .kpi-label {
   font-size: 0.64rem;

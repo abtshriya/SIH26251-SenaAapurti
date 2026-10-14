@@ -87,6 +87,21 @@ html {
   max-width: 100%;
 }
 
+app-header {
+  position: relative !important;
+  z-index: 99999 !important;
+  display: block !important;
+}
+
+app-header .main-navbar,
+app-header .nav-container,
+app-header .nav-user-actions,
+app-header .portal-cta-group,
+app-header .unit-cta-group,
+app-header .unit-profile-wrapper {
+  overflow: visible !important;
+}
+
 /* Accessibility: Font Size Variants (GIGW 3.0 Compliance) */
 html.font-scale-sm {
   font-size: 13.5px !important;

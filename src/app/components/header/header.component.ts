@@ -1,4 +1,4 @@
-import { Component, inject, computed, HostListener } from '@angular/core';
+import { Component, inject, computed, HostListener, ChangeDetectorRef, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -27,6 +27,7 @@ export class HeaderComponent {
   layoutService = inject(LayoutService);
   logisticsService = inject(LogisticsService);
   router = inject(Router);
+  cdr = inject(ChangeDetectorRef);
 
   constructor() {
     this.router.events.pipe(
@@ -36,6 +37,7 @@ export class HeaderComponent {
       this.importantLinksOpen = false;
       this.mobileMenuOpen = false;
       this.showNotifications = false;
+      this.userProfileOpen = false;
     });
   }
 
@@ -43,6 +45,7 @@ export class HeaderComponent {
   showPortalMenu = false;
   mobileMenuOpen = false;
   showUnitSelectorModal = false;
+  userProfileOpen = false;
   modalSearchQuery = '';
   modalSelectedCommand = 'All';
   faqDropdownOpen = false;
@@ -269,17 +272,49 @@ export class HeaderComponent {
     this.router.navigate(['/command', 'settings']);
   }
 
+  get currentUnitUser() {
+    const u = this.authService.currentUser();
+    if (u && u.role === 'unit') {
+      return u;
+    }
+    return this.authService.DEMO_UNIT_USER;
+  }
+
+  toggleUserProfile(event?: Event) {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    this.userProfileOpen = !this.userProfileOpen;
+    if (this.userProfileOpen) {
+      this.faqDropdownOpen = false;
+      this.importantLinksOpen = false;
+      this.showNotifications = false;
+    }
+  }
+
+  closeUserProfile() {
+    this.userProfileOpen = false;
+  }
+
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
-    const target = event.target as HTMLElement;
-    if (!target.closest('.faq-dropdown-item')) {
+    const target = event.target as Node;
+    if (!target || !document.contains(target)) {
+      return;
+    }
+    const targetEl = target as HTMLElement;
+    if (!targetEl.closest('.faq-dropdown-item')) {
       this.faqDropdownOpen = false;
     }
-    if (!target.closest('.links-dropdown-item')) {
+    if (!targetEl.closest('.links-dropdown-item')) {
       this.importantLinksOpen = false;
     }
-    if (!target.closest('.notif-wrapper')) {
+    if (!targetEl.closest('.notif-wrapper')) {
       this.showNotifications = false;
+    }
+    if (!targetEl.closest('.unit-profile-wrapper')) {
+      this.userProfileOpen = false;
     }
   }
 
@@ -288,6 +323,7 @@ export class HeaderComponent {
     this.faqDropdownOpen = false;
     this.importantLinksOpen = false;
     this.showNotifications = false;
+    this.userProfileOpen = false;
   }
 }
 

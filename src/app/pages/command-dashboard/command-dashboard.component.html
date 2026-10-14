@@ -288,20 +288,22 @@
             <!-- CRITICAL ALERTS -->
             <div class="card-surface alerts-panel">
               <div class="panel-header-between">
-                <h3 class="panel-heading">Critical Logistics Alerts ({{ logisticsService.alerts().length }})</h3>
-                <span class="badge-danger">ACTION REQUIRED</span>
+                <h3 class="panel-heading">Critical Logistics Alerts ({{ getActionRequiredCount() }})</h3>
+                <span *ngIf="getActionRequiredCount() > 0" class="badge-danger">ACTION REQUIRED</span>
+                <span *ngIf="getActionRequiredCount() === 0" class="badge-green">ALL DIRECTIVES SYNCED</span>
               </div>
 
               <div class="alerts-feed-list mt-3">
                 <div
                   *ngFor="let alt of logisticsService.alerts()"
                   class="alert-entry-card"
-                  [class.border-red]="alt.severity === 'Critical'"
-                  [class.border-amber]="alt.severity === 'High'"
+                  [class.border-red]="alt.severity === 'Critical' && alt.status !== 'AUTHORIZED'"
+                  [class.border-amber]="alt.severity === 'High' && alt.status !== 'AUTHORIZED'"
+                  [class.border-green]="alt.status === 'AUTHORIZED'"
                 >
                   <div class="alt-top-row">
                     <span class="alt-type-badge">{{ alt.type }}</span>
-                    <span class="alt-sev-pill" [class.bg-red]="alt.severity === 'Critical'">{{ alt.severity }}</span>
+                    <span class="alt-sev-pill" [class.bg-red]="alt.severity === 'Critical'" [class.bg-green]="alt.status === 'AUTHORIZED'">{{ alt.status === 'AUTHORIZED' ? 'AUTHORIZED' : alt.severity }}</span>
                     <span class="alt-theater">{{ alt.theater }} • {{ alt.sector }}</span>
                   </div>
                   <h4 class="alt-headline">{{ alt.headline }}</h4>
@@ -310,12 +312,16 @@
                     <strong>Recommended Action:</strong> {{ alt.recommendedAction }}
                   </div>
                   <div class="alt-btn-row">
-                    <button type="button" class="btn-army-sm" (click)="executeAlertRemedy(alt)">
-                      Authorize Suggested Action
+                    <button type="button" class="btn-army-sm" [disabled]="alt.status === 'AUTHORIZED'" (click)="executeAlertRemedy(alt)">
+                      <span *ngIf="alt.status !== 'AUTHORIZED'">Authorize Suggested Action</span>
+                      <span *ngIf="alt.status === 'AUTHORIZED'">✓ Authorized &amp; Synced in DB</span>
                     </button>
                     <button type="button" class="btn-outline-sm" (click)="setTab('recommendations')">
                       View Explanation Panel
                     </button>
+                  </div>
+                  <div *ngIf="alt.status === 'AUTHORIZED' && alt.txHash" class="alt-synced-hash mt-2">
+                    <small class="text-green font-mono">● PostgreSQL Cryptographic Ledger Hash: {{ alt.txHash.substring(0, 16) }}...</small>
                   </div>
                 </div>
               </div>
@@ -1122,6 +1128,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn-outline-army" (click)="showRiskModal = false">Close</button>
+              <button type="button" class="btn-army-primary" (click)="executeBufferRelease(selectedInventoryItem)">⚡ Authorize Emergency Buffer Release</button>
             </div>
           </div>
         </div>
@@ -1141,7 +1148,7 @@
         <div class="filter-strip card-surface mt-3">
           <div class="filter-col">
             <label class="filter-label">Region / Theater Command</label>
-            <select [(ngModel)]="forecastRegion" class="form-control-sm">
+            <select [(ngModel)]="forecastRegion" class="form-control-sm" (change)="onForecastOptionChange()">
               <option value="All Commands">National Strategic (All 9 Theaters)</option>
               <option value="Northern Command">Northern Command (Param Utkarsh - J&K, Ladakh)</option>
               <option value="Western Command">Western Command (Sarvada Vijayi - Punjab, Rajasthan)</option>
@@ -1156,24 +1163,24 @@
           </div>
           <div class="filter-col">
             <label class="filter-label">Supply Category</label>
-            <select [(ngModel)]="forecastCategory" class="form-control-sm">
-              <option>Class III (Sub-Zero POL & Arctic Aviation Fuel)</option>
-              <option>Class I (Rations & Extreme Cold Subsistence)</option>
-              <option>Class V (Ammunition, Artillery Shells & ATGMs)</option>
-              <option>Class IX (T-90, BMP & High-Mobility Vehicle Spares)</option>
-              <option>Class VIII (High-Altitude Medical & Oxygen Cannisters)</option>
-              <option>Class II (Extreme Cold Weather Clothing - ECC)</option>
+            <select [(ngModel)]="forecastCategory" class="form-control-sm" (change)="onForecastOptionChange()">
+              <option value="Class III (Sub-Zero POL & Arctic Aviation Fuel)">Class III (Sub-Zero POL & Arctic Aviation Fuel)</option>
+              <option value="Class I (Rations & Extreme Cold Subsistence)">Class I (Rations & Extreme Cold Subsistence)</option>
+              <option value="Class V (Ammunition, Artillery Shells & ATGMs)">Class V (Ammunition, Artillery Shells & ATGMs)</option>
+              <option value="Class IX (T-90, BMP & High-Mobility Vehicle Spares)">Class IX (T-90, BMP & High-Mobility Vehicle Spares)</option>
+              <option value="Class VIII (High-Altitude Medical & Oxygen Cannisters)">Class VIII (High-Altitude Medical & Oxygen Cannisters)</option>
+              <option value="Class II (Extreme Cold Weather Clothing - ECC)">Class II (Extreme Cold Weather Clothing - ECC)</option>
             </select>
           </div>
           <div class="filter-col">
             <label class="filter-label">Forecast Horizon</label>
-            <select [(ngModel)]="forecastPeriod" class="form-control-sm">
-              <option>7 Days (Tactical Sprint)</option>
-              <option>15 Days (Operational Horizon)</option>
-              <option>30 Days (Monthly Deployment Cycle)</option>
-              <option>60 Days (Bi-Monthly Replenishment)</option>
-              <option>90 Days (Full High-Altitude Winter Closure)</option>
-              <option>180 Days (Strategic Annual Reserve Horizon)</option>
+            <select [(ngModel)]="forecastPeriod" class="form-control-sm" (change)="onForecastOptionChange()">
+              <option value="7 Days (Tactical Sprint)">7 Days (Tactical Sprint)</option>
+              <option value="15 Days (Operational Horizon)">15 Days (Operational Horizon)</option>
+              <option value="30 Days (Monthly Deployment Cycle)">30 Days (Monthly Deployment Cycle)</option>
+              <option value="60 Days (Bi-Monthly Replenishment)">60 Days (Bi-Monthly Replenishment)</option>
+              <option value="90 Days (Full High-Altitude Winter Closure)">90 Days (Full High-Altitude Winter Closure)</option>
+              <option value="180 Days (Strategic Annual Reserve Horizon)">180 Days (Strategic Annual Reserve Horizon)</option>
             </select>
           </div>
         </div>
@@ -1182,7 +1189,7 @@
         <div class="card-surface mt-4">
           <div class="panel-header-between">
             <div>
-              <h3 class="panel-heading">Demand Trend & Predictive Curve ({{ forecastCategory }})</h3>
+              <h3 class="panel-heading">Demand Trend & Predictive Curve ({{ getShortCategoryName(forecastCategory) }})</h3>
               <span class="panel-hint">Trained on 15 years historical ASCON telemetry + meteorological elevation models</span>
             </div>
             <div class="chart-indicators">
@@ -1268,14 +1275,14 @@
                 <text [attr.x]="p.x" [attr.y]="p.y - 12" fill="#fbbf24" font-size="10" font-weight="bold" text-anchor="middle" font-family="'Rajdhani', monospace">{{ p.val }}</text>
               </g>
 
-              <!-- Axis Months -->
+              <!-- Axis Months & Intervals -->
               <g fill="#94a3b8" font-size="11" font-family="'Rajdhani', monospace">
-                <text x="80" y="235" text-anchor="middle">Aug 2026</text>
-                <text x="230" y="235" text-anchor="middle">Sep 2026</text>
-                <text [attr.x]="getForecastChartData().todayX" y="235" text-anchor="middle" fill="#fde047" font-weight="bold">TODAY (Oct)</text>
-                <text x="530" y="235" text-anchor="middle">Nov 2026</text>
-                <text x="680" y="235" text-anchor="middle" fill="#f87171" font-weight="bold">Dec 2026 (Peak)</text>
-                <text x="820" y="235" text-anchor="middle">Jan 2027</text>
+                <text x="80" y="235" text-anchor="middle">{{ getForecastChartData().timeLabels[0] }}</text>
+                <text x="230" y="235" text-anchor="middle">{{ getForecastChartData().timeLabels[1] }}</text>
+                <text [attr.x]="getForecastChartData().todayX" y="235" text-anchor="middle" fill="#fde047" font-weight="bold">{{ getForecastChartData().timeLabels[2] }}</text>
+                <text x="530" y="235" text-anchor="middle">{{ getForecastChartData().timeLabels[3] }}</text>
+                <text x="680" y="235" text-anchor="middle" fill="#f87171" font-weight="bold">{{ getForecastChartData().timeLabels[4] }}</text>
+                <text x="820" y="235" text-anchor="middle">{{ getForecastChartData().timeLabels[5] }}</text>
               </g>
             </svg>
           </div>
@@ -1402,7 +1409,10 @@
                 <td class="text-nowrap">{{ c.vehiclesCount }} Trucks</td>
                 <td class="text-nowrap">{{ c.tonnage }} T</td>
                 <td class="text-nowrap">{{ c.departureTime }}</td>
-                <td class="text-green font-bold text-nowrap">{{ c.eta }}</td>
+                <td class="text-green font-bold text-nowrap">
+                  <span class="live-clock-pulse"></span>
+                  {{ getLiveEta(c) }}
+                </td>
                 <td class="text-nowrap">
                   <span class="badge-status" [class.badge-success]="c.status === 'In-Transit'" [class.badge-danger]="c.status === 'Delayed'" [class.badge-gold]="c.status === 'Rerouted'">
                     {{ c.status }}
@@ -1411,7 +1421,9 @@
                 <td class="text-nowrap">
                   <div class="btn-group-sm">
                     <button type="button" class="btn-inspect" (click)="inspectConvoy(c)">Inspect</button>
-                    <button *ngIf="c.riskLevel === 'High'" type="button" class="btn-danger-sm" (click)="triggerReroute(c)">Reroute</button>
+                    <button type="button" class="btn-danger-sm" [disabled]="c.status === 'Rerouted'" (click)="triggerReroute(c)">
+                      {{ c.status === 'Rerouted' ? 'Rerouted' : 'Reroute' }}
+                    </button>
                   </div>
                 </td>
               </tr>
@@ -1440,8 +1452,15 @@
                   <span class="d-val text-green">{{ selectedConvoy.tonnage }} Tonnes • {{ selectedConvoy.cargoType }}</span>
                 </div>
                 <div class="detail-box">
-                  <span class="d-label">Estimated Time of Arrival:</span>
-                  <span class="d-val text-gold">{{ selectedConvoy.eta }} (Delay: {{ selectedConvoy.delayHours }}h)</span>
+                  <span class="d-label">Real-Time ETA (Live Ticker):</span>
+                  <span class="d-val text-gold font-bold">
+                    <span class="live-clock-pulse"></span>
+                    {{ getLiveEta(selectedConvoy) }}
+                  </span>
+                </div>
+                <div class="detail-box">
+                  <span class="d-label">GPS Telematics & Speed:</span>
+                  <span class="d-val text-green font-mono">42 km/h • 34.2819°N, 75.4812°E (ASCON Ping 12ms)</span>
                 </div>
                 <div class="detail-box">
                   <span class="d-label">Weather Advisory:</span>
@@ -1593,7 +1612,9 @@
                   </svg>
                   {{ alt.timestamp }}
                 </span>
-                <span class="hud-status-badge">AWAITING AUTHORIZATION</span>
+                <span class="hud-status-badge" [class.badge-authorized]="alt.status === 'AUTHORIZED'">
+                  {{ alt.status === 'AUTHORIZED' ? '✓ AUTHORIZED & DISPATCHED' : 'AWAITING AUTHORIZATION' }}
+                </span>
               </div>
             </div>
 
@@ -1733,11 +1754,12 @@
                 </div>
               </div>
               <div class="remedy-btn-col">
-                <button type="button" class="btn-authorize-remedy" (click)="executeAlertRemedy(alt)">
+                <button type="button" class="btn-authorize-remedy" [disabled]="alt.status === 'AUTHORIZED'" (click)="executeAlertRemedy(alt)">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="auth-btn-svg">
                     <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
                   </svg>
-                  <span>Authorize Recommended Action</span>
+                  <span *ngIf="alt.status !== 'AUTHORIZED'">Authorize Recommended Action</span>
+                  <span *ngIf="alt.status === 'AUTHORIZED'">✓ Authorized &amp; Synced in DB</span>
                 </button>
               </div>
             </div>
@@ -1923,11 +1945,11 @@
                 </div>
                 <div class="s-val text-gold font-mono">{{ logisticsService.simulationState().simulatedDaysOfStock }} Days</div>
                 <div class="s-metric-meta">
-                  <span class="s-badge-baseline">Baseline: 34 Days</span>
-                  <span class="s-delta-tag text-amber">-{{ 34 - logisticsService.simulationState().simulatedDaysOfStock }}D Delta</span>
+                  <span class="s-badge-baseline">Baseline: {{ logisticsService.simulationState().baselineDays }} Days</span>
+                  <span class="s-delta-tag text-amber">{{ logisticsService.simulationState().daysDelta < 0 ? logisticsService.simulationState().daysDelta : '+' + logisticsService.simulationState().daysDelta }}D Delta</span>
                 </div>
                 <div class="s-mini-track mt-2">
-                  <div class="s-mini-fill fill-gold" [style.width.%]="(logisticsService.simulationState().simulatedDaysOfStock / 34) * 100"></div>
+                  <div class="s-mini-fill fill-gold" [style.width.%]="(logisticsService.simulationState().simulatedDaysOfStock / logisticsService.simulationState().baselineDays) * 100"></div>
                 </div>
               </div>
 
@@ -1953,7 +1975,7 @@
                 <div class="s-risk-badge-wrap">
                   <span
                     class="s-risk-pill"
-                    [class.risk-high]="logisticsService.simulationState().stockoutRisk.includes('High')"
+                    [class.risk-high]="logisticsService.simulationState().stockoutRisk.includes('Critical') || logisticsService.simulationState().stockoutRisk.includes('High')"
                     [class.risk-moderate]="logisticsService.simulationState().stockoutRisk.includes('Moderate') || logisticsService.simulationState().stockoutRisk.includes('Medium')"
                     [class.risk-low]="logisticsService.simulationState().stockoutRisk.includes('Low')"
                   >
@@ -1968,14 +1990,14 @@
             <!-- BEFORE VS AFTER STRESS POSTURE -->
             <div class="posture-header-row">
               <h4 class="subpanel-title">Before vs After Stress Posture:</h4>
-              <span class="badge-gold">DELTA: -22.6% POSTURE SHIFT</span>
+              <span class="badge-gold">DELTA: {{ logisticsService.simulationState().postureDelta }}% POSTURE SHIFT</span>
             </div>
             <div class="comparison-bar-grid">
               <div class="comp-col">
                 <span class="comp-badge badge-normal">BASELINE</span>
                 <span class="comp-title">Normal Baseline</span>
                 <div class="comp-bar-shell"><div class="comp-bar-fill fill-green" style="height: 96.8%;"></div></div>
-                <span class="comp-score text-green">96.8%</span>
+                <span class="comp-score text-green">{{ logisticsService.simulationState().normalBaselineScore }}%</span>
                 <span class="comp-caption text-neutral">34 Days Buffer Nominal</span>
               </div>
               <div class="comp-vs-divider">
@@ -1984,9 +2006,26 @@
               <div class="comp-col">
                 <span class="comp-badge badge-stress">SIMULATION</span>
                 <span class="comp-title">Under Simulation Stress</span>
-                <div class="comp-bar-shell"><div class="comp-bar-fill fill-amber" style="height: 74.2%;"></div></div>
-                <span class="comp-score text-amber">74.2%</span>
-                <span class="comp-caption text-amber">Resilience Deficit (-22.6%)</span>
+                <div class="comp-bar-shell">
+                  <div
+                    class="comp-bar-fill"
+                    [class.fill-green]="logisticsService.simulationState().stressPostureScore >= 85"
+                    [class.fill-amber]="logisticsService.simulationState().stressPostureScore >= 60 && logisticsService.simulationState().stressPostureScore < 85"
+                    [class.fill-red]="logisticsService.simulationState().stressPostureScore < 60"
+                    [style.height.%]="logisticsService.simulationState().stressPostureScore"
+                  ></div>
+                </div>
+                <span
+                  class="comp-score"
+                  [class.text-green]="logisticsService.simulationState().stressPostureScore >= 85"
+                  [class.text-amber]="logisticsService.simulationState().stressPostureScore >= 60 && logisticsService.simulationState().stressPostureScore < 85"
+                  [class.text-red]="logisticsService.simulationState().stressPostureScore < 60"
+                >{{ logisticsService.simulationState().stressPostureScore }}%</span>
+                <span
+                  class="comp-caption"
+                  [class.text-amber]="logisticsService.simulationState().stressPostureScore >= 60"
+                  [class.text-red]="logisticsService.simulationState().stressPostureScore < 60"
+                >{{ logisticsService.simulationState().resilienceDeficitText }}</span>
               </div>
             </div>
 
@@ -2075,6 +2114,22 @@
           </div>
         </div>
 
+        <!-- CONTEXTUAL AUDIT WINDOW SUMMARY RIBBON -->
+        <div class="card-surface mt-3 p-3">
+          <div class="flex-between">
+            <div class="font-mono text-xs text-gold">
+              <span class="live-clock-pulse"></span>
+              AUDIT WINDOW: <strong>{{ getReportSummary().window }}</strong>
+            </div>
+            <div class="text-xs text-green font-bold">
+              POSTURE: {{ getReportSummary().stockPosture }}
+            </div>
+          </div>
+          <div class="text-xs text-muted mt-1">
+            {{ getReportSummary().focus }}
+          </div>
+        </div>
+
         <!-- DATA TABLE -->
         <div class="table-responsive card-surface mt-3">
           <table class="c2-table">
@@ -2090,41 +2145,30 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td><strong>Northern Command (Udhampur)</strong></td>
-                <td>420 Units</td>
-                <td class="text-green font-bold">97.2%</td>
-                <td>180 DOS</td>
-                <td>62 DOS</td>
-                <td>42 DOF</td>
-                <td><span class="badge-success">Verified</span></td>
+              <tr *ngFor="let row of getReportRows()">
+                <td>
+                  <strong>{{ row.theater }}</strong>
+                  <div class="text-xs text-muted">{{ row.subSector }}</div>
+                </td>
+                <td class="text-nowrap">{{ row.formations }}</td>
+                <td class="font-bold text-nowrap" [class.text-green]="row.readinessVal >= 96" [class.text-amber]="row.readinessVal < 96">
+                  {{ row.readiness }}
+                </td>
+                <td class="text-nowrap">{{ row.rationsDos }}</td>
+                <td class="text-nowrap">{{ row.polDos }}</td>
+                <td class="text-nowrap">{{ row.munitionsDof }}</td>
+                <td class="text-nowrap">
+                  <span class="badge-success">{{ row.auditStatus }}</span>
+                </td>
               </tr>
-              <tr>
-                <td><strong>Eastern Command (Kolkata)</strong></td>
-                <td>380 Units</td>
-                <td class="text-green font-bold">95.8%</td>
-                <td>150 DOS</td>
-                <td>58 DOS</td>
-                <td>40 DOF</td>
-                <td><span class="badge-success">Verified</span></td>
-              </tr>
-              <tr>
-                <td><strong>Western Command (Chandimandir)</strong></td>
-                <td>260 Units</td>
-                <td class="text-green font-bold">98.1%</td>
-                <td>120 DOS</td>
-                <td>70 DOS</td>
-                <td>45 DOF</td>
-                <td><span class="badge-success">Verified</span></td>
-              </tr>
-              <tr>
-                <td><strong>Southern Command (Pune)</strong></td>
-                <td>180 Units</td>
-                <td class="text-green font-bold">96.0%</td>
-                <td>90 DOS</td>
-                <td>65 DOS</td>
-                <td>38 DOF</td>
-                <td><span class="badge-success">Verified</span></td>
+              <tr class="bg-surface-elevated font-bold">
+                <td><strong>National Strategic Aggregate</strong></td>
+                <td>{{ getReportSummary().totalFormations }}</td>
+                <td class="text-green">{{ getReportSummary().meanReadiness }}</td>
+                <td>{{ getReportSummary().rationsAvg }}</td>
+                <td>{{ getReportSummary().polAvg }}</td>
+                <td>{{ getReportSummary().munitionsAvg }}</td>
+                <td><span class="badge-success">✓ Audited</span></td>
               </tr>
             </tbody>
           </table>

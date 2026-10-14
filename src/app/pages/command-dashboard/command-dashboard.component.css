@@ -1594,6 +1594,10 @@
   border-left-color: #f59e0b; 
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), inset 0 0 12px rgba(245, 158, 11, 0.06);
 }
+.alert-entry-card.border-green { 
+  border-left-color: #22c55e; 
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35), inset 0 0 12px rgba(34, 197, 94, 0.08);
+}
 
 .alt-top-row {
   display: flex;
@@ -1625,6 +1629,27 @@
   background: #ef4444;
   color: #ffffff;
   box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+}
+
+.alt-sev-pill.bg-green {
+  background: #22c55e;
+  color: #000000;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+}
+
+.badge-green {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.5);
+  color: #4ade80;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.alt-synced-hash {
+  font-size: 0.72rem;
+  letter-spacing: 0.5px;
 }
 
 .alt-theater {
@@ -4786,6 +4811,31 @@
   accent-color: #22c55e;
   cursor: pointer;
   flex-shrink: 0;
+}
+
+/* Live Timing Pulse & Authorized Status Badge */
+.live-clock-pulse {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+  margin-right: 6px;
+  animation: liveTickerPulse 1.5s infinite;
+  vertical-align: middle;
+}
+
+@keyframes liveTickerPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.35); opacity: 0.5; }
+}
+
+.hud-status-badge.badge-authorized {
+  background: rgba(34, 197, 94, 0.15) !important;
+  color: #4ade80 !important;
+  border: 1px solid rgba(74, 222, 128, 0.5) !important;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.25) !important;
 }
 
 

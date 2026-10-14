@@ -1,22 +1,154 @@
 .auth-page-wrapper {
-  min-height: calc(100vh - 250px);
+  min-height: calc(100vh - 200px);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px 20px;
-  background: radial-gradient(circle at 50% 30%, #1e3825 0%, #112217 60%, #0a140d 100%);
+  padding: 40px 20px 48px;
+  background-color: #050d07;
   position: relative;
+  overflow: hidden;
+}
+
+/* Background Carousel Container */
+.auth-bg-carousel {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.auth-bg-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 36%;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transform: scale(1.0);
+  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), transform 6s ease-out;
+  will-change: opacity, transform;
+}
+
+.auth-bg-slide.active {
+  opacity: 1;
+  transform: scale(1.04);
+}
+
+/* Cinematic Military Gradient & Vignette Overlay */
+.auth-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(2, 8, 4, 0.15) 0%, rgba(2, 8, 4, 0.48) 70%, rgba(1, 5, 2, 0.78) 100%),
+    linear-gradient(180deg, rgba(3, 10, 5, 0.4) 0%, rgba(5, 16, 8, 0.15) 40%, rgba(3, 10, 5, 0.45) 80%, rgba(2, 6, 3, 0.7) 100%);
+  z-index: 1;
+}
+
+/* Cyber Tactical Grid Dots */
+.auth-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(34, 197, 94, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 197, 94, 0.04) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.7;
 }
 
 .auth-card-container {
   width: 100%;
   max-width: 620px;
   background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
-  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 12px;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.8),
+    0 4px 24px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(212, 175, 55, 0.45);
+  border: 1px solid rgba(212, 175, 55, 0.5);
   overflow: hidden;
   position: relative;
+  z-index: 5;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Subtle Scene Badge & Indicator Dots */
+.auth-scene-badge {
+  margin-top: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(4, 15, 8, 0.85);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 6px 16px;
+  border-radius: 20px;
+  position: relative;
+  z-index: 5;
+  max-width: 90vw;
+}
+
+.scene-dot-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+  animation: pulseScene 2s infinite ease-in-out;
+  flex-shrink: 0;
+}
+
+@keyframes pulseScene {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.scene-title {
+  font-family: var(--font-secondary);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #e2e8f0;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.scene-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 6px;
+  padding-left: 10px;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.scene-dot-btn {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.scene-dot-btn:hover {
+  background: rgba(245, 158, 11, 0.7);
+  transform: scale(1.2);
+}
+
+.scene-dot-btn.active {
+  background: #f59e0b;
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.85);
+  transform: scale(1.25);
 }
 
 /* Header Banner */

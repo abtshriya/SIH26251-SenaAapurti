@@ -1,4 +1,18 @@
 <div class="auth-page-wrapper">
+
+  <!-- Dynamic Cinematic Military Background Slideshow -->
+  <div class="auth-bg-carousel" aria-hidden="true">
+    <div
+      *ngFor="let img of authImages; let i = index"
+      class="auth-bg-slide"
+      [class.active]="i === currentBgIndex"
+      [style.backgroundImage]="'url(' + img.src + ')'"
+    ></div>
+    <!-- Layered Tactical Dark Vignette & Cyber Grid Overlay -->
+    <div class="auth-bg-overlay"></div>
+    <div class="auth-grid-overlay"></div>
+  </div>
+
   <div class="auth-card-container">
 
     <!-- Top Security Header -->
@@ -674,4 +688,22 @@
     </div>
 
   </div>
+
+  <!-- Subtle Military Operational Scene Badge & Controls -->
+  <div class="auth-scene-badge" aria-label="Operational Scene Selector">
+    <span class="scene-dot-pulse"></span>
+    <span class="scene-title">{{ authImages[currentBgIndex].title }}</span>
+    <div class="scene-dots">
+      <button
+        *ngFor="let img of authImages; let i = index"
+        type="button"
+        class="scene-dot-btn"
+        [class.active]="i === currentBgIndex"
+        (click)="currentBgIndex = i"
+        [attr.title]="img.title"
+        [attr.aria-label]="'Switch scene to ' + img.title"
+      ></button>
+    </div>
+  </div>
+
 </div>

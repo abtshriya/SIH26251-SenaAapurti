@@ -23,6 +23,15 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   private readonly API_BASE = 'http://localhost:8000/api/v1';
 
+  // Background Images Carousel
+  authImages = [
+    { src: '/images/auth_bg_1.jpg', title: 'Tactical Border Defense & Forward Deployment' },
+    { src: '/images/auth_bg_2.jpg', title: 'Indian Armed Forces Regimental Strength' },
+    { src: '/images/auth_bg_3.jpg', title: 'Army Aviation Combat Helicopter Operations' }
+  ];
+  currentBgIndex = 0;
+  private bgInterval: any;
+
   // Current sub-route mode
   mode: 'login' | 'register' | 'forgot-password' | 'unauthorized' = 'login';
   portalMode: 'command' | 'unit' = 'command';
@@ -142,6 +151,17 @@ export class AuthComponent implements OnInit, OnDestroy {
       }
       this.refreshCaptcha();
     });
+
+    // Cycle background images smoothly every 4.5 seconds
+    this.bgInterval = setInterval(() => {
+      this.currentBgIndex = (this.currentBgIndex + 1) % this.authImages.length;
+    }, 4500);
+  }
+
+  ngOnDestroy() {
+    if (this.bgInterval) {
+      clearInterval(this.bgInterval);
+    }
   }
 
   setMode(m: 'login' | 'register' | 'forgot-password' | 'unauthorized') {

@@ -1130,3 +1130,571 @@
 .mt-3 { margin-top: 14px; }
 .mt-4 { margin-top: 20px; }
 .p-4 { padding: 20px; }
+
+/* MODALS EXTENSIONS */
+.modal-lg {
+  max-width: 840px !important;
+  width: 92%;
+}
+
+.modal-title-box {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.modal-title-box h3 {
+  margin: 0;
+  font-family: var(--font-military);
+  font-size: 1.15rem;
+  color: #fff;
+}
+
+.btn-close {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.btn-close:hover {
+  color: #fff;
+}
+
+/* TELEMETRY CHART CONTROLS */
+.chart-header-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.telemetry-live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  color: #86efac;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.live-dot {
+  width: 7px;
+  height: 7px;
+  background: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #22c55e;
+  animation: pulse-dot 1.5s infinite alternate;
+}
+
+@keyframes pulse-dot {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  100% { transform: scale(1.2); opacity: 1; }
+}
+
+.period-toggle-btn-group {
+  display: inline-flex;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.period-btn {
+  background: rgba(0, 0, 0, 0.3);
+  color: #94a3b8;
+  border: none;
+  padding: 5px 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.period-btn.active,
+.period-btn:hover {
+  background: #22c55e;
+  color: #0b150e;
+  font-weight: 700;
+}
+
+.chart-wrapper {
+  position: relative;
+  background: #09130b;
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.chart-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.chart-tooltip-popup {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  background: #112217;
+  border: 1px solid #4ade80;
+  border-radius: 6px;
+  padding: 8px 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+  z-index: 50;
+  min-width: 140px;
+}
+
+.tip-date {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  margin-bottom: 2px;
+}
+
+.tip-val {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #22c55e;
+  font-family: var(--font-military);
+}
+
+.tip-type {
+  font-size: 0.65rem;
+  color: #cbd5e1;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* INSPECTION CHECKLIST & MODAL */
+.ack-summary-card {
+  background: #0d1b10;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 14px;
+}
+
+.ack-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.metric-label {
+  font-size: 0.68rem;
+  color: #718a7a;
+  display: block;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.inspection-checklist-box {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-radius: 6px;
+  padding: 14px;
+}
+
+.box-subheading {
+  font-size: 0.85rem;
+  color: #86efac;
+  margin-top: 0;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+  color: #e2e8f0;
+  cursor: pointer;
+}
+
+.checkbox-row input[type="checkbox"] {
+  accent-color: #22c55e;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.audit-block-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px dashed rgba(34, 197, 94, 0.4);
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  color: #a7f3d0;
+  line-height: 1.4;
+}
+
+.shield-icon {
+  font-size: 1.2rem;
+}
+
+/* TRACKER MODAL */
+.tracker-status-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  background: #09130b;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+}
+
+.timeline-checkpoints {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tl-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  position: relative;
+}
+
+.tl-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 30px;
+  bottom: -12px;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.tl-item.completed:not(:last-child)::after {
+  background: #22c55e;
+}
+
+.tl-marker {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #182d1c;
+  border: 1px solid #335338;
+  color: #94a3b8;
+  font-size: 0.85rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+.tl-item.completed .tl-marker {
+  background: #22c55e;
+  border-color: #22c55e;
+  color: #0b150e;
+}
+
+.tl-item.active .tl-marker {
+  background: #eab308;
+  border-color: #facc15;
+  color: #000;
+  box-shadow: 0 0 10px rgba(234, 179, 8, 0.6);
+}
+
+.tl-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.tl-content strong {
+  font-size: 0.88rem;
+  color: #fff;
+}
+
+.tl-content span {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+/* ==========================================================================
+   OFFICIAL MILITARY RECEIPT VOUCHER (IAFZ-2026) STYLING
+   ========================================================================== */
+.voucher-modal-card {
+  max-width: 900px !important;
+}
+
+.printable-voucher {
+  background: #0f1c12;
+  padding: 16px;
+  max-height: 75vh;
+  overflow-y: auto;
+}
+
+.military-voucher-paper {
+  background: #fbfbf8;
+  color: #111827;
+  border: 3px double #1f2937;
+  border-radius: 4px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.voucher-top-crest {
+  text-align: center;
+  border-bottom: 2px solid #111827;
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+}
+
+.gov-emblem {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.gov-heading {
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #111827;
+  margin-top: 4px;
+}
+
+.form-title {
+  font-size: 1.15rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: #044b1c;
+  margin-top: 2px;
+}
+
+.form-sub {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #374151;
+  letter-spacing: 0.05em;
+}
+
+.voucher-barcode-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f3f4f6;
+  border: 1px dashed #6b7280;
+  padding: 10px 14px;
+  border-radius: 4px;
+  margin-bottom: 14px;
+}
+
+.barcode-visual {
+  display: flex;
+  flex-direction: column;
+}
+
+.barcode-lines {
+  font-family: monospace;
+  font-size: 1.6rem;
+  letter-spacing: -2px;
+  font-weight: 900;
+  color: #111827;
+}
+
+.barcode-text {
+  font-family: monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #4b5563;
+  letter-spacing: 0.08em;
+}
+
+.voucher-meta-box {
+  text-align: right;
+  font-size: 0.8rem;
+  color: #1f2937;
+  line-height: 1.5;
+}
+
+.voucher-meta-box .highlight-text {
+  font-family: monospace;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #044b1c;
+}
+
+.voucher-grid-table {
+  border: 1px solid #374151;
+  margin-bottom: 14px;
+}
+
+.vg-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 140px 1fr;
+  border-bottom: 1px solid #d1d5db;
+}
+
+.vg-row:last-child {
+  border-bottom: none;
+}
+
+.vg-cell {
+  padding: 8px 10px;
+  font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+}
+
+.vg-cell.label {
+  background: #f3f4f6;
+  font-weight: 700;
+  color: #374151;
+  border-right: 1px solid #d1d5db;
+  font-family: Arial, sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+}
+
+.vg-cell.val {
+  color: #111827;
+  border-right: 1px solid #d1d5db;
+}
+
+.vg-cell.val:last-child {
+  border-right: none;
+}
+
+.voucher-hash-banner {
+  background: #111827;
+  color: #4ade80;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.72rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hash-label {
+  color: #9ca3af;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.hash-value {
+  letter-spacing: 0.05em;
+  word-break: break-all;
+}
+
+.voucher-cert-box {
+  border-top: 1px solid #374151;
+  padding-top: 10px;
+}
+
+.voucher-cert-box p {
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: #1f2937;
+  margin-bottom: 20px;
+}
+
+.voucher-signatures {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.sig-block {
+  text-align: center;
+  min-width: 180px;
+}
+
+.sig-line {
+  border-top: 1px solid #111827;
+  padding-top: 4px;
+  font-size: 0.75rem;
+  color: #4b5563;
+  font-style: italic;
+}
+
+.sig-name {
+  font-weight: 800;
+  font-size: 0.88rem;
+  color: #111827;
+  font-family: Arial, sans-serif;
+}
+
+.sig-desig {
+  font-size: 0.72rem;
+  color: #6b7280;
+}
+
+.sig-seal-stamp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stamp-circle {
+  width: 90px;
+  height: 90px;
+  border: 2px dashed #991b1b;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #991b1b;
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  transform: rotate(-12deg);
+  opacity: 0.85;
+}
+
+.stamp-circle strong {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  margin: 2px 0;
+}
+
+/* PRINT MEDIA QUERIES */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printable-voucher-zone,
+  #printable-voucher-zone * {
+    visibility: visible;
+  }
+  #printable-voucher-zone {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    max-height: none !important;
+    overflow: visible !important;
+    background: transparent !important;
+    padding: 0 !important;
+  }
+  .military-voucher-paper {
+    border: 2px solid #000 !important;
+    box-shadow: none !important;
+    color: #000 !important;
+    background: #fff !important;
+  }
+}

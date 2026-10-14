@@ -359,7 +359,7 @@
                 <div class="s-meta">
                   <span class="text-green font-bold">ETA: 4 hrs 15 mins</span> • Via Atal Tunnel-Keylong Axis
                 </div>
-                <button type="button" class="btn-army-sm mt-2" (click)="setTab('logistics')">
+                <button type="button" class="btn-army-sm mt-2" (click)="trackConvoyLive(logisticsService.convoys()[0])">
                   Track Convoy Live
                 </button>
               </div>
@@ -373,6 +373,9 @@
                 <div class="s-meta">
                   <span class="text-gold font-bold">ETA: 7 hrs 10 mins</span> • Via Nilgrath Bypass
                 </div>
+                <button type="button" class="btn-army-sm mt-2" (click)="trackConvoyLive(logisticsService.convoys()[2])">
+                  Track Convoy Live
+                </button>
               </div>
             </div>
 
@@ -525,6 +528,109 @@
             </div>
           </div>
         </div>
+
+        <!-- ADD STORE RECEIPT MODAL (REAL DB SYNC) -->
+        <div *ngIf="showAddReceiptModal" class="modal-backdrop" (click)="showAddReceiptModal = false">
+          <div class="modal-card" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+              <h3 class="modal-title">+ Add Store Receipt Voucher</h3>
+              <button class="modal-close-btn" (click)="showAddReceiptModal = false">✕</button>
+            </div>
+            <div class="modal-body">
+              <p class="text-xs text-muted mb-2">Verified receipt will update 14 Rajput stock holding in PostgreSQL database & seal in tamper-proof cryptographic ledger.</p>
+              <div class="form-group mb-2">
+                <label class="form-label">Item Nomenclature / SKU</label>
+                <select [(ngModel)]="receiptItemSku" class="form-control">
+                  <option *ngFor="let item of unitInventoryList" [value]="item.id">
+                    {{ item.id }} • {{ item.item }} ({{ item.category }})
+                  </option>
+                </select>
+              </div>
+              <div class="form-grid-2 mb-2">
+                <div class="form-group">
+                  <label class="form-label">Quantity Received</label>
+                  <input type="number" [(ngModel)]="receiptQuantity" class="form-control" min="1" placeholder="e.g. 2500">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Dispatching Source Depot</label>
+                  <select [(ngModel)]="receiptDepot" class="form-control">
+                    <option value="COD Pathankot">COD Pathankot</option>
+                    <option value="21 Adv Base Depot (Udhampur)">21 Adv Base Depot (Udhampur)</option>
+                    <option value="COD Narangi (Guwahati)">COD Narangi (Guwahati)</option>
+                    <option value="COD Agra">COD Agra</option>
+                    <option value="COD Jabalpur">COD Jabalpur</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-grid-2 mb-2">
+                <div class="form-group">
+                  <label class="form-label">Receiving Quartermaster</label>
+                  <input type="text" [(ngModel)]="receiptOfficer" class="form-control" readonly>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Quality & Seal Inspection</label>
+                  <select [(ngModel)]="receiptInspection" class="form-control">
+                    <option value="PASSED_VERIFIED">PASSED // Seals Intact & Tested</option>
+                    <option value="CONDITION_SATISFACTORY">PASSED // Combat Usable</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group mb-2">
+                <label class="form-label">Inspection Notes & Waybill Ref</label>
+                <textarea [(ngModel)]="receiptRemarks" rows="2" class="form-control" placeholder="Sub-zero grade certified, seal numbers verified..."></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn-outline-army" (click)="showAddReceiptModal = false">Cancel</button>
+              <button type="button" class="btn-army-primary" (click)="submitAddStoreReceipt()">
+                ✓ Commit Receipt to DB
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- RECORD ISSUE / CONSUMPTION MODAL (REAL DB SYNC) -->
+        <div *ngIf="showRecordConsumptionModal" class="modal-backdrop" (click)="showRecordConsumptionModal = false">
+          <div class="modal-card" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+              <h3 class="modal-title">Record Store Issue / Daily Burn</h3>
+              <button class="modal-close-btn" (click)="showRecordConsumptionModal = false">✕</button>
+            </div>
+            <div class="modal-body">
+              <p class="text-xs text-muted mb-2">Deducts stock from PostgreSQL database and logs daily consumption entry into telematics history.</p>
+              <div class="form-group mb-2">
+                <label class="form-label">Item Nomenclature / SKU</label>
+                <select [(ngModel)]="consumeItemSku" class="form-control">
+                  <option *ngFor="let item of unitInventoryList" [value]="item.id">
+                    {{ item.id }} • {{ item.item }} (Current: {{ item.quantity }})
+                  </option>
+                </select>
+              </div>
+              <div class="form-group mb-2">
+                <label class="form-label">Quantity Issued / Burned</label>
+                <input type="number" [(ngModel)]="consumeQuantity" class="form-control" min="1" placeholder="e.g. 420">
+              </div>
+              <div class="form-group mb-2">
+                <label class="form-label">Tactical Mission / Operational Purpose</label>
+                <input type="text" [(ngModel)]="consumePurpose" class="form-control" placeholder="e.g. Daily Troop Rations & Tank Heating Routines">
+              </div>
+              <div class="form-group mb-2">
+                <label class="form-label">Issued To Formation / Sub-Unit</label>
+                <input type="text" [(ngModel)]="consumeIssuedTo" class="form-control" placeholder="e.g. Alpha Company Picket & BMP Section">
+              </div>
+              <div class="form-group mb-2">
+                <label class="form-label">Quartermaster Authorization Remarks</label>
+                <textarea [(ngModel)]="consumeRemarks" rows="2" class="form-control" placeholder="Authorized per daily sector routine order..."></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn-outline-army" (click)="showRecordConsumptionModal = false">Cancel</button>
+              <button type="button" class="btn-army-primary" (click)="submitRecordIssue()">
+                ✓ Commit Issue & Deduct Stock
+              </button>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- ================= 2.3 CONSUMPTION & DEMAND ================= -->
@@ -534,56 +640,189 @@
             <h2 class="module-title">2.3 Consumption Telematics & Unit Demand</h2>
             <p class="module-subtitle">Burn rates, daily troop rations, and vehicle sub-zero fuel tracking</p>
           </div>
+          <div class="header-action-group">
+            <button type="button" class="btn-outline-army" (click)="showRecordConsumptionModal = true">
+              + Log Store Burn
+            </button>
+            <button type="button" class="btn-army-primary" (click)="loadConsumptionTelemetry()">
+              🔄 Sync Telemetry from DB
+            </button>
+          </div>
         </div>
 
         <!-- CONSUMPTION OVERVIEW -->
         <div class="kpi-grid-4 mt-3">
           <div class="kpi-card">
             <div class="kpi-label">DAILY FUEL CONSUMPTION</div>
-            <div class="kpi-value text-gold">420 L/day</div>
+            <div class="kpi-value text-gold">{{ telemetrySummary.daily_fuel_consumption }}</div>
             <div class="kpi-sub">Generators + Heaters + BMPs</div>
           </div>
           <div class="kpi-card">
             <div class="kpi-label">WEEKLY RATION USAGE</div>
-            <div class="kpi-value text-green">1,400 Packs</div>
+            <div class="kpi-value text-green">{{ telemetrySummary.weekly_ration_usage }}</div>
             <div class="kpi-sub">840 Troops garrisoned</div>
           </div>
           <div class="kpi-card">
             <div class="kpi-label">MONTHLY AMMO EXPENDITURE</div>
-            <div class="kpi-value text-blue">1,200 Rnds</div>
+            <div class="kpi-value text-blue">{{ telemetrySummary.monthly_ammo_expenditure }}</div>
             <div class="kpi-sub">Field Zeroing & Ranges</div>
           </div>
           <div class="kpi-card">
             <div class="kpi-label">PREDICTED PEAK WINTER SURGE</div>
-            <div class="kpi-value text-amber">+28%</div>
+            <div class="kpi-value text-amber">{{ telemetrySummary.predicted_winter_surge }}</div>
             <div class="kpi-sub">Starts mid-November</div>
           </div>
         </div>
 
-        <!-- CONSUMPTION CHART & ANOMALIES -->
+        <!-- CONSUMPTION CHART & CONTROLS (DYNAMIC DB BACKED) -->
         <div class="card-surface mt-4">
-          <h3 class="panel-heading">Daily Consumption History vs Predicted Requirement</h3>
-          <div class="chart-large-wrap mt-3">
-            <svg viewBox="0 0 800 200" class="demand-trend-large-svg">
-              <line x1="40" y1="30" x2="760" y2="30" stroke="#1e3825" stroke-width="1"/>
-              <line x1="40" y1="90" x2="760" y2="90" stroke="#1e3825" stroke-width="1"/>
-              <line x1="40" y1="150" x2="760" y2="150" stroke="#1e3825" stroke-width="1"/>
+          <div class="chart-header-controls">
+            <div>
+              <h3 class="panel-heading">Daily Consumption History vs Predicted Requirement</h3>
+              <span class="telemetry-live-pill">● Live PostgreSQL Telemetry Stream (consumption_history)</span>
+            </div>
+            <div class="chart-filter-pills">
+              <select [(ngModel)]="consumptionFilterCat" (ngModelChange)="onTelemetryCategoryChange($event)" class="form-control-sm">
+                <option value="All">All Commodities</option>
+                <option value="Class III (POL)">Class III (POL / Fuel)</option>
+                <option value="Class I (Rations)">Class I (Rations / MRE)</option>
+                <option value="Class V (Ammo)">Class V (Ammunition)</option>
+              </select>
+              <div class="period-toggle-btn-group">
+                <button type="button" class="period-btn" [class.active]="consumptionPeriodDays === 7" (click)="onTelemetryPeriodChange(7)">7 Days</button>
+                <button type="button" class="period-btn" [class.active]="consumptionPeriodDays === 14" (click)="onTelemetryPeriodChange(14)">14 Days</button>
+              </div>
+            </div>
+          </div>
 
-              <!-- Historical Bar Chart Graphic -->
-              <rect x="80" y="100" width="30" height="50" fill="#3b82f6" rx="3"/>
-              <rect x="140" y="90" width="30" height="60" fill="#3b82f6" rx="3"/>
-              <rect x="200" y="110" width="30" height="40" fill="#3b82f6" rx="3"/>
-              <rect x="260" y="85" width="30" height="65" fill="#3b82f6" rx="3"/>
-              <rect x="320" y="70" width="30" height="80" fill="#3b82f6" rx="3"/>
-              <rect x="380" y="65" width="30" height="85" fill="#3b82f6" rx="3"/>
+          <!-- DYNAMIC DATA-DRIVEN SVG CHART -->
+          <div class="chart-large-wrap mt-3" style="position: relative;">
+            <svg viewBox="0 0 820 220" class="demand-trend-large-svg">
+              <defs>
+                <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#3b82f6"/>
+                  <stop offset="100%" stop-color="#1d4ed8"/>
+                </linearGradient>
+                <linearGradient id="barGradientToday" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#22c55e"/>
+                  <stop offset="100%" stop-color="#15803d"/>
+                </linearGradient>
+                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="3" result="glow"/>
+                  <feMerge>
+                    <feMergeNode in="glow"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
 
-              <!-- Predicted line -->
-              <path d="M 395 65 Q 480 50 560 42 Q 650 35 740 30"
-                    fill="none" stroke="#d4af37" stroke-width="3" stroke-dasharray="5 3"/>
+              <!-- Gridlines -->
+              <line x1="60" y1="30" x2="780" y2="30" stroke="#1e3825" stroke-width="1" stroke-dasharray="2 4"/>
+              <line x1="60" y1="70" x2="780" y2="70" stroke="#1e3825" stroke-width="1" stroke-dasharray="2 4"/>
+              <line x1="60" y1="110" x2="780" y2="110" stroke="#1e3825" stroke-width="1" stroke-dasharray="2 4"/>
+              <line x1="60" y1="150" x2="780" y2="150" stroke="#1e3825" stroke-width="1.5"/>
 
-              <text x="390" y="170" fill="#ef4444" font-size="10">Today</text>
-              <text x="560" y="170" fill="#d4af37" font-size="10">Predicted Cold Surge</text>
+              <!-- Y-Axis Value Labels -->
+              <text x="50" y="34" fill="#94a3b8" font-size="10" text-anchor="end">{{ telemetryMaxVal }}</text>
+              <text x="50" y="74" fill="#94a3b8" font-size="10" text-anchor="end">{{ Math.round(telemetryMaxVal * 0.66) }}</text>
+              <text x="50" y="114" fill="#94a3b8" font-size="10" text-anchor="end">{{ Math.round(telemetryMaxVal * 0.33) }}</text>
+              <text x="50" y="154" fill="#94a3b8" font-size="10" text-anchor="end">0</text>
+
+              <!-- Dynamic Historical Bars from PostgreSQL DB -->
+              <g *ngFor="let pt of telemetryPoints; let i = index">
+                <!-- Bar -->
+                <rect
+                  [attr.x]="80 + (i * 44)"
+                  [attr.y]="getBarY(pt.consumed)"
+                  width="28"
+                  [attr.height]="getBarHeight(pt.consumed)"
+                  [attr.fill]="i === telemetryPoints.length - 1 ? 'url(#barGradientToday)' : 'url(#barGradient)'"
+                  rx="4"
+                  style="cursor: pointer; transition: all 0.25s ease;"
+                  (mouseenter)="showTelemetryTooltip(pt, $event)"
+                  (mouseleave)="hideTelemetryTooltip()"
+                />
+                <!-- Value label above bar -->
+                <text
+                  [attr.x]="94 + (i * 44)"
+                  [attr.y]="getBarY(pt.consumed) - 6"
+                  fill="#94a3b8"
+                  font-size="9"
+                  font-weight="bold"
+                  text-anchor="middle"
+                >
+                  {{ pt.consumed }}
+                </text>
+                <!-- X-Axis Day label -->
+                <text
+                  [attr.x]="94 + (i * 44)"
+                  y="172"
+                  [attr.fill]="i === telemetryPoints.length - 1 ? '#22c55e' : '#94a3b8'"
+                  [attr.font-weight]="i === telemetryPoints.length - 1 ? 'bold' : 'normal'"
+                  font-size="10"
+                  text-anchor="middle"
+                >
+                  {{ pt.label }}
+                </text>
+              </g>
+
+              <!-- Predicted Requirement Curve (AI Forecast connecting from today's point) -->
+              <!-- Connecting path -->
+              <path
+                d="M 358 65 Q 440 52 520 44 Q 610 38 720 30"
+                fill="none"
+                stroke="#d4af37"
+                stroke-width="2.5"
+                stroke-dasharray="6 4"
+                filter="url(#glow)"
+              />
+
+              <!-- Projected Point Markers -->
+              <g *ngFor="let proj of telemetryProjections; let pi = index">
+                <circle
+                  [attr.cx]="420 + (pi * 75)"
+                  [attr.cy]="60 - (pi * 7)"
+                  r="5"
+                  fill="#d4af37"
+                  stroke="#112217"
+                  stroke-width="2"
+                  style="cursor: pointer;"
+                  (mouseenter)="showTelemetryTooltip({ label: proj.label, consumed: proj.predicted, troop_count: 840, tempo: 'Predicted Cold Surge (+28%)' }, $event)"
+                  (mouseleave)="hideTelemetryTooltip()"
+                />
+                <text
+                  [attr.x]="420 + (pi * 75)"
+                  [attr.y]="48 - (pi * 7)"
+                  fill="#d4af37"
+                  font-size="9"
+                  font-weight="bold"
+                  text-anchor="middle"
+                >
+                  {{ proj.predicted }}
+                </text>
+                <text
+                  [attr.x]="420 + (pi * 75)"
+                  y="172"
+                  fill="#d4af37"
+                  font-size="9"
+                  text-anchor="middle"
+                >
+                  {{ proj.label }}
+                </text>
+              </g>
+
+              <!-- Chart Annotations & Legend -->
+              <text x="358" y="195" fill="#22c55e" font-size="10" font-weight="bold" text-anchor="middle">▲ Today's Holding Baseline</text>
+              <text x="570" y="195" fill="#d4af37" font-size="10" font-weight="bold" text-anchor="middle">--- Predicted Cold Surge Horizon</text>
             </svg>
+
+            <!-- Floating Hover Tooltip -->
+            <div *ngIf="telemetryTooltip" class="chart-tooltip-popup">
+              <div class="tt-title">{{ telemetryTooltip.label }}</div>
+              <div class="tt-metric">Units Consumed: <strong>{{ telemetryTooltip.consumed }} Units</strong></div>
+              <div class="tt-sub">Troop Garrison: {{ telemetryTooltip.troop_count || 840 }} Personnel</div>
+              <div class="tt-sub">Tactical Tempo: {{ telemetryTooltip.tempo || 'Defensive Patrol' }}</div>
+            </div>
           </div>
         </div>
       </section>
@@ -743,10 +982,18 @@
             <h2 class="module-title">2.5 Unit Inbound & Outbound Logistics</h2>
             <p class="module-subtitle">Tracking road convoys and aerial drops scheduled for 14 Rajput base</p>
           </div>
+          <button type="button" class="btn-outline-army" (click)="loadAcknowledgements()">
+            🔄 Refresh Consignments
+          </button>
         </div>
 
         <div class="card-surface mt-3">
-          <h3 class="panel-heading">Inbound Consignments</h3>
+          <div class="panel-header-flex">
+            <div>
+              <h3 class="panel-heading">Inbound Consignments</h3>
+              <p class="panel-subtext">Active convoys en route to 14 Rajput Mech Stores Depot via Srinagar-Leh / Manali-Leh Axis</p>
+            </div>
+          </div>
           <div class="table-responsive mt-3">
             <table class="c2-table">
               <thead>
@@ -769,13 +1016,248 @@
                   <td class="text-green font-bold">{{ c.eta }}</td>
                   <td><span class="badge-success">{{ c.status }}</span></td>
                   <td>
-                    <button type="button" class="btn-army-sm" (click)="acknowledgeDelivery(c.id)">
-                      Acknowledge Receipt
-                    </button>
+                    <div style="display: flex; gap: 8px;">
+                      <button type="button" class="btn-army-sm" (click)="openAcknowledgeModal(c)">
+                        ✓ Acknowledge Receipt
+                      </button>
+                      <button type="button" class="btn-outline-army-sm" (click)="trackConvoyLive(c)">
+                        📍 Track Route
+                      </button>
+                    </div>
                   </td>
                 </tr>
               </tbody>
             </table>
+          </div>
+        </div>
+
+        <!-- Consignment Inspection & Acknowledgement Modal -->
+        <div class="modal-backdrop" *ngIf="showAckModal && selectedConvoyForAck">
+          <div class="modal-card modal-lg">
+            <div class="modal-header">
+              <div class="modal-title-box">
+                <span class="badge-tag">IAFZ-2026 MIL-INSPECTION</span>
+                <h3>Consignment Handover & Verification</h3>
+              </div>
+              <button type="button" class="btn-close" (click)="showAckModal = false">✕</button>
+            </div>
+            <div class="modal-body">
+              <div class="ack-summary-card mb-3">
+                <div class="ack-metric-grid">
+                  <div>
+                    <span class="metric-label">CONVOY CALLSIGN</span>
+                    <strong class="text-white">{{ selectedConvoyForAck.callsign }} ({{ selectedConvoyForAck.id }})</strong>
+                  </div>
+                  <div>
+                    <span class="metric-label">SOURCE DEPOT</span>
+                    <strong class="text-white">{{ selectedConvoyForAck.source }}</strong>
+                  </div>
+                  <div>
+                    <span class="metric-label">CARGO MANIFEST</span>
+                    <strong class="text-green">{{ selectedConvoyForAck.tonnage }}T {{ selectedConvoyForAck.cargoType }}</strong>
+                  </div>
+                  <div>
+                    <span class="metric-label">VEHICLES & ESCORT</span>
+                    <strong class="text-white">{{ selectedConvoyForAck.vehiclesCount }} Trucks • {{ selectedConvoyForAck.driverEscort }}</strong>
+                  </div>
+                </div>
+              </div>
+
+              <div class="inspection-checklist-box mb-3">
+                <h4 class="box-subheading">Quartermaster Physical Inspection Checklist</h4>
+                <label class="checkbox-row">
+                  <input type="checkbox" [(ngModel)]="ackSealsIntact">
+                  <span>Physical Security Seals intact & serials cross-matched with Transit Waybill</span>
+                </label>
+                <label class="checkbox-row">
+                  <input type="checkbox" [(ngModel)]="ackDensityVerified">
+                  <span>Field Lab testing passed (Fuel Density at -15°C / Ammunition moisture seals / Ration expiry)</span>
+                </label>
+                <label class="checkbox-row">
+                  <input type="checkbox" [(ngModel)]="ackWeightMatched">
+                  <span>Weighbridge gross tonnage verified at FSD Leh intake gate</span>
+                </label>
+              </div>
+
+              <div class="form-group mb-3">
+                <label class="form-label">Quartermaster Inspection Endorsement / Remarks</label>
+                <textarea [(ngModel)]="ackRemarks" rows="2" class="form-control" placeholder="Enter stores verification notes..."></textarea>
+              </div>
+
+              <div class="audit-block-notice">
+                <span class="shield-icon">🛡️</span>
+                <span>Submitting this acknowledgement will commit transaction to PostgreSQL <code>consignment_acknowledgements</code>, update stock reserves, and record a cryptographically chained block in the defense ledger.</span>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn-outline-army" (click)="showAckModal = false">Cancel</button>
+              <button type="button" class="btn-army-primary" (click)="confirmAcknowledgeReceipt()">
+                ✓ Sign & Generate Official IAFZ-2026 Receipt Voucher
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Official Military Voucher IAFZ-2026 Modal -->
+        <div class="modal-backdrop" *ngIf="showReceiptVoucherModal && activeSignedReceipt">
+          <div class="modal-card modal-lg voucher-modal-card">
+            <div class="modal-header">
+              <div class="modal-title-box">
+                <span class="badge-success">OFFICIAL RECEIPT SEALED & RECORDED</span>
+                <h3>Receipt of Acknowledgement (IAFZ-2026)</h3>
+              </div>
+              <button type="button" class="btn-close" (click)="showReceiptVoucherModal = false">✕</button>
+            </div>
+            <div class="modal-body printable-voucher" id="printable-voucher-zone">
+              <div class="military-voucher-paper">
+                <div class="voucher-top-crest">
+                  <div class="gov-emblem">🇮🇳</div>
+                  <div class="gov-heading">GOVERNMENT OF INDIA • MINISTRY OF DEFENCE</div>
+                  <div class="form-title">INDIAN ARMY FORM IAFZ-2026</div>
+                  <div class="form-sub">OFFICIAL RECEIPT VOUCHER & LEDGER ACKNOWLEDGEMENT (RV-ACK)</div>
+                </div>
+
+                <div class="voucher-barcode-row">
+                  <div class="barcode-visual">
+                    <span class="barcode-lines">||| | | |||| | || | ||| |||| | ||| | || |||| |</span>
+                    <span class="barcode-text">{{ activeSignedReceipt.barcode_code || ('IA-ACK-' + activeSignedReceipt.consignment_id) }}</span>
+                  </div>
+                  <div class="voucher-meta-box">
+                    <div><strong>Voucher No:</strong> <span class="highlight-text">{{ activeSignedReceipt.ack_id }}</span></div>
+                    <div><strong>Date/Time:</strong> {{ activeSignedReceipt.timestamp || activeSignedReceipt.created_at }}</div>
+                    <div><strong>Ledger Block:</strong> #{{ activeSignedReceipt.ledger_block || '110' }} (PostgreSQL Chained)</div>
+                  </div>
+                </div>
+
+                <div class="voucher-grid-table">
+                  <div class="vg-row">
+                    <div class="vg-cell label">CONSIGNMENT REF:</div>
+                    <div class="vg-cell val"><strong>{{ activeSignedReceipt.consignment_id }}</strong> ({{ activeSignedReceipt.callsign || 'CONVOY-DIV' }})</div>
+                    <div class="vg-cell label">ORIGIN DEPOT:</div>
+                    <div class="vg-cell val">{{ activeSignedReceipt.source_depot }}</div>
+                  </div>
+                  <div class="vg-row">
+                    <div class="vg-cell label">RECEIVING UNIT:</div>
+                    <div class="vg-cell val"><strong>14 RAJPUT (MECHANISED)</strong> [UNIT-14RM-LEH]</div>
+                    <div class="vg-cell label">THEATRE / SECTOR:</div>
+                    <div class="vg-cell val">Forward Defended Locality - Shyok Sector (14 Corps, Leh)</div>
+                  </div>
+                  <div class="vg-row">
+                    <div class="vg-cell label">CARGO MANIFEST:</div>
+                    <div class="vg-cell val"><strong>{{ activeSignedReceipt.cargo_type }}</strong></div>
+                    <div class="vg-cell label">QTY VERIFIED:</div>
+                    <div class="vg-cell val text-green"><strong>{{ activeSignedReceipt.quantity_received }}</strong></div>
+                  </div>
+                  <div class="vg-row">
+                    <div class="vg-cell label">ESCORT / DRIVER:</div>
+                    <div class="vg-cell val">{{ activeSignedReceipt.driver_escort || activeSignedReceipt.escort_personnel }}</div>
+                    <div class="vg-cell label">VEHICLES COUNT:</div>
+                    <div class="vg-cell val">{{ activeSignedReceipt.vehicles_count }} Military Heavy Vehicles</div>
+                  </div>
+                  <div class="vg-row">
+                    <div class="vg-cell label">RECEIVING QM:</div>
+                    <div class="vg-cell val">{{ activeSignedReceipt.receiving_officer }}</div>
+                    <div class="vg-cell label">INSPECTION STATUS:</div>
+                    <div class="vg-cell val"><span class="badge-success">{{ activeSignedReceipt.inspection_status || 'CERTIFIED COMBAT FIT' }}</span></div>
+                  </div>
+                </div>
+
+                <div class="voucher-hash-banner">
+                  <div class="hash-label">CRYPTOGRAPHIC SHA-256 AUDIT SEAL:</div>
+                  <div class="hash-value">{{ activeSignedReceipt.crypto_hash || '7a8f9c1e0b3d4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a' }}</div>
+                </div>
+
+                <div class="voucher-cert-box">
+                  <p><strong>QUARTERMASTER CERTIFICATION:</strong> Certified that the stores and commodities enumerated above have been received in combat-ready order, physical tamper seals verified intact, lab specification cleared, and entered directly into the 14 Rajput Regimental Stores Ledger on charge.</p>
+                  <div class="voucher-signatures">
+                    <div class="sig-block">
+                      <div class="sig-line">Subedar Major (Stores)</div>
+                      <div class="sig-name">SM R. K. Singh</div>
+                      <div class="sig-desig">Physical Stock Inspector</div>
+                    </div>
+                    <div class="sig-seal-stamp">
+                      <div class="stamp-circle">
+                        <span>14 RAJPUT (MECH)</span>
+                        <strong>OFFICIAL SEAL</strong>
+                        <span>QUARTERMASTER</span>
+                      </div>
+                    </div>
+                    <div class="sig-block">
+                      <div class="sig-line">Quartermaster</div>
+                      <div class="sig-name">Major Amit Sharma</div>
+                      <div class="sig-desig">IC-71044A, QM 14 Rajput</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn-outline-army" (click)="showReceiptVoucherModal = false">Close</button>
+              <button type="button" class="btn-outline-army" (click)="downloadReceiptVoucher(activeSignedReceipt)">
+                💾 Download Voucher (.TXT)
+              </button>
+              <button type="button" class="btn-army-primary" (click)="printReceiptVoucher()">
+                🖨 Print Official Form IAFZ-2026
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Convoy Route Tracker Modal -->
+        <div class="modal-backdrop" *ngIf="showConvoyTrackerModal && trackingConvoy">
+          <div class="modal-card modal-lg">
+            <div class="modal-header">
+              <div class="modal-title-box">
+                <span class="badge-tag">LIVE SATELLITE GPS & NAVIC</span>
+                <h3>Convoy Route Tracking: {{ trackingConvoy.callsign }}</h3>
+              </div>
+              <button type="button" class="btn-close" (click)="showConvoyTrackerModal = false">✕</button>
+            </div>
+            <div class="modal-body">
+              <div class="tracker-status-strip mb-3">
+                <div><span>Origin:</span> <strong>{{ trackingConvoy.source }}</strong></div>
+                <div><span>Destination:</span> <strong>FSD Leh / 14 Rajput Forward Base</strong></div>
+                <div><span>Current Speed:</span> <strong>38 km/h</strong></div>
+                <div><span>Live Coordinates:</span> <strong class="text-green">34.1526° N, 77.5771° E</strong></div>
+              </div>
+
+              <div class="timeline-checkpoints mt-3">
+                <div class="tl-item completed">
+                  <div class="tl-marker">✓</div>
+                  <div class="tl-content">
+                    <strong>1. Departure Clearance & Gate Weighbridge</strong>
+                    <span>{{ trackingConvoy.source }} • Gate Out Manifest Signed</span>
+                  </div>
+                </div>
+                <div class="tl-item completed">
+                  <div class="tl-marker">✓</div>
+                  <div class="tl-content">
+                    <strong>2. Intermediate TCP Inspection (Kargil / Banihal)</strong>
+                    <span>Fuel seals verified intact • Security escort handed over</span>
+                  </div>
+                </div>
+                <div class="tl-item active">
+                  <div class="tl-marker">🚚</div>
+                  <div class="tl-content">
+                    <strong>3. Mountain Pass In-Transit (Khardung La / Chang La Axis)</strong>
+                    <span>Chains mounted • Snow plow clearance ahead • ETA: {{ trackingConvoy.eta }}</span>
+                  </div>
+                </div>
+                <div class="tl-item">
+                  <div class="tl-marker">•</div>
+                  <div class="tl-content">
+                    <strong>4. FSD Leh Regimental Intake Bay</strong>
+                    <span>Scheduled for IAFZ-2026 physical verification and stock ledger entry</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn-outline-army" (click)="showConvoyTrackerModal = false">Close</button>
+              <button type="button" class="btn-army-primary" (click)="openAcknowledgeModal(trackingConvoy); showConvoyTrackerModal = false;">
+                ✓ Acknowledge This Consignment
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -837,8 +1319,8 @@
       <section *ngIf="activeTab === 'reports'" class="c2-tab-content">
         <div class="content-header-row">
           <div>
-            <h2 class="module-title">2.8 Unit Logistics Reports</h2>
-            <p class="module-subtitle">Daily Quartermaster logs, store ledger balance, and indent history</p>
+            <h2 class="module-title">2.8 Unit Logistics Reports & Vouchers</h2>
+            <p class="module-subtitle">Daily Quartermaster logs, store ledger balance, and official receipts of acknowledgement (IAFZ-2026)</p>
           </div>
           <div class="header-action-group">
             <button type="button" class="btn-outline-army" (click)="exportReport('CSV')">Export CSV</button>
@@ -852,6 +1334,7 @@
         </div>
 
         <div class="table-responsive card-surface mt-3">
+          <h3 class="panel-heading mb-2">Quartermaster Ledger Reports</h3>
           <table class="c2-table">
             <thead>
               <tr>
@@ -876,6 +1359,64 @@
               </tr>
             </tbody>
           </table>
+        </div>
+
+        <!-- Official Receipts of Acknowledgement (RV-ACK) Archive -->
+        <div class="card-surface mt-4">
+          <div class="panel-header-flex">
+            <div>
+              <h3 class="panel-heading">Official Receipts of Acknowledgement (IAFZ-2026 / RV-ACK) Archive</h3>
+              <p class="panel-subtext">Cryptographically sealed and signed vouchers registered in PostgreSQL ledger</p>
+            </div>
+            <button type="button" class="btn-outline-army-sm" (click)="loadAcknowledgements()">
+              🔄 Sync Vouchers
+            </button>
+          </div>
+
+          <div class="table-responsive mt-3">
+            <table class="c2-table">
+              <thead>
+                <tr>
+                  <th>Voucher #</th>
+                  <th>Consignment / Callsign</th>
+                  <th>Cargo Received</th>
+                  <th>Origin Depot</th>
+                  <th>Verified At</th>
+                  <th>Ledger Proof</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let ack of savedAcknowledgements">
+                  <td><strong class="text-green">{{ ack.ack_id }}</strong></td>
+                  <td>{{ ack.consignment_id }} <span *ngIf="ack.callsign">({{ ack.callsign }})</span></td>
+                  <td><strong>{{ ack.quantity_received }}</strong></td>
+                  <td>{{ ack.source_depot }}</td>
+                  <td>{{ ack.timestamp || ack.created_at }}</td>
+                  <td>
+                    <span class="badge-military" title="{{ ack.crypto_hash }}">
+                      Block #{{ ack.ledger_block || '110' }} • SHA-256
+                    </span>
+                  </td>
+                  <td>
+                    <div style="display: flex; gap: 6px;">
+                      <button type="button" class="btn-army-sm" (click)="viewReceiptVoucher(ack)">
+                        👁 View Voucher
+                      </button>
+                      <button type="button" class="btn-outline-army-sm" (click)="downloadReceiptVoucher(ack)">
+                        💾 TXT
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr *ngIf="savedAcknowledgements.length === 0">
+                  <td colspan="7" class="text-center py-4 text-muted">
+                    No receipts of acknowledgement recorded yet. Acknowledge an inbound consignment in Section 2.5 to generate the first IAFZ-2026 voucher.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 

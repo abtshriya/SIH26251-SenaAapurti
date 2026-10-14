@@ -1,4 +1,6 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal, computed, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { catchError, of } from 'rxjs';
 import { 
   ArmyCommand, 
   ArmyUnit, 
@@ -18,6 +20,9 @@ export type { ArmyCommand, ArmyUnit };
   providedIn: 'root'
 })
 export class UnitDatabaseService {
+  private http = inject(HttpClient);
+  private readonly API_BASE = 'http://localhost:8000/api/v1';
+
   /**
    * Comprehensive Indian Army Commands Database (All 7 Commands + ANC + Army HQ)
    */
@@ -35,6 +40,30 @@ export class UnitDatabaseService {
 
   /** Selected command filter signal */
   readonly selectedCommandFilter = signal<string>('All');
+
+  /** Dynamic national telemetry summary signal backed by FastAPI */
+  private _telemetrySummary = signal(getIndianArmyTelemetrySummary());
+
+  constructor() {
+    this.fetchTelemetryFromBackend();
+  }
+
+  /**
+   * Fetches real-time status summary from FastAPI backend: GET /api/v1/inventory/status
+   * Gracefully falls back to Indian Army static summary if backend is offline.
+   */
+  fetchTelemetryFromBackend(): void {
+    this.http.get<any>(`${this.API_BASE}/inventory/status`).pipe(
+      catchError(() => of(null))
+    ).subscribe(data => {
+      if (data && data.summary) {
+        this._telemetrySummary.update(curr => ({
+          ...curr,
+          criticalRiskUnits: data.summary.critical_shortages_count != null ? data.summary.critical_shortages_count : curr.criticalRiskUnits
+        }));
+      }
+    });
+  }
 
   /** Select active unit by ID */
   selectUnit(unitId: string): void {
@@ -78,6 +107,6 @@ export class UnitDatabaseService {
 
   /** National summary telemetry */
   getTelemetrySummary() {
-    return getIndianArmyTelemetrySummary();
+    return this._telemetrySummary();
   }
 }

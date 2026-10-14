@@ -40,3 +40,18 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Python & Backend
+backend/.venv/
+backend/**/__pycache__/
+backend/**/.pytest_cache/
+*.py[cod]
+backend/.env
+!backend/.env.example
+
+# Android & Gradle
+android-field-client/.gradle/
+android-field-client/**/build/
+android-field-client/.kotlin/
+android-field-client/local.properties
+*.apk

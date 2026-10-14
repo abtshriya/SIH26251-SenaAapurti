@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  postgis:
+    image: postgis/postgis:16-3.4
+    container_name: sena_aapurti_postgis
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-sena_admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-sena_classified_secret_2026}
+      POSTGRES_DB: ${POSTGRES_DB:-sena_aapurti_db}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgis_data:/var/lib/postgresql/data
+      - ./init_db.sql:/docker-entrypoint-initdb.d/01_init_db.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER:-sena_admin} -d $${POSTGRES_DB:-sena_aapurti_db}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    networks:
+      - sena_zero_trust_net
+
+volumes:
+  postgis_data:
+    driver: local
+
+networks:
+  sena_zero_trust_net:
+    driver: bridge

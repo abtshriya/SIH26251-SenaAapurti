@@ -20,6 +20,19 @@
   text-align: left;
 }
 
+.article-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.article-header-logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.25));
+}
+
 .page-title {
   font-size: 2rem;
   font-weight: 700;

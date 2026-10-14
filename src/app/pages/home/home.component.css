@@ -81,6 +81,63 @@
   padding: 0 20px;
 }
 
+.hero-brand-title-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-logo-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 6px;
+}
+
+.hero-emblem-wrap {
+  width: 84px;
+  height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.hero-emblem-wrap:hover {
+  transform: scale(1.05);
+}
+
+.hero-emblem-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.85));
+}
+
+.hero-title-badge-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  .hero-logo-box {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .hero-title-badge-col {
+    align-items: center;
+    text-align: center;
+  }
+}
+
 .hero-logo-main {
   font-family: var(--font-military);
   font-size: 3.8rem;

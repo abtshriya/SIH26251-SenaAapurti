@@ -563,3 +563,36 @@
   font-weight: bold;
 }
 
+.about-hero-brand {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 8px 0;
+  background: transparent;
+  border: none;
+  margin-bottom: 24px;
+}
+
+.about-brand-logo {
+  width: 68px;
+  height: 68px;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.2));
+  flex-shrink: 0;
+}
+
+.about-brand-text h2 {
+  margin: 0 0 4px 0;
+  color: #0f2416;
+  font-size: 1.65rem;
+}
+
+.about-brand-motto {
+  margin: 0;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #b45309;
+  letter-spacing: 0.04em;
+}
+
+

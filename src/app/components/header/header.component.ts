@@ -118,8 +118,40 @@ export class HeaderComponent {
   }
 
   onSearch() {
-    if (!this.searchQuery.trim()) return;
-    alert(`Searching SenaAapurti defense repository for: "${this.searchQuery}"`);
+    const q = this.searchQuery.trim().toLowerCase();
+    if (!q) return;
+    const mode = this.portalMode();
+    if (mode === 'unit') {
+      if (q.includes('convoy') || q.includes('shipment') || q.includes('garuda') || q.includes('himalaya') || q.includes('logistics') || q.includes('truck')) {
+        this.router.navigate(['/unit', 'logistics']);
+      } else if (q.includes('weather') || q.includes('pass') || q.includes('snow') || q.includes('temp') || q.includes('zoji') || q.includes('khardung')) {
+        this.router.navigate(['/unit', 'route-weather']);
+      } else if (q.includes('indent') || q.includes('request') || q.includes('voucher') || q.includes('sos')) {
+        this.router.navigate(['/unit', 'requests']);
+      } else if (q.includes('surge') || q.includes('forecast') || q.includes('burn') || q.includes('fuel') || q.includes('ration') || q.includes('consumption')) {
+        this.router.navigate(['/unit', 'consumption']);
+      } else if (q.includes('intel') || q.includes('alert') || q.includes('hazard') || q.includes('sitrep')) {
+        this.router.navigate(['/unit', 'ai-insights']);
+      } else {
+        this.router.navigate(['/unit', 'inventory']);
+      }
+    } else if (mode === 'command') {
+      if (q.includes('unit') || q.includes('formation') || q.includes('corps')) {
+        this.router.navigate(['/command', 'units']);
+      } else if (q.includes('convoy') || q.includes('shipment') || q.includes('movement')) {
+        this.router.navigate(['/command', 'logistics']);
+      } else if (q.includes('forecast') || q.includes('demand') || q.includes('burn')) {
+        this.router.navigate(['/command', 'forecasting']);
+      } else if (q.includes('intel') || q.includes('weather') || q.includes('pass')) {
+        this.router.navigate(['/command', 'intelligence']);
+      } else if (q.includes('simulation') || q.includes('scenario')) {
+        this.router.navigate(['/command', 'simulation']);
+      } else {
+        this.router.navigate(['/command', 'inventory']);
+      }
+    } else {
+      this.router.navigate(['/know-sena-aapurti']);
+    }
   }
 
   toggleMobileMenu() {
@@ -159,6 +191,15 @@ export class HeaderComponent {
 
   selectUnit(unit: ArmyUnit) {
     this.unitDbService.setSelectedUnit(unit);
+    this.authService.currentUser.set({
+      serviceNo: unit.serviceNo || 'IC-71044A',
+      name: unit.officerName || 'Major Amit Sharma',
+      rank: unit.officerRole || 'Quartermaster',
+      unit: unit.name,
+      command: `${unit.command} (${unit.corps})`,
+      role: 'unit',
+      clearanceLevel: 'SECRET - OPERATIONAL'
+    });
     this.showUnitSelectorModal = false;
   }
 

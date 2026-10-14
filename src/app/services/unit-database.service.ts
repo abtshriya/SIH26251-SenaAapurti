@@ -36,17 +36,35 @@ export class UnitDatabaseService {
   /** Selected command filter signal */
   readonly selectedCommandFilter = signal<string>('All');
 
+  constructor() {
+    if (typeof window !== 'undefined' && typeof sessionStorage !== 'undefined') {
+      const saved = sessionStorage.getItem('sena_selected_unit');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          const found = this.allUnits.find(u => u.id === parsed.id);
+          if (found) {
+            this._selectedUnit.set(found);
+          }
+        } catch (e) {}
+      }
+    }
+  }
+
   /** Select active unit by ID */
   selectUnit(unitId: string): void {
     const found = this.allUnits.find(u => u.id === unitId);
     if (found) {
-      this._selectedUnit.set(found);
+      this.setSelectedUnit(found);
     }
   }
 
   /** Select active unit by object */
   setSelectedUnit(unit: ArmyUnit): void {
     this._selectedUnit.set(unit);
+    if (typeof window !== 'undefined' && typeof sessionStorage !== 'undefined') {
+      sessionStorage.setItem('sena_selected_unit', JSON.stringify(unit));
+    }
   }
 
   /** Get unit by ID */

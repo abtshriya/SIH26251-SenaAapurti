@@ -5,6 +5,13 @@
 
     <!-- SIDEBAR NAVIGATION -->
     <aside class="c2-sidebar" [class.collapsed]="layoutService.sidebarCollapsed()">
+      <div class="sidebar-brand-badge" *ngIf="!layoutService.sidebarCollapsed()">
+        <img src="/images/sena_crest_logo.png" alt="SenaAapurti Insignia" class="sidebar-logo-img" />
+        <div class="sidebar-brand-text">
+          <div class="sidebar-title"><span class="sb-sena">SENA</span><span class="sb-aapurti">AAPURTI</span></div>
+          <span class="sidebar-sub">HQ C2 LOGISTICS</span>
+        </div>
+      </div>
       <div class="sidebar-menu-title">TACTICAL MODULES</div>
       <nav class="sidebar-nav">
         <button

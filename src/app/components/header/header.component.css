@@ -306,11 +306,13 @@
 }
 
 .aapurti-part {
-  background: linear-gradient(135deg, #ff8c00 0%, #ff5500 50%, #ff3300 100%);
+  color: #ff6a00;
+  background: linear-gradient(135deg, #ff7a00 0%, #ff5500 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
   position: relative;
+  text-shadow: none !important;
   transition: filter 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s ease;
 }
 

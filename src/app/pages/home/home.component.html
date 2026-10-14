@@ -49,14 +49,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Dynamic Slide Indicators -->
-    <div class="hero-carousel-indicators" role="tablist" aria-label="Operational Slides">
-      <button *ngFor="let slide of slides; let idx = index" type="button"
-        class="hero-indicator-dot" [class.active]="currentSlideIndex() === idx"
-        (click)="goToSlide(idx)" [attr.aria-label]="'Go to operational slide ' + (idx + 1)">
-      </button>
-    </div>
   </section>
 
   <!-- ================= STATISTICS / IMPACT (MOVED JUST BELOW HERO BANNER) ================= -->

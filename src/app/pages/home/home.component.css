@@ -43,13 +43,54 @@
   background-size: cover;
   background-position: center 38%;
   opacity: 0;
-  transition: opacity 1.2s ease-in-out, transform 10s ease-out;
-  transform: scale(1.03);
+  transition: opacity 0.7s ease-in-out, transform 3.5s ease-out;
+  transform: scale(1.04);
+  will-change: opacity, transform;
 }
 
 .slide-item.active {
   opacity: 1;
   transform: scale(1);
+}
+
+/* Dynamic Hero Carousel Indicators */
+.hero-carousel-indicators {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  z-index: 10;
+  padding: 5px 12px;
+  background: rgba(3, 10, 4, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+}
+
+.hero-indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.25s ease;
+}
+
+.hero-indicator-dot:hover {
+  background: rgba(255, 255, 255, 0.7);
+  transform: scale(1.2);
+}
+
+.hero-indicator-dot.active {
+  width: 24px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #ff8c00, #ff5500);
+  box-shadow: 0 0 10px rgba(255, 140, 0, 0.75);
 }
 
 .slide-overlay-gradient {

@@ -995,7 +995,7 @@ export class LogisticsService {
    * Queries strategic alerts from FastAPI / PostgreSQL: GET /api/v1/alerts
    */
   fetchAlerts(): void {
-    this.http.get<any>(${this.API_BASE}/alerts).pipe(
+    this.http.get<any>(`${this.API_BASE}/alerts`).pipe(
       catchError(() => of(null))
     ).subscribe(data => {
       if (data && Array.isArray(data.alerts) && data.alerts.length > 0) {
@@ -1019,7 +1019,7 @@ export class LogisticsService {
    * POST /api/v1/alerts/authorize
    */
   authorizeAlert(alertId: string) {
-    return this.http.post<any>(${this.API_BASE}/alerts/authorize, {
+    return this.http.post<any>(`${this.API_BASE}/alerts/authorize`, {
       alert_id: alertId,
       actor_id: 'COL-COMMAND-ADMIN-IC44912'
     }).pipe(

@@ -309,7 +309,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.stopAutoSlide();
     this.autoSlideTimer = setInterval(() => {
       this.nextSlide();
-    }, 120000); // Dynamic transition automatically every 2 minutes
+    }, 2500); // Dynamic transition automatically every 2.5 seconds (fast 2-3 sec cycle)
   }
 
   stopAutoSlide() {

@@ -43,8 +43,9 @@
   background-size: cover;
   background-position: center 38%;
   opacity: 0;
-  transition: opacity 1.2s ease-in-out, transform 10s ease-out;
-  transform: scale(1.03);
+  transition: opacity 0.7s ease-in-out, transform 3.5s ease-out;
+  transform: scale(1.04);
+  will-change: opacity, transform;
 }
 
 .slide-item.active {

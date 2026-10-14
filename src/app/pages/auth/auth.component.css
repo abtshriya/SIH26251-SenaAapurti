@@ -722,3 +722,515 @@
   flex-shrink: 0;
 }
 
+/* ==========================================================================
+   BIOMETRIC FACE ID SCANNER STYLING
+   ========================================================================== */
+.face-biometric-box {
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: #ffffff;
+}
+
+.face-biometric-header {
+  text-align: center;
+}
+
+.face-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 14px;
+  background: rgba(30, 56, 37, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 9999px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #1e3825;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+
+.status-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+  animation: pulseLight 1.8s infinite;
+}
+
+@keyframes pulseLight {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.face-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 4px;
+  letter-spacing: 0.02em;
+}
+
+.face-desc {
+  font-size: 0.82rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* Camera Viewport */
+.camera-viewport-container {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  height: 290px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #090e0b;
+  border: 2px solid #233b2a;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8), 0 8px 24px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.camera-video-feed {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1); /* Natural mirror view */
+}
+
+.camera-fallback-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, #112217 0%, #060907 100%);
+  color: #94a3b8;
+  text-align: center;
+  padding: 20px;
+  z-index: 2;
+}
+
+.fallback-camera-icon {
+  width: 52px;
+  height: 52px;
+  color: #d4af37;
+  margin-bottom: 12px;
+  opacity: 0.85;
+}
+
+.fallback-status-text {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+.fallback-subtext {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  max-width: 280px;
+}
+
+/* Tactical HUD Reticle Overlay */
+.reticle-hud-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reticle-corner {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-color: #d4af37;
+  border-style: solid;
+}
+
+.reticle-corner.top-left {
+  top: 16px;
+  left: 16px;
+  border-width: 3px 0 0 3px;
+}
+
+.reticle-corner.top-right {
+  top: 16px;
+  right: 16px;
+  border-width: 3px 3px 0 0;
+}
+
+.reticle-corner.bottom-left {
+  bottom: 16px;
+  left: 16px;
+  border-width: 0 0 3px 3px;
+}
+
+.reticle-corner.bottom-right {
+  bottom: 16px;
+  right: 16px;
+  border-width: 0 3px 3px 0;
+}
+
+/* Target Center Oval */
+.reticle-target-oval {
+  position: relative;
+  width: 170px;
+  height: 210px;
+  border: 1.5px dashed rgba(212, 175, 55, 0.45);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+  transition: all 0.3s ease;
+}
+
+.reticle-hud-overlay.scanning-active .reticle-target-oval {
+  border-color: #22c55e;
+  border-style: solid;
+  box-shadow: 0 0 25px rgba(34, 197, 94, 0.35);
+}
+
+.reticle-hud-overlay.verified-active .reticle-target-oval {
+  border-color: #eab308;
+  border-style: solid;
+  box-shadow: 0 0 30px rgba(234, 179, 8, 0.5);
+}
+
+.reticle-cross-h {
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3) 40%, rgba(212, 175, 55, 0.7) 50%, rgba(212, 175, 55, 0.3) 60%, transparent);
+}
+
+.reticle-cross-v {
+  position: absolute;
+  height: 100%;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(212, 175, 55, 0.3) 40%, rgba(212, 175, 55, 0.7) 50%, rgba(212, 175, 55, 0.3) 60%, transparent);
+}
+
+/* Scanning Laser Beam */
+.reticle-laser-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #22c55e 30%, #4ade80 50%, #22c55e 70%, transparent);
+  box-shadow: 0 0 14px #22c55e, 0 0 28px #22c55e;
+  animation: scanLaser 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes scanLaser {
+  0% { top: 12%; opacity: 0.9; }
+  100% { top: 88%; opacity: 0.9; }
+}
+
+/* Telemetry Badges */
+.hud-telemetry {
+  position: absolute;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #94a3b8;
+  letter-spacing: 0.05em;
+  backdrop-filter: blur(2px);
+}
+
+.hud-tl { top: 22px; left: 44px; }
+.hud-tr { top: 22px; right: 44px; color: #d4af37; }
+.hud-bl { bottom: 22px; left: 44px; }
+.hud-br { bottom: 22px; right: 44px; color: #22c55e; }
+
+/* Camera Notes & Success Banners */
+.camera-info-note {
+  font-size: 0.76rem;
+  color: #64748b;
+  background: #f8fafc;
+  border-left: 3px solid #94a3b8;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+.alert-success-banner {
+  background: #ecfdf5;
+  border: 1px solid #6ee7b7;
+  color: #065f46;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+/* Face Actions */
+.face-actions-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-scan-face-primary {
+  width: 100%;
+  padding: 13px 20px;
+  background: linear-gradient(135deg, #112217 0%, #1e3825 100%);
+  color: #ffffff;
+  border: 1.5px solid #d4af37;
+  border-radius: 8px;
+  font-family: var(--font-secondary, sans-serif);
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 4px 14px rgba(17, 34, 23, 0.3);
+  transition: all 0.2s ease;
+}
+
+.btn-scan-face-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #1e3825 0%, #294c33 100%);
+  box-shadow: 0 6px 18px rgba(17, 34, 23, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-scan-face-primary:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.btn-scan-face-primary svg {
+  width: 20px;
+  height: 20px;
+}
+
+.face-secondary-row {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-sm {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.btn-outline-army {
+  background: #f8fafc;
+  border: 1px solid #1e3825;
+  color: #1e3825;
+}
+
+.btn-outline-army:hover:not(:disabled) {
+  background: #1e3825;
+  color: #ffffff;
+}
+
+.btn-outline-secondary {
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  color: #64748b;
+}
+
+.btn-outline-secondary:hover {
+  background: #e2e8f0;
+  color: #334155;
+}
+
+.btn-link-cancel {
+  background: none;
+  border: none;
+  font-size: 0.8rem;
+  color: #64748b;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+.btn-link-cancel:hover {
+  color: #0f172a;
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   SIMULATED CARRIER TERMINAL HUD (2FA OTP)
+   ========================================================================== */
+.carrier-terminal-hud {
+  background: #090e0b;
+  border: 1.5px solid #233b2a;
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin: 14px 0 18px;
+  color: #f1f5f9;
+  font-family: var(--font-mono, monospace);
+}
+
+.carrier-hud-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #1a2c1f;
+  margin-bottom: 10px;
+}
+
+.carrier-hud-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #e2e8f0;
+}
+
+.carrier-indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 6px #22c55e;
+}
+
+.carrier-hud-channel {
+  font-size: 0.68rem;
+  color: #d4af37;
+  letter-spacing: 0.04em;
+}
+
+.carrier-hud-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.carrier-hud-stat {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+}
+
+.carrier-hud-stat .stat-label {
+  color: #94a3b8;
+}
+
+.carrier-hud-stat .stat-val {
+  font-weight: 600;
+}
+
+.text-gold {
+  color: #d4af37 !important;
+}
+
+.text-green {
+  color: #22c55e !important;
+}
+
+.carrier-incoming-sms {
+  margin-top: 8px;
+  padding: 8px 10px;
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  border-radius: 6px;
+}
+
+.sms-tag {
+  font-size: 0.65rem;
+  color: #4ade80;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.sms-content {
+  font-size: 0.78rem;
+  color: #e2e8f0;
+  line-height: 1.4;
+}
+
+.sms-content strong {
+  color: #facc15;
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+}
+
+/* Custom Phone Drawer */
+.custom-phone-drawer {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed #1e3825;
+}
+
+.phone-drawer-label {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  margin-bottom: 6px;
+}
+
+.phone-input-row {
+  display: flex;
+  gap: 8px;
+}
+
+.phone-input-ctrl {
+  background: #112217 !important;
+  border: 1px solid #233b2a !important;
+  color: #f1f5f9 !important;
+  font-family: var(--font-mono, monospace) !important;
+  font-size: 0.78rem !important;
+  padding: 6px 10px !important;
+  border-radius: 4px;
+}
+
+.phone-input-ctrl::placeholder {
+  color: #64748b;
+}
+
+.btn-update-phone {
+  background: #1e3825;
+  border: 1px solid #d4af37;
+  color: #d4af37;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.btn-update-phone:hover {
+  background: #d4af37;
+  color: #112217;
+}
+
+.otp-input-group {
+  margin-bottom: 16px;
+}
+
+

@@ -116,7 +116,7 @@
       </div>
 
       <!-- Step 1: Credentials Form -->
-      <div *ngIf="!showOtpStep" class="form-content">
+      <div *ngIf="!showFaceIdStep && !showOtpStep" class="form-content">
         <div class="form-group">
           <label class="form-label" for="serviceNo">User ID / Official Service Number</label>
           <div class="input-with-icon">
@@ -189,7 +189,7 @@
           [class.unit-submit]="portalMode === 'unit'"
           (click)="submitLogin()"
         >
-          <span>LOGIN</span>
+          <span>LOGIN & PROCEED TO BIOMETRICS</span>
           <svg viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
           </svg>
@@ -200,7 +200,118 @@
         </div>
       </div>
 
-      <!-- Step 2: 2FA OTP Screen -->
+      <!-- Step 2: Biometric Face ID Scan Screen -->
+      <div *ngIf="showFaceIdStep" class="face-biometric-box">
+        <div class="face-biometric-header">
+          <div class="face-status-pill">
+            <span class="status-pulse-dot"></span>
+            <span>LEVEL-3 BIOMETRIC CLEARANCE</span>
+          </div>
+          <h4 class="face-title">Biometric Login: Scan Using FACE ID</h4>
+          <p class="face-desc">
+            Optical facial verification required for <strong>{{ serviceNo }}</strong> before granting access to strategic logistics ledger.
+          </p>
+        </div>
+
+        <!-- Camera Viewport with Reticle Overlay -->
+        <div class="camera-viewport-container">
+          <video #faceVideo autoplay playsinline muted class="camera-video-feed"></video>
+
+          <!-- Fallback when camera inactive or denied -->
+          <div *ngIf="!cameraActive" class="camera-fallback-overlay">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="fallback-camera-icon">
+              <path d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"/>
+              <path d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"/>
+            </svg>
+            <div class="fallback-status-text">DEFENSE OPTICAL SENSOR READY</div>
+            <div class="fallback-subtext">Click "Scan Using Face ID" to initialize camera or biometric match</div>
+          </div>
+
+          <!-- Tactical HUD Reticle Overlay -->
+          <div class="reticle-hud-overlay" [class.scanning-active]="faceScanning" [class.verified-active]="faceVerified">
+            <!-- Corner Brackets -->
+            <div class="reticle-corner top-left"></div>
+            <div class="reticle-corner top-right"></div>
+            <div class="reticle-corner bottom-left"></div>
+            <div class="reticle-corner bottom-right"></div>
+
+            <!-- Optical Crosshairs & Oval Target -->
+            <div class="reticle-target-oval">
+              <div class="reticle-cross-h"></div>
+              <div class="reticle-cross-v"></div>
+            </div>
+
+            <!-- Animated Scanning Laser -->
+            <div *ngIf="faceScanning" class="reticle-laser-line"></div>
+
+            <!-- HUD Telemetry Badges -->
+            <div class="hud-telemetry hud-tl">SYS: ARMED // 468 LANDMARKS</div>
+            <div class="hud-telemetry hud-tr">ENC: SHA-256 / AES-GCM</div>
+            <div class="hud-telemetry hud-bl">ID: {{ serviceNo }}</div>
+            <div class="hud-telemetry hud-br">
+              {{ faceVerified ? ('CONFIDENCE: ' + faceConfidence + '% MATCH') : (faceScanning ? 'SCANNING OPTICAL MESH...' : 'LIVENESS: READY') }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Success and Warning Feedback Banners -->
+        <div *ngIf="faceEnrollSuccess" class="alert-success-banner">
+          ✓ {{ faceEnrollSuccess }}
+        </div>
+        <div *ngIf="faceVerified" class="alert-success-banner">
+          ✓ Biometric Face ID Authenticated ({{ faceConfidence }}% Confidence). Launching Carrier 2FA...
+        </div>
+        <div *ngIf="cameraError && !faceVerified" class="camera-info-note">
+          ℹ {{ cameraError }}
+        </div>
+
+        <!-- Face ID Action Buttons -->
+        <div class="face-actions-column">
+          <button
+            type="button"
+            class="btn-scan-face-primary"
+            [disabled]="faceScanning || faceVerified"
+            (click)="triggerFaceScan()"
+          >
+            <svg *ngIf="!faceScanning" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M7 3H5a2 2 0 00-2 2v2m18-4h-2a2 2 0 00-2 2v2m0 14h2a2 2 0 002-2v-2M3 17v2a2 2 0 002 2h2m3-9h4m-2-2v4"/>
+            </svg>
+            <span *ngIf="!faceScanning && !faceVerified">SCAN USING FACE ID</span>
+            <span *ngIf="faceScanning">AUTHENTICATING FACIAL BIOMETRICS...</span>
+            <span *ngIf="faceVerified">✓ FACE ID VERIFIED</span>
+          </button>
+
+          <div class="face-secondary-row">
+            <button
+              type="button"
+              class="btn-outline-army btn-sm"
+              [disabled]="faceScanning"
+              (click)="enrollCurrentFace()"
+              title="Capture this camera frame as your registered Face ID in PostgreSQL"
+            >
+              📸 Enroll / Update My Face ID
+            </button>
+            <button
+              type="button"
+              class="btn-outline-secondary btn-sm"
+              (click)="bypassFaceToOtp()"
+              title="Bypass camera if hardware optical sensor unavailable"
+            >
+              Manual Override → OTP
+            </button>
+          </div>
+
+          <button
+            type="button"
+            class="btn-link-cancel"
+            (click)="stopCamera(); showFaceIdStep = false;"
+          >
+            ← Back to Login Credentials
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 3: Defense 2FA OTP Screen with Simulated Carrier Terminal -->
       <div *ngIf="showOtpStep" class="otp-verification-box">
         <div class="otp-icon-header">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -209,10 +320,60 @@
         </div>
         <h4 class="otp-title">Defense 2-Factor Authentication</h4>
         <p class="otp-desc">
-          A secure authorization code has been dispatched to the defense terminal registered under <strong>{{ serviceNo }}</strong>.
+          Cryptographic OTP dispatched to authorized military handset for <strong>{{ serviceNo }}</strong>.
         </p>
 
-        <div class="form-group">
+        <!-- Simulated Carrier Dispatch HUD Display -->
+        <div class="carrier-terminal-hud">
+          <div class="carrier-hud-header">
+            <div class="carrier-hud-title">
+              <span class="carrier-indicator-dot"></span>
+              <span>DEFENSE CARRIER DISPATCH TERMINAL</span>
+            </div>
+            <div class="carrier-hud-channel">ASCON SATCOM LINK #9914</div>
+          </div>
+
+          <div class="carrier-hud-body">
+            <div class="carrier-hud-stat">
+              <span class="stat-label">DISPATCH NODE:</span>
+              <span class="stat-val">{{ carrierDispatchInfo?.masked_phone || '+91 98*** **210' }}</span>
+            </div>
+            <div class="carrier-hud-stat">
+              <span class="stat-label">TTL VALIDITY:</span>
+              <span class="stat-val text-gold">300 SECONDS</span>
+            </div>
+            <div class="carrier-hud-stat">
+              <span class="stat-label">STATUS:</span>
+              <span class="stat-val text-green">{{ carrierSending ? 'DISPATCHING...' : 'TRANSMITTED TO MOBILE HANDSET' }}</span>
+            </div>
+
+            <!-- Incoming Simulated SMS Box -->
+            <div class="carrier-incoming-sms" *ngIf="carrierDispatchInfo?.otp_dispatched">
+              <div class="sms-tag">[DEFENSE SMS RECEIVED ON HANDSET]</div>
+              <div class="sms-content">
+                "Sena Aapurti Auth: Your Defense 2FA OTP is <strong>{{ carrierDispatchInfo?.otp_dispatched }}</strong>. Valid for 5 min. Do not share."
+              </div>
+            </div>
+          </div>
+
+          <!-- Custom Phone Update Row -->
+          <div class="custom-phone-drawer">
+            <div class="phone-drawer-label">Want OTP dispatched to your specific phone number?</div>
+            <div class="phone-input-row">
+              <input
+                type="text"
+                [(ngModel)]="userCustomPhone"
+                placeholder="+91 98765 43210"
+                class="form-control phone-input-ctrl"
+              />
+              <button type="button" class="btn-update-phone" (click)="updateCustomPhone()">
+                Update & Dispatch
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group otp-input-group">
           <label class="form-label">Enter 4-Digit Security OTP</label>
           <input
             type="text"
@@ -224,8 +385,8 @@
         </div>
 
         <div class="otp-action-row">
-          <button type="button" class="btn-outline-army" (click)="showOtpStep = false">
-            Back
+          <button type="button" class="btn-outline-army" (click)="showOtpStep = false; showFaceIdStep = true; startCamera();">
+            ← Back to Face Scan
           </button>
           <button
             type="button"

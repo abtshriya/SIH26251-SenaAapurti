@@ -1,0 +1,18 @@
+<resources>
+    <!-- Tactical Army Palette -->
+    <color name="army_olive_dark">#1B3B22</color>
+    <color name="army_olive_primary">#234E2E</color>
+    <color name="army_olive_light">#356E42</color>
+    <color name="army_camo_slate">#2D3748</color>
+    <color name="army_safety_amber">#DD6B20</color>
+    <color name="army_gold">#D4AF37</color>
+    <color name="army_alert_red">#E53E3E</color>
+    <color name="army_success_green">#38A169</color>
+
+    <!-- Base Canvas -->
+    <color name="army_canvas_dark">#121814</color>
+    <color name="army_card_dark">#1A241C</color>
+    <color name="army_card_border">#2C3E30</color>
+    <color name="army_text_white">#F7FAFC</color>
+    <color name="army_text_muted">#A0AEC0</color>
+</resources>

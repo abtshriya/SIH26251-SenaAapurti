@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">SenaAapurti Field Client</string>
+    <string name="app_version">Version 3.4.1 (APK • 42 MB)</string>
+    <string name="app_motto">सदैव आपूर्ति • सदैव समर्थन</string>
+    <string name="app_authority">DGOS Sustenance • Northern Theater Command</string>
+    
+    <!-- Navigation Titles -->
+    <string name="nav_dashboard">Dashboard</string>
+    <string name="nav_scanner">Scan Terminal</string>
+    <string name="nav_inventory">Local Store</string>
+    <string name="nav_sync">Sync Outbox</string>
+
+    <!-- Scanner HUD -->
+    <string name="scanner_hud_title">RAPID BATCH SCANNER</string>
+    <string name="scanner_hud_subtitle">Align 1D/2D Barcode or Military RFID Crate Tag</string>
+    <string name="scanner_verified">ITEM VERIFIED - MATCHES VOUCHER</string>
+    <string name="scanner_mismatch">STOCK MISMATCH - DISCREPANCY</string>
+    <string name="scanner_unregistered">UNREGISTERED SKU - MANUAL TAGGING</string>
+
+    <!-- Buttons -->
+    <string name="btn_inward">Inward Receipt</string>
+    <string name="btn_dispatch">Dispatch Verify</string>
+    <string name="btn_audit">Physical Audit</string>
+    <string name="btn_force_sync">Force Sync Now</string>
+    <string name="btn_torch_toggle">Tactical Torch</string>
+</resources>

@@ -1,0 +1,26 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+    <!-- Circular Shield Background -->
+    <path
+        android:fillColor="#1B3B22"
+        android:pathData="M48,8C25.9,8 8,25.9 8,48s17.9,40 40,40s40,-17.9 40,-40S70.1,8 48,8z" />
+    <!-- Golden Border Ring -->
+    <path
+        android:strokeColor="#D4AF37"
+        android:strokeWidth="3"
+        android:pathData="M48,11C27.6,11 11,27.6 11,48s16.6,37 37,37s37,-16.6 37,-37S68.4,11 48,11z" />
+    <!-- Crossed Swords Crest -->
+    <path
+        android:fillColor="#F7FAFC"
+        android:pathData="M28,68l6,0l34,-34l-3,-3l-34,34l-3,3z" />
+    <path
+        android:fillColor="#F7FAFC"
+        android:pathData="M68,68l-6,0l-34,-34l3,-3l34,34l3,3z" />
+    <!-- Center Emblem Star/Badge -->
+    <path
+        android:fillColor="#DD6B20"
+        android:pathData="M48,32l5,11l12,1l-9,8l3,12l-11,-6l-11,6l3,-12l-9,-8l12,-1z" />
+</vector>

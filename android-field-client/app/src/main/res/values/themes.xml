@@ -1,0 +1,7 @@
+<resources>
+    <style name="Theme.SenaAapurtiFieldClient" parent="android:Theme.Material.NoActionBar">
+        <item name="android:statusBarColor">#121814</item>
+        <item name="android:navigationBarColor">#121814</item>
+        <item name="android:windowBackground">#121814</item>
+    </style>
+</resources>

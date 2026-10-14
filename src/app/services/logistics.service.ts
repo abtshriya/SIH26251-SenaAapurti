@@ -98,7 +98,7 @@ export interface WeatherStationData {
   windSpeed: string;
   visibility: string;
   alert: string;
-  accessibility: 'Open' | 'Chains Required' | 'Convoy Restriced' | 'Closed Due to Avalanche';
+  accessibility: 'Open' | 'Chains Required' | 'Convoy Restriced' | 'Convoy Restricted' | 'Closed Due to Avalanche';
   riskScore: number;
   alternativeRoute?: string;
 }
@@ -488,7 +488,8 @@ export class LogisticsService {
       visibility: '1.2 km',
       alert: 'NORMAL HIGH ALTITUDE WEATHER',
       accessibility: 'Open',
-      riskScore: 24
+      riskScore: 24,
+      alternativeRoute: 'Jawaharlal Nehru Road - Kupup Alternate Axis'
     },
     {
       location: 'Longewala (Rajasthan Desert)',
@@ -500,7 +501,21 @@ export class LogisticsService {
       visibility: '500 meters',
       alert: 'HEAT & SANDSTORM ADVISORY',
       accessibility: 'Open',
-      riskScore: 40
+      riskScore: 40,
+      alternativeRoute: 'Tanot - Ramgarh Heavy Armor Strategic Corridor'
+    },
+    {
+      location: 'Lahaul-Spiti (Manali - Leh Axis)',
+      passName: 'Baralacha La & Atal Axis',
+      elevation: '16,040 ft',
+      temperature: '-18°C',
+      rainfallSnow: '28 cm packed snow',
+      windSpeed: '46 km/h',
+      visibility: '650 meters',
+      alert: 'SUB-ZERO ICING & HIGH DRIFT ADVISORY',
+      accessibility: 'Chains Required',
+      riskScore: 58,
+      alternativeRoute: 'Atal All-Weather Tunnel Tube (Manali-Sissu Bypass)'
     }
   ]);
 
@@ -980,7 +995,7 @@ export class LogisticsService {
    * Queries strategic alerts from FastAPI / PostgreSQL: GET /api/v1/alerts
    */
   fetchAlerts(): void {
-    this.http.get<any>(`${this.API_BASE}/alerts`).pipe(
+    this.http.get<any>(${this.API_BASE}/alerts).pipe(
       catchError(() => of(null))
     ).subscribe(data => {
       if (data && Array.isArray(data.alerts) && data.alerts.length > 0) {
@@ -1004,7 +1019,7 @@ export class LogisticsService {
    * POST /api/v1/alerts/authorize
    */
   authorizeAlert(alertId: string) {
-    return this.http.post<any>(`${this.API_BASE}/alerts/authorize`, {
+    return this.http.post<any>(${this.API_BASE}/alerts/authorize, {
       alert_id: alertId,
       actor_id: 'COL-COMMAND-ADMIN-IC44912'
     }).pipe(
@@ -1016,6 +1031,18 @@ export class LogisticsService {
         ledger_block: 102,
         message: 'Cryptographically synchronized to PostgreSQL database ledger.'
       }))
+    );
+  }
+
+  deliverIndent(id: string) {
+    this.indents.update(items =>
+      items.map(item => item.id === id ? { ...item, status: 'Delivered' } : item)
+    );
+  }
+
+  acknowledgeConvoy(id: string) {
+    this.convoys.update(items =>
+      items.map(c => c.id === id ? { ...c, status: 'Arrived' as const } : c)
     );
   }
 

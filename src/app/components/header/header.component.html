@@ -43,12 +43,22 @@
 <div class="tricolor-ribbon"></div>
 
 <!-- ================= MAIN BRAND DEFENSE HEADER ================= -->
-<header class="main-defense-header" [style.backgroundImage]="'url(' + headerBgImage() + ')'">
+<header class="main-defense-header"
+  [class.command-header-bg]="portalMode() === 'command'"
+  [style.backgroundImage]="portalMode() !== 'command' ? 'url(' + headerBgImage() + ')' : 'none'">
+
   <div class="header-container" [class.command-header-container]="portalMode() === 'command'">
     <!-- Left: Connected Insignia Logo & Brand Name (hover together with subtle glow) -->
     <a routerLink="/" (click)="scrollToSection('hero')" class="brand-block-link" title="SenaAapurti">
       <div class="sena-logo-wrap">
-        <img src="/images/sena_official_logo.png" alt="SenaAapurti Official Insignia" class="sena-logo-img" />
+        <img
+          src="/images/sena_crest_logo.png"
+          alt="SenaAapurti Official Insignia"
+          class="sena-logo-img"
+          width="88"
+          height="88"
+          loading="eager"
+        />
       </div>
 
       <!-- Brand Title, Subtitles, Authority Badge and Tricolour Slash -->
@@ -76,14 +86,16 @@
           <span class="ia-text">INTEGRATED HQ OF MoD (ARMY) • SENA BHAWAN, NEW DELHI</span>
         </div>
         <div class="authority-badge unit-authority-badge" *ngIf="portalMode() === 'unit'">
-          <span class="ia-text">{{ unitDbService.selectedUnit().corps }} • {{ unitDbService.selectedUnit().station
-            }}</span>
+          <span class="ia-text">
+            <span class="ia-badge-icon">📍</span>
+            <span class="ia-badge-title">{{ unitDbService.selectedUnit().corps }} • {{ unitDbService.selectedUnit().station }}</span>
+          </span>
         </div>
       </div>
     </a>
 
-    <!-- Futuristic Tactical Map Web Lines Overlay (Interactive C4ISR Telemetry) - Hidden in Command Portal -->
-    <div *ngIf="portalMode() !== 'command'" class="futuristic-map-web-overlay" aria-hidden="true">
+    <!-- Futuristic Tactical Map Web Lines Overlay (Interactive C4ISR Telemetry) - Only in Public Portal to prevent text collisions -->
+    <div *ngIf="portalMode() === 'public'" class="futuristic-map-web-overlay" aria-hidden="true">
       <svg class="map-web-svg" viewBox="0 0 540 120" preserveAspectRatio="none" fill="none">
         <!-- Digital Grid Lines -->
         <line x1="20" y1="20" x2="520" y2="20" stroke="rgba(56, 189, 248, 0.18)" stroke-width="1"
@@ -276,7 +288,7 @@
 
 <!-- ================= MAIN NAVIGATION BAR ================= -->
 <nav class="main-navbar" aria-label="Main Navigation" *ngIf="portalMode() !== 'command'">
-  <div class="nav-container" [class.command-nav-container]="portalMode() === 'command'">
+  <div class="nav-container" [class.command-nav-container]="portalMode() === 'command'" [class.unit-nav-container]="portalMode() === 'unit'">
     <!-- Command Portal Sidebar Toggle Button -->
     <button *ngIf="portalMode() === 'command'" type="button" class="sidebar-toggle-btn command-toggle-btn"
       (click)="toggleSidebar()" title="Toggle Tactical Modules Menu">
@@ -452,15 +464,17 @@
 
       <!-- Unit mode actions -->
       <ng-container *ngIf="portalMode() === 'unit'">
-        <div class="portal-cta-group">
-          <button type="button" class="nav-portal-btn station-switch-btn" (click)="toggleUnitSelector()"
+        <div class="portal-cta-group unit-cta-group">
+          <button type="button" class="nav-portal-btn station-switch-btn unit-station-btn" (click)="toggleUnitSelector()"
             title="Switch Unit Station">
             📍 {{ unitDbService.selectedUnit().station.split(',')[0] }}
           </button>
-          <a routerLink="/" class="nav-portal-btn home-switch-btn" title="Return to Public Website">Public Home</a>
-          <a routerLink="/command/dashboard" class="nav-portal-btn command-btn" title="Switch to Command Portal">Switch
-            to Command</a>
-          <button class="logout-btn" (click)="authService.logout()" title="Secure Logout">Sign Out</button>
+          <a routerLink="/" class="nav-portal-btn home-switch-btn unit-home-btn" title="Return to Public Website">Home</a>
+          <a routerLink="/command/dashboard" class="nav-portal-btn command-btn unit-cmd-btn" title="Switch to Command Portal">
+            <span class="cmd-full-txt">Switch to Command</span>
+            <span class="cmd-short-txt">Command HQ</span>
+          </a>
+          <button class="logout-btn unit-logout-btn" (click)="authService.logout()" title="Secure Logout">Sign Out</button>
         </div>
       </ng-container>
     </div>

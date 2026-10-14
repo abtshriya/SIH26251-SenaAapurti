@@ -83,6 +83,8 @@
 html {
   font-size: 16px;
   transition: font-size 0.2s ease;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 /* Accessibility: Font Size Variants (GIGW 3.0 Compliance) */
@@ -139,6 +141,9 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
 }
 
 /* Global Typography Hierarchy */
@@ -287,8 +292,11 @@ input, select, textarea {
   -webkit-overflow-scrolling: touch;
 }
 
-.text-nowrap {
+.text-nowrap,
+.font-mono {
   white-space: nowrap !important;
+  word-break: keep-all !important;
+  hyphens: none !important;
 }
 
 /* Primary Button Styling */
@@ -547,3 +555,30 @@ select option:hover {
 .tactical-map-tooltip::before {
   border-top-color: rgba(5, 15, 10, 0.95) !important;
 }
+
+/* ================= GLOBAL DEFENSE MODAL SYSTEM ================= */
+body.modal-open {
+  overflow: hidden !important;
+  touch-action: none;
+}
+
+.modal-backdrop {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: rgba(0, 0, 0, 0.88) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 999999 !important;
+  padding: 20px !important;
+  box-sizing: border-box !important;
+  overflow-y: auto !important;
+}
+

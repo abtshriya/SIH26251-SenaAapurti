@@ -10,8 +10,6 @@
       </div>
     </div>
 
-
-
     <!-- Centered Hero Branding Overlay -->
     <div class="hero-content-center">
       <div class="hero-brand-title-wrap">
@@ -21,24 +19,24 @@
           </div>
           <div class="hero-title-badge-col">
             <h2 class="hero-logo-main">
-              <span class="hero-sena">Sena</span><span class="hero-aapurti">Aapurti</span>
+              <span class="hero-sena">{{ langService.t('titleSena') }}</span><span class="hero-aapurti">{{ langService.t('titleAapurti') }}</span>
             </h2>
-            <span class="hero-official-badge">भारतीय सेना आपूर्ति • INDIAN ARMY LOGISTICS</span>
+            <span class="hero-official-badge">{{ langService.t('heroOfficialBadge') }}</span>
           </div>
         </div>
 
         <h1 class="hero-primary-headline">
-          Predictive Logistics & Forward Supply
+          {{ langService.t('heroHeadline') }}
         </h1>
 
         <p class="hero-lead-description">
-          Autonomous AI supply chain intelligence synchronizing Central Ordnance Depots to high-altitude forward pickets.
+          {{ langService.t('heroDesc') }}
         </p>
 
         <!-- Hero CTAs -->
         <div class="hero-cta-group">
           <a routerLink="/auth/login" class="btn-saffron-primary btn-cta">
-            <span>Access Portal</span>
+            <span>{{ langService.t('heroAccessPortal') }}</span>
             <svg viewBox="0 0 20 20" fill="currentColor" class="cta-arrow">
               <path fill-rule="evenodd"
                 d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
@@ -46,7 +44,7 @@
             </svg>
           </a>
           <button type="button" class="btn-outline-hero" (click)="scrollToSection('core-capabilities')">
-            Explore SenaAapurti
+            {{ langService.t('heroExplore') }}
           </button>
         </div>
       </div>
@@ -60,26 +58,26 @@
       <div class="metrics-grid">
         <div class="metric-item">
           <div class="metric-value">1,420+</div>
-          <div class="metric-label">Registered Units</div>
-          <div class="metric-sub">Connected across all 7 Commands</div>
+          <div class="metric-label">{{ langService.t('metricRegisteredUnits') }}</div>
+          <div class="metric-sub">{{ langService.t('metricRegisteredUnitsSub') }}</div>
         </div>
 
         <div class="metric-item">
           <div class="metric-value">380+</div>
-          <div class="metric-label">Active Logistics Movements</div>
-          <div class="metric-sub">Convoys and air-drops synchronized</div>
+          <div class="metric-label">{{ langService.t('metricActiveMovements') }}</div>
+          <div class="metric-sub">{{ langService.t('metricActiveMovementsSub') }}</div>
         </div>
 
         <div class="metric-item">
           <div class="metric-value">96.8%</div>
-          <div class="metric-label">Supply Readiness</div>
-          <div class="metric-sub">Across all forward formations</div>
+          <div class="metric-label">{{ langService.t('metricSupplyReadiness') }}</div>
+          <div class="metric-sub">{{ langService.t('metricSupplyReadinessSub') }}</div>
         </div>
 
         <div class="metric-item">
           <div class="metric-value">100%</div>
-          <div class="metric-label">Predictive Coverage</div>
-          <div class="metric-sub">Northern & Eastern border defense</div>
+          <div class="metric-label">{{ langService.t('metricPredictiveCoverage') }}</div>
+          <div class="metric-sub">{{ langService.t('metricPredictiveCoverageSub') }}</div>
         </div>
       </div>
     </div>
@@ -92,10 +90,10 @@
 
     <div class="section-container">
       <div class="section-heading-center">
-        <span class="section-tag">STRATEGIC MANDATE & CAPABILITIES</span>
-        <h2 class="section-title">Mission & Four Pillars of Supply Superiority</h2>
+        <span class="section-tag">{{ langService.t('mandateTag') }}</span>
+        <h2 class="section-title">{{ langService.t('mandateTitle') }}</h2>
         <p class="section-lead">
-          Bridging the critical divide between Strategic Depots and Forward Localities through autonomous AI orchestration and real-time telemetry
+          {{ langService.t('mandateLead') }}
         </p>
       </div>
 
@@ -103,38 +101,36 @@
       <div class="executive-mandate-card">
         <div class="mandate-ethos-row">
           <div class="mandate-ethos-badge">
-            <span class="motto-hindi">सदैव आपूर्ति • सदैव समर्थन</span>
+            <span class="motto-hindi">{{ langService.t('mandateEthosHindi') }}</span>
             <span class="motto-sep">|</span>
-            <span class="motto-eng">INTELLIGENT SUPPLY • ASSURED READINESS</span>
+            <span class="motto-eng">{{ langService.t('mandateEthosEng') }}</span>
           </div>
           <div class="mandate-defcon-pill">
             <span class="pulse-green"></span>
-            ACTIVE THEATER READINESS
+            {{ langService.t('mandateDefcon') }}
           </div>
         </div>
 
         <div class="mandate-body-grid">
           <div class="mandate-text-col">
-            <h3 class="mandate-headline">Anticipatory Combat Sustenance</h3>
+            <h3 class="mandate-headline">{{ langService.t('mandateHeadline') }}</h3>
             <p class="mandate-para">
-              <strong>SenaAapurti (सेना आपूर्ति)</strong> is the Indian Army's centralized AI-driven predictive logistics orchestration platform.
-              It eliminates supply chain friction and guarantees uninterrupted combat sustenance across northern and eastern border theaters—automating
-              multi-echelon demand projections for Rations (Class I), POL Fuel (Class III), Munitions (Class V), and Equipment Spares (Class IX).
+              <strong>{{ langService.t('titleSena') }}{{ langService.t('titleAapurti') }}</strong> {{ langService.t('mandatePara') }}
             </p>
           </div>
 
           <div class="mandate-metrics-col">
             <div class="mandate-stat-box">
               <span class="stat-number">100%</span>
-              <span class="stat-label">Multi-Command Visibility</span>
+              <span class="stat-label">{{ langService.t('mandateStat1Label') }}</span>
             </div>
             <div class="mandate-stat-box">
-              <span class="stat-number">Zero</span>
-              <span class="stat-label">Critical Stockout Tolerance</span>
+              <span class="stat-number">{{ langService.t('mandateStat2Val') }}</span>
+              <span class="stat-label">{{ langService.t('mandateStat2Label') }}</span>
             </div>
             <div class="mandate-stat-box">
-              <span class="stat-number">30–90D</span>
-              <span class="stat-label">Predictive Buffer Warning</span>
+              <span class="stat-number">{{ langService.t('mandateStat3Val') }}</span>
+              <span class="stat-label">{{ langService.t('mandateStat3Label') }}</span>
             </div>
           </div>
         </div>
@@ -152,10 +148,10 @@
                 <line x1="12" y1="12" x2="20" y2="4"/>
               </svg>
             </div>
-            <span class="pillar-step-badge">PILLAR 01</span>
+            <span class="pillar-step-badge">{{ langService.t('pillar1Badge') }}</span>
           </div>
           <div class="pillar-content">
-            <h3 class="pillar-heading">Predict Demand</h3>
+            <h3 class="pillar-heading">{{ langService.t('pillar1Heading') }}</h3>
           </div>
         </div>
 
@@ -170,10 +166,10 @@
                 <circle cx="7" cy="18" r="2"/>
               </svg>
             </div>
-            <span class="pillar-step-badge">PILLAR 02</span>
+            <span class="pillar-step-badge">{{ langService.t('pillar2Badge') }}</span>
           </div>
           <div class="pillar-content">
-            <h3 class="pillar-heading">Optimize Movement</h3>
+            <h3 class="pillar-heading">{{ langService.t('pillar2Heading') }}</h3>
           </div>
         </div>
 
@@ -186,10 +182,10 @@
                 <path d="M12 22V12"/>
               </svg>
             </div>
-            <span class="pillar-step-badge">PILLAR 03</span>
+            <span class="pillar-step-badge">{{ langService.t('pillar3Badge') }}</span>
           </div>
           <div class="pillar-content">
-            <h3 class="pillar-heading">Ensure Availability</h3>
+            <h3 class="pillar-heading">{{ langService.t('pillar3Heading') }}</h3>
           </div>
         </div>
 
@@ -201,10 +197,10 @@
                 <path d="m9 12 2 2 4-4"/>
               </svg>
             </div>
-            <span class="pillar-step-badge">PILLAR 04</span>
+            <span class="pillar-step-badge">{{ langService.t('pillar4Badge') }}</span>
           </div>
           <div class="pillar-content">
-            <h3 class="pillar-heading">Strengthen Readiness</h3>
+            <h3 class="pillar-heading">{{ langService.t('pillar4Heading') }}</h3>
           </div>
         </div>
       </div>
@@ -217,9 +213,9 @@
       <div class="jarvis-hud-header">
         <div class="jarvis-hud-pill">
           <span class="hud-core-dot"></span>
-          <span class="hud-pill-text">AUTONOMOUS C4ISR WORKFLOW</span>
+          <span class="hud-pill-text">{{ langService.t('jarvisPill') }}</span>
         </div>
-        <h2 class="jarvis-hud-title">How SenaAapurti Operates</h2>
+        <h2 class="jarvis-hud-title">{{ langService.t('jarvisTitle') }}</h2>
       </div>
 
       <!-- Jarvis HUD Animated Buttons Flow -->
@@ -239,7 +235,7 @@
             [class.active]="selectedStageIndex === idx"
             [class.completed]="selectedStageIndex > idx"
             (click)="selectStage(idx)"
-            [attr.aria-label]="'Stage ' + stage.step + ': ' + stage.name">
+            [attr.aria-label]="'Stage ' + stage.step + ': ' + (langService.t('workflowStage_' + stage.step) || stage.name)">
 
             <!-- Arc Reactor Outer Spinning Ring -->
             <div class="jarvis-reactor-ring"></div>
@@ -300,8 +296,8 @@
 
             <!-- HUD Button Label -->
             <div class="jarvis-node-label">
-              <span class="jarvis-label-name">{{ stage.name }}</span>
-              <span class="jarvis-label-status" *ngIf="selectedStageIndex === idx">ACTIVE</span>
+              <span class="jarvis-label-name">{{ langService.t('workflowStage_' + stage.step) || stage.name }}</span>
+              <span class="jarvis-label-status" *ngIf="selectedStageIndex === idx">{{ langService.t('jarvisActive') }}</span>
             </div>
           </button>
         </div>
@@ -310,91 +306,87 @@
   </section>
 
   <!-- ================= INFORMATION / NEWS SECTION ================= -->
-  <!-- ================= INFORMATION / NEWS SECTION ================= -->
   <section class="news-information-section">
     <div class="section-container">
       <div class="section-heading-center">
         <span class="section-tag">
           <span class="tag-pulse-dot orange"></span>
-          OFFICIAL CIRCULARS
+          {{ langService.t('newsTag') }}
         </span>
-        <h2 class="section-title">Defense Information & Bulletin</h2>
-        <p class="section-lead">DGOS directives, system enhancements, and critical operational circulars</p>
+        <h2 class="section-title">{{ langService.t('newsTitle') }}</h2>
+        <p class="section-lead">{{ langService.t('newsLead') }}</p>
       </div>
 
       <div class="news-nav-tabs">
         <button type="button" class="news-tab-btn" [class.active]="activeNewsTab === 'announcements'"
           (click)="activeNewsTab = 'announcements'">
           <span class="tab-dot" *ngIf="activeNewsTab === 'announcements'"></span>
-          Announcements
+          {{ langService.t('newsTabAnnouncements') }}
         </button>
         <button type="button" class="news-tab-btn" [class.active]="activeNewsTab === 'updates'"
           (click)="activeNewsTab = 'updates'">
           <span class="tab-dot" *ngIf="activeNewsTab === 'updates'"></span>
-          System Updates
+          {{ langService.t('newsTabUpdates') }}
         </button>
         <button type="button" class="news-tab-btn" [class.active]="activeNewsTab === 'notices'"
           (click)="activeNewsTab = 'notices'">
           <span class="tab-dot" *ngIf="activeNewsTab === 'notices'"></span>
-          Important Notices
+          {{ langService.t('newsTabNotices') }}
         </button>
       </div>
 
       <div class="news-cards-list mt-3">
         <div *ngIf="activeNewsTab === 'announcements'" class="news-entry-card card-surface">
           <div class="news-card-top-row">
-            <span class="badge-gold">CIRCULAR 42/2026</span>
-            <span class="news-clearance-stamp">UNCLASSIFIED // DEFENSE WIDE</span>
+            <span class="badge-gold">{{ langService.t('circ1Tag') }}</span>
+            <span class="news-clearance-stamp">{{ langService.t('circ1Clearance') }}</span>
           </div>
-          <h4>Winter Stocking Verification for Northern & Eastern Theaters Completed</h4>
-          <p>The Master General of Sustenance (MGS) branch has certified 100% pre-positioning of Sub-Zero HSD and
-            high-altitude sustenance across 14, 15, 16, and 4 Corps ahead of seasonal mountain pass blockages.</p>
+          <h4>{{ langService.t('circ1Title') }}</h4>
+          <p>{{ langService.t('circ1Desc') }}</p>
           <div class="news-card-footer">
             <span class="news-date">
               <svg class="news-meta-icon" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
               </svg>
-              Published: 04 October 2026 • DGOS Directorate
+              {{ langService.t('circ1Date') }}
             </span>
-            <span class="news-auth-tag">VERIFIED BY MGS HQ</span>
+            <span class="news-auth-tag">{{ langService.t('circ1Auth') }}</span>
           </div>
         </div>
 
         <div *ngIf="activeNewsTab === 'updates'" class="news-entry-card card-surface">
           <div class="news-card-top-row">
-            <span class="badge-blue">SYSTEM RELEASE V4.8</span>
-            <span class="news-clearance-stamp">ASCON C4ISR PROTOCOL</span>
+            <span class="badge-blue">{{ langService.t('circ2Tag') }}</span>
+            <span class="news-clearance-stamp">{{ langService.t('circ2Clearance') }}</span>
           </div>
-          <h4>Deployment of Neural Pass Weather Forecasting along Sela Tunnel Axis</h4>
-          <p>SenaAapurti v4.8 activates automated IMD Doppler radar integration predicting black ice and snowfall
-            probabilities 72 hours in advance for Eastern Command convoys.</p>
+          <h4>{{ langService.t('circ2Title') }}</h4>
+          <p>{{ langService.t('circ2Desc') }}</p>
           <div class="news-card-footer">
             <span class="news-date">
               <svg class="news-meta-icon" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
               </svg>
-              Published: 01 October 2026 • Army Cyber Logistics Group
+              {{ langService.t('circ2Date') }}
             </span>
-            <span class="news-auth-tag">SYSTEM UPGRADE APPLIED</span>
+            <span class="news-auth-tag">{{ langService.t('circ2Auth') }}</span>
           </div>
         </div>
 
         <div *ngIf="activeNewsTab === 'notices'" class="news-entry-card card-surface">
           <div class="news-card-top-row">
-            <span class="badge-danger">FLASH NOTICE</span>
-            <span class="news-clearance-stamp urgent">MANDATORY COMPLIANCE</span>
+            <span class="badge-danger">{{ langService.t('circ3Tag') }}</span>
+            <span class="news-clearance-stamp urgent">{{ langService.t('circ3Clearance') }}</span>
           </div>
-          <h4>Migration of Field Indent Vouchers to Cryptographic ASCON Signatures</h4>
-          <p>All Regimental Quartermasters must file replenishment indents exclusively through the SenaAapurti Unit
-            Portal. Physical handwritten indents stand deprecated under Army Order AO-18/2026.</p>
+          <h4>{{ langService.t('circ3Title') }}</h4>
+          <p>{{ langService.t('circ3Desc') }}</p>
           <div class="news-card-footer">
             <span class="news-date">
               <svg class="news-meta-icon" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
               </svg>
-              Published: 28 September 2026 • Adjutant General's Branch
+              {{ langService.t('circ3Date') }}
             </span>
-            <span class="news-auth-tag urgent">STATUTORY DIRECTIVE</span>
+            <span class="news-auth-tag urgent">{{ langService.t('circ3Auth') }}</span>
           </div>
         </div>
       </div>
@@ -407,10 +399,10 @@
       <div class="section-heading-center">
         <span class="section-tag">
           <span class="tag-pulse-dot orange"></span>
-          PUBLICATIONS & ASSETS
+          {{ langService.t('dlTag') }}
         </span>
-        <h2 class="section-title dark-text-white">Official Defense Downloads & Documentation</h2>
-        <p class="section-lead dark-lead">Download official defense manuals, quick-start setup cards, and tactical mobile applications</p>
+        <h2 class="section-title dark-text-white">{{ langService.t('dlTitle') }}</h2>
+        <p class="section-lead dark-lead">{{ langService.t('dlLead') }}</p>
       </div>
 
       <div class="downloads-list">
@@ -425,15 +417,15 @@
             </svg>
           </div>
           <div class="dl-info">
-            <h4>User Manuals: SenaAapurti Comprehensive Manual v4.8</h4>
-            <p>Complete 180-page reference manual for Command and Unit logisticians detailing system operation.</p>
-            <span class="dl-meta">PDF • 8.4 MB • Official Defense Manual</span>
+            <h4>{{ langService.t('dl1Title') }}</h4>
+            <p>{{ langService.t('dl1Desc') }}</p>
+            <span class="dl-meta">{{ langService.t('dl1Meta') }}</span>
           </div>
           <button type="button" class="btn-dl" (click)="downloadManual('SenaAapurti_User_Manual_v4.8.pdf')">
             <svg viewBox="0 0 20 20" fill="currentColor" class="btn-dl-svg">
               <path fill-rule="evenodd" d="M3 17a1 1 0 001 1h12a1 1 0 100-2H4a1 1 0 00-1 1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
             </svg>
-            <span>Download PDF</span>
+            <span>{{ langService.t('dlBtnPdf') }}</span>
           </button>
         </div>
 
@@ -453,15 +445,15 @@
             </svg>
           </div>
           <div class="dl-info">
-            <h4>Quick Start Guide: Tactical Field Terminal Setup</h4>
-            <p>Step-by-step quick guide for setting up field tablet clients and ASCON satellite transponders.</p>
-            <span class="dl-meta">PDF • 2.1 MB • Quick Start Card</span>
+            <h4>{{ langService.t('dl2Title') }}</h4>
+            <p>{{ langService.t('dl2Desc') }}</p>
+            <span class="dl-meta">{{ langService.t('dl2Meta') }}</span>
           </div>
           <button type="button" class="btn-dl" (click)="downloadManual('Tactical_Quick_Start_Guide.pdf')">
             <svg viewBox="0 0 20 20" fill="currentColor" class="btn-dl-svg">
               <path fill-rule="evenodd" d="M3 17a1 1 0 001 1h12a1 1 0 100-2H4a1 1 0 00-1 1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
             </svg>
-            <span>Download PDF</span>
+            <span>{{ langService.t('dlBtnPdf') }}</span>
           </button>
         </div>
 
@@ -473,15 +465,15 @@
             </svg>
           </div>
           <div class="dl-info">
-            <h4>Mobile App: Ruggedized Android Field Client APK</h4>
-            <p>Official APK for military handheld terminals with offline store scanning capabilities.</p>
-            <span class="dl-meta">APK • 42 MB • Version 3.4.1</span>
+            <h4>{{ langService.t('dl3Title') }}</h4>
+            <p>{{ langService.t('dl3Desc') }}</p>
+            <span class="dl-meta">{{ langService.t('dl3Meta') }}</span>
           </div>
           <button type="button" class="btn-dl" (click)="downloadManual('SenaAapurti_Field_v3.4.apk')">
             <svg viewBox="0 0 20 20" fill="currentColor" class="btn-dl-svg">
               <path fill-rule="evenodd" d="M3 17a1 1 0 001 1h12a1 1 0 100-2H4a1 1 0 00-1 1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
             </svg>
-            <span>Download APK</span>
+            <span>{{ langService.t('dlBtnApk') }}</span>
           </button>
         </div>
 
@@ -494,15 +486,15 @@
             </svg>
           </div>
           <div class="dl-info">
-            <h4>Documentation: Technical Architecture & API Whitepaper</h4>
-            <p>Classified technical overview of cryptographic handshakes, ASCON protocols, and database schema.</p>
-            <span class="dl-meta">PDF • 4.8 MB • Army Cyber Logistics</span>
+            <h4>{{ langService.t('dl4Title') }}</h4>
+            <p>{{ langService.t('dl4Desc') }}</p>
+            <span class="dl-meta">{{ langService.t('dl4Meta') }}</span>
           </div>
           <button type="button" class="btn-dl" (click)="downloadManual('Technical_Architecture_Whitepaper.pdf')">
             <svg viewBox="0 0 20 20" fill="currentColor" class="btn-dl-svg">
               <path fill-rule="evenodd" d="M3 17a1 1 0 001 1h12a1 1 0 100-2H4a1 1 0 00-1 1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
             </svg>
-            <span>Download PDF</span>
+            <span>{{ langService.t('dlBtnPdf') }}</span>
           </button>
         </div>
       </div>
@@ -515,10 +507,10 @@
       <div class="section-heading-center">
         <span class="section-tag">
           <span class="tag-pulse-dot green"></span>
-          24x7 TECHNICAL SUPPORT
+          {{ langService.t('supTag') }}
         </span>
-        <h2 class="section-title">Support & Help Centre</h2>
-        <p class="section-lead">Round-the-clock defense logistics assistance, issue tracking, and automated response hotlines</p>
+        <h2 class="section-title">{{ langService.t('supTitle') }}</h2>
+        <p class="section-lead">{{ langService.t('supLead') }}</p>
       </div>
 
       <div *ngIf="ticketSuccess" class="alert-success-banner mb-3">
@@ -529,35 +521,35 @@
         <!-- Report an Issue Form -->
         <div class="ticket-form-card">
           <div class="card-header-flex">
-            <h3>Report an Operational Issue</h3>
+            <h3>{{ langService.t('supReportIssue') }}</h3>
             <span class="card-status-badge green">
-              <span class="pulse-green"></span> ASCON DESK ONLINE
+              <span class="pulse-green"></span> {{ langService.t('supAsconOnline') }}
             </span>
           </div>
           <form (submit)="submitTicket(); $event.preventDefault()">
             <div class="form-group">
-              <label class="form-label">Officer / Operator Name</label>
+              <label class="form-label">{{ langService.t('supOfficerName') }}</label>
               <input type="text" [(ngModel)]="ticketName" name="ticketName" class="form-control" placeholder="e.g. Major Amit Sharma">
             </div>
             <div class="form-group">
-              <label class="form-label">Army Service Number</label>
+              <label class="form-label">{{ langService.t('supServiceNo') }}</label>
               <input type="text" [(ngModel)]="ticketServiceNo" name="ticketServiceNo" class="form-control" placeholder="e.g. IC-71044A">
             </div>
             <div class="form-group">
-              <label class="form-label">Issue Category</label>
+              <label class="form-label">{{ langService.t('supCategory') }}</label>
               <select [(ngModel)]="ticketCategory" name="ticketCategory" class="form-control">
-                <option value="Voucher Tracking">Voucher Tracking / Requisition Delay</option>
-                <option value="Convoy Telemetry">Convoy GPS Telemetry Offline</option>
-                <option value="Stock Reconciliation">Depot Stock Reconciliation Discrepancy</option>
-                <option value="Security Access">Account Security / Access Permissions</option>
+                <option value="Voucher Tracking">{{ langService.t('supCatVoucher') }}</option>
+                <option value="Convoy Telemetry">{{ langService.t('supCatConvoy') }}</option>
+                <option value="Stock Reconciliation">{{ langService.t('supCatStock') }}</option>
+                <option value="Security Access">{{ langService.t('supCatSec') }}</option>
               </select>
             </div>
             <div class="form-group">
-              <label class="form-label">Issue Details & Reference #</label>
+              <label class="form-label">{{ langService.t('supIssueDetails') }}</label>
               <textarea [(ngModel)]="ticketMessage" name="ticketMessage" rows="3" class="form-control" placeholder="Describe the issue in detail..."></textarea>
             </div>
             <button type="submit" class="btn-saffron-primary full-width">
-              <span>Submit Support Ticket ➔</span>
+              <span>{{ langService.t('supSubmitTicket') }}</span>
             </button>
           </form>
         </div>
@@ -565,9 +557,9 @@
         <!-- Help Centre & Technical Hotlines -->
         <div class="hotline-card">
           <div class="card-header-flex">
-            <h3>Help Centre & Technical Hotlines</h3>
+            <h3>{{ langService.t('supHotlines') }}</h3>
             <span class="card-status-badge red">
-              <span class="pulse-red"></span> 24x7 ACTIVE
+              <span class="pulse-red"></span> {{ langService.t('supActive247') }}
             </span>
           </div>
           <div class="hotline-grid-items">
@@ -578,9 +570,9 @@
                 </svg>
               </div>
               <div class="hl-content">
-                <span class="hl-label">Army HQ 24x7 Control Room</span>
+                <span class="hl-label">{{ langService.t('supHl1Label') }}</span>
                 <span class="hl-number">1800-11-SENA (7362)</span>
-                <span class="hl-sub">Toll-free across all military circles</span>
+                <span class="hl-sub">{{ langService.t('supHl1Sub') }}</span>
               </div>
             </div>
 
@@ -593,9 +585,9 @@
                 </svg>
               </div>
               <div class="hl-content">
-                <span class="hl-label">Northern Command Ops Cell</span>
+                <span class="hl-label">{{ langService.t('supHl2Label') }}</span>
                 <span class="hl-number">ASCON Node 4421 / 4422</span>
-                <span class="hl-sub">Dedicated secure defense exchange</span>
+                <span class="hl-sub">{{ langService.t('supHl2Sub') }}</span>
               </div>
             </div>
 
@@ -607,9 +599,9 @@
                 </svg>
               </div>
               <div class="hl-content">
-                <span class="hl-label">Technical Helpdesk (Signal Corps)</span>
+                <span class="hl-label">{{ langService.t('supHl3Label') }}</span>
                 <span class="hl-number email">support.senaaapurti&#64;nic.in</span>
-                <span class="hl-sub">Ticketing response SLA: &lt; 30 mins</span>
+                <span class="hl-sub">{{ langService.t('supHl3Sub') }}</span>
               </div>
             </div>
 
@@ -620,9 +612,9 @@
                 </svg>
               </div>
               <div class="hl-content">
-                <span class="hl-label">Class V Munitions Emergency Hotline</span>
+                <span class="hl-label">{{ langService.t('supHl4Label') }}</span>
                 <span class="hl-number danger">1800-22-AMMO (2666)</span>
-                <span class="hl-sub">Immediate replenishment authorization</span>
+                <span class="hl-sub">{{ langService.t('supHl4Sub') }}</span>
               </div>
             </div>
           </div>
@@ -640,10 +632,10 @@
       <div class="section-heading-center">
         <span class="section-tag">
           <span class="tag-pulse-dot orange"></span>
-          DGOS SUSTENANCE MANDATE
+          {{ langService.t('aboutTag') }}
         </span>
-        <h2 class="section-title dark-text-white">About SenaAapurti & Official Contact</h2>
-        <p class="section-lead dark-lead">The Sovereign AI Predictive Logistics Continuum of the Indian Army</p>
+        <h2 class="section-title dark-text-white">{{ langService.t('aboutTitle') }}</h2>
+        <p class="section-lead dark-lead">{{ langService.t('aboutLead') }}</p>
       </div>
 
       <div *ngIf="contactSuccess" class="alert-success-banner mb-3">
@@ -655,13 +647,13 @@
         <div class="about-summary-panel">
           <div class="panel-header-badge">
             <span class="badge-dot"></span>
-            <span>INTEGRATED HQ OF MoD (ARMY) • MGS BRANCH</span>
+            <span>{{ langService.t('aboutHqBadge') }}</span>
           </div>
           
-          <h3 class="panel-title">Autonomous Defense Sustenance</h3>
+          <h3 class="panel-title">{{ langService.t('aboutPanelTitle') }}</h3>
           
           <p class="panel-statement">
-            <strong>SenaAapurti (सेना आपूर्ति)</strong> is the centralized AI-powered logistics backbone engineered by the Directorate General of Ordnance Services (DGOS). It connects operational commands, Central Ordnance Depots, and extreme high-altitude forward pickets into a real-time predictive replenishment network.
+            <strong>{{ langService.t('titleSena') }}{{ langService.t('titleAapurti') }}</strong> {{ langService.t('aboutStatement') }}
           </p>
 
           <!-- 3 High-Impact Tenets (Crisp & Minimal) -->
@@ -674,8 +666,8 @@
                 </svg>
               </div>
               <div class="tenet-info">
-                <h4>30–90D Anticipatory Buffers</h4>
-                <p>Neural demand forecasting before winter pass closures</p>
+                <h4>{{ langService.t('tenet1Title') }}</h4>
+                <p>{{ langService.t('tenet1Desc') }}</p>
               </div>
             </div>
 
@@ -686,8 +678,8 @@
                 </svg>
               </div>
               <div class="tenet-info">
-                <h4>Zero Critical Stockouts</h4>
-                <p>Autonomous inventory rebalancing across Class I to IX stores</p>
+                <h4>{{ langService.t('tenet2Title') }}</h4>
+                <p>{{ langService.t('tenet2Desc') }}</p>
               </div>
             </div>
 
@@ -699,65 +691,65 @@
                 </svg>
               </div>
               <div class="tenet-info">
-                <h4>ASCON Military Encryption</h4>
-                <p>Certified military-grade telemetry on sovereign infrastructure</p>
+                <h4>{{ langService.t('tenet3Title') }}</h4>
+                <p>{{ langService.t('tenet3Desc') }}</p>
               </div>
             </div>
           </div>
 
           <div class="governance-tags">
-            <span class="gov-tag">DGOS Secretariat</span>
-            <span class="gov-tag">Army Cyber Group</span>
-            <span class="gov-tag">CERT-In Audited</span>
+            <span class="gov-tag">{{ langService.t('govDgos') }}</span>
+            <span class="gov-tag">{{ langService.t('govCyber') }}</span>
+            <span class="gov-tag">{{ langService.t('govCert') }}</span>
           </div>
         </div>
 
         <!-- Right: Official Secretariat Directory & Quick Dispatch -->
         <div class="contact-hub-panel">
           <div class="secretariat-box">
-            <h4 class="hub-subheading">Principal Secretariats</h4>
+            <h4 class="hub-subheading">{{ langService.t('hubSecretariats') }}</h4>
             
             <div class="secretariat-item">
-              <span class="sec-label">Master General of Sustenance (MGS)</span>
-              <p class="sec-text">South Block, Integrated HQ of MoD (Army), New Delhi - 110011</p>
+              <span class="sec-label">{{ langService.t('secMgsLabel') }}</span>
+              <p class="sec-text">{{ langService.t('secMgsText') }}</p>
             </div>
 
             <div class="secretariat-item">
-              <span class="sec-label">Directorate General of Ordnance Services (DGOS)</span>
-              <p class="sec-text">West Block IV, RK Puram, New Delhi - 110066</p>
+              <span class="sec-label">{{ langService.t('secDgosLabel') }}</span>
+              <p class="sec-text">{{ langService.t('secDgosText') }}</p>
             </div>
 
             <div class="secretariat-item">
-              <span class="sec-label">24x7 Control Cell & Helpdesk</span>
-              <p class="sec-text">1800-11-SENA (7362) • ASCON-NET Node 4481</p>
+              <span class="sec-label">{{ langService.t('sec247Label') }}</span>
+              <p class="sec-text">{{ langService.t('sec247Text') }}</p>
             </div>
 
             <div class="secretariat-item">
-              <span class="sec-label">Official Electronic Gateways</span>
-              <p class="sec-text">dgos.sec&#64;nic.in • senaaapurti.hq&#64;gov.in</p>
+              <span class="sec-label">{{ langService.t('secGatewaysLabel') }}</span>
+              <p class="sec-text">{{ langService.t('secGatewaysText') }}</p>
             </div>
           </div>
 
           <!-- Quick Dispatch Form -->
           <div class="quick-comm-card">
-            <h4 class="hub-subheading">Official Communication Channel</h4>
+            <h4 class="hub-subheading">{{ langService.t('quickChannel') }}</h4>
             <form (submit)="submitContact(); $event.preventDefault()">
               <div class="comm-form-row">
                 <div class="form-group flex-1">
-                  <label class="form-label">Full Name & Rank</label>
+                  <label class="form-label">{{ langService.t('fieldNameRank') }}</label>
                   <input type="text" [(ngModel)]="contactName" name="contactName" class="form-control" placeholder="e.g. Col R. Sharma">
                 </div>
                 <div class="form-group flex-1">
-                  <label class="form-label">Defense Email ID</label>
+                  <label class="form-label">{{ langService.t('fieldDefEmail') }}</label>
                   <input type="email" [(ngModel)]="contactEmail" name="contactEmail" class="form-control" placeholder="officer&#64;army.nic.in">
                 </div>
               </div>
               <div class="form-group">
-                <label class="form-label">Message / Query</label>
+                <label class="form-label">{{ langService.t('fieldMsg') }}</label>
                 <textarea [(ngModel)]="contactMsg" name="contactMsg" rows="2" class="form-control" placeholder="Enter brief communication..."></textarea>
               </div>
               <button type="submit" class="btn-saffron-primary full-width">
-                <span>Transmit Communication ➔</span>
+                <span>{{ langService.t('btnTransmit') }}</span>
               </button>
             </form>
           </div>

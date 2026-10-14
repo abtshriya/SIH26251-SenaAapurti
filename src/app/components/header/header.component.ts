@@ -63,13 +63,13 @@ export class HeaderComponent {
     });
   }
   importantLinks = [
-    { title: 'Indian Army', url: 'https://indianarmy.nic.in' },
-    { title: 'Army Ordnance Corps (AOC)', url: 'https://aocrecruitment.gov.in/' },
-    { title: 'Ministry of Defence', url: 'https://mod.gov.in' },
-    { title: 'Government e-Marketplace (GeM)', url: 'https://gem.gov.in' },
-    { title: 'Central Public Procurement Portal (CPPP)', url: 'https://eprocure.gov.in/eprocure/app' },
-    { title: 'Border Roads Organisation (BRO)', url: 'https://bro.gov.in' },
-    { title: 'India Meteorological Department (IMD)', url: 'https://mausam.imd.gov.in' }
+    { title: 'Indian Army', key: 'linkIndianArmy', url: 'https://indianarmy.nic.in' },
+    { title: 'Army Ordnance Corps (AOC)', key: 'linkAoc', url: 'https://aocrecruitment.gov.in/' },
+    { title: 'Ministry of Defence', key: 'linkMod', url: 'https://mod.gov.in' },
+    { title: 'Government e-Marketplace (GeM)', key: 'linkGem', url: 'https://gem.gov.in' },
+    { title: 'Central Public Procurement Portal (CPPP)', key: 'linkCppp', url: 'https://eprocure.gov.in/eprocure/app' },
+    { title: 'Border Roads Organisation (BRO)', key: 'linkBro', url: 'https://bro.gov.in' },
+    { title: 'India Meteorological Department (IMD)', key: 'linkImd', url: 'https://mausam.imd.gov.in' }
   ];
 
   // Reactively track current URL to determine portal mode

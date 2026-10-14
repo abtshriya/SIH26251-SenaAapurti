@@ -314,7 +314,7 @@
       </li>
       <li class="nav-item">
         <a routerLink="/know-sena-aapurti" routerLinkActive="active" class="nav-link-btn" aria-label="Know SenaAapurti">
-          Know SenaAapurti
+          {{ langService.t('navKnowSena') }}
         </a>
       </li>
       <!-- FAQ DROPDOWN (INDIAN ARMY STYLE) -->
@@ -337,7 +337,7 @@
           <li *ngFor="let cat of faqCategories" role="none" class="dd-li">
             <a [routerLink]="cat.route" (click)="onFaqSelect($event)" class="faq-dropdown-link" role="menuitem"
               routerLinkActive="active-dd-link">
-              <span class="dd-title">{{ cat.title }}</span>
+              <span class="dd-title">{{ langService.t('faqCat_' + cat.id) || cat.title }}</span>
               <span class="dd-arrow" aria-hidden="true">›</span>
             </a>
           </li>
@@ -359,7 +359,7 @@
           (click)="toggleImportantLinks($event)" (keydown.enter)="toggleImportantLinks($event)"
           (keydown.space)="toggleImportantLinks($event)" (keydown.escape)="closeImportantLinks()" aria-haspopup="true"
           [attr.aria-expanded]="importantLinksOpen" role="button" tabindex="0">
-          <span>Important Links</span>
+          <span>{{ langService.t('navImportantLinks') }}</span>
           <svg class="dropdown-caret" viewBox="0 0 20 20" fill="currentColor" [class.rotated]="importantLinksOpen"
             aria-hidden="true">
             <path fill-rule="evenodd"
@@ -373,12 +373,12 @@
           <li *ngFor="let item of importantLinks" role="none" class="dd-li">
             <a *ngIf="item.url" [href]="item.url" target="_blank" rel="noopener noreferrer"
               class="faq-dropdown-link" role="menuitem">
-              <span class="dd-title">{{ item.title }}</span>
+              <span class="dd-title">{{ langService.t(item.key) || item.title }}</span>
               <span class="dd-arrow" aria-hidden="true">›</span>
             </a>
             <span *ngIf="!item.url" class="faq-dropdown-link disabled-dd-link" role="menuitem" aria-disabled="true"
               title="Official portal unlisted">
-              <span class="dd-title">{{ item.title }}</span>
+              <span class="dd-title">{{ langService.t(item.key) || item.title }}</span>
               <span class="dd-badge-disabled" aria-hidden="true">Unlisted</span>
             </span>
           </li>
@@ -435,10 +435,10 @@
           <div class="portal-cta-group">
             <a routerLink="/auth" [queryParams]="{portal: 'command'}" class="nav-portal-btn command-btn">
               <span class="pulse-dot"></span>
-              Command Portal
+              {{ langService.t('commandPortalNav') }}
             </a>
             <a routerLink="/auth" [queryParams]="{portal: 'unit'}" class="nav-portal-btn unit-btn">
-              Unit Portal
+              {{ langService.t('unitPortalNav') }}
             </a>
           </div>
         </ng-container>
@@ -558,21 +558,17 @@
   <div class="ticker-inner-wrap">
     <div class="ticker-label-badge">
       <span class="ticker-pulse-beacon"></span>
-      <span class="ticker-label-text">LIVE UPDATES</span>
+      <span class="ticker-label-text">{{ langService.t('liveUpdates') }}</span>
     </div>
     <div class="ticker-track-container">
       <div class="ticker-marquee-track">
-        <span class="ticker-item"><strong>Northern Command:</strong> Zojila Axis Convoy Column 42 cleared for
-          high-altitude transit with continuous GPS telemetry</span>
+        <span class="ticker-item"><strong>{{ langService.t('ticker1Prefix') }}</strong> {{ langService.t('ticker1Text') }}</span>
         <span class="ticker-dot">•</span>
-        <span class="ticker-item"><strong>Central Ordnance:</strong> Automated Class V munitions replenishment vouchers
-          dispatched to Eastern theater</span>
+        <span class="ticker-item"><strong>{{ langService.t('ticker2Prefix') }}</strong> {{ langService.t('ticker2Text') }}</span>
         <span class="ticker-dot">•</span>
-        <span class="ticker-item"><strong>POL Reserves:</strong> Advance winter fuel stocking at Siachen staging bases
-          verified at 100% capacity</span>
+        <span class="ticker-item"><strong>{{ langService.t('ticker3Prefix') }}</strong> {{ langService.t('ticker3Text') }}</span>
         <span class="ticker-dot">•</span>
-        <span class="ticker-item"><strong>SenaAapurti C4ISR:</strong> 7 Operational Commands interconnected on secure
-          edge network • 24x7 Control Room Active</span>
+        <span class="ticker-item"><strong>{{ langService.t('ticker4Prefix') }}</strong> {{ langService.t('ticker4Text') }}</span>
       </div>
     </div>
   </div>

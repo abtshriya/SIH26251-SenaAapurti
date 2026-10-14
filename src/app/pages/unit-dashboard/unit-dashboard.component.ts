@@ -226,7 +226,7 @@ export class UnitDashboardComponent implements OnInit {
           quantity: numAdded,
           depot: 'COD Pathankot',
           officer: 'Quartermaster Storeman',
-          remarks: this.newReceiptRemarks || 'Store receipt verified'
+          remarks: this.newReceiptNotes || 'Store receipt verified'
         }).pipe(
           catchError(() => of(null))
         ).subscribe();

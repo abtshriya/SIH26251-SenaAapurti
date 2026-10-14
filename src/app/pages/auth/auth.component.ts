@@ -162,6 +162,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     if (this.bgInterval) {
       clearInterval(this.bgInterval);
     }
+    this.stopCamera();
   }
 
   setMode(m: 'login' | 'register' | 'forgot-password' | 'unauthorized') {
@@ -204,10 +205,6 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.password = 'RajputRegt@2026';
     this.captchaInput = this.currentCaptcha;
     this.loginError = '';
-  }
-
-  ngOnDestroy() {
-    this.stopCamera();
   }
 
   async startCamera() {

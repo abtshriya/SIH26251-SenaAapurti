@@ -76,7 +76,6 @@ export class UnitDatabaseService {
       }
     });
   }
-  }
 
   /** Select active unit by ID */
   selectUnit(unitId: string): void {

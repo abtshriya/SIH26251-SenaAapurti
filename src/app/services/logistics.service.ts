@@ -1,6 +1,6 @@
 import { Injectable, signal, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, of, tap } from 'rxjs';
+import { catchError, of, tap, Observable } from 'rxjs';
 import { ALL_INDIAN_ARMY_UNITS } from '../data/indian-army-commands-database';
 
 export interface ConvoyItem {
@@ -995,7 +995,7 @@ export class LogisticsService {
    * Queries strategic alerts from FastAPI / PostgreSQL: GET /api/v1/alerts
    */
   fetchAlerts(): void {
-    this.http.get<any>(${this.API_BASE}/alerts).pipe(
+    this.http.get<any>(`${this.API_BASE}/alerts`).pipe(
       catchError(() => of(null))
     ).subscribe(data => {
       if (data && Array.isArray(data.alerts) && data.alerts.length > 0) {
@@ -1018,8 +1018,8 @@ export class LogisticsService {
    * Authorizes an alert recommended action and synchronizes with PostgreSQL database & cryptographic ledger:
    * POST /api/v1/alerts/authorize
    */
-  authorizeAlert(alertId: string) {
-    return this.http.post<any>(${this.API_BASE}/alerts/authorize, {
+  authorizeAlert(alertId: string): Observable<any> {
+    return this.http.post<any>(`${this.API_BASE}/alerts/authorize`, {
       alert_id: alertId,
       actor_id: 'COL-COMMAND-ADMIN-IC44912'
     }).pipe(

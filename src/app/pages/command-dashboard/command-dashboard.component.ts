@@ -1401,7 +1401,7 @@ export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestr
 
   // AI Recommendations
   executeAlertRemedy(alertItem: StrategicAlert) {
-    this.logisticsService.authorizeAlert(alertItem.id).subscribe(res => {
+    this.logisticsService.authorizeAlert(alertItem.id).subscribe((res: any) => {
       alertItem.status = 'AUTHORIZED';
       alertItem.txHash = res?.tx_hash;
       alertItem.authorizedAt = res?.authorized_at || new Date().toISOString();

@@ -372,7 +372,7 @@
         <ul class="links-dropdown-menu" [class.show]="importantLinksOpen" role="menu" aria-label="Important Links">
           <li *ngFor="let item of importantLinks" role="none" class="dd-li">
             <a *ngIf="item.url" [href]="item.url" target="_blank" rel="noopener noreferrer"
-              class="faq-dropdown-link" role="menuitem">
+              class="faq-dropdown-link" role="menuitem" (click)="closeImportantLinks()">
               <span class="dd-title">{{ langService.t(item.key) || item.title }}</span>
               <span class="dd-arrow" aria-hidden="true">›</span>
             </a>

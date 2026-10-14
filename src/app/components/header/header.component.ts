@@ -64,7 +64,7 @@ export class HeaderComponent {
   }
   importantLinks = [
     { title: 'Indian Army', key: 'linkIndianArmy', url: 'https://indianarmy.nic.in' },
-    { title: 'Army Ordnance Corps (AOC)', key: 'linkAoc', url: 'https://aocrecruitment.gov.in/' },
+    { title: 'Army Ordnance Corps (AOC)', key: 'linkAoc', url: 'https://joinindianarmy.nic.in' },
     { title: 'Ministry of Defence', key: 'linkMod', url: 'https://mod.gov.in' },
     { title: 'Government e-Marketplace (GeM)', key: 'linkGem', url: 'https://gem.gov.in' },
     { title: 'Central Public Procurement Portal (CPPP)', key: 'linkCppp', url: 'https://eprocure.gov.in/eprocure/app' },

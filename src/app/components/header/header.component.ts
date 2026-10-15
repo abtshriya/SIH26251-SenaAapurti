@@ -38,6 +38,7 @@ export class HeaderComponent {
       this.mobileMenuOpen = false;
       this.showNotifications = false;
       this.userProfileOpen = false;
+      this.commandProfileOpen = false;
     });
   }
 
@@ -46,6 +47,7 @@ export class HeaderComponent {
   mobileMenuOpen = false;
   showUnitSelectorModal = false;
   userProfileOpen = false;
+  commandProfileOpen = false;
   modalSearchQuery = '';
   modalSelectedCommand = 'All';
   faqDropdownOpen = false;
@@ -256,6 +258,10 @@ export class HeaderComponent {
       event.stopPropagation();
     }
     this.showNotifications = !this.showNotifications;
+    if (this.showNotifications) {
+      this.userProfileOpen = false;
+      this.commandProfileOpen = false;
+    }
   }
 
   closeNotifications() {
@@ -290,11 +296,38 @@ export class HeaderComponent {
       this.faqDropdownOpen = false;
       this.importantLinksOpen = false;
       this.showNotifications = false;
+      this.commandProfileOpen = false;
     }
   }
 
   closeUserProfile() {
     this.userProfileOpen = false;
+  }
+
+  get currentCommandUser() {
+    const u = this.authService.currentUser();
+    if (u && u.role === 'command') {
+      return u;
+    }
+    return this.authService.DEMO_COMMAND_USER;
+  }
+
+  toggleCommandProfile(event?: Event) {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    this.commandProfileOpen = !this.commandProfileOpen;
+    if (this.commandProfileOpen) {
+      this.faqDropdownOpen = false;
+      this.importantLinksOpen = false;
+      this.showNotifications = false;
+      this.userProfileOpen = false;
+    }
+  }
+
+  closeCommandProfile() {
+    this.commandProfileOpen = false;
   }
 
   @HostListener('document:click', ['$event'])
@@ -316,6 +349,9 @@ export class HeaderComponent {
     if (!targetEl.closest('.unit-profile-wrapper')) {
       this.userProfileOpen = false;
     }
+    if (!targetEl.closest('.command-profile-wrapper')) {
+      this.commandProfileOpen = false;
+    }
   }
 
   @HostListener('document:keydown.escape')
@@ -324,6 +360,7 @@ export class HeaderComponent {
     this.importantLinksOpen = false;
     this.showNotifications = false;
     this.userProfileOpen = false;
+    this.commandProfileOpen = false;
   }
 }
 

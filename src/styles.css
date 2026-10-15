@@ -597,3 +597,23 @@ body.modal-open {
   overflow-y: auto !important;
 }
 
+/* ================= HEADER & PROFILE FLOATING DROPDOWNS GLOBAL FIX ================= */
+app-header {
+  position: relative !important;
+  z-index: 99999 !important;
+  display: block !important;
+}
+
+app-header .main-navbar,
+app-header .nav-container,
+app-header .nav-user-actions,
+app-header .portal-cta-group,
+app-header .unit-cta-group,
+app-header .unit-profile-wrapper,
+app-header .header-container,
+app-header .command-header-container,
+app-header .header-right-zone,
+app-header .command-profile-wrapper {
+  overflow: visible !important;
+}
+

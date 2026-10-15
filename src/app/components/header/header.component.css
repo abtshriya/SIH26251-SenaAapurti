@@ -233,9 +233,16 @@
   height: 110px;
 }
 
-/* Command portal: tighter height, no bg image */
+/* Command portal: generous height and padding so logo, Hindi title, and English brand titles have ample breathing room */
 .command-header-container {
-  height: 78px !important;
+  height: auto !important;
+  min-height: 94px !important;
+  padding: 10px 24px !important;
+  overflow: visible !important;
+}
+
+.command-header-container .sena-logo-img {
+  height: 76px !important;
 }
 
 .brand-block-link {
@@ -2146,104 +2153,277 @@
 .notif-pop-body strong { color: #ffffff; margin-bottom: 2px; font-weight: 700; }
 .notif-pop-body span { color: #94a3b8; font-size: 0.68rem; }
 
-/* Officer Identity Pill */
-.officer-identity-pill {
-  display: flex;
+/* ================= COMMAND PORTAL HEADER ACTIONS & PROFILE SYSTEM ================= */
+.command-header-actions-group {
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
-  background: rgba(255, 255, 255, 0.08);
-  padding: 5px 14px;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  text-align: left;
-  backdrop-filter: blur(4px);
-  transition: all 0.2s ease;
+  gap: 8px;
 }
 
-.officer-identity-pill:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(212, 175, 55, 0.4);
-}
-
-.officer-avatar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.c2-avatar-svg {
-  width: 22px;
-  height: 22px;
-  stroke: #d4af37;
-}
-
-.officer-meta-txt {
-  display: flex;
-  flex-direction: column;
-}
-
-.officer-name {
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: #ffffff;
+.command-action-pill {
   font-family: var(--font-secondary);
-  line-height: 1.25;
-}
-
-.officer-role {
-  font-size: 0.66rem;
-  color: #94a3b8;
-  line-height: 1.2;
-}
-
-/* Top Header Portal Quick Jump Buttons - Stacked vertically */
-.top-header-portal-btns {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 4px;
-}
-
-.btn-top-portal-jump {
-  font-family: var(--font-secondary);
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   font-weight: 700;
   letter-spacing: 0.03em;
-  padding: 3px 10px;
-  border-radius: 4px;
+  padding: 6px 12px;
+  border-radius: 6px;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  gap: 6px;
   white-space: nowrap;
-  line-height: 1.25;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  line-height: 1.2;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.home-jump-btn {
+.command-action-pill.pill-home {
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #e2e8f0;
 }
 
-.home-jump-btn:hover {
-  background: rgba(255, 255, 255, 0.16);
+.command-action-pill.pill-home:hover {
+  background: rgba(255, 255, 255, 0.18);
   border-color: #ffffff;
   color: #ffffff;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
 }
 
-.unit-jump-btn {
+.command-action-pill.pill-home .pill-svg {
+  width: 14px;
+  height: 14px;
+}
+
+.command-action-pill.pill-unit {
   background: rgba(16, 185, 129, 0.14);
   border: 1px solid rgba(16, 185, 129, 0.5);
   color: #6ee7b7;
 }
 
-.unit-jump-btn:hover {
+.command-action-pill.pill-unit:hover {
   background: rgba(16, 185, 129, 0.26);
   border-color: #34d399;
   color: #ffffff;
-  box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.4);
+  transform: translateY(-1px);
+}
+
+.command-action-pill .pill-radar-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 6px #10b981;
+  animation: pulseSubtle 1.8s infinite;
+}
+
+/* Strategic Commander Profile Pill (C2 Level) */
+.command-profile-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  z-index: 10000;
+}
+
+.command-profile-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: rgba(15, 23, 16, 0.85);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  padding: 5px 12px 5px 7px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #ffffff;
+  backdrop-filter: blur(10px);
+  user-select: none;
+}
+
+.command-profile-trigger:hover,
+.command-profile-trigger.active {
+  background: rgba(28, 42, 28, 0.95);
+  border-color: #d4af37;
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.4);
+  transform: translateY(-1px);
+}
+
+.command-profile-avatar {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #78350f 0%, #92400e 50%, #b45309 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid rgba(250, 204, 21, 0.8);
+  flex-shrink: 0;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+}
+
+.command-profile-avatar .c2-avatar-svg {
+  width: 17px;
+  height: 17px;
+  stroke: #fef08a;
+}
+
+.c2-dot {
+  background: #ef4444 !important;
+  border-color: #0b170f !important;
+  box-shadow: 0 0 7px #ef4444 !important;
+  animation: pulseSubtle 1.4s infinite ease-in-out !important;
+}
+
+.command-profile-meta {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  text-align: left;
+}
+
+.command-officer-name {
+  font-family: var(--font-secondary);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.command-officer-rank {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #facc15;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.command-chevron {
+  font-size: 0.76rem;
+  color: #d4af37;
+}
+
+/* ================= STRATEGIC COMMAND DOSSIER DROPDOWN CARD ================= */
+.command-profile-dropdown {
+  position: absolute !important;
+  top: calc(100% + 8px) !important;
+  right: 0 !important;
+  width: 340px !important;
+  max-width: calc(100vw - 24px) !important;
+  background: linear-gradient(180deg, rgba(16, 26, 18, 0.98) 0%, rgba(7, 13, 9, 0.99) 100%) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  border: 1px solid rgba(212, 175, 55, 0.5) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 24px 52px rgba(0, 0, 0, 0.92), 0 0 28px rgba(212, 175, 55, 0.25) !important;
+  z-index: 100000 !important;
+  overflow: hidden !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  animation: profileDropdownIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.command-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, rgba(85, 45, 10, 0.75) 0%, rgba(20, 28, 20, 0.95) 100%);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+.c2-large-avatar {
+  background: linear-gradient(135deg, #78350f, #92400e) !important;
+  border-color: rgba(250, 204, 21, 0.9) !important;
+  box-shadow: 0 0 14px rgba(212, 175, 55, 0.45) !important;
+}
+
+.c2-large-avatar svg {
+  color: #fef08a !important;
+  stroke: #fef08a !important;
+}
+
+.c2-badge-dot {
+  background: #ef4444 !important;
+  border-color: #0b170f !important;
+  box-shadow: 0 0 8px #ef4444 !important;
+}
+
+.c2-duty-tag {
+  color: #fca5a5 !important;
+}
+
+.pulse-red {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ef4444;
+  box-shadow: 0 0 7px #ef4444;
+  animation: pulseSubtle 1.4s infinite;
+  display: inline-block;
+}
+
+.command-service-val {
+  color: #facc15 !important;
+  font-family: monospace;
+  font-size: 0.86rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em;
+}
+
+.c2-clearance {
+  background: rgba(220, 38, 38, 0.22) !important;
+  border-color: rgba(239, 68, 68, 0.6) !important;
+  color: #fca5a5 !important;
+}
+
+.command-card-quick-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: rgba(0, 0, 0, 0.35);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.c2-action-pill {
+  flex: 1;
+  font-family: var(--font-secondary);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 6px 8px;
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.c2-action-pill:hover {
+  background: rgba(212, 175, 55, 0.2);
+  border-color: #d4af37;
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+.c2-action-pill .pill-icon {
+  font-size: 0.75rem;
+}
+
+.command-card-actions {
+  border-top: 1px solid rgba(212, 175, 55, 0.2) !important;
 }
 
 /* Notification Bell & Dropdown Popover */

@@ -50,6 +50,9 @@ export const routes: Routes = [
   { path: 'unit/:tab', component: UnitDashboardComponent },
   { path: 'unit-dashboard', redirectTo: 'unit/dashboard', pathMatch: 'full' },
 
+  // SITEMAP ROUTE
+  { path: 'sitemap', redirectTo: '', pathMatch: 'full' },
+
   // Wildcard
   { path: '**', redirectTo: '' }
 ];

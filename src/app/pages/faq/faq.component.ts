@@ -54,12 +54,18 @@ export class FaqComponent implements OnInit, OnDestroy {
       }
     });
 
-    // Listen for query params (e.g. ?q=predictive-analytics)
+    // Listen for query params (e.g. ?q=predictive-analytics or ?q=rations)
     this.queryParamSub = this.route.queryParams.subscribe(params => {
-      const targetQuestion = params['q'] || params['question'];
+      const targetQuestion = params['q'] || params['question'] || params['search'];
       if (targetQuestion) {
         setTimeout(() => {
-          this.expandAndScrollTo(targetQuestion);
+          const el = document.getElementById(`faq-${targetQuestion}`);
+          if (el) {
+            this.expandAndScrollTo(targetQuestion);
+          } else {
+            this.searchQuery = targetQuestion;
+            this.onSearchChange();
+          }
         }, 150);
       }
     });

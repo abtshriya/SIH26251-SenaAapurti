@@ -5,7 +5,7 @@
 
     <!-- SIDEBAR NAVIGATION -->
     <aside class="c2-sidebar" [class.collapsed]="sidebarCollapsed">
-      <div class="sidebar-menu-title">UNIT MODULES</div>
+      <div class="sidebar-menu-title">{{ langService.t('UNIT MODULES') }}</div>
       <nav class="sidebar-nav">
         <button
           type="button"
@@ -16,7 +16,7 @@
           <span class="nav-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="side-svg-icon"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
           </span>
-          <span class="nav-label">Unit Dashboard</span>
+          <span class="nav-label">{{ langService.t('Unit Dashboard') }}</span>
           <span class="nav-tag live">LIVE</span>
         </button>
 
@@ -29,7 +29,7 @@
           <span class="nav-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="side-svg-icon"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
           </span>
-          <span class="nav-label">Unit Inventory</span>
+          <span class="nav-label">{{ langService.t('Unit Inventory') }}</span>
         </button>
 
         <button
@@ -41,7 +41,7 @@
           <span class="nav-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="side-svg-icon"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
           </span>
-          <span class="nav-label">Consumption & Demand</span>
+          <span class="nav-label">{{ langService.t('Consumption & Demand') }}</span>
         </button>
 
         <button
@@ -53,7 +53,7 @@
           <span class="nav-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="side-svg-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
           </span>
-          <span class="nav-label">Supply Requests</span>
+          <span class="nav-label">{{ langService.t('Supply Requests') }}</span>
           <span class="nav-pill-alert">{{ logisticsService.indents().length }}</span>
         </button>
 
@@ -66,7 +66,7 @@
           <span class="nav-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="side-svg-icon"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
           </span>
-          <span class="nav-label">Incoming Logistics</span>
+          <span class="nav-label">{{ langService.t('Incoming Logistics') }}</span>
         </button>
 
         <button
@@ -78,7 +78,7 @@
           <span class="nav-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="side-svg-icon"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6v6l4 2"/></svg>
           </span>
-          <span class="nav-label">Route & Weather</span>
+          <span class="nav-label">{{ langService.t('Route & Weather') }}</span>
         </button>
 
         <button
@@ -90,7 +90,7 @@
           <span class="nav-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="side-svg-icon"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
           </span>
-          <span class="nav-label">Predictive Logistics Intel</span>
+          <span class="nav-label">{{ langService.t('Predictive Logistics Intel') }}</span>
         </button>
 
         <button
@@ -102,7 +102,7 @@
           <span class="nav-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="side-svg-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
           </span>
-          <span class="nav-label">Unit Reports</span>
+          <span class="nav-label">{{ langService.t('Unit Reports') }}</span>
         </button>
 
         <button
@@ -114,14 +114,14 @@
           <span class="nav-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="side-svg-icon"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
           </span>
-          <span class="nav-label">Unit Settings</span>
+          <span class="nav-label">{{ langService.t('Unit Settings') }}</span>
         </button>
       </nav>
 
       <div class="sidebar-footer-info">
         <button type="button" class="btn-sos-sidebar" (click)="triggerSosEmergency()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="sos-icon-svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          <span>SOS EMERGENCY INDENT</span>
+          <span>{{ langService.t('SOS EMERGENCY INDENT') }}</span>
         </button>
       </div>
     </aside>
@@ -1421,7 +1421,14 @@
         <!-- 4 Tactical KPI Stat Tiles -->
         <div class="logistics-kpi-grid">
           <div class="logistics-kpi-card">
-            <div class="kpi-icon-wrap icon-green">🚛</div>
+            <div class="kpi-icon-wrap icon-green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="kpi-svg">
+                <rect x="1" y="3" width="15" height="13"></rect>
+                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                <circle cx="18.5" cy="18.5" r="2.5"></circle>
+              </svg>
+            </div>
             <div class="kpi-content">
               <div class="kpi-val">{{ logisticsService.convoys().length }}</div>
               <div class="kpi-label">Active Convoys</div>
@@ -1430,7 +1437,15 @@
           </div>
 
           <div class="logistics-kpi-card">
-            <div class="kpi-icon-wrap icon-gold">⚖️</div>
+            <div class="kpi-icon-wrap icon-gold">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="kpi-svg">
+                <line x1="12" y1="2" x2="12" y2="20"></line>
+                <path d="M5 7l7-4 7 4"></path>
+                <path d="M2 14l3-7 3 7a3 3 0 0 1-6 0z"></path>
+                <path d="M16 14l3-7 3 7a3 3 0 0 1-6 0z"></path>
+                <line x1="10" y1="21" x2="14" y2="21"></line>
+              </svg>
+            </div>
             <div class="kpi-content">
               <div class="kpi-val">{{ getTotalTonnage() | number }}<span class="kpi-unit">T</span></div>
               <div class="kpi-label">Gross Tonnage En-Route</div>
@@ -1439,7 +1454,11 @@
           </div>
 
           <div class="logistics-kpi-card">
-            <div class="kpi-icon-wrap icon-cyan">🛡️</div>
+            <div class="kpi-icon-wrap icon-cyan">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="kpi-svg">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
             <div class="kpi-content">
               <div class="kpi-val">{{ getTotalTrucks() }}</div>
               <div class="kpi-label">Heavy Military Trucks</div>
@@ -1448,7 +1467,13 @@
           </div>
 
           <div class="logistics-kpi-card kpi-card-highlight">
-            <div class="kpi-icon-wrap icon-red">⏱️</div>
+            <div class="kpi-icon-wrap icon-red">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="kpi-svg">
+                <circle cx="12" cy="12" r="9"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+              </svg>
+            </div>
             <div class="kpi-content">
               <div class="kpi-val">1h 15m</div>
               <div class="kpi-label">Next Inbound Arrival</div>
@@ -1462,7 +1487,12 @@
           <!-- Row 1: Search & View Toggle -->
           <div class="toolbar-top-row">
             <div class="search-input-wrap">
-              <span class="search-icon-svg">🔍</span>
+              <span class="search-icon-svg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+              </span>
               <input
                 type="text"
                 [(ngModel)]="logisticsSearch"
@@ -1480,7 +1510,8 @@
                 [class.active]="logisticsViewMode === 'cards'"
                 (click)="logisticsViewMode = 'cards'"
                 title="Tactical Fleet Cards Grid">
-                🗂️ Cards
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-svg"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                <span>Cards</span>
               </button>
               <button
                 type="button"
@@ -1488,7 +1519,8 @@
                 [class.active]="logisticsViewMode === 'table'"
                 (click)="logisticsViewMode = 'table'"
                 title="Military Manifest Table">
-                📑 Table
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-svg"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                <span>Table</span>
               </button>
             </div>
           </div>
@@ -1501,35 +1533,40 @@
                 class="cargo-pill"
                 [class.active]="logisticsCargoFilter === 'All'"
                 (click)="logisticsCargoFilter = 'All'">
-                All Cargo ({{ logisticsService.convoys().length }})
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="pill-svg-icon"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                <span>All Cargo ({{ logisticsService.convoys().length }})</span>
               </button>
               <button
                 type="button"
                 class="cargo-pill"
                 [class.active]="logisticsCargoFilter === 'Class III'"
                 (click)="logisticsCargoFilter = 'Class III'">
-                ⛽ Class III (POL)
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="pill-svg-icon"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+                <span>Class III (POL)</span>
               </button>
               <button
                 type="button"
                 class="cargo-pill"
                 [class.active]="logisticsCargoFilter === 'Class V'"
                 (click)="logisticsCargoFilter = 'Class V'">
-                🎯 Class V (Ammo)
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="pill-svg-icon"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+                <span>Class V (Ammo)</span>
               </button>
               <button
                 type="button"
                 class="cargo-pill"
                 [class.active]="logisticsCargoFilter === 'Winter Stocking'"
                 (click)="logisticsCargoFilter = 'Winter Stocking'">
-                ❄️ Winter Stocking
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="pill-svg-icon"><line x1="12" y1="2" x2="12" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line><line x1="19.07" y1="4.93" x2="4.93" y2="19.07"></line></svg>
+                <span>Winter Stocking</span>
               </button>
               <button
                 type="button"
                 class="cargo-pill"
                 [class.active]="logisticsCargoFilter === 'Class IX'"
                 (click)="logisticsCargoFilter = 'Class IX'">
-                ⚙️ Class IX (Spares)
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="pill-svg-icon"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                <span>Class IX (Spares)</span>
               </button>
             </div>
 
@@ -1559,7 +1596,9 @@
 
         <!-- EMPTY STATE -->
         <div *ngIf="filteredConvoys().length === 0" class="card-surface empty-logistics-state mt-3">
-          <div class="empty-icon">🛰️</div>
+          <div class="empty-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="empty-svg"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+          </div>
           <h3>No Convoys Found</h3>
           <p>No military consignments match your search query or filter selection.</p>
           <button type="button" class="btn-army-sm mt-2" (click)="logisticsSearch = ''; logisticsCargoFilter = 'All'; logisticsStatusFilter = 'All'">
@@ -1579,7 +1618,9 @@
                   <span class="c-id-chip">{{ c.id }}</span>
                 </div>
                 <div class="c-escort-info">
-                  <span class="escort-icon">👮</span>
+                  <span class="escort-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                  </span>
                   <span class="escort-name">{{ c.driverEscort }}</span>
                 </div>
               </div>
@@ -1622,7 +1663,9 @@
 
             <!-- Route Axis Label -->
             <div class="c-route-axis">
-              <span class="axis-icon">🛣️</span>
+              <span class="axis-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="12" y1="3" x2="12" y2="8"></line><line x1="12" y1="11" x2="12" y2="13"></line><line x1="12" y1="16" x2="12" y2="21"></line></svg>
+              </span>
               <span class="axis-text"><strong>Transit Axis:</strong> {{ c.route }}</span>
             </div>
 
@@ -1650,7 +1693,9 @@
             <div class="c-waypoint-section" *ngIf="c.checkpoints && c.checkpoints.length > 0">
               <div class="waypoint-header">
                 <span class="waypoint-title">
-                  <span class="waypoint-radar-icon">📡</span> Route Checkpoints Progress:
+                  <span class="waypoint-radar-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="2"></circle><path d="M4.93 19.07a10 10 0 0 1 0-14.14M7.76 16.24a6 6 0 0 1 0-8.48"></path></svg>
+                  </span> Route Checkpoints Progress:
                   <strong>{{ getPassedCheckpointsCount(c) }} of {{ getTotalCheckpointsCount(c) }} Cleared</strong>
                 </span>
                 <span class="waypoint-percent font-mono">{{ getCheckpointProgressPercent(c) }}%</span>
@@ -1679,7 +1724,9 @@
 
             <!-- Tactical Weather Advisory (if any) -->
             <div *ngIf="c.weatherAlert" class="c-weather-alert-box">
-              <span class="weather-alert-icon">⚠️</span>
+              <span class="weather-alert-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              </span>
               <div class="weather-alert-content">
                 <strong>TACTICAL ADVISORY:</strong> {{ c.weatherAlert }}
               </div>
@@ -1691,7 +1738,9 @@
                 type="button"
                 class="btn-convoy-inspect"
                 (click)="inspectConvoy(c)">
-                <span class="btn-icon">🔍</span> Inspect Telemetry & Stepper
+                <span class="btn-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </span> Inspect Telemetry & Stepper
               </button>
               <button
                 type="button"
@@ -1829,7 +1878,9 @@
         <!-- 4 Tactical Weather Summary KPIs -->
         <div class="weather-kpi-grid">
           <div class="weather-kpi-card">
-            <div class="kpi-icon-wrap icon-cyan">❄️</div>
+            <div class="kpi-icon-wrap icon-cyan">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="kpi-svg"><line x1="12" y1="2" x2="12" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line><line x1="19.07" y1="4.93" x2="4.93" y2="19.07"></line></svg>
+            </div>
             <div class="kpi-content">
               <div class="kpi-val">-26°C</div>
               <div class="kpi-label">Lowest Sector Temp</div>
@@ -1837,7 +1888,9 @@
             </div>
           </div>
           <div class="weather-kpi-card">
-            <div class="kpi-icon-wrap icon-gold">⛰️</div>
+            <div class="kpi-icon-wrap icon-gold">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="kpi-svg"><path d="M8 3l4 8 5-5 5 15H2L8 3z"></path></svg>
+            </div>
             <div class="kpi-content">
               <div class="kpi-val">17,800<span class="kpi-unit">ft</span></div>
               <div class="kpi-label">Max Operational Altitude</div>
@@ -1845,7 +1898,9 @@
             </div>
           </div>
           <div class="weather-kpi-card kpi-card-highlight">
-            <div class="kpi-icon-wrap icon-red">⚠️</div>
+            <div class="kpi-icon-wrap icon-red">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="kpi-svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            </div>
             <div class="kpi-content">
               <div class="kpi-val">{{ getRestrictedPassesCount() }} Passes</div>
               <div class="kpi-label">Convoy Transit Restrictions</div>
@@ -1853,7 +1908,9 @@
             </div>
           </div>
           <div class="weather-kpi-card">
-            <div class="kpi-icon-wrap icon-green">🚜</div>
+            <div class="kpi-icon-wrap icon-green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="kpi-svg"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+            </div>
             <div class="kpi-content">
               <div class="kpi-val">6 Teams</div>
               <div class="kpi-label">BRO Snow Clearance Units</div>
@@ -2061,7 +2118,9 @@
         <!-- 4 Summary Tiles -->
         <div class="ai-kpi-grid">
           <div class="ai-kpi-card">
-            <div class="kpi-icon-wrap icon-red">🚨</div>
+            <div class="kpi-icon-wrap icon-red">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="kpi-svg"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            </div>
             <div class="kpi-content">
               <div class="kpi-val">1 Critical</div>
               <div class="kpi-label">Severe Weather Hazard</div>
@@ -2069,7 +2128,9 @@
             </div>
           </div>
           <div class="ai-kpi-card">
-            <div class="kpi-icon-wrap icon-gold">📈</div>
+            <div class="kpi-icon-wrap icon-gold">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="kpi-svg"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+            </div>
             <div class="kpi-content">
               <div class="kpi-val">+28% Surge</div>
               <div class="kpi-label">Winter Caloric Demand</div>
@@ -2077,7 +2138,9 @@
             </div>
           </div>
           <div class="ai-kpi-card">
-            <div class="kpi-icon-wrap icon-cyan">📋</div>
+            <div class="kpi-icon-wrap icon-cyan">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="kpi-svg"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+            </div>
             <div class="kpi-content">
               <div class="kpi-val">4 Directives</div>
               <div class="kpi-label">Mitigation Orders</div>
@@ -2085,7 +2148,9 @@
             </div>
           </div>
           <div class="ai-kpi-card">
-            <div class="kpi-icon-wrap icon-green">🛡️</div>
+            <div class="kpi-icon-wrap icon-green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="kpi-svg"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
             <div class="kpi-content">
               <div class="kpi-val">92% Reliability</div>
               <div class="kpi-label">Historical Confidence</div>
@@ -2279,7 +2344,9 @@
         <!-- 4 Audit KPI Cards -->
         <div class="reports-kpi-grid mt-3">
           <div class="reports-kpi-card">
-            <div class="kpi-icon-wrap icon-green">📜</div>
+            <div class="kpi-icon-wrap icon-green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="kpi-svg"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+            </div>
             <div class="kpi-content">
               <div class="kpi-val">100%</div>
               <div class="kpi-label">Ledger Reconciliation</div>
@@ -2287,7 +2354,9 @@
             </div>
           </div>
           <div class="reports-kpi-card">
-            <div class="kpi-icon-wrap icon-gold">✍️</div>
+            <div class="kpi-icon-wrap icon-gold">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="kpi-svg"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+            </div>
             <div class="kpi-content">
               <div class="kpi-val">48 Vouchers</div>
               <div class="kpi-label">Digitally Signed Tokens</div>
@@ -2295,7 +2364,9 @@
             </div>
           </div>
           <div class="reports-kpi-card">
-            <div class="kpi-icon-wrap icon-cyan">📦</div>
+            <div class="kpi-icon-wrap icon-cyan">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="kpi-svg"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+            </div>
             <div class="kpi-content">
               <div class="kpi-val">14 Indents</div>
               <div class="kpi-label">Quarterly Requisitions</div>
@@ -2303,7 +2374,9 @@
             </div>
           </div>
           <div class="reports-kpi-card">
-            <div class="kpi-icon-wrap icon-green">⚖️</div>
+            <div class="kpi-icon-wrap icon-green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="kpi-svg"><line x1="12" y1="2" x2="12" y2="20"></line><path d="M5 7l7-4 7 4"></path><path d="M2 14l3-7 3 7a3 3 0 0 1-6 0z"></path><path d="M16 14l3-7 3 7a3 3 0 0 1-6 0z"></path><line x1="10" y1="21" x2="14" y2="21"></line></svg>
+            </div>
             <div class="kpi-content">
               <div class="kpi-val">0.00%</div>
               <div class="kpi-label">Audit Discrepancy Rate</div>

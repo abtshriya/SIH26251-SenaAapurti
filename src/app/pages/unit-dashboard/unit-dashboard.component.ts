@@ -9,6 +9,8 @@ import { LogisticsService, UnitIndent, ConvoyItem, WeatherStationData, Strategic
 import { UnitDatabaseService } from '../../services/unit-database.service';
 
 import { ThemeService, FontSize } from '../../services/theme.service';
+import { LayoutService } from '../../services/layout.service';
+import { LanguageService } from '../../services/language.service';
 
 export type UnitTab =
   | 'dashboard'
@@ -48,7 +50,9 @@ export class UnitDashboardComponent implements OnInit {
   authService = inject(AuthService);
   logisticsService = inject(LogisticsService);
   themeService = inject(ThemeService);
+  layoutService = inject(LayoutService);
   unitDbService = inject(UnitDatabaseService);
+  langService = inject(LanguageService);
   route = inject(ActivatedRoute);
   router = inject(Router);
   http = inject(HttpClient);
@@ -84,7 +88,9 @@ export class UnitDashboardComponent implements OnInit {
 
   // Active Tab
   activeTab: UnitTab = 'dashboard';
-  sidebarCollapsed = false;
+  get sidebarCollapsed(): boolean {
+    return this.layoutService.sidebarCollapsed();
+  }
 
   // Header & Status
   currentDate = '';
@@ -1081,7 +1087,7 @@ export class UnitDashboardComponent implements OnInit {
   }
 
   toggleSidebar() {
-    this.sidebarCollapsed = !this.sidebarCollapsed;
+    this.layoutService.toggleSidebar();
   }
 
   filteredInventory(): LocalInventoryItem[] {

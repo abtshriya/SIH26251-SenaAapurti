@@ -1,6 +1,184 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, effect, computed } from '@angular/core';
 
 export type Language = 'en' | 'hi';
+
+export const DASHBOARD_TRANSLATIONS: Record<string, string> = {
+  // Command & General Navigation
+  '1.1 National Command & Control Dashboard': '1.1 राष्ट्रीय कमान एवं नियंत्रण डैशबोर्ड',
+  'National Command & Control Dashboard': 'राष्ट्रीय कमान एवं नियंत्रण डैशबोर्ड',
+  'Command Dashboard': 'कमांड डैशबोर्ड',
+  'Unit Network & Formations': 'यूनिट नेटवर्क एवं फॉर्मेशन',
+  'Unit Network': 'यूनिट नेटवर्क',
+  'National Central Inventory': 'राष्ट्रीय केंद्रीय इन्वेंटरी',
+  'National Inventory': 'राष्ट्रीय इन्वेंटरी',
+  'Demand & Forecasting Modeling': 'मांग एवं पूर्वानुमान मॉडलिंग',
+  'Demand & Forecasting': 'मांग एवं पूर्वानुमान',
+  'Demand & Forecast': 'मांग एवं पूर्वानुमान',
+  'Logistics Convoy Movement': 'रसद काफिला आवागमन',
+  'Logistics Movement': 'रसद आवागमन',
+  'Route & Weather Intel': 'मार्ग एवं मौसम आसूचना',
+  'Route Intel & Avalanche': 'मार्ग आसूचना एवं हिमस्खलन',
+  'Route Intel': 'मार्ग आसूचना',
+  'Strategic Advisory & Alerts': 'सामरिक परामर्श एवं अलर्ट',
+  'Strategic Advisory': 'सामरिक परामर्श',
+  'What-If Simulation Engine': 'युद्ध-खेल सिमुलेशन इंजन',
+  'What-If Simulation': 'युद्ध-खेल सिमुलेशन',
+  'Reports & Defense Analytics': 'रिपोर्ट एवं रक्षा विश्लेषण',
+  'Reports & Analytics': 'रिपोर्ट एवं विश्लेषण',
+  'Admin & System Settings': 'प्रशासनिक एवं प्रणाली सेटिंग्स',
+  'Admin Settings': 'प्रशासनिक सेटिंग्स',
+  'TACTICAL MODULES': 'सामरिक मॉड्यूल',
+  'HQ C2 LOGISTICS': 'मुख्यालय सी2 रसद',
+
+  // Unit Dashboard Navigation
+  'Frontline Unit Dashboard': 'अग्रिम पंक्ति यूनिट डैशबोर्ड',
+  'Unit Dashboard': 'यूनिट डैशबोर्ड',
+  'Unit Stores & Physical Ledger': 'यूनिट भंडार एवं लेजर',
+  'Unit Inventory': 'यूनिट इन्वेंटरी',
+  'Unit Stores': 'यूनिट भंडार',
+  'Consumption & Days of Supply': 'खपत एवं आपूर्ति दिवस',
+  'Consumption & Demand': 'खपत एवं मांग',
+  'Consumption & DOS': 'खपत एवं आपूर्ति दिवस',
+  'Supply Requests & Indents': 'आपूर्ति मांग पत्र',
+  'Digital Supply Requisitions': 'डिजिटल आपूर्ति मांग पत्र',
+  'Supply Requests': 'आपूर्ति मांग पत्र',
+  'Incoming Convoys & Tracking': 'आगामी काफिले एवं ट्रैकिंग',
+  'Incoming Logistics': 'आवक रसद',
+  'Incoming Convoys': 'आगामी काफिले',
+  'Route & Weather Hazards': 'मार्ग एवं मौसम खतरे',
+  'Route & Weather': 'मार्ग एवं मौसम',
+  'Predictive Logistics Intel': 'पूर्वानुमान रसद आसूचना',
+  'Predictive Intel': 'पूर्वानुमान आसूचना',
+  'Unit Reports & Daily Ledger': 'यूनिट रिपोर्ट एवं दैनिक लेजर',
+  'Unit Reports': 'यूनिट रिपोर्ट',
+  'Station Settings & Profile': 'स्टेशन सेटिंग्स एवं प्रोफाइल',
+  'Station Settings': 'स्टेशन सेटिंग्स',
+  'Unit Settings': 'यूनिट सेटिंग्स',
+  'UNIT MODULES': 'यूनिट मॉड्यूल',
+  'FRONTLINE UNIT': 'अग्रिम पंक्ति यूनिट',
+  'QUARTERMASTER STORE': 'क्वार्टरमास्टर स्टोर',
+
+  // Switch Buttons & Actions
+  'Switch to Unit': 'यूनिट पोर्टल पर जाएं',
+  'Unit Portal': 'यूनिट पोर्टल',
+  'Switch to Command': 'कमान पोर्टल पर जाएं',
+  'Command HQ': 'कमान मुख्यालय',
+  'Command Portal': 'कमान पोर्टल',
+  'Switch Unit Station': 'यूनिट स्टेशन बदलें',
+  'Select Command': 'कमान चुनें',
+  'Return to Public Website': 'सार्वजनिक वेबसाइट पर जाएं',
+  'Return to Public Portal': 'सार्वजनिक पोर्टल पर जाएं',
+  'Live Tactical Alerts': 'लाइव सामरिक अलर्ट',
+  'ACTIVE DUTY': 'सक्रिय ड्यूटी',
+  'SECURE ASCON': 'सुरक्षित एस्कॉन',
+  'ASCON SECURE': 'एस्कॉन सुरक्षित',
+  'DEFCON 2': 'डेफकॉन 2',
+  'DEFCON 1': 'डेफकॉन 1',
+  'DEFCON 3': 'डेफकॉन 3',
+  'RESTRICTED OFFICIAL': 'प्रतिबंधित आधिकारिक',
+  'TOP SECRET - STRATEGIC': 'परम गोपनीय - सामरिक',
+  'SECRET - OPERATIONAL': 'गोपनीय - परिचालन',
+
+  // KPIs & Metrics
+  'Operational logistics readiness posture across Indian Army theater commands': 'भारतीय सेना के थियेटर कमानों में परिचालन रसद तत्परता स्थिति',
+  'TOTAL UNITS': 'कुल इकाइयां',
+  'Across 7 Commands': '7 कमानों में',
+  'SUPPLY READINESS': 'आपूर्ति तत्परता',
+  'Optimal Status': 'उत्कृष्ट स्थिति',
+  'CRITICAL LOCATIONS': 'संकटपूर्ण स्थान',
+  'High-Altitude Picked': 'उच्च तुंगता चौकियां',
+  'High-Altitude Pickets': 'उच्च तुंगता चौकियां',
+  'ACTIVE CONVOYS': 'सक्रिय काफिले',
+  'En Route Forward Bases': 'अग्रिम ठिकानों की ओर',
+  'NATIONAL STOCK LEVEL': 'राष्ट्रीय स्टॉक स्तर',
+  'Class I–IX Reserves': 'वर्ग I–IX भंडार',
+  'AVALANCHE ALERTS': 'हिमस्खलन अलर्ट',
+  'Mountain Sectors': 'पर्वतीय सेक्टर',
+  'SOS REQUISITIONS': 'एसओएस मांग पत्र',
+  'Pending Action': 'कार्रवाई लंबित',
+  'AVG TRANSIT TIME': 'औसत पारगमन समय',
+  'Days (Northern Axis)': 'दिन (उत्तरी अक्ष)',
+  'Total Registered Units': 'कुल पंजीकृत इकाइयां',
+  'Strategic Reserves': 'सामरिक भंडार',
+  'In-Transit Supplies': 'पारगमन में आपूर्ति',
+  'High Altitude Stocks': 'उच्च तुंगता भंडार',
+  'Critical Stockout Risk': 'गंभीर स्टॉकआउट जोखिम',
+  'Days of Supply (National)': 'आपूर्ति दिवस (राष्ट्रीय)',
+  'Days of Supply': 'आपूर्ति दिवस',
+
+  // Supply Classes & Categories
+  'Class I (Rations)': 'वर्ग I (राशन)',
+  'Class III (POL)': 'वर्ग III (ईंधन व तेल)',
+  'Class V (Ammo)': 'वर्ग V (गोला-बारूद)',
+  'Class IX (Spares)': 'वर्ग IX (पुर्जे)',
+  'Medical & Clothing': 'चिकित्सा एवं वस्त्र',
+  'Rations (Class I)': 'राशन (वर्ग I)',
+  'POL Fuel (Class III)': 'ईंधन (वर्ग III)',
+  'Munitions (Class V)': 'गोला-बारूद (वर्ग V)',
+  'Equipment Spares (Class IX)': 'उपकरण पुर्जे (वर्ग IX)',
+  'Extreme Cold Clothing': 'अत्यंत शीतकालीन वस्त्र',
+  'Winter Reserve': 'शीतकालीन आरक्षित भंडार',
+
+  // Statuses & Actions
+  'Adequate': 'पर्याप्त',
+  'Low': 'कम',
+  'Critical': 'संकटपूर्ण',
+  'Surplus': 'अधिशेष',
+  'Optimal': 'उत्कृष्ट',
+  'Active': 'सक्रिय',
+  'LIVE': 'लाइव',
+  'FLASH SOS': 'फ्लैश एसओएस',
+  'PRIORITY 1': 'प्राथमिकता 1',
+  'PRIORITY 2': 'प्राथमिकता 2',
+  'ROUTINE': 'नियमित',
+  'Approved': 'स्वीकृत',
+  'Dispatched': 'रवाना किया गया',
+  'In Transit': 'पारगमन में',
+  'Delivered': 'प्राप्त हुआ',
+  'Pending Approval': 'अनुमोदन लंबित',
+  'Operational': 'परिचालन योग्य',
+  'Export Briefing': 'ब्रीफिंग निर्यात करें',
+  'Emergency Rebalance': 'आपातकालीन पुनर्संतुलन',
+  'Trigger Alert': 'अलर्ट जारी करें',
+  'Refresh': 'रिफ्रेश',
+  '↻ Refresh': '↻ रिफ्रेश',
+  'Sync': 'सिंक',
+  'Filter': 'फ़िल्टर',
+  'Export': 'निर्यात',
+  'Download': 'डाउनलोड',
+  'Close': 'बंद करें',
+  'Submit': 'जमा करें',
+  'Cancel': 'रद्द करें',
+  'View Details': 'विवरण देखें',
+  'View on Map': 'मानचित्र पर देखें',
+  'Track Convoy': 'काफिला ट्रैक करें',
+  'Logout': 'लॉग आउट',
+  'Secure Logout': 'सुरक्षित लॉग आउट',
+  'Secure Sign Out': 'सुरक्षित साइन आउट',
+
+  // Theaters & Commands
+  'Northern Command': 'उत्तरी कमान',
+  'Eastern Command': 'पूर्वी कमान',
+  'Western Command': 'पश्चिमी कमान',
+  'Southern Command': 'दक्षिणी कमान',
+  'South Western Command': 'दक्षिण पश्चिमी कमान',
+  'Central Command': 'मध्य कमान',
+  'Army Training Command': 'सेना प्रशिक्षण कमान',
+  'Training Command (ARTRAC)': 'प्रशिक्षण कमान (आरट्रैक)',
+
+  // Unit Specific
+  'Unit Readiness Posture': 'यूनिट तत्परता स्थिति',
+  'Current Station': 'वर्तमान स्टेशन',
+  'Sector / Corps': 'सेक्टर / कोर',
+  'Critical Shortages': 'गंभीर कमियां',
+  'Inbound Shipments': 'आवक खेप',
+  'Submit Urgent Indent': 'तत्काल मांग पत्र भेजें',
+  'Log Daily Burn': 'दैनिक खपत दर्ज करें',
+  'Winter Stock Scale': 'शीतकालीन स्टॉक पैमाना',
+  'Physical Bin Cards': 'भौतिक बिन कार्ड',
+  'Daily Burn Rate': 'दैनिक खपत दर',
+  'Sub-Depot Stores': 'उप-डिपो भंडार'
+};
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +195,7 @@ export class LanguageService {
     } catch {
       // Local storage unavailable
     }
+    this.initDomTranslator();
   }
 
   private translations: Record<Language, Record<string, string>> = {
@@ -532,7 +711,155 @@ export class LanguageService {
 
   t(key: string): string {
     const lang = this.currentLang();
+    if (lang === 'hi') {
+      if (this.translations['hi']?.[key]) return this.translations['hi'][key];
+      if (DASHBOARD_TRANSLATIONS[key]) return DASHBOARD_TRANSLATIONS[key];
+    }
     return this.translations[lang]?.[key] || this.translations['en']?.[key] || key;
+  }
+
+  private isTranslating = false;
+  private observer: MutationObserver | null = null;
+  private originalTextMap = new Map<Node, string>();
+  private sortedPhraseKeys: string[] = [];
+
+  private initDomTranslator() {
+    if (typeof window === 'undefined' || typeof document === 'undefined') return;
+
+    // Pre-sort phrase keys by length descending (>= 3 chars)
+    this.sortedPhraseKeys = Object.keys(DASHBOARD_TRANSLATIONS)
+      .filter(k => k.length >= 3)
+      .sort((a, b) => b.length - a.length);
+
+    // Reactively run when currentLang changes
+    effect(() => {
+      const lang = this.currentLang();
+      this.applyDomTranslations(lang);
+    });
+
+    // Observe DOM mutations to translate dynamic changes (route / tab / modal changes)
+    if (typeof MutationObserver !== 'undefined') {
+      this.observer = new MutationObserver(() => {
+        if (this.currentLang() === 'hi' && !this.isTranslating) {
+          this.debounceTranslate();
+        }
+      });
+
+      const startObserver = () => {
+        if (document.body && this.observer) {
+          this.observer.observe(document.body, {
+            childList: true,
+            subtree: true,
+            characterData: false
+          });
+        }
+      };
+
+      if (document.body) {
+        startObserver();
+      } else {
+        window.addEventListener('DOMContentLoaded', startObserver);
+      }
+    }
+  }
+
+  private debounceTimer: any = null;
+  private debounceTranslate() {
+    clearTimeout(this.debounceTimer);
+    this.debounceTimer = setTimeout(() => {
+      if (this.currentLang() === 'hi') {
+        this.applyDomTranslations('hi');
+      }
+    }, 120);
+  }
+
+  private applyDomTranslations(lang: Language) {
+    if (typeof document === 'undefined' || !document.body) return;
+    this.isTranslating = true;
+
+    try {
+      if (lang === 'en') {
+        // Restore original English text
+        this.originalTextMap.forEach((origText, node) => {
+          if (node.parentNode) {
+            node.textContent = origText;
+          }
+        });
+        this.originalTextMap.clear();
+        return;
+      }
+
+      // Walk text nodes and translate
+      const walker = document.createTreeWalker(
+        document.body,
+        NodeFilter.SHOW_TEXT,
+        {
+          acceptNode: (node) => {
+            const parent = node.parentElement;
+            if (!parent) return NodeFilter.FILTER_REJECT;
+            const tag = parent.tagName.toLowerCase();
+            if (['script', 'style', 'noscript', 'textarea', 'input', 'code', 'pre', 'select'].includes(tag)) {
+              return NodeFilter.FILTER_REJECT;
+            }
+            if (parent.closest('.not-translatable') || parent.isContentEditable) {
+              return NodeFilter.FILTER_REJECT;
+            }
+            const text = node.textContent?.trim();
+            if (!text || text.length < 2) return NodeFilter.FILTER_SKIP;
+            return NodeFilter.FILTER_ACCEPT;
+          }
+        }
+      );
+
+      const nodes: Node[] = [];
+      let curr = walker.nextNode();
+      while (curr) {
+        nodes.push(curr);
+        curr = walker.nextNode();
+      }
+
+      for (const node of nodes) {
+        const raw = node.textContent || '';
+        const trimmed = raw.trim();
+        if (!trimmed) continue;
+
+        // 1. Direct dictionary match
+        if (DASHBOARD_TRANSLATIONS[trimmed]) {
+          if (!this.originalTextMap.has(node)) {
+            this.originalTextMap.set(node, raw);
+          }
+          node.textContent = raw.replace(trimmed, DASHBOARD_TRANSLATIONS[trimmed]);
+          continue;
+        }
+
+        // 2. Translations map match
+        if (this.translations['hi']?.[trimmed]) {
+          if (!this.originalTextMap.has(node)) {
+            this.originalTextMap.set(node, raw);
+          }
+          node.textContent = raw.replace(trimmed, this.translations['hi'][trimmed]);
+          continue;
+        }
+
+        // 3. Substring phrase match for known phrases
+        let replaced = raw;
+        let matched = false;
+        for (const phrase of this.sortedPhraseKeys) {
+          if (replaced.includes(phrase)) {
+            replaced = replaced.split(phrase).join(DASHBOARD_TRANSLATIONS[phrase]);
+            matched = true;
+          }
+        }
+        if (matched) {
+          if (!this.originalTextMap.has(node)) {
+            this.originalTextMap.set(node, raw);
+          }
+          node.textContent = replaced;
+        }
+      }
+    } finally {
+      this.isTranslating = false;
+    }
   }
 }
 

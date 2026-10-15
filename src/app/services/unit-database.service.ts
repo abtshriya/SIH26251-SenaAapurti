@@ -38,6 +38,10 @@ export class UnitDatabaseService {
   private _selectedUnit = signal<ArmyUnit>(this.allUnits[0]);
   readonly selectedUnit = computed(() => this._selectedUnit());
 
+  /** Currently selected active command signal (Default: Northern Command) */
+  private _selectedCommand = signal<ArmyCommand>(this.allCommands[0]);
+  readonly selectedCommand = computed(() => this._selectedCommand());
+
   /** Selected command filter signal */
   readonly selectedCommandFilter = signal<string>('All');
 
@@ -56,8 +60,28 @@ export class UnitDatabaseService {
           }
         } catch (e) {}
       }
+      const savedCmd = sessionStorage.getItem('sena_selected_command');
+      if (savedCmd) {
+        try {
+          const parsedCmd = JSON.parse(savedCmd);
+          const foundCmd = this.allCommands.find(c => c.id === parsedCmd.id);
+          if (foundCmd) {
+            this._selectedCommand.set(foundCmd);
+            this.selectedCommandFilter.set(foundCmd.name);
+          }
+        } catch (e) {}
+      }
     }
     this.fetchTelemetryFromBackend();
+  }
+
+  /** Select active command */
+  setSelectedCommand(cmd: ArmyCommand): void {
+    this._selectedCommand.set(cmd);
+    this.selectedCommandFilter.set(cmd.name);
+    if (typeof window !== 'undefined' && typeof sessionStorage !== 'undefined') {
+      sessionStorage.setItem('sena_selected_command', JSON.stringify(cmd));
+    }
   }
 
   /**

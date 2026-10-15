@@ -15,6 +15,7 @@ import { UnitDatabaseService } from '../../services/unit-database.service';
 import { ArmyCommand, ArmyUnit, INDIAN_ARMY_COMMANDS, ALL_INDIAN_ARMY_UNITS } from '../../data/indian-army-commands-database';
 import { ThemeService, FontSize } from '../../services/theme.service';
 import { LayoutService } from '../../services/layout.service';
+import { LanguageService } from '../../services/language.service';
 
 declare let L: any;
 
@@ -44,6 +45,7 @@ export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestr
   unitDbService = inject(UnitDatabaseService);
   themeService = inject(ThemeService);
   layoutService = inject(LayoutService);
+  langService = inject(LanguageService);
   route = inject(ActivatedRoute);
   router = inject(Router);
 

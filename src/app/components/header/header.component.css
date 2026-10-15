@@ -1935,94 +1935,200 @@
    COMMAND PORTAL INTEGRATED MAIN HEADER STYLES
    ========================================================================== */
 
-.brand-title-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.role-badge-c2 {
-  font-family: var(--font-secondary);
-  background: rgba(212, 175, 55, 0.15);
-  color: #d4af37;
-  border: 1px solid #d4af37;
-  padding: 3px 9px;
-  border-radius: 4px;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  display: inline-flex;
-  align-items: center;
-  line-height: 1;
-}
-
 .command-header-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  padding: 8px 24px !important;
+  min-height: 88px !important;
+  height: auto !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+  width: 100% !important;
+  max-width: 1440px !important;
+  margin: 0 auto !important;
 }
 
-.compact-map {
-  max-width: 320px;
+/* Left Branding Section in Command Portal */
+.command-header-container .brand-block-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  flex-shrink: 0 !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  min-width: 0 !important;
 }
 
+.command-header-container .sena-logo-wrap {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+}
+
+.command-header-container .sena-logo-img {
+  height: 72px !important;
+  width: auto !important;
+  object-fit: contain !important;
+  filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.7)) !important;
+}
+
+.command-header-container .brand-text {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  gap: 2px !important;
+  min-width: 0 !important;
+}
+
+.command-header-container .brand-title-row {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex-wrap: nowrap !important;
+}
+
+.command-header-container .logo-title {
+  font-family: var(--font-military) !important;
+  font-size: 2.15rem !important;
+  font-weight: 800 !important;
+  line-height: 1.1 !important;
+  letter-spacing: 0.01em !important;
+  white-space: nowrap !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.command-header-container .logo-title .sena-part,
+.command-header-container .logo-title .aapurti-part {
+  display: inline-block !important;
+  white-space: nowrap !important;
+}
+
+.command-header-container .role-badge-c2 {
+  font-family: var(--font-secondary) !important;
+  font-size: 0.65rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: #fde047 !important;
+  background: rgba(212, 175, 55, 0.14) !important;
+  border: 1px solid rgba(212, 175, 55, 0.45) !important;
+  padding: 2px 7px !important;
+  border-radius: 4px !important;
+  white-space: nowrap !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  line-height: 1.2 !important;
+  margin-left: 2px !important;
+  position: static !important;
+}
+
+.command-header-container .role-badge-c2::before {
+  content: '' !important;
+  width: 5px !important;
+  height: 5px !important;
+  border-radius: 50% !important;
+  background: #f59e0b !important;
+  box-shadow: 0 0 6px #f59e0b !important;
+  flex-shrink: 0 !important;
+  animation: badgePulse 2s ease-in-out infinite !important;
+}
+
+.command-header-container .logo-tagline {
+  font-family: var(--font-secondary) !important;
+  font-size: 0.70rem !important;
+  font-weight: 600 !important;
+  color: #94a3b8 !important;
+  letter-spacing: 0.03em !important;
+  text-transform: uppercase !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.2 !important;
+  white-space: nowrap !important;
+}
+
+.command-header-container .command-authority-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  margin-top: 1px !important;
+}
+
+.command-header-container .command-authority-badge .ia-text {
+  font-family: var(--font-secondary) !important;
+  font-size: 0.62rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.06em !important;
+  color: #cbd5e1 !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-left: 2px solid #d4af37 !important;
+  padding: 1.5px 7px !important;
+  border-radius: 2px !important;
+  white-space: nowrap !important;
+  line-height: 1.3 !important;
+}
+
+/* Right Status & Controls Zone in Command Portal */
 .command-right-zone {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-left: auto;
-  position: relative;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin-left: auto !important;
+  flex-shrink: 0 !important;
+  position: relative !important;
+  z-index: 15 !important;
 }
 
-/* ASCON Telemetry Status Box */
-.telemetry-status-box {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(34, 197, 94, 0.12);
-  border: 1px solid rgba(34, 197, 94, 0.35);
-  padding: 6px 12px;
-  border-radius: 6px;
-  backdrop-filter: blur(4px);
+/* ASCON Telemetry Status Card */
+.command-right-zone .telemetry-status-box {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  background: rgba(34, 197, 94, 0.10) !important;
+  border: 1px solid rgba(34, 197, 94, 0.35) !important;
+  padding: 4px 9px !important;
+  border-radius: 6px !important;
+  backdrop-filter: blur(6px) !important;
+  flex-shrink: 0 !important;
+  line-height: 1.15 !important;
 }
 
-.status-dot-pulse {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: #22c55e;
-  box-shadow: 0 0 10px #22c55e;
-  animation: telemetryPulse 2s infinite ease-in-out;
+.command-right-zone .status-dot-pulse {
+  width: 7px !important;
+  height: 7px !important;
+  border-radius: 50% !important;
+  background-color: #22c55e !important;
+  box-shadow: 0 0 8px #22c55e !important;
+  animation: telemetryPulse 2s infinite ease-in-out !important;
+  flex-shrink: 0 !important;
 }
 
-@keyframes telemetryPulse {
-  0% { transform: scale(0.95); box-shadow: 0 0 4px #22c55e; }
-  50% { transform: scale(1.25); box-shadow: 0 0 12px #22c55e; }
-  100% { transform: scale(0.95); box-shadow: 0 0 4px #22c55e; }
+.command-right-zone .status-texts {
+  display: flex !important;
+  flex-direction: column !important;
+  text-align: left !important;
 }
 
-.status-texts {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
+.command-right-zone .status-headline {
+  font-size: 0.66rem !important;
+  font-weight: 800 !important;
+  color: #4ade80 !important;
+  letter-spacing: 0.04em !important;
+  font-family: var(--font-secondary) !important;
+  line-height: 1.15 !important;
+  white-space: nowrap !important;
 }
 
-.status-headline {
-  font-size: 0.7rem;
-  font-weight: 800;
-  color: #22c55e;
-  letter-spacing: 0.05em;
-  font-family: var(--font-secondary);
-  line-height: 1.2;
-}
-
-.status-sub {
-  font-size: 0.62rem;
-  color: #94a3b8;
-  font-weight: 600;
-  font-family: var(--font-secondary);
-  line-height: 1.2;
+.command-right-zone .status-sub {
+  font-size: 0.58rem !important;
+  color: #94a3b8 !important;
+  font-weight: 600 !important;
+  font-family: var(--font-secondary) !important;
+  line-height: 1.15 !important;
+  white-space: nowrap !important;
 }
 
 /* Strategic Alerts Notifications Bell & Dropdown */
@@ -2155,120 +2261,125 @@
 
 /* ================= COMMAND PORTAL HEADER ACTIONS & PROFILE SYSTEM ================= */
 .command-header-actions-group {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  flex-shrink: 0 !important;
 }
 
 .command-action-pill {
-  font-family: var(--font-secondary);
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  padding: 6px 12px;
-  border-radius: 6px;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  white-space: nowrap;
-  line-height: 1.2;
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: var(--font-secondary) !important;
+  font-size: 0.71rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em !important;
+  padding: 5px 9px !important;
+  border-radius: 6px !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  white-space: nowrap !important;
+  line-height: 1.2 !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  flex-shrink: 0 !important;
 }
 
 .command-action-pill.pill-home {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #e2e8f0 !important;
 }
 
 .command-action-pill.pill-home:hover {
-  background: rgba(255, 255, 255, 0.18);
-  border-color: #ffffff;
-  color: #ffffff;
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
-  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.18) !important;
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.25) !important;
+  transform: translateY(-1px) !important;
 }
 
 .command-action-pill.pill-home .pill-svg {
-  width: 14px;
-  height: 14px;
+  width: 13px !important;
+  height: 13px !important;
+  flex-shrink: 0 !important;
 }
 
 .command-action-pill.pill-unit {
-  background: rgba(16, 185, 129, 0.14);
-  border: 1px solid rgba(16, 185, 129, 0.5);
-  color: #6ee7b7;
+  background: rgba(16, 185, 129, 0.14) !important;
+  border: 1px solid rgba(16, 185, 129, 0.5) !important;
+  color: #6ee7b7 !important;
 }
 
 .command-action-pill.pill-unit:hover {
-  background: rgba(16, 185, 129, 0.26);
-  border-color: #34d399;
-  color: #ffffff;
-  box-shadow: 0 0 14px rgba(16, 185, 129, 0.4);
-  transform: translateY(-1px);
+  background: rgba(16, 185, 129, 0.26) !important;
+  border-color: #34d399 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.4) !important;
+  transform: translateY(-1px) !important;
 }
 
 .command-action-pill .pill-radar-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #10b981;
-  box-shadow: 0 0 6px #10b981;
-  animation: pulseSubtle 1.8s infinite;
+  width: 6px !important;
+  height: 6px !important;
+  border-radius: 50% !important;
+  background: #10b981 !important;
+  box-shadow: 0 0 6px #10b981 !important;
+  animation: pulseSubtle 1.8s infinite !important;
+  flex-shrink: 0 !important;
 }
 
 /* Strategic Commander Profile Pill (C2 Level) */
 .command-profile-wrapper {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  flex-shrink: 0;
-  cursor: pointer;
-  z-index: 10000;
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  flex-shrink: 0 !important;
+  cursor: pointer !important;
+  z-index: 10000 !important;
 }
 
 .command-profile-trigger {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  background: rgba(15, 23, 16, 0.85);
-  border: 1px solid rgba(212, 175, 55, 0.45);
-  padding: 5px 12px 5px 7px;
-  border-radius: 7px;
-  cursor: pointer;
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  color: #ffffff;
-  backdrop-filter: blur(10px);
-  user-select: none;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  background: rgba(15, 23, 16, 0.85) !important;
+  border: 1px solid rgba(212, 175, 55, 0.45) !important;
+  padding: 4px 9px 4px 5px !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  color: #ffffff !important;
+  backdrop-filter: blur(10px) !important;
+  user-select: none !important;
+  flex-shrink: 0 !important;
 }
 
 .command-profile-trigger:hover,
 .command-profile-trigger.active {
-  background: rgba(28, 42, 28, 0.95);
-  border-color: #d4af37;
-  box-shadow: 0 0 16px rgba(212, 175, 55, 0.4);
-  transform: translateY(-1px);
+  background: rgba(28, 42, 28, 0.95) !important;
+  border-color: #d4af37 !important;
+  box-shadow: 0 0 14px rgba(212, 175, 55, 0.35) !important;
+  transform: translateY(-1px) !important;
 }
 
 .command-profile-avatar {
-  position: relative;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #78350f 0%, #92400e 50%, #b45309 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1.5px solid rgba(250, 204, 21, 0.8);
-  flex-shrink: 0;
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+  position: relative !important;
+  width: 26px !important;
+  height: 26px !important;
+  border-radius: 50% !important;
+  background: linear-gradient(135deg, #78350f 0%, #92400e 50%, #b45309 100%) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1.5px solid rgba(250, 204, 21, 0.8) !important;
+  flex-shrink: 0 !important;
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.35) !important;
 }
 
 .command-profile-avatar .c2-avatar-svg {
-  width: 17px;
-  height: 17px;
-  stroke: #fef08a;
+  width: 14px !important;
+  height: 14px !important;
+  stroke: #fef08a !important;
 }
 
 .c2-dot {
@@ -2279,31 +2390,47 @@
 }
 
 .command-profile-meta {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.15;
-  text-align: left;
+  display: flex !important;
+  flex-direction: column !important;
+  line-height: 1.15 !important;
+  text-align: left !important;
 }
 
 .command-officer-name {
-  font-family: var(--font-secondary);
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: #ffffff;
-  white-space: nowrap;
+  font-family: var(--font-secondary) !important;
+  font-size: 0.76rem !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  white-space: nowrap !important;
 }
 
 .command-officer-rank {
-  font-size: 0.65rem;
-  font-weight: 800;
-  color: #facc15;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  font-size: 0.60rem !important;
+  font-weight: 800 !important;
+  color: #facc15 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
 }
 
 .command-chevron {
-  font-size: 0.76rem;
-  color: #d4af37;
+  font-size: 0.72rem !important;
+  color: #d4af37 !important;
+}
+
+/* Ashoka Lion Capital National Emblem in Command Header */
+.command-right-zone .state-emblem-wrap {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+  margin-left: 2px !important;
+}
+
+.command-right-zone .ashoka-emblem-img {
+  height: 46px !important;
+  width: auto !important;
+  object-fit: contain !important;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6)) !important;
 }
 
 /* ================= STRATEGIC COMMAND DOSSIER DROPDOWN CARD ================= */
@@ -2729,41 +2856,61 @@
   box-shadow: 0 0 10px rgba(212, 175, 55, 0.25);
 }
 
-@media (max-width: 1200px) {
-  .compact-map {
-    display: none;
+/* ================= COMMAND PORTAL HEADER RESPONSIVE RULES ================= */
+@media (max-width: 1280px) {
+  .command-header-container .command-authority-badge {
+    display: none !important;
   }
-  .nav-tactical-search {
-    max-width: 240px;
+  .command-right-zone .telemetry-status-box .status-sub {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1140px) {
+  .command-header-container .logo-tagline {
+    display: none !important;
+  }
+  .command-right-zone .command-action-pill .pill-txt {
+    display: none !important;
+  }
+  .command-right-zone .command-action-pill {
+    padding: 5px 8px !important;
+  }
+  .command-right-zone .telemetry-status-box {
+    display: none !important;
   }
 }
 
 @media (max-width: 950px) {
-  .officer-meta-txt .officer-role {
-    display: none;
+  .command-header-container .logo-title {
+    font-size: 1.85rem !important;
   }
-  .telemetry-status-box .status-sub {
-    display: none;
+  .command-header-container .role-badge-c2 {
+    display: none !important;
+  }
+  .command-right-zone .command-profile-meta .command-officer-rank {
+    display: none !important;
   }
   .nav-tactical-search {
-    display: none;
+    display: none !important;
   }
 }
 
-@media (max-width: 680px) {
-  .command-right-zone {
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 8px;
+@media (max-width: 720px) {
+  .command-header-container {
+    padding: 6px 14px !important;
   }
-  .officer-identity-pill {
-    padding: 4px 8px;
+  .command-header-container .sena-logo-img {
+    height: 56px !important;
   }
-  .officer-meta-txt {
-    display: none;
+  .command-header-container .logo-title {
+    font-size: 1.6rem !important;
   }
-  .telemetry-status-box {
-    padding: 4px 8px;
+  .command-right-zone .state-emblem-wrap {
+    display: none !important;
+  }
+  .command-right-zone .command-profile-meta {
+    display: none !important;
   }
 }
 

@@ -11,9 +11,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import mil.gov.senaaapurti.fieldclient.data.local.converters.Converters
 import mil.gov.senaaapurti.fieldclient.data.local.dao.InventoryDao
+import mil.gov.senaaapurti.fieldclient.data.local.dao.OperationsDao
 import mil.gov.senaaapurti.fieldclient.data.local.dao.ScanTransactionDao
 import mil.gov.senaaapurti.fieldclient.data.local.dao.SyncOutboxDao
+import mil.gov.senaaapurti.fieldclient.data.local.entity.ConvoyEntity
+import mil.gov.senaaapurti.fieldclient.data.local.entity.IndentEntity
 import mil.gov.senaaapurti.fieldclient.data.local.entity.InventoryItemEntity
+import mil.gov.senaaapurti.fieldclient.data.local.entity.RouteCorridorEntity
 import mil.gov.senaaapurti.fieldclient.data.local.entity.ScanTransactionEntity
 import mil.gov.senaaapurti.fieldclient.data.local.entity.SyncOutboxQueueEntity
 
@@ -21,9 +25,12 @@ import mil.gov.senaaapurti.fieldclient.data.local.entity.SyncOutboxQueueEntity
     entities = [
         InventoryItemEntity::class,
         ScanTransactionEntity::class,
-        SyncOutboxQueueEntity::class
+        SyncOutboxQueueEntity::class,
+        ConvoyEntity::class,
+        IndentEntity::class,
+        RouteCorridorEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -32,6 +39,7 @@ abstract class SenaFieldDatabase : RoomDatabase() {
     abstract fun inventoryDao(): InventoryDao
     abstract fun scanTransactionDao(): ScanTransactionDao
     abstract fun syncOutboxDao(): SyncOutboxDao
+    abstract fun operationsDao(): OperationsDao
 
     companion object {
         @Volatile
@@ -59,14 +67,31 @@ abstract class SenaFieldDatabase : RoomDatabase() {
                 super.onCreate(db)
                 INSTANCE?.let { database ->
                     scope.launch(Dispatchers.IO) {
-                        populateInitialDatabase(database.inventoryDao())
+                        populateInitialDatabase(database)
                     }
                 }
             }
 
-            suspend fun populateInitialDatabase(dao: InventoryDao) {
-                if (dao.getItemCount() == 0) {
-                    dao.insertAll(DatabaseSeedData.initialInventoryItems)
+            override fun onOpen(db: SupportSQLiteDatabase) {
+                super.onOpen(db)
+                INSTANCE?.let { database ->
+                    scope.launch(Dispatchers.IO) {
+                        populateInitialDatabase(database)
+                    }
+                }
+            }
+
+            suspend fun populateInitialDatabase(database: SenaFieldDatabase) {
+                val inventoryDao = database.inventoryDao()
+                if (inventoryDao.getItemCount() < DatabaseSeedData.initialInventoryItems.size) {
+                    inventoryDao.insertAll(DatabaseSeedData.initialInventoryItems)
+                }
+
+                val operationsDao = database.operationsDao()
+                if (operationsDao.getIndentCount() == 0) {
+                    operationsDao.insertConvoys(DatabaseSeedData.initialConvoys)
+                    operationsDao.insertIndents(DatabaseSeedData.initialIndents)
+                    operationsDao.insertCorridors(DatabaseSeedData.initialRouteCorridors)
                 }
             }
         }

@@ -28,6 +28,7 @@ class MainActivity : ComponentActivity() {
                     inventoryRepository = applicationInstance.inventoryRepository,
                     scanRepository = applicationInstance.scanRepository,
                     syncRepository = applicationInstance.syncRepository,
+                    operationsRepository = applicationInstance.operationsRepository,
                     syncManager = applicationInstance.syncManager,
                     hardwareManager = applicationInstance.hardwareManager,
                     isNightVisionMode = isNightVisionMode,

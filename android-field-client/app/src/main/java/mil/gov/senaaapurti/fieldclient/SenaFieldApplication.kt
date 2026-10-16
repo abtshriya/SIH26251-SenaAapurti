@@ -8,6 +8,7 @@ import mil.gov.senaaapurti.fieldclient.data.local.database.SenaFieldDatabase
 import mil.gov.senaaapurti.fieldclient.hardware.RuggedScannerHardwareManager
 import mil.gov.senaaapurti.fieldclient.repository.InventoryRepository
 import mil.gov.senaaapurti.fieldclient.repository.ScanRepository
+import mil.gov.senaaapurti.fieldclient.repository.OperationsRepository
 import mil.gov.senaaapurti.fieldclient.repository.SyncRepository
 import mil.gov.senaaapurti.fieldclient.worker.SyncManager
 
@@ -26,6 +27,7 @@ class SenaFieldApplication : Application() {
         )
     }
     val syncRepository by lazy { SyncRepository(database.syncOutboxDao()) }
+    val operationsRepository by lazy { OperationsRepository(database.operationsDao(), database.syncOutboxDao()) }
 
     val syncManager by lazy { SyncManager(this) }
     val hardwareManager by lazy { RuggedScannerHardwareManager(this) }

@@ -740,6 +740,13 @@
   background: #071009 !important;
 }
 
+/* High-Contrast Tactical Military Dark Basemap (Zero API Key, Zero Watermarks) */
+.tactical-military-tiles,
+:host ::ng-deep .tactical-military-tiles {
+  filter: invert(100%) hue-rotate(185deg) brightness(85%) contrast(145%) saturate(0.3) !important;
+  -webkit-filter: invert(100%) hue-rotate(185deg) brightness(85%) contrast(145%) saturate(0.3) !important;
+}
+
 .leaflet-bar {
   border: 1px solid rgba(212, 175, 55, 0.35) !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6) !important;

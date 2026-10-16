@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, inject, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, inject, ViewEncapsulation, ChangeDetectorRef, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { catchError, of, filter } from 'rxjs';
@@ -880,6 +880,8 @@ export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestr
         const nextTab = this.normalizeTab(parts[1]);
         if (this.activeTab !== nextTab) {
           this.setTab(nextTab, false);
+        } else if (nextTab === 'dashboard') {
+          setTimeout(() => this.ensureMapInitialized(), 80);
         }
       }
       this.cdr.markForCheck();
@@ -892,6 +894,8 @@ export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestr
         const normalized = this.normalizeTab(tabParam);
         if (this.activeTab !== normalized) {
           this.setTab(normalized, false);
+        } else if (normalized === 'dashboard') {
+          setTimeout(() => this.ensureMapInitialized(), 80);
         }
       }
       this.cdr.markForCheck();
@@ -907,9 +911,16 @@ export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestr
     this.runScenarioSimulation();
   }
 
+  @HostListener('window:resize')
+  onWindowResize() {
+    if (this.map) {
+      this.map.invalidateSize();
+    }
+  }
+
   ngAfterViewInit() {
     if (this.activeTab === 'dashboard') {
-      setTimeout(() => this.initLeafletMap(), 250);
+      setTimeout(() => this.ensureMapInitialized(), 150);
     }
   }
 
@@ -954,17 +965,28 @@ export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestr
       this.router.navigate(['/command', normalized]);
     }
     if (normalized === 'dashboard') {
+      this.cdr.detectChanges();
       setTimeout(() => {
-        if (!this.map) {
-          this.initLeafletMap();
-        } else {
+        this.ensureMapInitialized();
+      }, 60);
+      setTimeout(() => {
+        if (this.map) {
           this.map.invalidateSize();
         }
-      }, 200);
-    } else if (normalized === 'forecasting') {
-      this.fetchDemandCurve();
-    } else if (normalized === 'reports') {
-      this.updateReportData();
+      }, 250);
+    } else {
+      // Free old map instance when moving off dashboard tab
+      if (this.map) {
+        try {
+          this.map.remove();
+        } catch (e) {}
+        this.map = null;
+      }
+      if (normalized === 'forecasting') {
+        this.fetchDemandCurve();
+      } else if (normalized === 'reports') {
+        this.updateReportData();
+      }
     }
     this.cdr.markForCheck();
   }
@@ -1003,19 +1025,14 @@ export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestr
     }
 
     if (type === 'dark') {
-      // Tactical Military Dark: High-contrast Esri World Dark Gray Base + Reference (boundaries, cities & transit axes)
+      // Tactical Military Dark: High-contrast military tactical grid using inverted OSM with luminous corridors
       // 100% Free, zero API key requirement, zero watermarks
-      const baseLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
-        maxNativeZoom: 16,
+      this.basemapTileLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxNativeZoom: 19,
         maxZoom: 19,
-        attribution: 'Esri Dark Canvas | ASCON Tactical Dark'
-      });
-      const refLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
-        maxNativeZoom: 16,
-        maxZoom: 19,
-        attribution: ''
-      });
-      this.basemapTileLayer = L.layerGroup([baseLayer, refLayer]).addTo(this.map);
+        className: 'tactical-military-tiles',
+        attribution: '© OpenStreetMap contributors | ASCON Tactical Dark Grid'
+      }).addTo(this.map);
     } else if (type === 'imagery') {
       // Esri World Imagery: Real satellite terrain photography, zero API keys
       this.basemapTileLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
@@ -1024,7 +1041,7 @@ export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestr
         attribution: 'Esri World Imagery | High-Res Earth Observation'
       }).addTo(this.map);
     } else if (type === 'dark_canvas') {
-      // Esri Dark Gray Canvas: Minimalist tactical dark backdrop without text clutter, zero API keys
+      // Esri Dark Gray Canvas: Minimalist uniform dark gray slate cartography, zero API keys
       this.basemapTileLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
         maxNativeZoom: 16,
         maxZoom: 19,
@@ -1040,6 +1057,19 @@ export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestr
     }
   }
 
+  ensureMapInitialized() {
+    if (this.activeTab !== 'dashboard') return;
+    const mapEl = document.getElementById('indianLogisticsMap');
+    if (!mapEl || typeof L === 'undefined') return;
+
+    const hasHealthyMap = this.map && (mapEl as any)._leaflet_id && mapEl.classList.contains('leaflet-container') && mapEl.children.length > 0;
+    if (!hasHealthyMap) {
+      this.initLeafletMap();
+    } else {
+      this.map.invalidateSize();
+    }
+  }
+
   initLeafletMap() {
     const mapEl = document.getElementById('indianLogisticsMap');
     if (!mapEl || typeof L === 'undefined') return;
@@ -1049,6 +1079,10 @@ export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestr
         this.map.remove();
       } catch (e) {}
       this.map = null;
+    }
+
+    if ((mapEl as any)._leaflet_id) {
+      (mapEl as any)._leaflet_id = null;
     }
 
     // Centered on India with broad strategic view
@@ -1061,7 +1095,7 @@ export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestr
       attributionControl: false
     });
 
-    // Zero-Auth High Fidelity Geographic Tile Provider (Esri World Topo Map)
+    // Zero-Auth High Fidelity Geographic Tile Provider
     this.setBasemap(this.currentBasemap);
 
     this.commandsLayer = L.layerGroup().addTo(this.map);
@@ -1087,7 +1121,12 @@ export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestr
       if (this.map) {
         this.map.invalidateSize();
       }
-    }, 250);
+    }, 150);
+    setTimeout(() => {
+      if (this.map) {
+        this.map.invalidateSize();
+      }
+    }, 350);
   }
 
   toggleMapLayer(layer: 'routes' | 'convoys' | 'weather' | 'risks') {

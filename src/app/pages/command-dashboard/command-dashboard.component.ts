@@ -1417,7 +1417,7 @@ export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestr
 
   refreshData() {
     this.lastDataSync = 'Synchronized at ' + new Date().toLocaleTimeString();
-    alert('Real-time ASCON military telemetry feeds refreshed across all 7 Operational Commands.');
+    alert(this.langService.t('Real-time ASCON military telemetry feeds refreshed across all 7 Operational Commands.'));
   }
 
   toggleSidebar() {

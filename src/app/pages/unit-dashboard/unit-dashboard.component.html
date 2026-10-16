@@ -2224,53 +2224,53 @@
                   [class.tag-demand]="alt.type === 'Demand Surge'"
                   [class.tag-stock]="alt.type === 'Stock Critical'"
                   [class.tag-route]="alt.type === 'Route Disruption'">
-                  {{ alt.type }}
+                  {{ langService.t(alt.type) }}
                 </span>
                 <span class="badge-priority-pill" [class.prio-crit]="alt.severity === 'Critical'" [class.prio-high]="alt.severity === 'High'">
-                  {{ alt.severity }}
+                  {{ langService.t(alt.severity) }}
                 </span>
                 <span *ngIf="isDirectiveApproved(alt.id)" class="badge-success-directive">
-                  ✓ DIRECTIVE EXECUTED
+                  {{ langService.t('✓ DIRECTIVE EXECUTED') }}
                 </span>
-                <span class="brief-sector-label">📍 {{ alt.theater }} • {{ alt.sector }}</span>
+                <span class="brief-sector-label">📍 {{ langService.t(alt.theater) }} • {{ langService.t(alt.sector) }}</span>
               </div>
-              <span class="brief-time-badge font-mono">🕒 {{ alt.timestamp }}</span>
+              <span class="brief-time-badge font-mono">🕒 {{ langService.t(alt.timestamp) }}</span>
             </div>
 
             <!-- Title & Narrative Brief -->
             <div class="brief-content-body">
-              <h3 class="brief-headline">{{ alt.headline }}</h3>
-              <p class="brief-narrative">{{ alt.details }}</p>
+              <h3 class="brief-headline">{{ langService.t(alt.headline) }}</h3>
+              <p class="brief-narrative">{{ langService.t(alt.details) }}</p>
             </div>
 
             <!-- Key Operational Parameters (Clean 3-column row) -->
             <div class="brief-stats-row" *ngIf="alt.affectedUnit || alt.affectedSupply || alt.expectedImpact">
               <div class="brief-stat-col" *ngIf="alt.affectedUnit">
-                <span class="stat-col-label">AFFECTED UNITS</span>
-                <strong class="stat-col-val text-accent">{{ alt.affectedUnit }}</strong>
+                <span class="stat-col-label">{{ langService.t('AFFECTED UNITS') }}</span>
+                <strong class="stat-col-val text-accent">{{ langService.t(alt.affectedUnit) }}</strong>
               </div>
               <div class="brief-stat-col" *ngIf="alt.affectedSupply">
-                <span class="stat-col-label">TARGET STORES</span>
-                <strong class="stat-col-val text-gold">{{ alt.affectedSupply }}</strong>
+                <span class="stat-col-label">{{ langService.t('TARGET STORES') }}</span>
+                <strong class="stat-col-val text-gold">{{ langService.t(alt.affectedSupply) }}</strong>
               </div>
               <div class="brief-stat-col" *ngIf="alt.expectedImpact">
-                <span class="stat-col-label">EXPECTED READINESS IMPACT</span>
-                <strong class="stat-col-val text-green">{{ alt.expectedImpact }}</strong>
+                <span class="stat-col-label">{{ langService.t('EXPECTED READINESS IMPACT') }}</span>
+                <strong class="stat-col-val text-green">{{ langService.t(alt.expectedImpact) }}</strong>
               </div>
             </div>
 
             <!-- Assessment Note (Simple, Human-Scale) -->
             <div class="brief-assessment-callout" *ngIf="alt.aiExplanation">
-              <span class="callout-tag">OPERATIONAL ASSESSMENT</span>
-              <p class="callout-text">{{ alt.aiExplanation }}</p>
+              <span class="callout-tag">{{ langService.t('OPERATIONAL ASSESSMENT') }}</span>
+              <p class="callout-text">{{ langService.t(alt.aiExplanation) }}</p>
             </div>
 
             <!-- Drivers / Contributing Factors as Clean Inline Badges -->
             <div class="brief-factors-line" *ngIf="alt.contributingFactors && alt.contributingFactors.length > 0">
-              <span class="factors-line-label">Key Drivers:</span>
+              <span class="factors-line-label">{{ langService.t('Key Drivers:') }}</span>
               <div class="factors-badge-wrap">
                 <span *ngFor="let factor of alt.contributingFactors" class="factor-badge-item">
-                  • {{ factor }}
+                  • {{ langService.t(factor) }}
                 </span>
               </div>
             </div>
@@ -2278,8 +2278,8 @@
             <!-- Action Directive & Approval Controls -->
             <div class="brief-action-footer">
               <div class="action-summary-col">
-                <span class="action-call-label">REQUIRED DIRECTIVE</span>
-                <p class="action-call-text">{{ alt.recommendedAction }}</p>
+                <span class="action-call-label">{{ langService.t('REQUIRED DIRECTIVE') }}</span>
+                <p class="action-call-text">{{ langService.t(alt.recommendedAction) }}</p>
               </div>
               <div class="action-controls-col">
                 <button
@@ -2287,15 +2287,15 @@
                   type="button"
                   class="btn-tray-toggle"
                   (click)="toggleContingency(alt.id)">
-                  <span>{{ expandedContingencies[alt.id] ? 'Hide Options ▲' : 'Secondary Options (' + alt.alternativeActions.length + ') ▼' }}</span>
+                  <span>{{ expandedContingencies[alt.id] ? langService.t('Hide Options ▲') : langService.t('Secondary Options') + ' (' + alt.alternativeActions.length + ') ▼' }}</span>
                 </button>
                 <button
                   type="button"
                   class="btn-approve-directive"
                   [class.btn-directive-approved]="isDirectiveApproved(alt.id)"
                   (click)="executeAlertAction(alt)">
-                  <span *ngIf="!isDirectiveApproved(alt.id)">✓ Approve & Issue Order</span>
-                  <span *ngIf="isDirectiveApproved(alt.id)">✓ Order Issued & Dispatched</span>
+                  <span *ngIf="!isDirectiveApproved(alt.id)">{{ langService.t('✓ Approve & Issue Order') }}</span>
+                  <span *ngIf="isDirectiveApproved(alt.id)">{{ langService.t('✓ Order Issued & Dispatched') }}</span>
                 </button>
               </div>
             </div>

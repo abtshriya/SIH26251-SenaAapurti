@@ -70,6 +70,17 @@
   font-size: 1.05rem;
   letter-spacing: 0.04em;
   line-height: 1.1;
+  white-space: nowrap;
+}
+
+.sidebar-title.hindi-sb-title {
+  font-family: 'Tiro Devanagari Hindi', 'Noto Sans Devanagari', 'Inter', sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.25;
+  padding-top: 2px;
+  display: inline-flex;
+  align-items: baseline;
+  white-space: nowrap;
 }
 
 .sb-sena {
@@ -78,6 +89,11 @@
 
 .sb-aapurti {
   color: #f59e0b;
+}
+
+.sb-gap {
+  display: inline-block;
+  width: 0.28em;
 }
 
 .sidebar-sub {

@@ -64,16 +64,14 @@
       <!-- Brand Title, Subtitles, Authority Badge and Tricolour Slash -->
       <div class="brand-text">
         <div class="brand-title-row">
-          <h1 class="logo-title">
-            <span class="sena-part">{{ langService.t('titleSena') }}</span><span class="aapurti-part">{{
-              langService.t('titleAapurti') }}</span>
+          <h1 class="logo-title" [class.hindi-title]="langService.currentLang() === 'hi'">
+            <span class="sena-part">{{ langService.t('titleSena') }}</span><span class="brand-word-gap" *ngIf="langService.currentLang() === 'hi'">&nbsp;</span><span class="aapurti-part">{{ langService.t('titleAapurti') }}</span>
           </h1>
         </div>
 
         <!-- Contextual Subtitle by Portal Mode -->
         <p class="logo-tagline" *ngIf="portalMode() === 'public'">{{ langService.t('subtitle') }}</p>
-        <p class="logo-tagline" *ngIf="portalMode() === 'command'">HQ Strategic Defense Logistics & C4ISR Command Center
-        </p>
+        <p class="logo-tagline" *ngIf="portalMode() === 'command'">{{ langService.t('HQ Strategic Defense Logistics & C4ISR Command Center') }}</p>
         <p class="logo-tagline" *ngIf="portalMode() === 'unit'">{{ unitDbService.selectedUnit().name }} • {{
           unitDbService.selectedUnit().id }}</p>
 
@@ -84,7 +82,7 @@
         <div class="authority-badge command-authority-badge" *ngIf="portalMode() === 'command'">
           <span class="ia-text">
             <span class="ia-badge-icon">📍</span>
-            <span class="ia-badge-title">INTEGRATED HQ OF MoD (ARMY) • SENA BHAWAN, NEW DELHI</span>
+            <span class="ia-badge-title">{{ langService.t('INTEGRATED HQ OF MoD (ARMY) • SENA BHAWAN, NEW DELHI') }}</span>
           </span>
         </div>
         <div class="authority-badge unit-authority-badge" *ngIf="portalMode() === 'unit'">
@@ -161,7 +159,7 @@
             (focus)="onSearchFocus()"
             (blur)="onSearchBlur()"
             (input)="onSearchInput()"
-            [placeholder]="portalMode() === 'command' ? 'Search Command C2, units, munitions...' : (portalMode() === 'unit' ? 'Search Unit stores, indents, weather...' : langService.t('searchPlaceholder'))"
+            [placeholder]="portalMode() === 'command' ? langService.t('Search Command C2, units, munitions...') : (portalMode() === 'unit' ? langService.t('Search Unit stores, indents, weather...') : langService.t('searchPlaceholder'))"
             class="header-search-input"
             autocomplete="off"
             aria-label="Search Army Logistics Knowledgebase" />
@@ -174,8 +172,8 @@
         <!-- Live Instant Tactical Search Dropdown -->
         <div *ngIf="searchDropdownOpen && liveSearchResults().length > 0" class="header-search-dropdown" (mousedown)="$event.preventDefault()" (click)="$event.stopPropagation()">
           <div class="search-dropdown-header">
-            <span class="search-dropdown-title">TACTICAL SEARCH RESULTS</span>
-            <span class="search-count-badge">{{ liveSearchResults().length }} MATCHES</span>
+            <span class="search-dropdown-title">{{ langService.t('TACTICAL SEARCH RESULTS') }}</span>
+            <span class="search-count-badge">{{ liveSearchResults().length }} {{ langService.t('MATCHES') }}</span>
           </div>
 
           <div class="search-dropdown-list">
@@ -194,7 +192,7 @@
 
           <div class="search-dropdown-footer" (click)="openFullSearchDirectory()">
             <span>Press <strong>Enter</strong> to open top result</span>
-            <span class="search-all-link">Full Platform Directory ↗</span>
+            <span class="search-all-link">{{ langService.t('Full Platform Directory ↗') }}</span>
           </div>
         </div>
 
@@ -203,7 +201,7 @@
           <div class="search-dropdown-empty">
             <p>No direct matches for "<strong>{{ searchQuery }}</strong>"</p>
             <button type="button" class="btn-open-sitemap-search" (click)="openFullSearchDirectory()">
-              Browse Complete Platform Directory ↗
+              {{ langService.t('Browse Complete Platform Directory ↗') }}
             </button>
           </div>
         </div>
@@ -214,11 +212,11 @@
         title="Switch Army Unit Station across India">
         <div class="pill-station-dot"></div>
         <div class="pill-station-info">
-          <span class="pill-station-label">ACTIVE STATION</span>
+          <span class="pill-station-label">{{ langService.t('ACTIVE STATION') }}</span>
           <span class="pill-station-title">{{ unitDbService.selectedUnit().station }}</span>
         </div>
         <button type="button" class="btn-change-station">
-          Switch ▾
+          {{ langService.t('Switch ▾') }}
         </button>
       </div>
 
@@ -227,11 +225,11 @@
         title="Switch Operational Army Command across India">
         <div class="pill-station-dot pill-command-dot"></div>
         <div class="pill-station-info">
-          <span class="pill-station-label">ACTIVE COMMAND</span>
+          <span class="pill-station-label">{{ langService.t('ACTIVE COMMAND') }}</span>
           <span class="pill-station-title">{{ unitDbService.selectedCommand().name }}</span>
         </div>
         <button type="button" class="btn-change-station">
-          Switch ▾
+          {{ langService.t('Switch ▾') }}
         </button>
       </div>
 
@@ -490,17 +488,17 @@
             <!-- Dropdown Panel -->
             <div *ngIf="showNotifications" class="notif-popover command-notif-popover" (click)="$event.stopPropagation()">
               <div class="notif-pop-header">
-                <h4>Live Tactical Alerts</h4>
-                <span class="badge-danger">4 ACTIVE</span>
+                <h4>{{ langService.t('Live Tactical Alerts') }}</h4>
+                <span class="badge-danger">{{ langService.t('4 ACTIVE') }}</span>
               </div>
               <div class="notif-pop-list">
                 <div *ngFor="let alt of logisticsService.alerts()" class="notif-pop-item" (click)="goToAlerts()">
                   <span class="notif-sev" [class.sev-crit]="alt.severity === 'Critical'" [class.sev-high]="alt.severity === 'High'">
-                    {{ alt.severity }}
+                    {{ langService.t(alt.severity) }}
                   </span>
                   <div class="notif-pop-body">
-                    <strong>{{ alt.headline }}</strong>
-                    <span>{{ alt.timestamp }} • {{ alt.theater }}</span>
+                    <strong>{{ langService.t(alt.headline) }}</strong>
+                    <span>{{ langService.t(alt.timestamp) }} • {{ langService.t(alt.theater) }}</span>
                   </div>
                 </div>
               </div>
@@ -618,17 +616,17 @@
             <!-- Dropdown Panel -->
             <div *ngIf="showNotifications" class="notif-popover unit-notif-popover" (click)="$event.stopPropagation()">
               <div class="notif-pop-header">
-                <h4>Live Tactical Alerts</h4>
-                <span class="badge-danger">{{ unreadNotificationsCount }} ACTIVE</span>
+                <h4>{{ langService.t('Live Tactical Alerts') }}</h4>
+                <span class="badge-danger">{{ unreadNotificationsCount }} {{ langService.t('ACTIVE') }}</span>
               </div>
               <div class="notif-pop-list">
                 <div *ngFor="let alt of logisticsService.alerts()" class="notif-pop-item" (click)="goToAlerts()">
                   <span class="notif-sev" [class.sev-crit]="alt.severity === 'Critical'" [class.sev-high]="alt.severity === 'High'">
-                    {{ alt.severity }}
+                    {{ langService.t(alt.severity) }}
                   </span>
                   <div class="notif-pop-body">
-                    <strong>{{ alt.headline }}</strong>
-                    <span>{{ alt.timestamp }} • {{ alt.theater }}</span>
+                    <strong>{{ langService.t(alt.headline) }}</strong>
+                    <span>{{ langService.t(alt.timestamp) }} • {{ langService.t(alt.theater) }}</span>
                   </div>
                 </div>
               </div>
@@ -799,9 +797,9 @@
   <div class="unit-modal-container" (click)="$event.stopPropagation()">
     <div class="unit-modal-header">
       <div class="modal-title-wrap">
-        <span class="modal-tag">INDIAN ARMED FORCES • OPERATIONAL THEATERS & COMMANDS</span>
-        <h3 class="modal-title">National Commands & Headquarters Database</h3>
-        <p class="modal-sub">Switch active operational theater command across all 7 Indian Army Commands, Tri-Service ANC, and Apex Headquarters.</p>
+        <span class="modal-tag">{{ langService.t('INDIAN ARMED FORCES • OPERATIONAL THEATERS & COMMANDS') }}</span>
+        <h3 class="modal-title">{{ langService.t('National Commands & Headquarters Database') }}</h3>
+        <p class="modal-sub">{{ langService.t('Switch active operational theater command across all 7 Indian Army Commands, Tri-Service ANC, and Apex Headquarters.') }}</p>
       </div>
       <button type="button" class="btn-modal-close" (click)="showCommandSelectorModal = false">✕</button>
     </div>
@@ -812,7 +810,7 @@
         <svg class="search-icon" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
         </svg>
-        <input type="text" [(ngModel)]="commandModalSearchQuery" placeholder="Search by command name, HQ station, state, or code..." class="modal-search-input">
+        <input type="text" [(ngModel)]="commandModalSearchQuery" [placeholder]="langService.t('Search by command name, HQ station, state, or code...')" class="modal-search-input">
       </div>
     </div>
 
@@ -820,9 +818,9 @@
       <div *ngFor="let cmd of modalFilteredCommands()" class="unit-station-card"
         [class.selected]="unitDbService.selectedCommand().id === cmd.id" (click)="selectCommand(cmd)">
         <div class="station-card-body">
-          <div class="station-type-tag">{{ cmd.code }} • ESTABLISHED {{ cmd.established }}</div>
+          <div class="station-type-tag">{{ cmd.code }} • {{ langService.t('ESTABLISHED') }} {{ cmd.established }}</div>
           <h4 class="station-name">{{ cmd.name }}</h4>
-          <span class="station-corps">Motto: {{ cmd.motto }}</span>
+          <span class="station-corps">{{ langService.t('Motto:') }} {{ cmd.motto }}</span>
           <div class="station-location-row">
             <svg class="location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z" />
@@ -832,15 +830,15 @@
           </div>
           <p class="station-sector-sub">{{ cmd.areaOfResponsibility }}</p>
           <div class="station-footer-meta">
-            <span class="station-officer">{{ cmd.activeUnitsCount }} Units • {{ cmd.readiness }}% Readiness</span>
-            <span class="station-select-cta" *ngIf="unitDbService.selectedCommand().id !== cmd.id">Activate Command →</span>
-            <span class="station-active-badge" *ngIf="unitDbService.selectedCommand().id === cmd.id">✓ ACTIVE</span>
+            <span class="station-officer">{{ cmd.activeUnitsCount }} {{ langService.t('Units') }} • {{ cmd.readiness }}% {{ langService.t('Readiness') }}</span>
+            <span class="station-select-cta" *ngIf="unitDbService.selectedCommand().id !== cmd.id">{{ langService.t('Activate Command →') }}</span>
+            <span class="station-active-badge" *ngIf="unitDbService.selectedCommand().id === cmd.id">{{ langService.t('✓ ACTIVE') }}</span>
           </div>
         </div>
       </div>
       <div *ngIf="modalFilteredCommands().length === 0" class="no-units-found">
         <p>No commands match the search "{{ commandModalSearchQuery }}".</p>
-        <button type="button" class="btn-reset-filters" (click)="commandModalSearchQuery = ''">Reset Search</button>
+        <button type="button" class="btn-reset-filters" (click)="commandModalSearchQuery = ''">{{ langService.t('Reset Search') }}</button>
       </div>
     </div>
   </div>

@@ -1794,6 +1794,13 @@
   transform: translateY(-1px);
 }
 
+.btn-outline-army.active {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.35) 0%, rgba(180, 83, 9, 0.6) 100%);
+  border-color: #fde047;
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(212, 175, 55, 0.45);
+}
+
 .btn-army-sm {
   background: linear-gradient(135deg, rgba(34, 197, 94, 0.25) 0%, rgba(20, 83, 45, 0.7) 100%);
   backdrop-filter: blur(8px);

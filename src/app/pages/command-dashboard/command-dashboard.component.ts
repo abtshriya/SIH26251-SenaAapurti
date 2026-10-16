@@ -1,6 +1,8 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, inject, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, inject, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, ActivatedRoute, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { catchError, of, filter } from 'rxjs';
+import { RouterModule, ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import {
@@ -48,6 +50,31 @@ export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestr
   langService = inject(LanguageService);
   route = inject(ActivatedRoute);
   router = inject(Router);
+  http = inject(HttpClient);
+  cdr = inject(ChangeDetectorRef);
+  readonly API_BASE = 'http://localhost:8000/api/v1';
+
+  normalizeTab(rawTab: string | null): CommandTab {
+    if (!rawTab) {
+      const url = this.router.url || '';
+      const parts = url.split('?')[0].split('/').filter(Boolean);
+      if (parts.length >= 2 && parts[0] === 'command') {
+        rawTab = parts[1];
+      }
+    }
+    if (!rawTab) return 'dashboard';
+    const t = rawTab.toLowerCase().trim();
+    if (t === 'forecasting' || t === 'demand-forecasting' || t === 'demand' || t === 'forecast') return 'forecasting';
+    if (t === 'reports' || t === 'reports-and-analytics' || t === 'analytics' || t === 'report') return 'reports';
+    if (t === 'units' || t === 'unit-network') return 'units';
+    if (t === 'inventory' || t === 'stocks') return 'inventory';
+    if (t === 'logistics' || t === 'convoys' || t === 'movement') return 'logistics';
+    if (t === 'intelligence' || t === 'intel' || t === 'c4isr') return 'intelligence';
+    if (t === 'recommendations' || t === 'ai-recommendations') return 'recommendations';
+    if (t === 'simulation' || t === 'wargame') return 'simulation';
+    if (t === 'settings' || t === 'admin') return 'settings';
+    return (t as CommandTab) || 'dashboard';
+  }
 
   setFont(size: FontSize) {
     this.themeService.setFontSize(size);
@@ -144,6 +171,9 @@ export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestr
   forecastCategory = 'Class III (Sub-Zero POL & Arctic Aviation Fuel)';
   forecastPeriod = '30 Days (Monthly Deployment Cycle)';
   forecastHorizon = 'Winter Q4 (Nov 2026 - Mar 2027)';
+  forecastChartData: any = null;
+  forecastLoading = false;
+  preStockingSuccessMsg = '';
 
   // 1.5 Logistics Movement State
   selectedConvoy: ConvoyItem | null = null;
@@ -234,11 +264,60 @@ export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestr
     return cat;
   }
 
+  fetchDemandCurve() {
+    this.forecastLoading = true;
+    this.http.get<any>(`${this.API_BASE}/forecast/demand-curve`, {
+      params: {
+        region: this.forecastRegion,
+        category: this.forecastCategory,
+        horizon: this.forecastPeriod
+      }
+    }).pipe(
+      catchError(err => {
+        console.warn('Backend demand curve endpoint unreachable, falling back to local model', err);
+        return of(this.computeLocalForecastChartData());
+      })
+    ).subscribe(data => {
+      this.forecastLoading = false;
+      if (data) {
+        this.forecastChartData = data;
+      }
+      this.cdr.markForCheck();
+    });
+  }
+
   onForecastOptionChange() {
-    // The chart updates reactively via getForecastChartData() while looking fully static and crisp at all times
+    this.forecastChartData = this.computeLocalForecastChartData();
+    this.fetchDemandCurve();
+  }
+
+  setForecastCategory(cat: string) {
+    this.forecastCategory = cat;
+    this.onForecastOptionChange();
+  }
+
+  setForecastRegion(reg: string) {
+    this.forecastRegion = reg;
+    this.onForecastOptionChange();
+  }
+
+  authorizePreStockingBuffer() {
+    this.preStockingSuccessMsg = `Pre-Winter Stocking Buffer authorized for ${this.forecastRegion} (${this.getShortCategoryName(this.forecastCategory)}). Special C-130J sorties prioritized with ASCON electronic verification.`;
+    setTimeout(() => {
+      this.preStockingSuccessMsg = '';
+      this.cdr.markForCheck();
+    }, 8000);
+    this.cdr.markForCheck();
   }
 
   getForecastChartData() {
+    if (!this.forecastChartData) {
+      this.forecastChartData = this.computeLocalForecastChartData();
+    }
+    return this.forecastChartData;
+  }
+
+  computeLocalForecastChartData() {
     const reg = (this.forecastRegion || '').toLowerCase();
     const cat = (this.forecastCategory || '').toLowerCase();
     const hor = (this.forecastPeriod || '').toLowerCase();
@@ -439,8 +518,96 @@ export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestr
   reportRegion = 'All Commands';
   downloadSuccessNotice = '';
 
+  reportColumns: string[] = [];
+  reportRows: any[] = [];
+  reportAggregateRow: any = {};
+  reportSummary: any = {};
+
+  updateReportData() {
+    this.reportColumns = this.getReportColumns();
+    this.reportRows = this.getReportRows();
+    this.reportAggregateRow = this.getReportAggregateRow();
+    this.reportSummary = this.getReportSummary();
+    this.cdr.markForCheck();
+  }
+
+  onReportCategoryChange() {
+    this.updateReportData();
+  }
+
+  getReportColumns(): string[] {
+    const cat = (this.reportCategory || '').toLowerCase();
+    if (cat.includes('inventory')) {
+      return ['Central Depot / Base', 'Supply Class / SKU', 'On-Hand Stock', 'Safety Buffer', 'Days of Supply', 'Stock Status', 'Audit Clearance'];
+    }
+    if (cat.includes('convoy') || cat.includes('efficiency')) {
+      return ['Convoy Callsign', 'Strategic Axis', 'Vehicles', 'Cargo Class', 'Tonnage', 'Transit Punctuality', 'Audit Clearance'];
+    }
+    if (cat.includes('demand') || cat.includes('projection')) {
+      return ['Theater Command', 'Supply Discipline', 'Baseline Demand', 'Projected Surge', 'Reserve Horizon', 'AI Confidence', 'Audit Clearance'];
+    }
+    if (cat.includes('unit')) {
+      return ['Formation / Unit', 'Corps / Sector', 'Strength', 'Readiness', 'Combat Posture', 'Comms Security', 'Audit Clearance'];
+    }
+    if (cat.includes('route') || cat.includes('risk')) {
+      return ['Strategic Axis', 'Pass & Elevation', 'Transit Status', 'Daily Capacity', 'Hazard Risk', 'Bypass Route', 'Audit Clearance'];
+    }
+    if (cat.includes('weather')) {
+      return ['Station / Pass', 'Elevation', 'Temperature', 'Snow Accumulation', 'Wind & Gale', 'Accessibility', 'Audit Clearance'];
+    }
+    if (cat.includes('stockout')) {
+      return ['Critical Sector', 'Vulnerable SKU', 'Reserve DOS', 'Depletion Window', 'Impact Level', 'Mitigation Protocol', 'Audit Clearance'];
+    }
+    if (cat.includes('redistribution') || cat.includes('saving')) {
+      return ['Origin Depot', 'Receiving Unit', 'Material Transferred', 'Tonnage', 'Savings Estimate', 'Voucher Ref', 'Audit Clearance'];
+    }
+    // Default National Readiness
+    return ['Theater Command', 'Total Formations', 'Avg Readiness', 'Class I (Rations)', 'Class III (POL)', 'Class V (Munitions)', 'Audit Status'];
+  }
+
   getReportSummary() {
+    const cat = (this.reportCategory || '').toLowerCase();
     const d = (this.reportDateRange || '').toLowerCase();
+
+    if (cat.includes('inventory')) {
+      return {
+        window: 'CENTRAL & FORWARD ORDNANCE STORES AUDIT (ALL CODs)',
+        totalFormations: '2,450,000 Total Line Items',
+        meanReadiness: '135 DOS Mean Reserve',
+        focus: 'Quarterly physical muster verification against tamper-proof PostgreSQL ledger across 6 Central Ordnance Depots.',
+        rationsAvg: '185 DOS',
+        polAvg: '94 DOS',
+        munitionsAvg: '65 DOF',
+        stockPosture: 'SURPLUS ADVANCED HIGH-ALTITUDE POSTURE'
+      };
+    }
+
+    if (cat.includes('convoy') || cat.includes('efficiency')) {
+      return {
+        window: 'HIGHWAY LOGISTICS & CONVOY TELEMETICS AUDIT',
+        totalFormations: '38 Active Military Columns',
+        meanReadiness: '97.8% Fleet On-Time Rate',
+        focus: 'Real-time GPS telematics and military check-post passage times along NH-1D, Manali-Leh, and Sela Axis.',
+        rationsAvg: '158 Vehicles',
+        polAvg: '1,470 T In-Transit',
+        munitionsAvg: 'Zero Breaches',
+        stockPosture: 'UNINTERRUPTED MULTIMODAL CONVOY TRANSIT'
+      };
+    }
+
+    if (cat.includes('demand') || cat.includes('projection')) {
+      return {
+        window: 'PREDICTIVE NEURAL NETWORK SUSTENANCE PROJECTIONS',
+        totalFormations: '9 Strategic Theater Commands',
+        meanReadiness: '97.8% Model Confidence (R²=0.982)',
+        focus: 'ARIMA-LSTM neural network demand forecasting cross-referenced against historical high-altitude seasonal spikes.',
+        rationsAvg: '+28.4% Glacier Surge',
+        polAvg: '+31.6% Cold Surge',
+        munitionsAvg: '180 DOS Horizon',
+        stockPosture: 'PRE-WINTER HIGH ALTITUDE ACCELERATION'
+      };
+    }
+
     if (d.includes('7 days')) {
       return {
         window: '08 OCT 2026 – 14 OCT 2026 (TACTICAL 7-DAY SPRINT)',
@@ -475,6 +642,7 @@ export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestr
         stockPosture: 'NORMALIZED ANNUAL HARMONIC MEAN'
       };
     }
+
     // Default: Last 30 Days
     return {
       window: '15 SEP 2026 – 14 OCT 2026 (MONTHLY SUSTENANCE)',
@@ -489,293 +657,188 @@ export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   getReportRows() {
+    const cat = (this.reportCategory || '').toLowerCase();
     const d = (this.reportDateRange || '').toLowerCase();
 
-    // 1. "Last 7 Days" (Tactical Sprint)
+    // 1. INVENTORY AUDIT
+    if (cat.includes('inventory')) {
+      return [
+        { col1: 'COD Delhi Cantt', sub: 'Central Strategic Hub • Northern Feeder', col2: 'Class III (Sub-Zero POL)', col3: '1,420,000 L', col4: '600,000 L', col5: '94 DOS', col6: 'SURPLUS RESERVE', col7: 'Verified', isGood: true },
+        { col1: 'FSD Leh (14 Corps)', sub: 'Forward Supply Depot • Ladakh Sector', col2: 'Class I (High Alt Rations)', col3: '89,400 Packs', col4: '45,000 Packs', col5: '185 DOS', col6: 'WINTER BUFFER MET', col7: 'Verified', isGood: true },
+        { col1: 'COD Jabalpur', sub: 'Heavy Munitions & Artillery Arsenal', col2: 'Class V (155mm Shells)', col3: '48,200 Rds', col4: '20,000 Rds', col5: '65 DOF', col6: 'WWR BUFFER STABLE', col7: 'Verified', isGood: true },
+        { col1: 'COD Agra', sub: 'Armored Vehicle Spares Directorate', col2: 'Class IX (BMP/T-90 Spares)', col3: '14,800 Pcs', col4: '6,500 Pcs', col5: '48 DOS', col6: 'ADEQUATE', col7: 'Verified', isGood: true },
+        { col1: 'FSD Tawang (4 Corps)', sub: 'Extreme Altitude Medical Outpost', col2: 'Class VIII (Medical O2 Kits)', col3: '12,500 Cyl', col4: '4,000 Cyl', col5: '120 DOS', col6: 'SUB-ZERO STABILIZED', col7: 'Verified', isGood: true },
+        { col1: '224 ABOD Pathankot', sub: 'Forward Cold Clothing Depot', col2: 'Class II (Extreme Cold ECC)', col3: '36,000 Suits', col4: '15,000 Suits', col5: '110 DOS', col6: 'FORWARD DEPLOYED', col7: 'Verified', isGood: true }
+      ];
+    }
+
+    // 2. LOGISTICS CONVOY EFFICIENCY
+    if (cat.includes('convoy') || cat.includes('efficiency')) {
+      return [
+        { col1: 'GARUDA-01', sub: 'CV-104-N • Northern Convoy', col2: 'Manali - Rohtang - Leh Axis', col3: '28 Heavy 6x6', col4: 'Class III (POL)', col5: '320 Tonnes', col6: '98.2% ON TIME', col7: 'Verified', isGood: true },
+        { col1: 'CHEETAH-04', sub: 'CV-219-W • Western Transit', col2: 'Pathankot - Kargil Axis', col3: '34 Trucks', col4: 'Class I (Rations)', col5: '280 Tonnes', col6: '100% ON TIME', col7: 'Verified', isGood: true },
+        { col1: 'BRAHMA-02', sub: 'CV-308-E • Eastern Column', col2: 'Siliguri - Tawang Axis', col3: '22 4x4 Stallions', col4: 'Class V (Munitions)', col5: '195 Tonnes', col6: '95.4% ON TIME', col7: 'Verified', isGood: true },
+        { col1: 'THUNDER-09', sub: 'CV-412-S • Desert Sector', col2: 'Jodhpur - Barmer Sector', col3: '40 Heavy Transporters', col4: 'Class IX (Spares)', col5: '410 Tonnes', col6: '99.1% ON TIME', col7: 'Verified', isGood: true },
+        { col1: 'ARROW-12', sub: 'CV-515-E • Mountain Echelon', col2: 'Dimapur - Moreh Axis', col3: '18 Medium Trucks', col4: 'Class VIII (Medical)', col5: '140 Tonnes', col6: '96.8% ON TIME', col7: 'Verified', isGood: true },
+        { col1: 'HIMALAYA-07', sub: 'CV-620-C • Central Transit', col2: 'Joshimath - Mana Pass', col3: '16 High-Mobility Trucks', col4: 'Class II (ECC)', col5: '125 Tonnes', col6: '97.5% ON TIME', col7: 'Verified', isGood: true }
+      ];
+    }
+
+    // 3. DEMAND PROJECTIONS
+    if (cat.includes('demand') || cat.includes('projection')) {
+      return [
+        { col1: 'Northern Command (Udhampur)', sub: '14, 15, 16 Corps • Arctic High Altitude', col2: 'Sub-Zero POL & Aviation', col3: '2,850 T/Day', col4: '+31.6% Winter Cold', col5: '180 Days Full Buffer', col6: '98.4% (R²=0.982)', col7: 'Verified', isGood: true },
+        { col1: 'Eastern Command (Kolkata)', sub: '3, 4, 33 Corps • Mountain Glacier Resupply', col2: 'Caloric Rations (4,200 kcal)', col3: '1,650 T/Day', col4: '+28.4% Mountain Slog', col5: '120 Days Advanced Stock', col6: '97.9% (R²=0.975)', col7: 'Verified', isGood: true },
+        { col1: 'Western Command (Chandimandir)', sub: '2, 9, 11 Corps • Heavy Armor Columns', col2: 'BMP & Tank Heavy Spares', col3: '4,100 Pcs/Mo', col4: '+57.3% Desert Maneuver', col5: '45 Days Combat Buffer', col6: '96.5% (R²=0.961)', col7: 'Verified', isGood: true },
+        { col1: 'Northern Command (Udhampur)', sub: 'Forward Artillery & Gun Positions', col2: '155mm & ATGM Munitions', col3: '1,420 Rds/Day', col4: '+88.7% Tactical WWR', col5: '45 Days WWR Echelon', col6: '98.8% (R²=0.988)', col7: 'Verified', isGood: true },
+        { col1: 'South Western Command (Jaipur)', sub: '1 Corps Pivot Strike • Thar Desert', col2: 'High-Mobility Engine Parts', col3: '2,800 Pcs/Mo', col4: '+34.2% Sand Friction', col5: '30 Days Maintenance', col6: '96.2% (R²=0.958)', col7: 'Verified', isGood: true },
+        { col1: 'Central Command (Lucknow)', sub: 'Surya Command • High Altitude Inductions', col2: 'Extreme Cold Clothing (ECC)', col3: '2,200 Suits/Mo', col4: '+118.0% Pre-Winter', col5: '100% Induction Reserve', col6: '99.1% (R²=0.990)', col7: 'Verified', isGood: true }
+      ];
+    }
+
+    // 4. UNIT READINESS
+    if (cat.includes('unit')) {
+      return [
+        { col1: '14 Rajput (Mechanised)', sub: '14 Corps • Fire & Fury', col2: 'Leh - Ladakh Garrison', col3: '780 Pax', col4: '98.4%', col5: 'DEFCON 1', col6: 'ASCON V4', col7: 'Verified', isGood: true },
+        { col1: '3 Grenadiers (Infantry)', sub: '15 Corps • Chinar Corps', col2: 'Uri Sector - LOC', col3: '820 Pax', col4: '97.2%', col5: 'FORWARD ACTIVE', col6: 'ASCON V4', col7: 'Verified', isGood: true },
+        { col1: '7 Cavalry (Armoured)', sub: '2 Corps • Kharga Strike', col2: 'Ambala Garrison', col3: '620 Pax', col4: '99.1%', col5: 'STRIKE READY', col6: 'SATCOM PRIORITY', col7: 'Verified', isGood: true },
+        { col1: '17 Mountain Artillery', sub: '4 Corps • Gajraj Corps', col2: 'Tawang LAC Sector', col3: '540 Pax', col4: '96.8%', col5: 'HIGH ALTITUDE', col6: 'ASCON V4', col7: 'Verified', isGood: true },
+        { col1: '9 Para (Special Forces)', sub: 'Northern Command Reserve', col2: 'Udhampur Base', col3: '340 Pax', col4: '100.0%', col5: 'STRATEGIC AIRBORNE', col6: 'SATCOM SECURE', col7: 'Verified', isGood: true },
+        { col1: '120 Forward ASC Bn', sub: '33 Corps • Trishakti', col2: 'Sukna Feeder Base', col3: '690 Pax', col4: '97.5%', col5: 'CONVOY TRANSIT', col6: 'ASCON V4', col7: 'Verified', isGood: true }
+      ];
+    }
+
+    // 5. ROUTE RISK ASSESSMENT
+    if (cat.includes('route') || cat.includes('risk')) {
+      return [
+        { col1: 'NH-1D Highway', sub: 'Srinagar - Leh Axis', col2: 'Zojila Pass (11,575 ft)', col3: 'SNOW CHAINS ON', col4: '45 Convoys/Day', col5: 'MEDIUM (AVALANCHE)', col6: 'Mughal Road Axis', col7: 'Verified', isGood: true },
+        { col1: 'Manali - Leh Axis', sub: 'Himachal - Ladakh Transit', col2: 'Baralacha La (15,910 ft)', col3: 'ATAL TUNNEL OPEN', col4: '60 Convoys/Day', col5: 'LOW (CONTROLLED)', col6: 'Shinkun La Axis', col7: 'Verified', isGood: true },
+        { col1: 'Balipara - Tawang Axis', sub: 'Arunachal LAC Corridor', col2: 'Sela Pass (13,700 ft)', col3: 'SELA TUNNEL OPEN', col4: '35 Convoys/Day', col5: 'LOW (ALL-WEATHER)', col6: 'Orang-Kalaktang Axis', col7: 'Verified', isGood: true },
+        { col1: 'Joshimath - Malari Axis', sub: 'Garhwal Himalaya Corridor', col2: 'Niti Pass (16,600 ft)', col3: 'HIGH WIND WARNING', col4: '20 Convoys/Day', col5: 'HIGH (ROCKFALL)', col6: 'Mana Pass Axis', col7: 'Verified', isGood: false },
+        { col1: 'Pathankot - Udhampur', sub: 'Jammu Strategic Feeder', col2: 'Banihal Qazigund Tunnel', col3: 'ALL-WEATHER 4-LANE', col4: '120 Convoys/Day', col5: 'LOW (SECURE)', col6: 'Old Jawahar Tunnel', col7: 'Verified', isGood: true },
+        { col1: 'Darjeeling - Gangtok', sub: 'Sikkim Border Axis', col2: 'Nathu La (14,140 ft)', col3: 'DENSE FOG & MIST', col4: '25 Convoys/Day', col5: 'MEDIUM (VISIBILITY)', col6: 'Pakyong Bypass Axis', col7: 'Verified', isGood: true }
+      ];
+    }
+
+    // 6. WEATHER INCIDENT SUMMARY
+    if (cat.includes('weather')) {
+      return [
+        { col1: 'Siachen Base Camp', sub: 'Glacier Sensor • Sector 1', col2: '12,000 ft', col3: '-28°C Sub-Zero', col4: '15 cm / 6 hrs', col5: '45 km/h Blizzard', col6: 'CHAINS REQUIRED', col7: 'Verified', isGood: false },
+        { col1: 'Zojila Pass Weather Post', sub: 'Mountain Ridge • NH-1D Axis', col2: '11,575 ft', col3: '-18°C Sub-Zero', col4: '28 cm / 6 hrs', col5: '62 km/h Gale Force', col6: 'CONVOY RESTRICTED', col7: 'Verified', isGood: false },
+        { col1: 'Sela Pass Sensor Grid', sub: 'Arunachal LAC Sector', col2: '13,700 ft', col3: '-12°C Sub-Zero', col4: '8 cm / 6 hrs', col5: '25 km/h Moderate', col6: 'SELA TUNNEL OPEN', col7: 'Verified', isGood: true },
+        { col1: 'Rohtang North Portal', sub: 'Pir Panjal Mountain Range', col2: '10,050 ft', col3: '-14°C Sub-Zero', col4: '12 cm / 6 hrs', col5: '30 km/h Gusts', col6: 'ATAL TUNNEL OPEN', col7: 'Verified', isGood: true },
+        { col1: 'Kargil Ordnance Picket', sub: 'Drass High Plateau', col2: '8,780 ft', col3: '-16°C Sub-Zero', col4: '5 cm / 6 hrs', col5: '18 km/h Light', col6: 'OPEN ALL CONVOYS', col7: 'Verified', isGood: true },
+        { col1: 'Nathu La Ridge Sensor', sub: 'East Sikkim Frontier', col2: '14,140 ft', col3: '-9°C Sub-Zero', col4: '2 cm / 6 hrs', col5: '50 km/h Severe Wind', col6: 'CHAINS MANDATORY', col7: 'Verified', isGood: true }
+      ];
+    }
+
+    // 7. STOCKOUT RISK PREVENTION
+    if (cat.includes('stockout')) {
+      return [
+        { col1: 'Siachen Glacier', sub: 'Sub-Zero Forward Sector', col2: 'Sub-Zero HSD Grade Fuel', col3: '14 DOS', col4: '72 Hours to Threshold', col5: 'CRITICAL RISK', col6: 'Priority Convoy + IAF Mi-17', col7: 'Verified', isGood: false },
+        { col1: 'Tawang Forward Posts', sub: 'Arunachal High Altitude', col2: '81mm Mortar High Explosive', col3: '18 DOF', col4: '5 Days to Threshold', col5: 'HIGH RISK', col6: 'Siliguri Train + Stallion Fleet', col7: 'Verified', isGood: false },
+        { col1: 'Kargil High Pickets', sub: 'Drass High Ridge', col2: 'High-Altitude Calorie Rations', col3: '22 DOS', col4: '8 Days to Threshold', col5: 'MEDIUM RISK', col6: 'Forward Supply Depot Release', col7: 'Verified', isGood: true },
+        { col1: 'Barmer Desert Sector', sub: 'Western Operational Pickets', col2: 'T-90 Air Filter Cartridges', col3: '12 DOS', col4: '4 Days to Threshold', col5: 'HIGH RISK', col6: 'COD Delhi Cantt Express Air', col7: 'Verified', isGood: false },
+        { col1: 'Uri Border Echelon', sub: 'Line of Control Posts', col2: 'Medical Oxygen Cylinders', col3: '16 DOS', col4: '6 Days to Threshold', col5: 'MEDIUM RISK', col6: '92 Base Hospital Refill Sortie', col7: 'Verified', isGood: true },
+        { col1: 'Sikkim North Sector', sub: 'High Elevation Pickets', col2: 'Extreme Cold Parka Suits', col3: '15 DOS', col4: '5 Days to Threshold', col5: 'HIGH RISK', col6: 'Advance Ordnance Depot Dump', col7: 'Verified', isGood: false }
+      ];
+    }
+
+    // 8. REDISTRIBUTION SAVINGS
+    if (cat.includes('redistribution') || cat.includes('saving')) {
+      return [
+        { col1: 'COD Pathankot', sub: 'Northern Command Central Depot', col2: '14 Rajput (Mechanised)', col3: '40,000L Sub-Zero HSD', col4: '32 Tonnes', col5: '₹18.4 Lakhs Saved', col6: 'RV-14R-7104-REDIST', col7: 'Verified', isGood: true },
+        { col1: 'COD Jabalpur', sub: 'Heavy Artillery Central Arsenal', col2: '17 Mountain Artillery', col3: '155mm HE Shell Assemblies', col4: '45 Tonnes', col5: '₹34.2 Lakhs Saved', col6: 'RV-17A-8821-REDIST', col7: 'Verified', isGood: true },
+        { col1: 'FSD Jammu', sub: 'Forward Subsistence Reserve', col2: '3 Grenadiers (Infantry)', col3: 'Caloric Combat Meal Packs', col4: '24 Tonnes', col5: '₹12.8 Lakhs Saved', col6: 'RV-3G-9902-REDIST', col7: 'Verified', isGood: true },
+        { col1: 'COD Agra', sub: 'Central Armored Spares Base', col2: '7 Cavalry (Armoured)', col3: 'T-90 Hydraulic Valve Kits', col4: '8 Tonnes', col5: '₹42.5 Lakhs Saved', col6: 'RV-7C-4412-REDIST', col7: 'Verified', isGood: true },
+        { col1: 'COD Delhi Cantt', sub: 'Strategic Signals Directorate', col2: '9 Para (Special Forces)', col3: 'SATCOM Encryption Terminals', col4: '4 Tonnes', col5: '₹26.0 Lakhs Saved', col6: 'RV-9P-1123-REDIST', col7: 'Verified', isGood: true },
+        { col1: '224 ABOD Pathankot', sub: 'Forward Cold Weather Depot', col2: '120 Forward ASC Bn', col3: 'Extreme Cold Boot Kits', col4: '18 Tonnes', col5: '₹14.6 Lakhs Saved', col6: 'RV-120-6674-REDIST', col7: 'Verified', isGood: true }
+      ];
+    }
+
+    // 9. DEFAULT: NATIONAL READINESS
     if (d.includes('7 days')) {
       return [
-        {
-          theater: 'Northern Command (Udhampur)',
-          subSector: '14, 15, 16 Corps • Active Glacier Resupply',
-          formations: '418 Units',
-          readiness: '98.4%',
-          readinessVal: 98.4,
-          rationsDos: '185 DOS',
-          polDos: '64 DOS',
-          munitionsDof: '44 DOF',
-          auditStatus: 'Verified'
-        },
-        {
-          theater: 'Eastern Command (Kolkata)',
-          subSector: '3, 4, 33 Corps • Sela Transit Axis',
-          formations: '382 Units',
-          readiness: '96.7%',
-          readinessVal: 96.7,
-          rationsDos: '154 DOS',
-          polDos: '61 DOS',
-          munitionsDof: '42 DOF',
-          auditStatus: 'Verified'
-        },
-        {
-          theater: 'Western Command (Chandimandir)',
-          subSector: '2, 9, 11 Corps • Strike Columns',
-          formations: '258 Units',
-          readiness: '98.8%',
-          readinessVal: 98.8,
-          rationsDos: '124 DOS',
-          polDos: '73 DOS',
-          munitionsDof: '46 DOF',
-          auditStatus: 'Verified'
-        },
-        {
-          theater: 'Southern Command (Pune)',
-          subSector: '11, 12 Corps • Desert Strike Sector',
-          formations: '178 Units',
-          readiness: '96.5%',
-          readinessVal: 96.5,
-          rationsDos: '92 DOS',
-          polDos: '67 DOS',
-          munitionsDof: '39 DOF',
-          auditStatus: 'Verified'
-        },
-        {
-          theater: 'South Western Command (Jaipur)',
-          subSector: '1 Corps • Pivot Maneuver Force',
-          formations: '208 Units',
-          readiness: '97.9%',
-          readinessVal: 97.9,
-          rationsDos: '114 DOS',
-          polDos: '70 DOS',
-          munitionsDof: '45 DOF',
-          auditStatus: 'Verified'
-        },
-        {
-          theater: 'Central Command (Lucknow)',
-          subSector: 'Central Strategic Depots & Surya Axis',
-          formations: '188 Units',
-          readiness: '97.2%',
-          readinessVal: 97.2,
-          rationsDos: '144 DOS',
-          polDos: '62 DOS',
-          munitionsDof: '40 DOF',
-          auditStatus: 'Verified'
-        }
+        { col1: 'Northern Command (Udhampur)', sub: '14, 15, 16 Corps • Active Glacier Resupply', col2: '418 Units', col3: '98.4%', col4: '185 DOS', col5: '64 DOS', col6: '44 DOF', col7: 'Verified', isGood: true },
+        { col1: 'Eastern Command (Kolkata)', sub: '3, 4, 33 Corps • Sela Transit Axis', col2: '382 Units', col3: '96.7%', col4: '154 DOS', col5: '61 DOS', col6: '42 DOF', col7: 'Verified', isGood: true },
+        { col1: 'Western Command (Chandimandir)', sub: '2, 9, 11 Corps • Strike Columns', col2: '258 Units', col3: '98.8%', col4: '124 DOS', col5: '73 DOS', col6: '46 DOF', col7: 'Verified', isGood: true },
+        { col1: 'Southern Command (Pune)', sub: '11, 12 Corps • Desert Strike Sector', col2: '178 Units', col3: '96.5%', col4: '92 DOS', col5: '67 DOS', col6: '39 DOF', col7: 'Verified', isGood: true },
+        { col1: 'South Western Command (Jaipur)', sub: '1 Corps • Pivot Maneuver Force', col2: '208 Units', col3: '97.9%', col4: '114 DOS', col5: '70 DOS', col6: '45 DOF', col7: 'Verified', isGood: true },
+        { col1: 'Central Command (Lucknow)', sub: 'Central Strategic Depots & Surya Axis', col2: '188 Units', col3: '97.2%', col4: '144 DOS', col5: '62 DOS', col6: '40 DOF', col7: 'Verified', isGood: true }
       ];
     }
 
-    // 2. "Quarter Q3 2026" (Pre-Winter Advance Stocking Surge)
     if (d.includes('quarter') || d.includes('q3')) {
       return [
-        {
-          theater: 'Northern Command (Udhampur)',
-          subSector: '14, 15, 16 Corps • Peak Winter Stock Dumps',
-          formations: '428 Units',
-          readiness: '95.2%',
-          readinessVal: 95.2,
-          rationsDos: '215 DOS',
-          polDos: '84 DOS',
-          munitionsDof: '52 DOF',
-          auditStatus: 'Verified'
-        },
-        {
-          theater: 'Eastern Command (Kolkata)',
-          subSector: '3, 4, 33 Corps • Advance Forward Depots',
-          formations: '388 Units',
-          readiness: '94.6%',
-          readinessVal: 94.6,
-          rationsDos: '178 DOS',
-          polDos: '76 DOS',
-          munitionsDof: '48 DOF',
-          auditStatus: 'Verified'
-        },
-        {
-          theater: 'Western Command (Chandimandir)',
-          subSector: '2, 9, 11 Corps • Pre-Exercise Build-Up',
-          formations: '264 Units',
-          readiness: '97.6%',
-          readinessVal: 97.6,
-          rationsDos: '128 DOS',
-          polDos: '68 DOS',
-          munitionsDof: '46 DOF',
-          auditStatus: 'Verified'
-        },
-        {
-          theater: 'Southern Command (Pune)',
-          subSector: '11, 12 Corps • Peninsular & Maritime Hubs',
-          formations: '182 Units',
-          readiness: '95.4%',
-          readinessVal: 95.4,
-          rationsDos: '96 DOS',
-          polDos: '62 DOS',
-          munitionsDof: '36 DOF',
-          auditStatus: 'Verified'
-        },
-        {
-          theater: 'South Western Command (Jaipur)',
-          subSector: '1 Corps • Heavy Armor Reserves',
-          formations: '212 Units',
-          readiness: '96.8%',
-          readinessVal: 96.8,
-          rationsDos: '115 DOS',
-          polDos: '65 DOS',
-          munitionsDof: '42 DOF',
-          auditStatus: 'Verified'
-        },
-        {
-          theater: 'Central Command (Lucknow)',
-          subSector: 'Central Feeder Ordnance Depots',
-          formations: '194 Units',
-          readiness: '96.1%',
-          readinessVal: 96.1,
-          rationsDos: '152 DOS',
-          polDos: '64 DOS',
-          munitionsDof: '40 DOF',
-          auditStatus: 'Verified'
-        }
+        { col1: 'Northern Command (Udhampur)', sub: '14, 15, 16 Corps • Peak Winter Stock Dumps', col2: '428 Units', col3: '95.2%', col4: '215 DOS', col5: '84 DOS', col6: '52 DOF', col7: 'Verified', isGood: true },
+        { col1: 'Eastern Command (Kolkata)', sub: '3, 4, 33 Corps • Advance Forward Depots', col2: '388 Units', col3: '94.6%', col4: '178 DOS', col5: '76 DOS', col6: '48 DOF', col7: 'Verified', isGood: true },
+        { col1: 'Western Command (Chandimandir)', sub: '2, 9, 11 Corps • Pre-Exercise Build-Up', col2: '264 Units', col3: '97.6%', col4: '128 DOS', col5: '68 DOS', col6: '46 DOF', col7: 'Verified', isGood: true },
+        { col1: 'Southern Command (Pune)', sub: '11, 12 Corps • Peninsular & Maritime Hubs', col2: '182 Units', col3: '95.4%', col4: '96 DOS', col5: '62 DOS', col6: '36 DOF', col7: 'Verified', isGood: true },
+        { col1: 'South Western Command (Jaipur)', sub: '1 Corps • Heavy Armor Reserves', col2: '212 Units', col3: '96.8%', col4: '115 DOS', col5: '65 DOS', col6: '42 DOF', col7: 'Verified', isGood: true },
+        { col1: 'Central Command (Lucknow)', sub: 'Central Feeder Ordnance Depots', col2: '194 Units', col3: '96.1%', col4: '152 DOS', col5: '64 DOS', col6: '40 DOF', col7: 'Verified', isGood: true }
       ];
     }
 
-    // 3. "Full Year 2025-26" (Annual Strategic Baseline)
     if (d.includes('year') || d.includes('2025-26')) {
       return [
-        {
-          theater: 'Northern Command (Udhampur)',
-          subSector: '14, 15, 16 Corps • Annual Harmonic Mean',
-          formations: '415 Units',
-          readiness: '94.8%',
-          readinessVal: 94.8,
-          rationsDos: '165 DOS',
-          polDos: '54 DOS',
-          munitionsDof: '38 DOF',
-          auditStatus: 'Verified'
-        },
-        {
-          theater: 'Eastern Command (Kolkata)',
-          subSector: '3, 4, 33 Corps • Monsoon & Winter Average',
-          formations: '375 Units',
-          readiness: '93.9%',
-          readinessVal: 93.9,
-          rationsDos: '138 DOS',
-          polDos: '51 DOS',
-          munitionsDof: '36 DOF',
-          auditStatus: 'Verified'
-        },
-        {
-          theater: 'Western Command (Chandimandir)',
-          subSector: '2, 9, 11 Corps • Annual Cycle Baseline',
-          formations: '255 Units',
-          readiness: '96.8%',
-          readinessVal: 96.8,
-          rationsDos: '112 DOS',
-          polDos: '64 DOS',
-          munitionsDof: '42 DOF',
-          auditStatus: 'Verified'
-        },
-        {
-          theater: 'Southern Command (Pune)',
-          subSector: '11, 12 Corps • Southern Annual Baseline',
-          formations: '175 Units',
-          readiness: '94.5%',
-          readinessVal: 94.5,
-          rationsDos: '82 DOS',
-          polDos: '58 DOS',
-          munitionsDof: '35 DOF',
-          auditStatus: 'Verified'
-        },
-        {
-          theater: 'South Western Command (Jaipur)',
-          subSector: '1 Corps • Desert Training Cycle',
-          formations: '205 Units',
-          readiness: '95.8%',
-          readinessVal: 95.8,
-          rationsDos: '102 DOS',
-          polDos: '61 DOS',
-          munitionsDof: '40 DOF',
-          auditStatus: 'Verified'
-        },
-        {
-          theater: 'Central Command (Lucknow)',
-          subSector: 'Surya Command & Ordnance Depots',
-          formations: '185 Units',
-          readiness: '95.2%',
-          readinessVal: 95.2,
-          rationsDos: '128 DOS',
-          polDos: '55 DOS',
-          munitionsDof: '37 DOF',
-          auditStatus: 'Verified'
-        }
+        { col1: 'Northern Command (Udhampur)', sub: '14, 15, 16 Corps • Annual Harmonic Mean', col2: '415 Units', col3: '94.8%', col4: '165 DOS', col5: '54 DOS', col6: '38 DOF', col7: 'Verified', isGood: true },
+        { col1: 'Eastern Command (Kolkata)', sub: '3, 4, 33 Corps • Monsoon & Winter Average', col2: '375 Units', col3: '93.9%', col4: '138 DOS', col5: '51 DOS', col6: '36 DOF', col7: 'Verified', isGood: true },
+        { col1: 'Western Command (Chandimandir)', sub: '2, 9, 11 Corps • Annual Cycle Baseline', col2: '255 Units', col3: '96.8%', col4: '112 DOS', col5: '64 DOS', col6: '42 DOF', col7: 'Verified', isGood: true },
+        { col1: 'Southern Command (Pune)', sub: '11, 12 Corps • Southern Annual Baseline', col2: '175 Units', col3: '94.5%', col4: '82 DOS', col5: '58 DOS', col6: '35 DOF', col7: 'Verified', isGood: true },
+        { col1: 'South Western Command (Jaipur)', sub: '1 Corps • Desert Training Cycle', col2: '205 Units', col3: '95.8%', col4: '102 DOS', col5: '61 DOS', col6: '40 DOF', col7: 'Verified', isGood: true },
+        { col1: 'Central Command (Lucknow)', sub: 'Surya Command & Ordnance Depots', col2: '185 Units', col3: '95.2%', col4: '128 DOS', col5: '55 DOS', col6: '37 DOF', col7: 'Verified', isGood: true }
       ];
     }
 
-    // 4. Default: "Last 30 Days"
+    // Default: Last 30 Days
     return [
-      {
-        theater: 'Northern Command (Udhampur)',
-        subSector: '14, 15, 16 Corps • Siachen/Ladakh Axis',
-        formations: '420 Units',
-        readiness: '97.2%',
-        readinessVal: 97.2,
-        rationsDos: '180 DOS',
-        polDos: '62 DOS',
-        munitionsDof: '42 DOF',
-        auditStatus: 'Verified'
-      },
-      {
-        theater: 'Eastern Command (Kolkata)',
-        subSector: '3, 4, 33 Corps • LAC Mountain Formations',
-        formations: '380 Units',
-        readiness: '95.8%',
-        readinessVal: 95.8,
-        rationsDos: '150 DOS',
-        polDos: '58 DOS',
-        munitionsDof: '40 DOF',
-        auditStatus: 'Verified'
-      },
-      {
-        theater: 'Western Command (Chandimandir)',
-        subSector: '2, 9, 11 Corps • Strike & Plains Echelons',
-        formations: '260 Units',
-        readiness: '98.1%',
-        readinessVal: 98.1,
-        rationsDos: '120 DOS',
-        polDos: '70 DOS',
-        munitionsDof: '45 DOF',
-        auditStatus: 'Verified'
-      },
-      {
-        theater: 'Southern Command (Pune)',
-        subSector: '11, 12 Corps • Desert Strike & Maritime Axis',
-        formations: '180 Units',
-        readiness: '96.0%',
-        readinessVal: 96.0,
-        rationsDos: '90 DOS',
-        polDos: '65 DOS',
-        munitionsDof: '38 DOF',
-        auditStatus: 'Verified'
-      },
-      {
-        theater: 'South Western Command (Jaipur)',
-        subSector: '1 Corps (Pivot Strike) • Sapta Shakti',
-        formations: '210 Units',
-        readiness: '97.4%',
-        readinessVal: 97.4,
-        rationsDos: '110 DOS',
-        polDos: '68 DOS',
-        munitionsDof: '44 DOF',
-        auditStatus: 'Verified'
-      },
-      {
-        theater: 'Central Command (Lucknow)',
-        subSector: 'Central Ordnance Depots & Surya Sector',
-        formations: '190 Units',
-        readiness: '96.9%',
-        readinessVal: 96.9,
-        rationsDos: '140 DOS',
-        polDos: '60 DOS',
-        munitionsDof: '39 DOF',
-        auditStatus: 'Verified'
-      }
+      { col1: 'Northern Command (Udhampur)', sub: '14, 15, 16 Corps • Siachen/Ladakh Axis', col2: '420 Units', col3: '97.2%', col4: '180 DOS', col5: '62 DOS', col6: '42 DOF', col7: 'Verified', isGood: true },
+      { col1: 'Eastern Command (Kolkata)', sub: '3, 4, 33 Corps • LAC Mountain Formations', col2: '380 Units', col3: '95.8%', col4: '150 DOS', col5: '58 DOS', col6: '40 DOF', col7: 'Verified', isGood: true },
+      { col1: 'Western Command (Chandimandir)', sub: '2, 9, 11 Corps • Strike & Plains Echelons', col2: '260 Units', col3: '98.1%', col4: '120 DOS', col5: '70 DOS', col6: '45 DOF', col7: 'Verified', isGood: true },
+      { col1: 'Southern Command (Pune)', sub: '11, 12 Corps • Desert Strike & Maritime Axis', col2: '180 Units', col3: '96.0%', col4: '90 DOS', col5: '65 DOS', col6: '38 DOF', col7: 'Verified', isGood: true },
+      { col1: 'South Western Command (Jaipur)', sub: '1 Corps (Pivot Strike) • Sapta Shakti', col2: '210 Units', col3: '97.4%', col4: '110 DOS', col5: '68 DOS', col6: '44 DOF', col7: 'Verified', isGood: true },
+      { col1: 'Central Command (Lucknow)', sub: 'Central Ordnance Depots & Surya Sector', col2: '190 Units', col3: '96.9%', col4: '140 DOS', col5: '60 DOS', col6: '39 DOF', col7: 'Verified', isGood: true }
     ];
+  }
+
+  getReportAggregateRow() {
+    const cat = (this.reportCategory || '').toLowerCase();
+    const d = (this.reportDateRange || '').toLowerCase();
+
+    if (cat.includes('inventory')) {
+      return { col1: 'National Ordnance Stockpiles', sub: '6 Central Ordnance Depots Audited', col2: '2,450,000 Items', col3: 'Full WWR Met', col4: '135 DOS Avg', col5: 'Surplus', col6: 'STRATEGIC STABILITY', col7: 'All Audited' };
+    }
+    if (cat.includes('convoy') || cat.includes('efficiency')) {
+      return { col1: 'National Road Movement', sub: '38 Active Military Columns Tracked', col2: '158 Vehicles', col3: 'Multimodal Road/Rail', col4: '1,470 Tonnes', col5: '98.5% Schedule', col6: '97.8% Fleet Avg', col7: 'All Audited' };
+    }
+    if (cat.includes('demand') || cat.includes('projection')) {
+      return { col1: 'National Neural Forecast', sub: 'ASCON Telemetry Grid Convergence', col2: 'All 9 Theaters', col3: '15,020 Aggregate Load', col4: '+48.6% Mean Surge', col5: '120 Days Mean', col6: '97.8% Confidence', col7: 'All Audited' };
+    }
+    if (cat.includes('unit')) {
+      return { col1: 'National Combat Formations', sub: '1,725 Active Battalions Integrated', col2: '1,280,000 Pax', col3: '97.1% Mean', col4: 'COMBAT READY', col5: 'DEFCON 1', col6: '99.8% Uptime', col7: 'All Audited' };
+    }
+    if (cat.includes('route') || cat.includes('risk')) {
+      return { col1: 'National Border Corridors', sub: '6 Primary Transit Axes Monitored', col2: '94.2% Operational', col3: '305 Convoys/Day', col4: 'C4ISR Monitored', col5: 'BRO Winter Plan Active', col6: 'ALL CLEAR', col7: 'All Audited' };
+    }
+    if (cat.includes('weather')) {
+      return { col1: 'National Mountain Grid', sub: '6 Automated Telemetry Posts', col2: 'Regional Highlands', col3: '-16.2°C Regional Mean', col4: '70 cm Total Accumulation', col5: '38.3 km/h Mean', col6: 'BRO Clearance Active', col7: 'All Audited' };
+    }
+    if (cat.includes('stockout')) {
+      return { col1: 'National Stockout Prevention', sub: '6 Forward Sensitive Sectors', col2: 'All Echelons', col3: '16.2 DOS Average', col4: 'Continuous ASCON Telemetry', col5: 'EARLY INTERVENTION', col6: 'Zero Stockouts Logged', col7: 'All Audited' };
+    }
+    if (cat.includes('redistribution') || cat.includes('saving')) {
+      return { col1: 'National Dynamic Redistribution', sub: '6 Lateral Strategic Re-allocations', col2: 'Multi-Theater Net', col3: '131 Tonnes Total Relocated', col4: 'Zero Fresh Procurement', col5: '₹1.485 Crores Saved', col6: 'Multi-Depot Reconciled', col7: 'All Audited' };
+    }
+
+    if (d.includes('7 days')) {
+      return { col1: 'National Strategic Aggregate', sub: 'Tactical High-Tempo Window', col2: '1,712 Units', col3: '97.6%', col4: '139 DOS Avg', col5: '66 DOS Avg', col6: '43 DOF Avg', col7: 'All Audited' };
+    } else if (d.includes('quarter') || d.includes('q3')) {
+      return { col1: 'National Strategic Aggregate', sub: 'Pre-Winter Surge Stockpile', col2: '1,756 Units', col3: '95.9%', col4: '147 DOS Avg', col5: '70 DOS Avg', col6: '44 DOF Avg', col7: 'All Audited' };
+    } else if (d.includes('year') || d.includes('2025-26')) {
+      return { col1: 'National Strategic Aggregate', sub: 'Full FY Annual Fiscal Average', col2: '1,700 Units', col3: '95.2%', col4: '121 DOS Avg', col5: '57 DOS Avg', col6: '38 DOF Avg', col7: 'All Audited' };
+    }
+
+    return { col1: 'National Strategic Aggregate', sub: 'National Standard Baseline', col2: '1,725 Units', col3: '97.1%', col4: '135 DOS Avg', col5: '64 DOS Avg', col6: '41 DOF Avg', col7: 'All Audited' };
   }
 
   // 1.10 Settings State
@@ -801,12 +864,44 @@ export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestr
     // Load persisted alerts & authorizations directly from PostgreSQL
     this.logisticsService.fetchAlerts();
 
-    // Read route params
-    this.route.params.subscribe(params => {
-      if (params['tab']) {
-        this.setTab(params['tab'] as CommandTab, false);
+    // Initialize reports cached dataset
+    this.updateReportData();
+
+    // Read route params synchronously first, with url fallback
+    const initialParam = this.route.snapshot.paramMap.get('tab');
+    this.activeTab = this.normalizeTab(initialParam);
+
+    // Subscribe to router navigation events
+    this.router.events.pipe(
+      filter((e): e is NavigationEnd => e instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      const parts = event.urlAfterRedirects.split('?')[0].split('/').filter(Boolean);
+      if (parts.length >= 2 && parts[0] === 'command') {
+        const nextTab = this.normalizeTab(parts[1]);
+        if (this.activeTab !== nextTab) {
+          this.setTab(nextTab, false);
+        }
       }
+      this.cdr.markForCheck();
     });
+
+    // Subscribe to route param changes
+    this.route.paramMap.subscribe(params => {
+      const tabParam = params.get('tab');
+      if (tabParam) {
+        const normalized = this.normalizeTab(tabParam);
+        if (this.activeTab !== normalized) {
+          this.setTab(normalized, false);
+        }
+      }
+      this.cdr.markForCheck();
+    });
+
+    if (this.activeTab === 'forecasting') {
+      this.fetchDemandCurve();
+    } else if (this.activeTab === 'reports') {
+      this.updateReportData();
+    }
 
     // Run initial simulation calculation
     this.runScenarioSimulation();
@@ -852,12 +947,13 @@ export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   setTab(tab: CommandTab, navigate = true) {
-    this.activeTab = tab;
+    const normalized = this.normalizeTab(tab);
+    this.activeTab = normalized;
     this.actionFeedbackMsg = '';
     if (navigate) {
-      this.router.navigate(['/command', tab]);
+      this.router.navigate(['/command', normalized]);
     }
-    if (tab === 'dashboard') {
+    if (normalized === 'dashboard') {
       setTimeout(() => {
         if (!this.map) {
           this.initLeafletMap();
@@ -865,7 +961,12 @@ export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestr
           this.map.invalidateSize();
         }
       }, 200);
+    } else if (normalized === 'forecasting') {
+      this.fetchDemandCurve();
+    } else if (normalized === 'reports') {
+      this.updateReportData();
     }
+    this.cdr.markForCheck();
   }
 
   isExtremeArea(unit: ArmyUnit): boolean {

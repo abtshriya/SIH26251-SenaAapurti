@@ -18,7 +18,12 @@ from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
 
 from app.api.routes_inventory import get_db_engine, memory_store
-from app.api.report_generator import generate_defense_readiness_pdf, generate_defense_readiness_csv
+from app.api.report_generator import (
+    generate_defense_readiness_pdf,
+    generate_defense_readiness_csv,
+    generate_unit_ledger_pdf,
+    generate_unit_ledger_csv
+)
 
 logger = logging.getLogger("sena_aapurti.command")
 
@@ -817,6 +822,106 @@ def export_readiness_csv(
         headers={
             "Content-Disposition": f"attachment; filename=\"{filename}\"",
             "X-Audit-Ledger-Hash": latest_hash
+        }
+    )
+
+
+@router.get("/unit-reports/export-pdf")
+def export_unit_ledger_pdf(
+    report_id: str = Query(default="REP-2026-10-06-A"),
+    title: str = Query(default="Daily Logistics & Fuel Balance Log"),
+    category: str = Query(default="POL & Consumption"),
+    period: str = Query(default="Today (06 Oct 2026)"),
+    officer: str = Query(default="Major Amit Sharma (QM)"),
+    classification: str = Query(default="RESTRICTED"),
+    unit_name: str = Query(default="14 RAJPUT (MECHANISED)")
+):
+    """
+    Renders an official, certified Regimental Logistics Ledger PDF with Ministry &
+    Regimental rubber stamps, Ashok Stambh emblem, classified watermark, and SHA-256 proof.
+    """
+    engine = get_db_engine()
+    latest_hash = "9039aed288926a924a3db52466ea39834e82b20b9ba42695081894857c64f4da"
+    if engine is not None:
+        try:
+            with engine.connect() as conn:
+                q = text("SELECT current_hash FROM tamper_proof_audit_ledger ORDER BY log_id DESC LIMIT 1")
+                row = conn.execute(q).mappings().one_or_none()
+                if row and row["current_hash"]:
+                    latest_hash = str(row["current_hash"]).strip()
+        except Exception as e:
+            logger.warning("Could not read latest ledger hash for unit PDF report: %s", e)
+
+    pdf_bytes = generate_unit_ledger_pdf(
+        report_id=report_id,
+        title=title,
+        category=category,
+        period=period,
+        authorizing_officer=officer,
+        classification=classification,
+        unit_name=unit_name,
+        station="Leh, Ladakh (14 Corps - Fire & Fury)",
+        audit_hash=latest_hash
+    )
+
+    clean_id = report_id.replace(" ", "_")
+    filename = f"{unit_name.replace(' ', '_')}_{clean_id}_{datetime.now().strftime('%Y%m%d')}.pdf"
+    return Response(
+        content=pdf_bytes,
+        media_type="application/pdf",
+        headers={
+            "Content-Disposition": f"attachment; filename=\"{filename}\"",
+            "X-Audit-Ledger-Hash": latest_hash,
+            "Access-Control-Expose-Headers": "Content-Disposition, X-Audit-Ledger-Hash"
+        }
+    )
+
+
+@router.get("/unit-reports/export-csv")
+def export_unit_ledger_csv(
+    report_id: str = Query(default="REP-2026-10-06-A"),
+    title: str = Query(default="Daily Logistics & Fuel Balance Log"),
+    category: str = Query(default="POL & Consumption"),
+    period: str = Query(default="Today (06 Oct 2026)"),
+    officer: str = Query(default="Major Amit Sharma (QM)"),
+    classification: str = Query(default="RESTRICTED"),
+    unit_name: str = Query(default="14 RAJPUT (MECHANISED)")
+):
+    """
+    Renders an official CSV statement for a regimental unit ledger.
+    """
+    engine = get_db_engine()
+    latest_hash = "9039aed288926a924a3db52466ea39834e82b20b9ba42695081894857c64f4da"
+    if engine is not None:
+        try:
+            with engine.connect() as conn:
+                q = text("SELECT current_hash FROM tamper_proof_audit_ledger ORDER BY log_id DESC LIMIT 1")
+                row = conn.execute(q).mappings().one_or_none()
+                if row and row["current_hash"]:
+                    latest_hash = str(row["current_hash"]).strip()
+        except Exception as e:
+            logger.warning("Could not read latest ledger hash for unit CSV report: %s", e)
+
+    csv_text = generate_unit_ledger_csv(
+        report_id=report_id,
+        title=title,
+        category=category,
+        period=period,
+        authorizing_officer=officer,
+        classification=classification,
+        unit_name=unit_name,
+        audit_hash=latest_hash
+    )
+
+    clean_id = report_id.replace(" ", "_")
+    filename = f"{unit_name.replace(' ', '_')}_{clean_id}_{datetime.now().strftime('%Y%m%d')}.csv"
+    return Response(
+        content=csv_text,
+        media_type="text/csv",
+        headers={
+            "Content-Disposition": f"attachment; filename=\"{filename}\"",
+            "X-Audit-Ledger-Hash": latest_hash,
+            "Access-Control-Expose-Headers": "Content-Disposition, X-Audit-Ledger-Hash"
         }
     )
 

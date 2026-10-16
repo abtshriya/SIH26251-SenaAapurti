@@ -1005,19 +1005,45 @@ export class UnitDashboardComponent implements OnInit {
 
   downloadReportCSV(rep?: any) {
     const filename = rep ? rep.id : `${this.unitDbService.selectedUnit().name.replace(/[^a-zA-Z0-9]/g, '_')}_Audit_Ledger`;
-    const items = rep ? [rep] : this.reportsList;
-    const header = ['Report ID', 'Document Title', 'Category', 'Period', 'Authorizing Officer', 'Classification', 'Audit Status', 'Records', 'Size'];
-    const rows = items.map(r => [r.id, `"${r.title}"`, `"${r.category}"`, `"${r.period}"`, `"${r.authorizingOfficer}"`, r.classification, `"${r.status}"`, r.recordsCount, r.fileSize]);
-    const csvContent = 'data:text/csv;charset=utf-8,' + [header.join(','), ...rows.map(e => e.join(','))].join('\n');
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement('a');
-    link.setAttribute('href', encodedUri);
-    link.setAttribute('download', `${filename}_${new Date().toISOString().split('T')[0]}.csv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    this.reportDownloadNotice = `Downloaded ${filename}.csv with official DGOS digital ledger seal.`;
-    setTimeout(() => this.reportDownloadNotice = '', 6000);
+    const reportId = rep ? rep.id : 'REP-2026-10-06-A';
+    const unitName = this.unitDbService.selectedUnit().name || '14 RAJPUT (MECHANISED)';
+    const period = rep ? rep.period : this.reportDateRange;
+    const classification = rep ? rep.classification : 'CONFIDENTIAL';
+
+    this.reportDownloadNotice = `Compiling official CSV ledger for "${rep ? rep.title : this.reportType}"...`;
+    this.http.get(`${this.API_BASE}/unit-reports/export-csv`, {
+      params: { report_id: reportId, unit_name: unitName, period: period, classification: classification },
+      responseType: 'blob'
+    }).pipe(
+      catchError(() => {
+        // Fallback to local CSV generation if backend is unavailable
+        const items = rep ? [rep] : this.reportsList;
+        const header = ['Report ID', 'Document Title', 'Category', 'Period', 'Authorizing Officer', 'Classification', 'Audit Status', 'Records', 'Size'];
+        const rows = items.map(r => [r.id, `"${r.title}"`, `"${r.category}"`, `"${r.period}"`, `"${r.authorizingOfficer}"`, r.classification, `"${r.status}"`, r.recordsCount, r.fileSize]);
+        const csvContent = 'data:text/csv;charset=utf-8,' + [header.join(','), ...rows.map(e => e.join(','))].join('\n');
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement('a');
+        link.setAttribute('href', encodedUri);
+        link.setAttribute('download', `${filename}_${new Date().toISOString().split('T')[0]}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        return of(null);
+      })
+    ).subscribe(blob => {
+      if (blob) {
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `${reportId}_${unitName.replace(/[^a-zA-Z0-9]/g, '_')}.csv`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      }
+      this.reportDownloadNotice = `Downloaded ${filename}.csv with official DGOS digital ledger seal.`;
+      setTimeout(() => this.reportDownloadNotice = '', 6000);
+    });
   }
 
   // 2.9 Terminal Settings State
@@ -1178,12 +1204,50 @@ export class UnitDashboardComponent implements OnInit {
       this.downloadReportCSV(rep);
       return;
     }
+
+    const unitName = this.unitDbService.selectedUnit().name || '14 RAJPUT (MECHANISED)';
+    const reportId = rep ? rep.id : 'REP-2026-10-06-A';
     const title = rep ? rep.title : this.reportType;
-    this.reportDownloadNotice = `Generating unit PDF report for "${title}" (${this.reportDateRange}). Verification stamp appended.`;
-    setTimeout(() => {
-      window.print();
-    }, 400);
-    setTimeout(() => this.reportDownloadNotice = '', 6000);
+    const period = rep ? rep.period : this.reportDateRange;
+    const classification = rep ? rep.classification : 'CONFIDENTIAL';
+    const officer = rep ? rep.authorizingOfficer : 'Lt. Col. R. Rathore, QM';
+
+    this.reportDownloadNotice = `Generating Ministry & Regimental stamped ReportLab PDF for "${title}"...`;
+    
+    this.http.get(`${this.API_BASE}/unit-reports/export-pdf`, {
+      params: {
+        report_id: reportId,
+        unit_name: unitName,
+        corps: '14 CORPS - LEH (FIRE & FURY)',
+        period: period,
+        classification: classification,
+        officer: officer
+      },
+      responseType: 'blob'
+    }).pipe(
+      catchError((err) => {
+        console.error('Failed to generate ReportLab PDF', err);
+        this.reportDownloadNotice = 'Error connecting to ReportLab PDF generator service. Falling back to print view.';
+        setTimeout(() => {
+          window.print();
+          this.reportDownloadNotice = '';
+        }, 800);
+        return of(null);
+      })
+    ).subscribe(blob => {
+      if (blob) {
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `${reportId}_REGIMENTAL_LEDGER.pdf`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+        this.reportDownloadNotice = `Official Ministry & Regimental stamped PDF generated & downloaded (${reportId}).`;
+        setTimeout(() => this.reportDownloadNotice = '', 6000);
+      }
+    });
   }
 
   saveUnitSettings() {

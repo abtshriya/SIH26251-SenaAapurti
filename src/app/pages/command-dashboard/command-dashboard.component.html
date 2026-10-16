@@ -1148,7 +1148,43 @@
             <h2 class="module-title">1.4 Demand & Predictive Forecasting Engine</h2>
             <p class="module-subtitle">Machine learning neural network forecasting seasonal defense consumption</p>
           </div>
-          <span class="badge-gold">HORIZON: {{ forecastHorizon }}</span>
+          <div class="header-action-group">
+            <span *ngIf="forecastLoading" class="badge-blue">CALCULATING ML INFERENCE...</span>
+            <button type="button" class="btn-army-primary" (click)="authorizePreStockingBuffer()">
+              ❄ Authorize Pre-Winter Buffer Dispatch
+            </button>
+            <span class="badge-gold">HORIZON: {{ forecastHorizon }}</span>
+          </div>
+        </div>
+
+        <!-- PRE-STOCKING NOTIFICATION BANNER -->
+        <div *ngIf="preStockingSuccessMsg" class="alert-success-banner mt-2 mb-2">
+          {{ preStockingSuccessMsg }}
+        </div>
+
+        <!-- CATEGORY QUICK SELECT CHIPS -->
+        <div class="filter-strip card-surface mt-3" style="padding: 10px 16px; align-items: center;">
+          <span class="filter-label" style="margin-right: 8px; font-weight: 700; color: #d4af37;">QUICK CATEGORY:</span>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button type="button" class="btn-outline-army" [class.active]="forecastCategory.includes('III')" (click)="setForecastCategory('Class III (Sub-Zero POL & Arctic Aviation Fuel)')">
+              ⛽ POL & Arctic Fuel
+            </button>
+            <button type="button" class="btn-outline-army" [class.active]="forecastCategory.includes('Class I ')" (click)="setForecastCategory('Class I (Rations & Extreme Cold Subsistence)')">
+              🍞 Combat Rations
+            </button>
+            <button type="button" class="btn-outline-army" [class.active]="forecastCategory.includes('Class V')" (click)="setForecastCategory('Class V (Ammunition, Artillery Shells & ATGMs)')">
+              💣 Munitions & Shells
+            </button>
+            <button type="button" class="btn-outline-army" [class.active]="forecastCategory.includes('Class IX')" (click)="setForecastCategory('Class IX (T-90, BMP & High-Mobility Vehicle Spares)')">
+              ⚙ Vehicle & Armor Spares
+            </button>
+            <button type="button" class="btn-outline-army" [class.active]="forecastCategory.includes('VIII')" (click)="setForecastCategory('Class VIII (High-Altitude Medical & Oxygen Cannisters)')">
+              💉 High-Alt Medical & O2
+            </button>
+            <button type="button" class="btn-outline-army" [class.active]="forecastCategory.includes('Class II ')" (click)="setForecastCategory('Class II (Extreme Cold Weather Clothing - ECC)')">
+              🧥 ECC Winter Clothing
+            </button>
+          </div>
         </div>
 
         <!-- FILTERS -->
@@ -2098,7 +2134,7 @@
         <div class="filter-strip card-surface mt-3">
           <div class="filter-col">
             <label class="filter-label">Report Category</label>
-            <select [(ngModel)]="reportCategory" class="form-control-sm">
+            <select [(ngModel)]="reportCategory" (ngModelChange)="onReportCategoryChange()" class="form-control-sm">
               <option>National Readiness</option>
               <option>Unit Readiness</option>
               <option>Inventory Audit</option>
@@ -2112,7 +2148,7 @@
           </div>
           <div class="filter-col">
             <label class="filter-label">Date Range</label>
-            <select [(ngModel)]="reportDateRange" class="form-control-sm">
+            <select [(ngModel)]="reportDateRange" (ngModelChange)="onReportCategoryChange()" class="form-control-sm">
               <option>Last 7 Days</option>
               <option>Last 30 Days</option>
               <option>Quarter Q3 2026</option>
@@ -2126,14 +2162,14 @@
           <div class="flex-between">
             <div class="font-mono text-xs text-gold">
               <span class="live-clock-pulse"></span>
-              AUDIT WINDOW: <strong>{{ getReportSummary().window }}</strong>
+              AUDIT WINDOW: <strong>{{ reportSummary.window }}</strong>
             </div>
             <div class="text-xs text-green font-bold">
-              POSTURE: {{ getReportSummary().stockPosture }}
+              POSTURE: {{ reportSummary.stockPosture }}
             </div>
           </div>
           <div class="text-xs text-muted mt-1">
-            {{ getReportSummary().focus }}
+            {{ reportSummary.focus }}
           </div>
         </div>
 
@@ -2142,40 +2178,37 @@
           <table class="c2-table">
             <thead>
               <tr>
-                <th>Theater Command</th>
-                <th>Total Formations</th>
-                <th>Avg Readiness</th>
-                <th>Class I Rations</th>
-                <th>Class III POL</th>
-                <th>Class V Munitions</th>
-                <th>Audit Status</th>
+                <th *ngFor="let col of reportColumns">{{ col }}</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let row of getReportRows()">
+              <tr *ngFor="let row of reportRows">
                 <td>
-                  <strong>{{ row.theater }}</strong>
-                  <div class="text-xs text-muted">{{ row.subSector }}</div>
+                  <strong>{{ row.col1 }}</strong>
+                  <div class="text-xs text-muted">{{ row.sub }}</div>
                 </td>
-                <td class="text-nowrap">{{ row.formations }}</td>
-                <td class="font-bold text-nowrap" [class.text-green]="row.readinessVal >= 96" [class.text-amber]="row.readinessVal < 96">
-                  {{ row.readiness }}
+                <td class="text-nowrap">{{ row.col2 }}</td>
+                <td class="font-bold text-nowrap" [class.text-green]="row.isGood !== false" [class.text-amber]="row.isGood === false">
+                  {{ row.col3 }}
                 </td>
-                <td class="text-nowrap">{{ row.rationsDos }}</td>
-                <td class="text-nowrap">{{ row.polDos }}</td>
-                <td class="text-nowrap">{{ row.munitionsDof }}</td>
+                <td class="text-nowrap">{{ row.col4 }}</td>
+                <td class="text-nowrap">{{ row.col5 }}</td>
+                <td class="text-nowrap">{{ row.col6 }}</td>
                 <td class="text-nowrap">
-                  <span class="badge-success">{{ row.auditStatus }}</span>
+                  <span class="badge-success">{{ row.col7 }}</span>
                 </td>
               </tr>
               <tr class="bg-surface-elevated font-bold">
-                <td><strong>National Strategic Aggregate</strong></td>
-                <td>{{ getReportSummary().totalFormations }}</td>
-                <td class="text-green">{{ getReportSummary().meanReadiness }}</td>
-                <td>{{ getReportSummary().rationsAvg }}</td>
-                <td>{{ getReportSummary().polAvg }}</td>
-                <td>{{ getReportSummary().munitionsAvg }}</td>
-                <td><span class="badge-success">✓ Audited</span></td>
+                <td>
+                  <strong>{{ reportAggregateRow.col1 }}</strong>
+                  <div class="text-xs text-muted">{{ reportAggregateRow.sub }}</div>
+                </td>
+                <td class="text-nowrap">{{ reportAggregateRow.col2 }}</td>
+                <td class="text-green text-nowrap">{{ reportAggregateRow.col3 }}</td>
+                <td class="text-nowrap">{{ reportAggregateRow.col4 }}</td>
+                <td class="text-nowrap">{{ reportAggregateRow.col5 }}</td>
+                <td class="text-nowrap">{{ reportAggregateRow.col6 }}</td>
+                <td class="text-nowrap"><span class="badge-success">✓ {{ reportAggregateRow.col7 }}</span></td>
               </tr>
             </tbody>
           </table>

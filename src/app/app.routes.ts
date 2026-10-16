@@ -42,6 +42,10 @@ export const routes: Routes = [
 
   // 1. COMMAND / ADMIN DASHBOARD
   { path: 'command', redirectTo: 'command/dashboard', pathMatch: 'full' },
+  { path: 'command/demand-forecasting', redirectTo: 'command/forecasting', pathMatch: 'full' },
+  { path: 'command/demand', redirectTo: 'command/forecasting', pathMatch: 'full' },
+  { path: 'command/reports-and-analytics', redirectTo: 'command/reports', pathMatch: 'full' },
+  { path: 'command/analytics', redirectTo: 'command/reports', pathMatch: 'full' },
   { path: 'command/:tab', component: CommandDashboardComponent },
   { path: 'command-dashboard', redirectTo: 'command/dashboard', pathMatch: 'full' },
 

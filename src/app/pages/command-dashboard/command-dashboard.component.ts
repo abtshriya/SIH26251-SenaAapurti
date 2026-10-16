@@ -996,42 +996,48 @@ export class CommandDashboardComponent implements OnInit, AfterViewInit, OnDestr
     if (!this.map) return;
     this.currentBasemap = type;
     if (this.basemapTileLayer) {
-      this.map.removeLayer(this.basemapTileLayer);
+      try {
+        this.map.removeLayer(this.basemapTileLayer);
+      } catch (e) {}
+      this.basemapTileLayer = null;
     }
-
-    let tileUrl = '';
-    let maxZoom = 19;
-    let attribution = '';
-    let subdomains: string[] | string = 'abc';
 
     if (type === 'dark') {
-      // CartoDB Dark Matter: High-contrast military tactical dark backdrop with luminous roads & boundaries, zero API keys
-      tileUrl = 'https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png';
-      attribution = '&copy; OpenStreetMap contributors &copy; CARTO | ASCON Tactical Dark';
-      subdomains = 'abcd';
-      maxZoom = 20;
+      // Tactical Military Dark: High-contrast Esri World Dark Gray Base + Reference (boundaries, cities & transit axes)
+      // 100% Free, zero API key requirement, zero watermarks
+      const baseLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+        maxNativeZoom: 16,
+        maxZoom: 19,
+        attribution: 'Esri Dark Canvas | ASCON Tactical Dark'
+      });
+      const refLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
+        maxNativeZoom: 16,
+        maxZoom: 19,
+        attribution: ''
+      });
+      this.basemapTileLayer = L.layerGroup([baseLayer, refLayer]).addTo(this.map);
     } else if (type === 'imagery') {
       // Esri World Imagery: Real satellite terrain photography, zero API keys
-      tileUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
-      attribution = 'Esri World Imagery | High-Res Earth Observation';
-      maxZoom = 18;
+      this.basemapTileLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        maxNativeZoom: 18,
+        maxZoom: 19,
+        attribution: 'Esri World Imagery | High-Res Earth Observation'
+      }).addTo(this.map);
     } else if (type === 'dark_canvas') {
-      // Esri Dark Gray Canvas: High-contrast military tactical dark backdrop, zero API keys
-      tileUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}';
-      attribution = 'Esri Dark Canvas | ASCON Defense Command';
-      maxZoom = 16;
+      // Esri Dark Gray Canvas: Minimalist tactical dark backdrop without text clutter, zero API keys
+      this.basemapTileLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+        maxNativeZoom: 16,
+        maxZoom: 19,
+        attribution: 'Esri Dark Canvas | ASCON Defense Command'
+      }).addTo(this.map);
     } else {
-      // Esri World Topo Map: Rich mountain contours & relief elevations
-      tileUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}';
-      attribution = 'Esri World Topo Map | Strategic Logistics C2 Grid';
-      maxZoom = 18;
+      // Esri World Topo Map: Rich mountain contours & relief elevations, zero API keys
+      this.basemapTileLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+        maxNativeZoom: 18,
+        maxZoom: 19,
+        attribution: 'Esri World Topo Map | Strategic Logistics C2 Grid'
+      }).addTo(this.map);
     }
-
-    this.basemapTileLayer = L.tileLayer(tileUrl, {
-      maxZoom,
-      subdomains,
-      attribution
-    }).addTo(this.map);
   }
 
   initLeafletMap() {

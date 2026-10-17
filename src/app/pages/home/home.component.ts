@@ -382,6 +382,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   downloadManual(filename: string) {
-    alert(`Initiating secure download of official defense document: "${filename}". Verification hash matched.`);
+    const link = document.createElement('a');
+    link.href = `/downloads/${filename}`;
+    link.setAttribute('download', filename);
+    link.target = '_blank';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }
 }
+

@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -64,6 +65,14 @@ def create_application() -> FastAPI:
             "zero_trust_gateway": "ACTIVE",
             "cors_allowed_origin": settings.FRONTEND_ORIGIN,
         }
+
+    # Mount downloads directory if present
+    downloads_path = os.path.abspath(
+        os.path.join(os.path.dirname(__file__), "..", "..", "public", "downloads")
+    )
+    if os.path.isdir(downloads_path):
+        from fastapi.staticfiles import StaticFiles
+        app.mount("/downloads", StaticFiles(directory=downloads_path), name="downloads")
 
     return app
 

@@ -55,3 +55,7 @@ android-field-client/**/build/
 android-field-client/.kotlin/
 android-field-client/local.properties
 *.apk
+!public/downloads/*.apk
+
+
+

@@ -1,0 +1,16 @@
+[
+  "&nbsp;",
+  "Optical facial verification required for",
+  "before granting access to strategic logistics ledger.",
+  "SYS: ARMED // 468 LANDMARKS",
+  "ENC: SHA-256 / AES-GCM",
+  "ID: {{ serviceNo }}",
+  "✓ {{ faceEnrollSuccess }}",
+  "✓ Biometric Face ID Authenticated ({{ faceConfidence }}% Confidence). Launching Carrier 2FA...",
+  "ℹ {{ cameraError }}",
+  "Cryptographic OTP dispatched to authorized military handset for",
+  "ASCON SATCOM LINK #9914",
+  "\"Sena Aapurti Auth: Your Defense 2FA OTP is",
+  ". Valid for 5 min. Do not share.\"",
+  "Password"
+]

@@ -361,7 +361,7 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   updateCustomPhone() {
     if (!this.userCustomPhone || this.userCustomPhone.trim().length < 8) {
-      alert('Please enter a valid phone number (e.g. +91 98765 43210)');
+      alert(this.langService.t(''));
       return;
     }
     const sno = this.serviceNo || (this.portalMode === 'command' ? 'IC-48291X' : 'IC-71044A');
@@ -456,11 +456,11 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   submitUnitRegister() {
     if (!this.unitRegName || !this.unitRegId || !this.unitRegAuthOfficer || !this.unitRegEmail || !this.unitRegPassword) {
-      alert('Please fill in all required fields for Unit Registration.');
+      alert(this.langService.t(''));
       return;
     }
     if (this.unitRegPassword !== this.unitRegConfirmPassword) {
-      alert('Passwords do not match.');
+      alert(this.langService.t(''));
       return;
     }
     this.regSuccessMsg = `Unit Registration for "${this.unitRegName} (${this.unitRegId})" submitted successfully to DGOS Logistics Cell. Verification email sent to ${this.unitRegEmail}.`;
@@ -472,11 +472,11 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   submitAdminRegister() {
     if (!this.adminRegId || !this.adminRegName || !this.adminRegEmail || !this.adminRegPassword) {
-      alert('Please fill in all required fields for Command/Admin Registration.');
+      alert(this.langService.t(''));
       return;
     }
     if (this.adminRegPassword !== this.adminRegConfirmPassword) {
-      alert('Passwords do not match.');
+      alert(this.langService.t(''));
       return;
     }
     this.regSuccessMsg = `Admin Officer Registration for "${this.adminRegName} (${this.adminRegId})" submitted for clearance authorization. Approval notification will be routed to ${this.adminRegEmail}.`;

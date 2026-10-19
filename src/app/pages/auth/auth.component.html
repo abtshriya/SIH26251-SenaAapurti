@@ -25,10 +25,10 @@
         />
       </div>
       <div class="auth-header-text">
-        <h2 class="auth-title">
-          <span class="text-white">Sena</span><span class="text-saffron">Aapurti</span>
+        <h2 class="auth-title" [class.hindi-title]="langService.currentLang() === 'hi'">
+          <span class="text-white">{{ langService.t('titleSena') }}</span><span class="brand-word-gap" *ngIf="langService.currentLang() === 'hi'">&nbsp;</span><span class="text-saffron">{{ langService.t('titleAapurti') }}</span>
         </h2>
-        <span class="auth-sub">DEFENSE LOGISTICS ACCESS & AUTHENTICATION PORTAL</span>
+        <span class="auth-sub">{{ langService.t('DEFENSE LOGISTICS ACCESS & AUTHENTICATION PORTAL') }}</span>
       </div>
     </div>
 
@@ -40,7 +40,7 @@
         [class.active]="mode === 'login'"
         (click)="setMode('login')"
       >
-        Sign In
+        {{ langService.t('Sign In') }}
       </button>
       <button
         type="button"
@@ -48,7 +48,7 @@
         [class.active]="mode === 'register'"
         (click)="setMode('register')"
       >
-        Register New Account
+        {{ langService.t('Register New Account') }}
       </button>
       <button
         type="button"
@@ -56,7 +56,7 @@
         [class.active]="mode === 'forgot-password'"
         (click)="setMode('forgot-password')"
       >
-        Forgot Password
+        {{ langService.t('Forgot Password') }}
       </button>
       <button
         type="button"
@@ -64,7 +64,7 @@
         [class.active]="mode === 'unauthorized'"
         (click)="setMode('unauthorized')"
       >
-        Access Denied Test
+        {{ langService.t('Access Denied Test') }}
       </button>
     </div>
 
@@ -74,25 +74,25 @@
     <div *ngIf="mode === 'login'">
       <!-- Welcome Message & Role Selection -->
       <div class="auth-welcome-banner">
-        <h3>Official Defense Authentication Gateway</h3>
-        <p>Select your operational echelon to access the authorized logistics command center.</p>
+        <h3>{{ langService.t('Official Defense Authentication Gateway') }}</h3>
+        <p>{{ langService.t('Select your operational echelon to access the authorized logistics command center.') }}</p>
       </div>
 
       <!-- Quick Demo Auto-Fill Strip -->
       <div class="demo-quick-bar">
-        <span class="demo-tag">Fast Evaluation Fill:</span>
+        <span class="demo-tag">{{ langService.t('Fast Evaluation Fill:') }}</span>
         <div class="demo-btns-wrap">
           <button type="button" class="btn-demo command-demo" (click)="fillDemoCommand()">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="demo-btn-icon">
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
             </svg>
-            <span>Fill Command Admin (Lt Gen Rawat)</span>
+            <span>{{ langService.t('Fill Command Admin (Lt Gen Rawat)') }}</span>
           </button>
           <button type="button" class="btn-demo unit-demo" (click)="fillDemoUnit()">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="demo-btn-icon">
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
             </svg>
-            <span>Fill Unit Officer (Maj Sharma - 14 Rajput)</span>
+            <span>{{ langService.t('Fill Unit Officer (Maj Sharma - 14 Rajput)') }}</span>
           </button>
         </div>
       </div>
@@ -108,7 +108,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M12 21v-4M4 21h16M3 10h18M5 10v11M19 10v11M12 10V6M8 6h8M12 2v4"/>
           </svg>
-          <span>COMMAND / ADMIN</span>
+          <span>{{ langService.t('COMMAND / ADMIN') }}</span>
         </button>
 
         <button
@@ -120,19 +120,19 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0z"/>
           </svg>
-          <span>UNIT PORTAL</span>
+          <span>{{ langService.t('UNIT PORTAL') }}</span>
         </button>
       </div>
 
       <!-- Error Message Banner -->
       <div *ngIf="loginError" class="alert-danger-banner">
-        {{ loginError }}
+        {{ langService.t(loginError) }}
       </div>
 
       <!-- Step 1: Credentials Form -->
       <div *ngIf="!showFaceIdStep && !showOtpStep" class="form-content">
         <div class="form-group">
-          <label class="form-label" for="serviceNo">User ID / Official Service Number</label>
+          <label class="form-label" for="serviceNo">{{ langService.t('User ID / Official Service Number') }}</label>
           <div class="input-with-icon">
             <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
@@ -141,16 +141,16 @@
               id="serviceNo"
               type="text"
               [(ngModel)]="serviceNo"
-              placeholder="e.g. IC-48291X or IC-71044A"
+              [placeholder]="langService.t('e.g. IC-48291X or IC-71044A')"
               class="form-control"
               autocomplete="username"
             />
           </div>
-          <span class="field-help">Commissioned Officers, JCOs & authorized Logisticians</span>
+          <span class="field-help">{{ langService.t('Commissioned Officers, JCOs & authorized Logisticians') }}</span>
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="password">Password</label>
+          <label class="form-label" for="password">{{ langService.t('Password') }}</label>
           <div class="input-with-icon">
             <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/>
@@ -168,18 +168,18 @@
 
         <!-- Captcha / Security Verification -->
         <div class="form-group">
-          <label class="form-label">CAPTCHA / Security Verification</label>
+          <label class="form-label">{{ langService.t('CAPTCHA / Security Verification') }}</label>
           <div class="captcha-row">
-            <div class="captcha-badge" title="Military Security Captcha">
+            <div class="captcha-badge" [title]="langService.t('Military Security Captcha')">
               <span class="captcha-chars">{{ currentCaptcha }}</span>
             </div>
-            <button type="button" class="btn-captcha-refresh" (click)="refreshCaptcha()" title="Refresh Captcha">
-              ↻ Refresh
+            <button type="button" class="btn-captcha-refresh" (click)="refreshCaptcha()" [title]="langService.t('Refresh Captcha')">
+              ↻ {{ langService.t('Refresh') }}
             </button>
             <input
               type="text"
               [(ngModel)]="captchaInput"
-              placeholder="Enter Code"
+              [placeholder]="langService.t('Enter Code')"
               class="form-control captcha-input"
               maxlength="5"
             />
@@ -189,10 +189,10 @@
         <div class="form-row-between">
           <label class="checkbox-label">
             <input type="checkbox" [(ngModel)]="rememberMe">
-            <span>Remember Me</span>
+            <span>{{ langService.t('Remember Me') }}</span>
           </label>
           <button type="button" class="link-btn-text" (click)="setMode('forgot-password')">
-            Forgot Password?
+            {{ langService.t('Forgot Password?') }}
           </button>
         </div>
 
@@ -203,14 +203,14 @@
           [class.unit-submit]="portalMode === 'unit'"
           (click)="submitLogin()"
         >
-          <span>LOGIN & PROCEED TO BIOMETRICS</span>
+          <span>{{ langService.t('LOGIN & PROCEED TO BIOMETRICS') }}</span>
           <svg viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
           </svg>
         </button>
 
         <div class="back-home-wrap">
-          <a routerLink="/" class="back-home-link">← Back to Main Website</a>
+          <a routerLink="/" class="back-home-link">{{ langService.t('← Back to Main Website') }}</a>
         </div>
       </div>
 
@@ -219,11 +219,11 @@
         <div class="face-biometric-header">
           <div class="face-status-pill">
             <span class="status-pulse-dot"></span>
-            <span>LEVEL-3 BIOMETRIC CLEARANCE</span>
+            <span>{{ langService.t('LEVEL-3 BIOMETRIC CLEARANCE') }}</span>
           </div>
-          <h4 class="face-title">Biometric Login: Scan Using FACE ID</h4>
+          <h4 class="face-title">{{ langService.t('Biometric Login: Scan Using FACE ID') }}</h4>
           <p class="face-desc">
-            Optical facial verification required for <strong>{{ serviceNo }}</strong> before granting access to strategic logistics ledger.
+            {{ langService.t('Optical facial verification required for') }} <strong>{{ serviceNo }}</strong> {{ langService.t('before granting access to strategic logistics ledger.') }}
           </p>
         </div>
 
@@ -237,8 +237,8 @@
               <path d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"/>
               <path d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"/>
             </svg>
-            <div class="fallback-status-text">DEFENSE OPTICAL SENSOR READY</div>
-            <div class="fallback-subtext">Click "Scan Using Face ID" to initialize camera or biometric match</div>
+            <div class="fallback-status-text">{{ langService.t('DEFENSE OPTICAL SENSOR READY') }}</div>
+            <div class="fallback-subtext">{{ langService.t('Click "Scan Using Face ID" to initialize camera or biometric match') }}</div>
           </div>
 
           <!-- Tactical HUD Reticle Overlay -->
@@ -270,13 +270,13 @@
 
         <!-- Success and Warning Feedback Banners -->
         <div *ngIf="faceEnrollSuccess" class="alert-success-banner">
-          ✓ {{ faceEnrollSuccess }}
+          ✓ {{ langService.t(faceEnrollSuccess) }}
         </div>
         <div *ngIf="faceVerified" class="alert-success-banner">
-          ✓ Biometric Face ID Authenticated ({{ faceConfidence }}% Confidence). Launching Carrier 2FA...
+          ✓ {{ langService.t('Biometric Face ID Authenticated') }} ({{ faceConfidence }}% {{ langService.t('Confidence') }}). {{ langService.t('Launching Carrier 2FA...') }}
         </div>
         <div *ngIf="cameraError && !faceVerified" class="camera-info-note">
-          ℹ {{ cameraError }}
+          ℹ {{ langService.t(cameraError) }}
         </div>
 
         <!-- Face ID Action Buttons -->
@@ -290,9 +290,9 @@
             <svg *ngIf="!faceScanning" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M7 3H5a2 2 0 00-2 2v2m18-4h-2a2 2 0 00-2 2v2m0 14h2a2 2 0 002-2v-2M3 17v2a2 2 0 002 2h2m3-9h4m-2-2v4"/>
             </svg>
-            <span *ngIf="!faceScanning && !faceVerified">SCAN USING FACE ID</span>
-            <span *ngIf="faceScanning">AUTHENTICATING FACIAL BIOMETRICS...</span>
-            <span *ngIf="faceVerified">✓ FACE ID VERIFIED</span>
+            <span *ngIf="!faceScanning && !faceVerified">{{ langService.t('SCAN USING FACE ID') }}</span>
+            <span *ngIf="faceScanning">{{ langService.t('AUTHENTICATING FACIAL BIOMETRICS...') }}</span>
+            <span *ngIf="faceVerified">{{ langService.t('✓ FACE ID VERIFIED') }}</span>
           </button>
 
           <div class="face-secondary-row">
@@ -303,7 +303,7 @@
               (click)="enrollCurrentFace()"
               title="Capture this camera frame as your registered Face ID in PostgreSQL"
             >
-              📸 Enroll / Update My Face ID
+              📸 {{ langService.t('Enroll / Update My Face ID') }}
             </button>
             <button
               type="button"
@@ -311,7 +311,7 @@
               (click)="bypassFaceToOtp()"
               title="Bypass camera if hardware optical sensor unavailable"
             >
-              Manual Override → OTP
+              {{ langService.t('Manual Override → OTP') }}
             </button>
           </div>
 
@@ -320,7 +320,7 @@
             class="btn-link-cancel"
             (click)="stopCamera(); showFaceIdStep = false;"
           >
-            ← Back to Login Credentials
+            {{ langService.t('← Back to Login Credentials') }}
           </button>
         </div>
       </div>
@@ -332,9 +332,9 @@
             <path d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"/>
           </svg>
         </div>
-        <h4 class="otp-title">Defense 2-Factor Authentication</h4>
+        <h4 class="otp-title">{{ langService.t('Defense 2-Factor Authentication') }}</h4>
         <p class="otp-desc">
-          Cryptographic OTP dispatched to authorized military handset for <strong>{{ serviceNo }}</strong>.
+          {{ langService.t('Cryptographic OTP dispatched to authorized military handset for') }} <strong>{{ serviceNo }}</strong>.
         </p>
 
         <!-- Simulated Carrier Dispatch HUD Display -->
@@ -342,37 +342,37 @@
           <div class="carrier-hud-header">
             <div class="carrier-hud-title">
               <span class="carrier-indicator-dot"></span>
-              <span>DEFENSE CARRIER DISPATCH TERMINAL</span>
+              <span>{{ langService.t('DEFENSE CARRIER DISPATCH TERMINAL') }}</span>
             </div>
-            <div class="carrier-hud-channel">ASCON SATCOM LINK #9914</div>
+            <div class="carrier-hud-channel">{{ langService.t('ASCON SATCOM LINK #9914') }}</div>
           </div>
 
           <div class="carrier-hud-body">
             <div class="carrier-hud-stat">
-              <span class="stat-label">DISPATCH NODE:</span>
+              <span class="stat-label">{{ langService.t('DISPATCH NODE:') }}</span>
               <span class="stat-val">{{ carrierDispatchInfo?.masked_phone || '+91 98*** **210' }}</span>
             </div>
             <div class="carrier-hud-stat">
-              <span class="stat-label">TTL VALIDITY:</span>
-              <span class="stat-val text-gold">300 SECONDS</span>
+              <span class="stat-label">{{ langService.t('TTL VALIDITY:') }}</span>
+              <span class="stat-val text-gold">300 {{ langService.t('SECONDS') }}</span>
             </div>
             <div class="carrier-hud-stat">
-              <span class="stat-label">STATUS:</span>
-              <span class="stat-val text-green">{{ carrierSending ? 'DISPATCHING...' : 'TRANSMITTED TO MOBILE HANDSET' }}</span>
+              <span class="stat-label">{{ langService.t('STATUS:') }}</span>
+              <span class="stat-val text-green">{{ carrierSending ? langService.t('DISPATCHING...') : langService.t('TRANSMITTED TO MOBILE HANDSET') }}</span>
             </div>
 
             <!-- Incoming Simulated SMS Box -->
             <div class="carrier-incoming-sms" *ngIf="carrierDispatchInfo?.otp_dispatched">
-              <div class="sms-tag">[DEFENSE SMS RECEIVED ON HANDSET]</div>
+              <div class="sms-tag">{{ langService.t('[DEFENSE SMS RECEIVED ON HANDSET]') }}</div>
               <div class="sms-content">
-                "Sena Aapurti Auth: Your Defense 2FA OTP is <strong>{{ carrierDispatchInfo?.otp_dispatched }}</strong>. Valid for 5 min. Do not share."
+                {{ langService.t('"Sena Aapurti Auth: Your Defense 2FA OTP is') }} <strong>{{ carrierDispatchInfo?.otp_dispatched }}</strong>{{ langService.t('. Valid for 5 min. Do not share."') }}
               </div>
             </div>
           </div>
 
           <!-- Custom Phone Update Row -->
           <div class="custom-phone-drawer">
-            <div class="phone-drawer-label">Want OTP dispatched to your specific phone number?</div>
+            <div class="phone-drawer-label">{{ langService.t('Want OTP dispatched to your specific phone number?') }}</div>
             <div class="phone-input-row">
               <input
                 type="text"
@@ -381,33 +381,33 @@
                 class="form-control phone-input-ctrl"
               />
               <button type="button" class="btn-update-phone" (click)="updateCustomPhone()">
-                Update & Dispatch
+                {{ langService.t('Update & Dispatch') }}
               </button>
             </div>
           </div>
         </div>
 
         <div class="form-group otp-input-group">
-          <label class="form-label">Enter 4-Digit Security OTP</label>
+          <label class="form-label">{{ langService.t('Enter 4-Digit Security OTP') }}</label>
           <input
             type="text"
             [(ngModel)]="otpCode"
             maxlength="4"
             class="form-control otp-input"
-            placeholder="4829"
+            [placeholder]="langService.t('4829')"
           />
         </div>
 
         <div class="otp-action-row">
           <button type="button" class="btn-outline-army" (click)="showOtpStep = false; showFaceIdStep = true; startCamera();">
-            ← Back to Face Scan
+            {{ langService.t('← Back to Face Scan') }}
           </button>
           <button
             type="button"
             class="btn-army-primary"
             (click)="verifyOtpAndLogin()"
           >
-            Authorize & Enter Dashboard
+            {{ langService.t('Authorize & Enter Dashboard') }}
           </button>
         </div>
       </div>
@@ -418,8 +418,8 @@
     <!-- ============================================================= -->
     <div *ngIf="mode === 'register'" class="form-content">
       <div class="auth-welcome-banner">
-        <h3>Select Registration Type</h3>
-        <p>Register a forward tactical unit or a headquarters logistics administration account.</p>
+        <h3>{{ langService.t('Select Registration Type') }}</h3>
+        <p>{{ langService.t('Register a forward tactical unit or a headquarters logistics administration account.') }}</p>
       </div>
 
       <!-- Toggle: Command / Admin vs Unit -->
@@ -433,7 +433,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="reg-btn-icon">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
           </svg>
-          <span>Unit Registration</span>
+          <span>{{ langService.t('Unit Registration') }}</span>
         </button>
         <button
           type="button"
@@ -444,68 +444,68 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="reg-btn-icon">
             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
           </svg>
-          <span>Admin Registration</span>
+          <span>{{ langService.t('Admin Registration') }}</span>
         </button>
       </div>
 
       <!-- Success Notice -->
       <div *ngIf="regSuccessMsg" class="alert-success-banner">
-        {{ regSuccessMsg }}
+        {{ langService.t(regSuccessMsg) }}
       </div>
 
       <!-- A. UNIT REGISTRATION -->
       <div *ngIf="regType === 'unit'">
         <div class="form-grid-2">
           <div class="form-group">
-            <label class="form-label">Unit Name</label>
-            <input type="text" [(ngModel)]="unitRegName" placeholder="e.g. 14 RAJPUT (MECHANISED)" class="form-control">
+            <label class="form-label">{{ langService.t('Unit Name') }}</label>
+            <input type="text" [(ngModel)]="unitRegName" [placeholder]="langService.t('e.g. 14 RAJPUT (MECHANISED)')" class="form-control">
           </div>
           <div class="form-group">
-            <label class="form-label">Unit ID</label>
-            <input type="text" [(ngModel)]="unitRegId" placeholder="e.g. UN-14RM-LEH" class="form-control">
+            <label class="form-label">{{ langService.t('Unit ID') }}</label>
+            <input type="text" [(ngModel)]="unitRegId" [placeholder]="langService.t('e.g. UN-14RM-LEH')" class="form-control">
           </div>
           <div class="form-group">
-            <label class="form-label">Formation / Region</label>
+            <label class="form-label">{{ langService.t('Formation / Region') }}</label>
             <select [(ngModel)]="unitRegFormation" class="form-control">
               <option *ngFor="let f of formations" [value]="f">{{ f }}</option>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-label">Location / Forward Sector</label>
-            <input type="text" [(ngModel)]="unitRegLocation" placeholder="e.g. FDL Shyok Valley - 14 Corps" class="form-control">
+            <label class="form-label">{{ langService.t('Location / Forward Sector') }}</label>
+            <input type="text" [(ngModel)]="unitRegLocation" [placeholder]="langService.t('e.g. FDL Shyok Valley - 14 Corps')" class="form-control">
           </div>
           <div class="form-group">
-            <label class="form-label">Authorized Officer</label>
-            <input type="text" [(ngModel)]="unitRegAuthOfficer" placeholder="e.g. Major Amit Sharma" class="form-control">
+            <label class="form-label">{{ langService.t('Authorized Officer') }}</label>
+            <input type="text" [(ngModel)]="unitRegAuthOfficer" [placeholder]="langService.t('e.g. Major Amit Sharma')" class="form-control">
           </div>
           <div class="form-group">
-            <label class="form-label">Contact Details</label>
-            <input type="text" [(ngModel)]="unitRegContact" placeholder="e.g. +91 94190 XXXXX / ASCON 2841" class="form-control">
+            <label class="form-label">{{ langService.t('Contact Details') }}</label>
+            <input type="text" [(ngModel)]="unitRegContact" [placeholder]="langService.t('e.g. +91 94190 XXXXX / ASCON 2841')" class="form-control">
           </div>
           <div class="form-group full-width">
-            <label class="form-label">Official Email</label>
-            <input type="email" [(ngModel)]="unitRegEmail" placeholder="officer.unit&#64;army.nic.in" class="form-control">
+            <label class="form-label">{{ langService.t('Official Email') }}</label>
+            <input type="email" [(ngModel)]="unitRegEmail" [placeholder]="langService.t('officer.unit@army.nic.in')" class="form-control">
           </div>
           <div class="form-group">
-            <label class="form-label">Username</label>
-            <input type="text" [(ngModel)]="unitRegUsername" placeholder="e.g. IC-71044A" class="form-control">
+            <label class="form-label">{{ langService.t('Username') }}</label>
+            <input type="text" [(ngModel)]="unitRegUsername" [placeholder]="langService.t('e.g. IC-71044A')" class="form-control">
           </div>
           <div class="form-group">
             <label class="form-label">Password</label>
             <input type="password" [(ngModel)]="unitRegPassword" class="form-control">
           </div>
           <div class="form-group">
-            <label class="form-label">Confirm Password</label>
+            <label class="form-label">{{ langService.t('Confirm Password') }}</label>
             <input type="password" [(ngModel)]="unitRegConfirmPassword" class="form-control">
           </div>
           <div class="form-group">
-            <label class="form-label">Verification Code (Enter 7K9X2)</label>
-            <input type="text" [(ngModel)]="unitRegCaptcha" placeholder="7K9X2" class="form-control">
+            <label class="form-label">{{ langService.t('Verification Code (Enter 7K9X2)') }}</label>
+            <input type="text" [(ngModel)]="unitRegCaptcha" [placeholder]="langService.t('7K9X2')" class="form-control">
           </div>
         </div>
 
         <button type="button" class="btn-submit-login unit-submit mt-3" (click)="submitUnitRegister()">
-          <span>REGISTER UNIT</span>
+          <span>{{ langService.t('REGISTER UNIT') }}</span>
         </button>
       </div>
 
@@ -513,57 +513,57 @@
       <div *ngIf="regType === 'admin'">
         <div class="form-grid-2">
           <div class="form-group">
-            <label class="form-label">Official ID / Service No</label>
-            <input type="text" [(ngModel)]="adminRegId" placeholder="e.g. IC-48291X" class="form-control">
+            <label class="form-label">{{ langService.t('Official ID / Service No') }}</label>
+            <input type="text" [(ngModel)]="adminRegId" [placeholder]="langService.t('e.g. IC-48291X')" class="form-control">
           </div>
           <div class="form-group">
-            <label class="form-label">Full Name</label>
-            <input type="text" [(ngModel)]="adminRegName" placeholder="e.g. Lt Gen V. K. Rawat" class="form-control">
+            <label class="form-label">{{ langService.t('Full Name') }}</label>
+            <input type="text" [(ngModel)]="adminRegName" [placeholder]="langService.t('e.g. Lt Gen V. K. Rawat')" class="form-control">
           </div>
           <div class="form-group">
-            <label class="form-label">Designation</label>
-            <input type="text" [(ngModel)]="adminRegDesignation" placeholder="e.g. DGOS Directorate / MGS Branch" class="form-control">
+            <label class="form-label">{{ langService.t('Designation') }}</label>
+            <input type="text" [(ngModel)]="adminRegDesignation" [placeholder]="langService.t('e.g. DGOS Directorate / MGS Branch')" class="form-control">
           </div>
           <div class="form-group">
-            <label class="form-label">Command / Organization</label>
+            <label class="form-label">{{ langService.t('Command / Organization') }}</label>
             <select [(ngModel)]="adminRegCommand" class="form-control">
               <option *ngFor="let ac of adminCommands" [value]="ac">{{ ac }}</option>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-label">Official Email</label>
-            <input type="email" [(ngModel)]="adminRegEmail" placeholder="admin.dgos&#64;nic.in" class="form-control">
+            <label class="form-label">{{ langService.t('Official Email') }}</label>
+            <input type="email" [(ngModel)]="adminRegEmail" [placeholder]="langService.t('admin.dgos@nic.in')" class="form-control">
           </div>
           <div class="form-group">
-            <label class="form-label">Contact</label>
-            <input type="text" [(ngModel)]="adminRegContact" placeholder="e.g. +91 11 2301 XXXX" class="form-control">
+            <label class="form-label">{{ langService.t('Contact') }}</label>
+            <input type="text" [(ngModel)]="adminRegContact" [placeholder]="langService.t('e.g. +91 11 2301 XXXX')" class="form-control">
           </div>
           <div class="form-group">
-            <label class="form-label">Username</label>
-            <input type="text" [(ngModel)]="adminRegUsername" placeholder="e.g. rawat.vk" class="form-control">
+            <label class="form-label">{{ langService.t('Username') }}</label>
+            <input type="text" [(ngModel)]="adminRegUsername" [placeholder]="langService.t('e.g. rawat.vk')" class="form-control">
           </div>
           <div class="form-group">
             <label class="form-label">Password</label>
             <input type="password" [(ngModel)]="adminRegPassword" class="form-control">
           </div>
           <div class="form-group">
-            <label class="form-label">Confirm Password</label>
+            <label class="form-label">{{ langService.t('Confirm Password') }}</label>
             <input type="password" [(ngModel)]="adminRegConfirmPassword" class="form-control">
           </div>
           <div class="form-group">
-            <label class="form-label">Verification Code (Enter 7K9X2)</label>
-            <input type="text" [(ngModel)]="adminRegCaptcha" placeholder="7K9X2" class="form-control">
+            <label class="form-label">{{ langService.t('Verification Code (Enter 7K9X2)') }}</label>
+            <input type="text" [(ngModel)]="adminRegCaptcha" [placeholder]="langService.t('7K9X2')" class="form-control">
           </div>
         </div>
 
         <button type="button" class="btn-submit-login command-submit mt-3" (click)="submitAdminRegister()">
-          <span>REGISTER ADMIN</span>
+          <span>{{ langService.t('REGISTER ADMIN') }}</span>
         </button>
       </div>
 
       <div class="back-home-wrap">
         <button type="button" class="link-btn-text" (click)="setMode('login')">
-          Already registered? Back to Sign In
+          {{ langService.t('Already registered? Back to Sign In') }}
         </button>
       </div>
     </div>
@@ -573,30 +573,30 @@
     <!-- ============================================================= -->
     <div *ngIf="mode === 'forgot-password'" class="form-content">
       <div class="auth-welcome-banner">
-        <h3>Reset Defense Terminal Password</h3>
-        <p>Recover access to your account via official defense registered email or service credentials.</p>
+        <h3>{{ langService.t('Reset Defense Terminal Password') }}</h3>
+        <p>{{ langService.t('Recover access to your account via official defense registered email or service credentials.') }}</p>
       </div>
 
       <div *ngIf="forgotSuccessMsg" class="alert-success-banner">
-        {{ forgotSuccessMsg }}
+        {{ langService.t(forgotSuccessMsg) }}
       </div>
       <div *ngIf="forgotError" class="alert-danger-banner">
-        {{ forgotError }}
+        {{ langService.t(forgotError) }}
       </div>
 
       <div *ngIf="!forgotOtpSent">
         <div class="form-group">
-          <label class="form-label">Username / Official Email</label>
+          <label class="form-label">{{ langService.t('Username / Official Email') }}</label>
           <input
             type="text"
             [(ngModel)]="forgotUsernameEmail"
-            placeholder="e.g. IC-48291X or officer&#64;army.nic.in"
+            [placeholder]="langService.t('e.g. IC-48291X or officer@army.nic.in')"
             class="form-control"
           />
         </div>
 
         <div class="form-group">
-          <label class="form-label">Verification Code</label>
+          <label class="form-label">{{ langService.t('Verification Code') }}</label>
           <div class="captcha-row">
             <div class="captcha-badge">
               <span class="captcha-chars">{{ currentCaptcha }}</span>
@@ -604,39 +604,39 @@
             <input
               type="text"
               [(ngModel)]="forgotCaptcha"
-              placeholder="Enter code"
+              [placeholder]="langService.t('Enter code')"
               class="form-control captcha-input"
             />
           </div>
         </div>
 
         <button type="button" class="btn-army-primary full-width-btn" (click)="requestForgotOtp()">
-          Dispatch Verification OTP
+          {{ langService.t('Dispatch Verification OTP') }}
         </button>
       </div>
 
       <div *ngIf="forgotOtpSent">
         <div class="form-group">
-          <label class="form-label">Enter 4-Digit OTP (Simulated: 7741)</label>
-          <input type="text" [(ngModel)]="forgotOtp" placeholder="7741" class="form-control">
+          <label class="form-label">{{ langService.t('Enter 4-Digit OTP (Simulated: 7741)') }}</label>
+          <input type="text" [(ngModel)]="forgotOtp" [placeholder]="langService.t('7741')" class="form-control">
         </div>
         <div class="form-group">
-          <label class="form-label">New Password</label>
+          <label class="form-label">{{ langService.t('New Password') }}</label>
           <input type="password" [(ngModel)]="forgotNewPassword" class="form-control">
         </div>
         <div class="form-group">
-          <label class="form-label">Confirm New Password</label>
+          <label class="form-label">{{ langService.t('Confirm New Password') }}</label>
           <input type="password" [(ngModel)]="forgotConfirmPassword" class="form-control">
         </div>
 
         <button type="button" class="btn-submit-login command-submit" (click)="submitResetPassword()">
-          RESET PASSWORD
+          {{ langService.t('RESET PASSWORD') }}
         </button>
       </div>
 
       <div class="back-home-wrap">
         <button type="button" class="link-btn-text" (click)="setMode('login')">
-          ← Back to Sign In
+          {{ langService.t('← Back to Sign In') }}
         </button>
       </div>
     </div>
@@ -651,31 +651,31 @@
         </svg>
       </div>
 
-      <h3 class="unauth-code">403 - ACCESS RESTRICTED</h3>
-      <h4 class="unauth-headline">INSUFFICIENT SECURITY CLEARANCE LEVEL</h4>
+      <h3 class="unauth-code">{{ langService.t('403 - ACCESS RESTRICTED') }}</h3>
+      <h4 class="unauth-headline">{{ langService.t('INSUFFICIENT SECURITY CLEARANCE LEVEL') }}</h4>
 
       <div class="unauth-role-card">
         <div class="role-item">
-          <span class="role-label">Your Authenticated Role:</span>
+          <span class="role-label">{{ langService.t('Your Authenticated Role:') }}</span>
           <span class="role-val">{{ authService.currentUser()?.role || 'UNAUTHENTICATED / GUEST' }}</span>
         </div>
         <div class="role-item">
-          <span class="role-label">Required Theater Clearance:</span>
-          <span class="role-val text-red">SECRET / DEFCON-1 LEVEL AUTHORIZATION</span>
+          <span class="role-label">{{ langService.t('Required Theater Clearance:') }}</span>
+          <span class="role-val text-red">{{ langService.t('SECRET / DEFCON-1 LEVEL AUTHORIZATION') }}</span>
         </div>
         <div class="role-item">
-          <span class="role-label">Terminal Identity:</span>
+          <span class="role-label">{{ langService.t('Terminal Identity:') }}</span>
           <span class="role-val">{{ authService.currentUser()?.serviceNo || 'SEC-ANON-TERM-92' }}</span>
         </div>
       </div>
 
       <p class="unauth-explain">
-        This resource is segregated under Military Cryptographic Policy. Your identity does not possess the operational credentials required for this sector.
+        {{ langService.t('This resource is segregated under Military Cryptographic Policy. Your identity does not possess the operational credentials required for this sector.') }}
       </p>
 
       <div class="unauth-actions">
-        <a routerLink="/" class="btn-outline-army">Return to Home</a>
-        <a routerLink="/command/dashboard" class="btn-army-primary">Return to Dashboard</a>
+        <a routerLink="/" class="btn-outline-army">{{ langService.t('Return to Home') }}</a>
+        <a routerLink="/command/dashboard" class="btn-army-primary">{{ langService.t('Return to Dashboard') }}</a>
       </div>
     </div>
 
@@ -684,7 +684,7 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M12 9v3.75m0-10.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
       </svg>
-      <span>Restricted Official Defense Network. All terminal transactions are cryptographically recorded under the Official Secrets Act 1923.</span>
+      <span>{{ langService.t('Restricted Official Defense Network. All terminal transactions are cryptographically recorded under the Official Secrets Act 1923.') }}</span>
     </div>
 
   </div>

@@ -2,6 +2,7 @@ import { Component, inject, ElementRef, ViewChild, AfterViewChecked } from '@ang
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AssistantService, ChatMessage } from '../../services/assistant.service';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-assistant',
@@ -12,6 +13,7 @@ import { AssistantService, ChatMessage } from '../../services/assistant.service'
 })
 export class AssistantComponent implements AfterViewChecked {
   assistantService = inject(AssistantService);
+  langService = inject(LanguageService);
   userInputText = '';
   private shouldScrollToBottom = false;
 
@@ -60,8 +62,9 @@ export class AssistantComponent implements AfterViewChecked {
 
   formatMessageText(rawText: string): string {
     if (!rawText) return '';
+    const textToFormat = this.langService.t(rawText);
     // Escape HTML tags to prevent XSS
-    let escaped = rawText
+    let escaped = textToFormat
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;');

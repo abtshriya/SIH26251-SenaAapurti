@@ -6,8 +6,8 @@
     type="button"
     class="launcher-badge-btn"
     (click)="toggleChat()"
-    aria-label="Open Ask SenaAapurti Assistant"
-    title="Ask SenaAapurti Assistant (Jai Hind)">
+    [attr.aria-label]="langService.t('Open Ask SenaAapurti Assistant')"
+    [title]="langService.t('Ask SenaAapurti Assistant (Jai Hind)')">
     
     <!-- Outer Curved Circular Badge with Tricolor & Officer Silhouette -->
     <svg class="launcher-badge-svg" viewBox="0 0 100 100" width="86" height="86">
@@ -30,14 +30,14 @@
       <!-- Curved Top Text: JAI HIND -->
       <text font-family="'Rajdhani', 'Inter', sans-serif" font-weight="800" font-size="10" fill="#ffffff" letter-spacing="1.5">
         <textPath href="#launcher-top-path" startOffset="50%" text-anchor="middle">
-          JAI HIND
+          {{ langService.t('JAI HIND') }}
         </textPath>
       </text>
 
       <!-- Curved Bottom Text: ASK SENA AAPURTI ASSISTANT -->
-      <text font-family="'Inter', sans-serif" font-weight="700" font-size="5.5" fill="#ffffff" letter-spacing="0.6">
+      <text font-family="'Inter', sans-serif" font-weight="700" [attr.font-size]="langService.currentLang() === 'hi' ? '4.8' : '5.5'" fill="#ffffff" letter-spacing="0.6">
         <textPath href="#launcher-bot-path" startOffset="50%" text-anchor="middle">
-          ASK SENA AAPURTI ASSISTANT
+          {{ langService.t('ASK SENA AAPURTI ASSISTANT') }}
         </textPath>
       </text>
 
@@ -116,11 +116,11 @@
       </div>
 
       <!-- Title Text -->
-      <h3 class="header-title">Ask SenaAapurti Assistant</h3>
+      <h3 class="header-title">{{ langService.t('Ask SenaAapurti Assistant') }}</h3>
     </div>
 
     <!-- Close Button '✕' -->
-    <button type="button" class="header-close-btn" (click)="closeChat()" aria-label="Close Assistant">
+    <button type="button" class="header-close-btn" (click)="closeChat()" [attr.aria-label]="langService.t('Close Assistant')">
       ✕
     </button>
   </div>
@@ -166,7 +166,7 @@
               type="button"
               class="quick-reply-pill"
               (click)="onQuickReplyClick(pill)">
-              {{ pill }}
+              {{ langService.t(pill) }}
             </button>
           </div>
         </div>
@@ -176,7 +176,7 @@
       <ng-container *ngIf="msg.sender === 'user'">
         <div class="user-bubble-col">
           <div class="user-bubble-box">
-            {{ msg.text }}
+            {{ langService.t(msg.text) }}
           </div>
         </div>
 
@@ -225,8 +225,8 @@
         type="button"
         class="btn-terracotta btn-home"
         (click)="onHomeClick()"
-        aria-label="Home / Restart Assistant"
-        title="Reset to Welcome Menu">
+        [attr.aria-label]="langService.t('Home / Restart Assistant')"
+        [title]="langService.t('Reset to Welcome Menu')">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
           <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
         </svg>
@@ -237,8 +237,8 @@
         type="button"
         class="btn-terracotta btn-back"
         (click)="onBackClick()"
-        aria-label="Back to Previous Question"
-        title="Go Back">
+        [attr.aria-label]="langService.t('Back to Previous Question')"
+        [title]="langService.t('Go Back')">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14h-2v-4H8l4-4 4 4h-3v4z" transform="rotate(-90 12 12)" />
         </svg>
@@ -251,17 +251,17 @@
         type="text"
         [(ngModel)]="userInputText"
         name="userInputText"
-        placeholder="Type logistics query or voucher ID..."
+        [placeholder]="langService.t('Type logistics query or voucher ID...')"
         class="assistant-text-input"
-        aria-label="Enter question or indent voucher"
+        [attr.aria-label]="langService.t('Enter question or indent voucher')"
         autocomplete="off" />
       
       <button
         type="submit"
         class="assistant-send-btn"
         [disabled]="!userInputText.trim() || assistantService.isLoading()"
-        aria-label="Send Message"
-        title="Send Query">
+        [attr.aria-label]="langService.t('Send Message')"
+        [title]="langService.t('Send Query')">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
           <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
         </svg>

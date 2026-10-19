@@ -99,9 +99,9 @@ export const DASHBOARD_TRANSLATIONS: Record<string, string> = {
   'Days of Supply (National)': 'आपूर्ति दिवस (राष्ट्रीय)',
   'Days of Supply': 'आपूर्ति दिवस',
   'Class I (Rations)': 'वर्ग I (राशन)',
-  'Class III (POL)': 'वर्ग III (पीओएल)',
+  'Class III (POL)': 'वर्ग III (ईंधन व तेल)',
   'Class V (Ammo)': 'वर्ग V (गोला-बारूद)',
-  'Class IX (Spares)': 'वर्ग IX (स्पेयर)',
+  'Class IX (Spares)': 'वर्ग IX (पुर्जे)',
   'Medical & Clothing': 'चिकित्सा एवं वस्त्र',
   'Rations (Class I)': 'राशन (वर्ग I)',
   'POL Fuel (Class III)': 'ईंधन (वर्ग III)',
@@ -110,10 +110,10 @@ export const DASHBOARD_TRANSLATIONS: Record<string, string> = {
   'Extreme Cold Clothing': 'अत्यंत शीतकालीन वस्त्र',
   'Winter Reserve': 'शीतकालीन आरक्षित भंडार',
   'Adequate': 'पर्याप्त',
-  'Low': 'निम्न',
-  'Critical': 'अति-गंभीर',
+  'Low': 'कम',
+  'Critical': 'संकटपूर्ण',
   'Surplus': 'अधिशेष',
-  'Optimal': 'इष्टतम',
+  'Optimal': 'उत्कृष्ट',
   'Active': 'सक्रिय',
   'LIVE': 'लाइव',
   'FLASH SOS': 'फ्लैश एसओएस',
@@ -129,8 +129,8 @@ export const DASHBOARD_TRANSLATIONS: Record<string, string> = {
   'Export Briefing': 'ब्रीफिंग निर्यात करें',
   'Emergency Rebalance': 'आपातकालीन पुनर्संतुलन',
   'Trigger Alert': 'अलर्ट जारी करें',
-  'Refresh': 'रिफ्रेश',
-  '↻ Refresh': '↻ रिफ्रेश',
+  'Refresh': 'पुनः लोड करें',
+  '↻ Refresh': '↻ पुनः लोड करें',
   'Sync': 'सिंक',
   'Filter': 'फ़िल्टर',
   'Export': 'निर्यात',
@@ -328,7 +328,7 @@ export const DASHBOARD_TRANSLATIONS: Record<string, string> = {
   'Clear': 'स्पष्ट',
   'In-Transit': 'पारगमन में',
   'Delayed': 'विलंबित',
-  'Rerouted': 'पुनः मार्गित',
+  'Rerouted': 'मार्ग बदला गया',
   'Arrived': 'पहुंच गया',
   'High-Altitude Hold': 'उच्च-तुंगता रुकावट',
   'AVALANCHE WARNING - RED ALERT': 'हिमस्खलन चेतावनी - रेड अलर्ट',
@@ -395,24 +395,24 @@ export const DASHBOARD_TRANSLATIONS: Record<string, string> = {
   'Operational Priority 1 (Winter Buffer)': 'परिचालन प्राथमिकता 1 (शीतकालीन बफर)',
   'Online': 'ऑनलाइन',
   'Offline': 'ऑफलाइन',
-  'SATCOM Only': 'केवल सैटकॉम',
-  'Healthy': 'स्वस्थ',
+  'SATCOM Only': 'केवल SATCOM',
+  'Healthy': 'उत्कृष्ट',
   'Warning': 'चेतावनी',
   'Moderate': 'मध्यम',
-  'Depleted': 'क्षीण',
+  'Depleted': 'कम हुआ',
   'Review Needed': 'समीक्षा आवश्यक',
-  'Infantry': 'पैदल सेना (इन्फैंट्री)',
+  'Infantry': 'इन्फैंट्री (पैदल सेना)',
   'Mechanised': 'मैकेनाइज्ड इन्फैंट्री',
   'Armoured': 'आर्मर्ड कोर (टैंक)',
-  'Artillery': 'तोपखाना (आर्टिलरी)',
+  'Artillery': 'आर्टिलरी रेजिमेंट',
   'Air Defence': 'वायु रक्षा (आर्मी एयर डिफेंस)',
-  'Engineers': 'इंजीनियर्स कोर (बॉम्बे/मद्रास/बंगाल सैपर्स)',
+  'Engineers': 'इंजीनियर कोर (सैपर्स)',
   'Signals': 'सिग्नल कोर (सैन्य संचार)',
-  'Special Forces': 'पैरा स्पेशल फोर्सेज (SF)',
+  'Special Forces': 'पैरा (विशेष बल)',
   'Aviation': 'सेना विमानन कोर',
-  'Ordnance': 'सेना आयुध कोर (AOC)',
-  'ASC': 'सेना सेवा कोर (ASC - रसद एवं आपूर्ति)',
-  'EME': 'इलेक्ट्रिकल एवं मैकेनिकल इंजीनियर्स (EME)',
+  'Ordnance': 'आयुध कोर (AOC)',
+  'ASC': 'सेना सेवा कोर (ASC)',
+  'EME': 'ईएमई कोर (EME)',
   'HQ Strategic Defense Logistics & C4ISR Command Center': 'मुख्यालय सामरिक रक्षा रसद एवं C4ISR कमान केंद्र',
   'INTEGRATED HQ OF MoD (ARMY) • SENA BHAWAN, NEW DELHI': 'रक्षा मंत्रालय (सेना) का एकीकृत मुख्यालय • सेना भवन, नई दिल्ली',
   'Search Command C2, units, munitions...': 'कमांड C2, यूनिट, गोला-बारूद खोजें...',
@@ -488,12 +488,12 @@ export const DASHBOARD_TRANSLATIONS: Record<string, string> = {
   'Depleting (20-45 DOS)': 'घटता हुआ (20-45 आपूर्ति दिवस)',
   'Critical (<20 DOS)': 'संकटपूर्ण (<20 आपूर्ति दिवस)',
   'Extreme Frontier': 'अति अग्रिम सीमा',
-  'Critical Logistics Alerts': 'गंभीर रसद अलर्ट',
+  'Critical Logistics Alerts': 'महत्वपूर्ण रसद अलर्ट',
   'Recommended Action:': 'अनुशंसित कार्रवाई:',
   'Authorize Suggested Action': 'सुझाई गई कार्रवाई अधिकृत करें',
   '✓ Authorized & Synced in DB': '✓ अधिकृत एवं डेटाबेस में सिंक',
   'View Explanation Panel': 'विवरण पैनल देखें',
-  'PostgreSQL Cryptographic Ledger Hash:': 'पोस्टग्रेएसक्यूएल क्रिप्टोग्राफिक लेजर हैश:',
+  'PostgreSQL Cryptographic Ledger Hash:': 'PostgreSQL क्रिप्टोग्राफिक लेजर हैश:',
   'National Supply Health & Stock Echelon': 'राष्ट्रीय आपूर्ति स्वास्थ्य एवं स्टॉक ईशेलॉन',
   'Aggregated posture across all Strategic Central Ordnance Depots': 'सभी सामरिक केंद्रीय आयुध डिपो में समेकित स्थिति',
   '● Healthy (> 45 Days DOS)': '● उत्कृष्ट (> 45 आपूर्ति दिवस)',
@@ -563,7 +563,7 @@ export const DASHBOARD_TRANSLATIONS: Record<string, string> = {
   'Corps of EME': 'ईएमई कोर (EME)',
   'Combat Readiness': 'युद्ध तत्परता',
   'All Levels': 'सभी स्तर',
-  'Optimal (≥ 96%)': 'इष्टतम (≥ 96%)',
+  'Optimal (≥ 96%)': 'उत्कृष्ट (≥ 96%)',
   'Review Needed (< 96%)': 'समीक्षा आवश्यक (< 96%)',
   'Unit ID': 'यूनिट आईडी',
   'Unit Name & Type': 'यूनिट नाम एवं प्रकार',
@@ -684,9 +684,9 @@ export const DASHBOARD_TRANSLATIONS: Record<string, string> = {
   'Critical Priority': 'गंभीर प्राथमिकता',
   'High Priority': 'उच्च प्राथमिकता',
   'Medium Priority': 'मध्यम प्राथमिकता',
-  'OPERATIONAL ISSUE / THREAT INTEL': 'परिचालन समस्या / खतरा बुद्धिमत्ता',
-  'DETAILS & NEURAL EXPLAINABILITY AUDIT': 'विवरण एवं न्यूरल स्पष्टीकरण ऑडिट',
-  'RECOMMENDED STRATEGIC ACTION': 'अनुशंसित रणनीतिक कार्रवाई',
+  'OPERATIONAL ISSUE / THREAT INTEL': 'परिचालन मुद्दा / खतरा आसूचना',
+  'DETAILS & NEURAL EXPLAINABILITY AUDIT': 'विवरण एवं न्यूरल व्याख्या ऑडिट',
+  'RECOMMENDED STRATEGIC ACTION': 'अनुशंसित सामरिक कार्रवाई',
   'Authorize & Deploy Recommended Mitigation': 'अनुशंसित निवारण अधिकृत एवं तैनात करें',
   'TACTICAL SIMULATOR ONLINE': 'सामरिक सिम्युलेटर ऑनलाइन',
   'Simulation Parameters & Stress Inputs': 'सिमुलेशन पैरामीटर एवं तनाव इनपुट',
@@ -718,7 +718,7 @@ export const DASHBOARD_TRANSLATIONS: Record<string, string> = {
   'Last 30 Days': 'पिछले 30 दिन',
   'Quarter Q3 2026': 'तिमाही Q3 2026',
   'Full Year 2025-26': 'पूरा वर्ष 2025-26',
-  'AUDIT WINDOW:': 'ऑडिट विंडो:',
+  'AUDIT WINDOW:': 'ऑडिट अवधि:',
   'POSTURE:': 'स्थिति:',
   '💾 Save Configuration': '💾 कॉन्फ़िगरेशन सहेजें',
   'Officer Profile & Terminal Identity': 'अधिकारी प्रोफ़ाइल एवं टर्मिनल पहचान',
@@ -1749,6 +1749,142 @@ export const DASHBOARD_TRANSLATIONS: Record<string, string> = {
   'Unit Reports & Daily Ledger (2.8)': 'यूनिट रिपोर्ट एवं दैनिक लेजर (2.8)',
   'Unit Stores & Physical Ledger (2.2)': 'यूनिट भंडार एवं लेजर (2.2)',
   'Severe Cold Wave Forecast': 'भीषण शीतलहर का पूर्वानुमान',
+  '4829': '4829',
+  '7741': '7741',
+  'DEFENSE LOGISTICS ACCESS & AUTHENTICATION PORTAL': 'रक्षा रसद अभिगम एवं प्रमाणीकरण पोर्टल',
+  'Sign In': 'साइन इन करें',
+  'Register New Account': 'नया खाता पंजीकृत करें',
+  'Forgot Password': 'पासवर्ड भूल गए',
+  'Forgot Password?': 'पासवर्ड भूल गए?',
+  'Access Denied Test': 'पहुंच अस्वीकृत परीक्षण',
+  'Official Defense Authentication Gateway': 'आधिकारिक रक्षा प्रमाणीकरण प्रवेश द्वार',
+  'Select your operational echelon to access the authorized logistics command center.': 'अधिकृत रसद कमान केंद्र तक पहुंचने हेतु अपना परिचालन स्तर चुनें।',
+  'Fast Evaluation Fill:': 'त्वरित मूल्यांकन प्रविष्टि:',
+  'Fill Command Admin (Lt Gen Rawat)': 'कमान व्यवस्थापक भरें (लेफ्टिनेंट जनरल रावत)',
+  'Fill Unit Officer (Maj Sharma - 14 Rajput)': 'यूनिट अधिकारी भरें (मेजर शर्मा - 14 राजपूत)',
+  'COMMAND / ADMIN': 'कमान / व्यवस्थापक',
+  'UNIT PORTAL': 'यूनिट पोर्टल',
+  'User ID / Official Service Number': 'उपयोगकर्ता आईडी / आधिकारिक सेवा संख्या',
+  'Commissioned Officers, JCOs & authorized Logisticians': 'कमीशंड अधिकारी, जेसीओ एवं अधिकृत रसद विशेषज्ञ',
+  'Password': 'पासवर्ड',
+  'CAPTCHA / Security Verification': 'कैप्चा / सुरक्षा सत्यापन',
+  'Military Security Captcha': 'सैन्य सुरक्षा कैप्चा',
+  'Refresh Captcha': 'कैप्चा पुनः लोड करें',
+  'Remember Me': 'मुझे याद रखें',
+  'LOGIN & PROCEED TO BIOMETRICS': 'लॉगिन करें एवं बायोमेट्रिक्स पर आगे बढ़ें',
+  '← Back to Main Website': '← मुख्य वेबसाइट पर वापस जाएं',
+  'LEVEL-3 BIOMETRIC CLEARANCE': 'स्तर-3 बायोमेट्रिक सुरक्षा मंजूरी',
+  'Biometric Login: Scan Using FACE ID': 'बायोमेट्रिक लॉगिन: फेस आईडी द्वारा स्कैन करें',
+  'Optical facial verification required for': 'ऑप्टिकल चेहरे का सत्यापन आवश्यक है:',
+  'before granting access to strategic logistics ledger.': 'सामरिक रसद लेजर तक पहुंच प्रदान करने से पहले।',
+  'DEFENSE OPTICAL SENSOR READY': 'रक्षा ऑप्टिकल सेंसर तैयार है',
+  'Click "Scan Using Face ID" to initialize camera or biometric match': 'कैमरा या बायोमेट्रिक मिलान प्रारंभ करने हेतु "फेस आईडी द्वारा स्कैन करें" पर क्लिक करें',
+  'SYS: ARMED // 468 LANDMARKS': 'सिस्टम: सक्रिय // 468 लैंडमार्क',
+  'ENC: SHA-256 / AES-GCM': 'एन्क्रिप्शन: SHA-256 / AES-GCM',
+  'SCAN USING FACE ID': 'फेस आईडी द्वारा स्कैन करें',
+  'AUTHENTICATING FACIAL BIOMETRICS...': 'चेहरे के बायोमेट्रिक्स का सत्यापन जारी...',
+  '✓ FACE ID VERIFIED': '✓ फेस आईडी सत्यापित',
+  'Enroll / Update My Face ID': 'मेरी फेस आईडी दर्ज / अपडेट करें',
+  '📸 Enroll / Update My Face ID': '📸 मेरी फेस आईडी दर्ज / अपडेट करें',
+  'Manual Override → OTP': 'मैन्युअल ओवरराइड → ओटीपी',
+  '← Back to Login Credentials': '← लॉगिन क्रेडेंशियल पर वापस जाएं',
+  'Biometric Face ID Authenticated': 'बायोमेट्रिक फेस आईडी सत्यापित',
+  'Confidence': 'सटीकता',
+  'Launching Carrier 2FA...': 'कैरियर 2FA प्रारंभ हो रहा है...',
+  'Live webcam not accessible or permission denied. Biometric simulation active.': 'लाइव वेबकैम उपलब्ध नहीं है या अनुमति अस्वीकृत है। बायोमेट्रिक सिमुलेशन सक्रिय है।',
+  'Optical camera not supported in this browser environment.': 'इस ब्राउज़र परिवेश में ऑप्टिकल कैमरा समर्थित नहीं है।',
+  'Face biometrics enrolled successfully in fallback cache.': 'फ़ॉलबैक कैश में चेहरे का बायोमेट्रिक्स सफलतापूर्वक दर्ज किया गया।',
+  'Biometric Face ID profile calibrated & stored in defense ledger!': 'बायोमेट्रिक फेस आईडी प्रोफ़ाइल कैलिब्रेट कर रक्षा लेजर में सुरक्षित की गई!',
+  'Face biometric match failed. Please re-center face in reticle.': 'चेहरे का बायोमेट्रिक मिलान विफल रहा। कृपया रेटिकल में चेहरे को पुनः संरेखित करें।',
+  'Defense 2-Factor Authentication': 'रक्षा 2-कारक प्रमाणीकरण (2FA)',
+  'Cryptographic OTP dispatched to authorized military handset for': 'अधिकृत सैन्य हैंडसेट पर क्रिप्टोग्राफ़िक ओटीपी भेजा गया:',
+  'DEFENSE CARRIER DISPATCH TERMINAL': 'रक्षा कैरियर प्रेषण टर्मिनल',
+  'ASCON SATCOM LINK #9914': 'एस्कॉन सैटकॉम लिंक #9914',
+  'DISPATCH NODE:': 'प्रेषण नोड:',
+  'TTL VALIDITY:': 'वैधता अवधि:',
+  '300 SECONDS': '300 सेकंड',
+  'SECONDS': 'सेकंड',
+  'STATUS:': 'स्थिति:',
+  'DISPATCHING...': 'प्रेषित किया जा रहा है...',
+  'TRANSMITTED TO MOBILE HANDSET': 'मोबाइल हैंडसेट पर प्रेषित',
+  '[DEFENSE SMS RECEIVED ON HANDSET]': '[हैंडसेट पर प्राप्त रक्षा एसएमएस]',
+  '"Sena Aapurti Auth: Your Defense 2FA OTP is': '"सेना आपूर्ति प्रमाणीकरण: आपका रक्षा 2FA ओटीपी है',
+  '. Valid for 5 min. Do not share."': '। यह 5 मिनट के लिए वैध है। इसे किसी से साझा न करें।"',
+  'Want OTP dispatched to your specific phone number?': 'क्या आप अपने विशिष्ट फ़ोन नंबर पर ओटीपी प्राप्त करना चाहते हैं?',
+  'Update & Dispatch': 'अपडेट करें एवं प्रेषित करें',
+  'Enter 4-Digit Security OTP': '4-अंकीय सुरक्षा ओटीपी दर्ज करें',
+  '← Back to Face Scan': '← फेस स्कैन पर वापस जाएं',
+  'Authorize & Enter Dashboard': 'अधिकृत करें एवं डैशबोर्ड में प्रवेश करें',
+  'Invalid or expired OTP token.': 'अमान्य अथवा समाप्त हो चुका ओटीपी टोकन।',
+  'Please enter the 4-digit verification code received on defense terminal.': 'कृपया रक्षा टर्मिनल पर प्राप्त 4-अंकीय सत्यापन कोड दर्ज करें।',
+  'Please enter your Official Service Number / User ID.': 'कृपया अपनी आधिकारिक सेवा संख्या / उपयोगकर्ता आईडी दर्ज करें।',
+  'Please enter your security access password.': 'कृपया अपना सुरक्षा एक्सेस पासवर्ड दर्ज करें।',
+  'Security verification code is incorrect. Please try again.': 'सुरक्षा सत्यापन कोड गलत है। कृपया पुनः प्रयास करें।',
+  'Select Registration Type': 'पंजीकरण का प्रकार चुनें',
+  'Register a forward tactical unit or a headquarters logistics administration account.': 'अग्रिम सामरिक यूनिट अथवा मुख्यालय रसद प्रशासन खाता पंजीकृत करें।',
+  'Unit Registration': 'यूनिट पंजीकरण',
+  'Admin Registration': 'व्यवस्थापक पंजीकरण',
+  'Formation / Region': 'फॉर्मेशन / क्षेत्र',
+  'Location / Forward Sector': 'स्थान / अग्रिम सेक्टर',
+  'Authorized Officer': 'अधिकृत अधिकारी',
+  'Contact Details': 'संपर्क विवरण',
+  'Official Email': 'आधिकारिक ईमेल',
+  'Username': 'उपयोगकर्ता नाम',
+  'Confirm Password': 'पासवर्ड की पुष्टि करें',
+  'Verification Code (Enter 7K9X2)': 'सत्यापन कोड (7K9X2 दर्ज करें)',
+  'REGISTER UNIT': 'यूनिट पंजीकृत करें',
+  'Official ID / Service No': 'आधिकारिक आईडी / सेवा संख्या',
+  'Full Name': 'पूरा नाम',
+  'Designation': 'पदनाम',
+  'Command / Organization': 'कमान / संगठन',
+  'Contact': 'संपर्क',
+  'REGISTER ADMIN': 'व्यवस्थापक पंजीकृत करें',
+  'Already registered? Back to Sign In': 'पहले से पंजीकृत हैं? साइन इन पर वापस जाएं',
+  'Please fill in all required fields for Unit Registration.': 'कृपया यूनिट पंजीकरण हेतु सभी आवश्यक फ़ील्ड भरें।',
+  'Please fill in all required fields for Command/Admin Registration.': 'कृपया कमान/व्यवस्थापक पंजीकरण हेतु सभी आवश्यक फ़ील्ड भरें।',
+  'Passwords do not match.': 'पासवर्ड मेल नहीं खाते।',
+  'Reset Defense Terminal Password': 'रक्षा टर्मिनल पासवर्ड रीसेट करें',
+  'Recover access to your account via official defense registered email or service credentials.': 'आधिकारिक रक्षा पंजीकृत ईमेल अथवा सेवा क्रेडेंशियल के माध्यम से अपने खाते तक पहुंच पुनः प्राप्त करें।',
+  'Username / Official Email': 'उपयोगकर्ता नाम / आधिकारिक ईमेल',
+  'Verification Code': 'सत्यापन कोड',
+  'Dispatch Verification OTP': 'सत्यापन ओटीपी भेजें',
+  'Enter 4-Digit OTP (Simulated: 7741)': '4-अंकीय ओटीपी दर्ज करें (सिम्युलेटेड: 7741)',
+  'New Password': 'नया पासवर्ड',
+  'Confirm New Password': 'नए पासवर्ड की पुष्टि करें',
+  'RESET PASSWORD': 'पासवर्ड रीसेट करें',
+  '← Back to Sign In': '← साइन इन पर वापस जाएं',
+  'Please provide your registered Username or Official Email ID.': 'कृपया अपना पंजीकृत उपयोगकर्ता नाम या आधिकारिक ईमेल आईडी प्रदान करें।',
+  'Please enter the verification OTP.': 'कृपया सत्यापन ओटीपी दर्ज करें।',
+  'Password must be at least 6 characters.': 'पासवर्ड कम से कम 6 अक्षरों का होना चाहिए।',
+  'Password successfully reset! You can now log into your defense portal with your new credentials.': 'पासवर्ड सफलतापूर्वक रीसेट हो गया! अब आप अपने नए क्रेडेंशियल के साथ रक्षा पोर्टल में लॉगिन कर सकते हैं।',
+  '403 - ACCESS RESTRICTED': '403 - पहुंच प्रतिबंधित',
+  'INSUFFICIENT SECURITY CLEARANCE LEVEL': 'अपर्याप्त सुरक्षा मंजूरी स्तर',
+  'Your Authenticated Role:': 'आपकी प्रमाणित भूमिका:',
+  'Required Theater Clearance:': 'आवश्यक थिएटर मंजूरी:',
+  'SECRET / DEFCON-1 LEVEL AUTHORIZATION': 'गोपनीय / डेफकॉन-1 स्तर का प्राधिकरण',
+  'Terminal Identity:': 'टर्मिनल पहचान:',
+  'This resource is segregated under Military Cryptographic Policy. Your identity does not possess the operational credentials required for this sector.': 'यह संसाधन सैन्य क्रिप्टोग्राफ़िक नीति के तहत पृथक है। आपकी पहचान में इस सेक्टर के लिए आवश्यक परिचालन क्रेडेंशियल नहीं हैं।',
+  'Return to Home': 'होम पेज पर वापस जाएं',
+  'Return to Dashboard': 'डैशबोर्ड पर वापस जाएं',
+  'Restricted Official Defense Network. All terminal transactions are cryptographically recorded under the Official Secrets Act 1923.': 'प्रतिबंधित आधिकारिक रक्षा नेटवर्क। सभी टर्मिनल लेनदेन शासकीय गोपनीयता अधिनियम 1923 के तहत क्रिप्टोग्राफिक रूप से दर्ज किए जाते हैं।',
+  'e.g. IC-48291X or IC-71044A': 'उदा. IC-48291X या IC-71044A',
+  'Enter Code': 'कोड दर्ज करें',
+  'Enter code': 'कोड दर्ज करें',
+  '7K9X2': '7K9X2',
+  'e.g. 14 RAJPUT (MECHANISED)': 'उदा. 14 राजपूत (मैकेनाइज्ड)',
+  'e.g. UN-14RM-LEH': 'उदा. UN-14RM-LEH',
+  'e.g. FDL Shyok Valley - 14 Corps': 'उदा. एफडीएल श्योक घाटी - 14 कोर',
+  'e.g. Major Amit Sharma': 'उदा. मेजर अमित शर्मा',
+  'e.g. +91 94190 XXXXX / ASCON 2841': 'उदा. +91 94190 XXXXX / एस्कॉन 2841',
+  'officer.unit@army.nic.in': 'officer.unit@army.nic.in',
+  'e.g. IC-71044A': 'उदा. IC-71044A',
+  'e.g. IC-48291X': 'उदा. IC-48291X',
+  'e.g. Lt Gen V. K. Rawat': 'उदा. ले. जन. वी. के. रावत',
+  'e.g. DGOS Directorate / MGS Branch': 'उदा. डीजीओएस निदेशालय / एमजीएस शाखा',
+  'admin.dgos@nic.in': 'admin.dgos@nic.in',
+  'e.g. +91 11 2301 XXXX': 'उदा. +91 11 2301 XXXX',
+  'e.g. rawat.vk': 'उदा. rawat.vk',
+  'e.g. IC-48291X or officer@army.nic.in': 'उदा. IC-48291X या officer@army.nic.in',
 };
 
 @Injectable({
@@ -2321,7 +2457,74 @@ export class LanguageService {
       if (res !== trimmed) return text.replace(trimmed, res);
     }
 
-    // 3. Dynamic patterns (timestamps, dates, counters, status badges)
+    // Altitude regex: e.g. "Eastern Ladakh / Shyok Axis (11,500 ft)" or "(18,800 ft)" or "18,800 ft"
+    const mAlt = trimmed.match(/^(.*?)\s*\((\d+[\d,]*)\s*ft\)$/i);
+    if (mAlt) {
+      const baseTranslated = this.translateText(mAlt[1]);
+      return text.replace(trimmed, `${baseTranslated} (${mAlt[2]} फीट)`);
+    }
+    const mFtOnly = trimmed.match(/^(\d+[\d,]*)\s*ft$/i);
+    if (mFtOnly) {
+      return text.replace(trimmed, `${mFtOnly[1]} फीट`);
+    }
+
+    // Military date format: e.g. "Monday, 19 Oct 2026"
+    const mMilDate = trimmed.match(/^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),\s*(\d{1,2})\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+(\d{4})$/i);
+    if (mMilDate) {
+      const dayMap: Record<string, string> = {
+        monday: 'सोमवार', tuesday: 'मंगलवार', wednesday: 'बुधवार', thursday: 'गुरुवार',
+        friday: 'शुक्रवार', saturday: 'शनिवार', sunday: 'रविवार'
+      };
+      const monthMap: Record<string, string> = {
+        jan: 'जनवरी', feb: 'फरवरी', mar: 'मार्च', apr: 'अप्रैल', may: 'मई', jun: 'जून',
+        jul: 'जुलाई', aug: 'अगस्त', sep: 'सितंबर', oct: 'अक्टूबर', nov: 'नवंबर', dec: 'दिसंबर'
+      };
+      const dName = dayMap[mMilDate[1].toLowerCase()] || mMilDate[1];
+      const mName = monthMap[mMilDate[3].toLowerCase()] || mMilDate[3];
+      return text.replace(trimmed, `${dName}, ${mMilDate[2]} ${mName} ${mMilDate[4]}`);
+    }
+
+    // Date format e.g. "19-Oct-2026" or "19 Oct 2026"
+    const mDateSimple = trimmed.match(/^(\d{1,2})[\s\-]+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*[\s\-]+(\d{4})$/i);
+    if (mDateSimple) {
+      const monthMap: Record<string, string> = {
+        jan: 'जनवरी', feb: 'फरवरी', mar: 'मार्च', apr: 'अप्रैल', may: 'मई', jun: 'जून',
+        jul: 'जुलाई', aug: 'अगस्त', sep: 'सितंबर', oct: 'अक्टूबर', nov: 'नवंबर', dec: 'दिसंबर'
+      };
+      const mName = monthMap[mDateSimple[2].toLowerCase()] || mDateSimple[2];
+      return text.replace(trimmed, `${mDateSimple[1]} ${mName} ${mDateSimple[3]}`);
+    }
+
+    // Military quantities with units: e.g. "16,200 Litres", "4,200 Packs", "120,000 Rounds", "12 Sets", "450 Suits", "320 Tonnes", "340 T", "48 DOS", "12 Days", "0 Item", "0 High Risk"
+    const mQtyUnit = trimmed.match(/^([\d,]+(?:\.\d+)?)\s*(Litres|Litre|Ltrs|Ltr|Packs|Pack|Pkts|Rounds|Round|Rnds|Sets|Set|Suits|Suit|Tonnes|Tonne|Tons|Ton|T|Vehicles|Vehicle|Trucks|Truck|Items|Item|Days|Day|DOS|High Risk)$/i);
+    if (mQtyUnit) {
+      const unitMap: Record<string, string> = {
+        litres: 'लीटर', litre: 'लीटर', ltrs: 'लीटर', ltr: 'लीटर',
+        packs: 'पैकेट', pack: 'पैकेट', pkts: 'पैकेट',
+        rounds: 'राउंड', round: 'राउंड', rnds: 'राउंड',
+        sets: 'सेट', set: 'सेट',
+        suits: 'सूट', suit: 'सूट',
+        tonnes: 'टन', tonne: 'टन', tons: 'टन', ton: 'टन', t: 'टन',
+        vehicles: 'वाहन', vehicle: 'वाहन', trucks: 'ट्रक', truck: 'ट्रक',
+        items: 'आइटम', item: 'आइटम',
+        days: 'दिन', day: 'दिन',
+        dos: 'आपूर्ति दिवस',
+        'high risk': 'उच्च जोखिम'
+      };
+      const uHindi = unitMap[mQtyUnit[2].toLowerCase()] || mQtyUnit[2];
+      return text.replace(trimmed, `${mQtyUnit[1]} ${uHindi}`);
+    }
+
+    // Buffer scale: e.g. "12d Buffer", "30d Buffer"
+    const mBuffer = trimmed.match(/^(\d+)\s*d\s+Buffer$/i);
+    if (mBuffer) return text.replace(trimmed, `${mBuffer[1]} दिन बफर`);
+
+    // In-transit indication: e.g. "4 suspension pads under transit via Convoy GARUDA-01"
+    const mTransit = trimmed.match(/^(\d+)\s+([A-Za-z0-9\s\-]+?)\s+under transit via Convoy\s+([A-Za-z0-9\-]+)$/i);
+    if (mTransit) {
+      return text.replace(trimmed, `${mTransit[1]} ${mTransit[2]} काफिला ${mTransit[3]} के माध्यम से पारगमन में`);
+    }
+
     const mToday = trimmed.match(/^Today\s+(\d\d:\d\d)\s*hrs$/i);
     if (mToday) return text.replace(trimmed, `आज ${mToday[1]} बजे`);
 
@@ -2524,7 +2727,7 @@ export class LanguageService {
             const parent = node.parentElement;
             if (!parent) return NodeFilter.FILTER_REJECT;
             const tag = parent.tagName.toLowerCase();
-            if (['script', 'style', 'noscript', 'textarea', 'input', 'code', 'pre', 'select'].includes(tag)) {
+            if (['script', 'style', 'noscript', 'textarea', 'input', 'code', 'pre'].includes(tag)) {
               return NodeFilter.FILTER_REJECT;
             }
             if (parent.closest('.not-translatable') || parent.isContentEditable) {

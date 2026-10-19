@@ -1,0 +1,3787 @@
+[
+  {
+    "lineNo": 10,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 11,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 12,
+    "text": "class=\"nav-item-btn\"",
+    "full": "class=\"nav-item-btn\""
+  },
+  {
+    "lineNo": 14,
+    "text": "(click)=\"setTab('dashboard')\"",
+    "full": "(click)=\"setTab('dashboard')\""
+  },
+  {
+    "lineNo": 20,
+    "text": "LIVE",
+    "full": "<span class=\"nav-tag live\">LIVE</span>"
+  },
+  {
+    "lineNo": 23,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 24,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 25,
+    "text": "class=\"nav-item-btn\"",
+    "full": "class=\"nav-item-btn\""
+  },
+  {
+    "lineNo": 27,
+    "text": "(click)=\"setTab('inventory')\"",
+    "full": "(click)=\"setTab('inventory')\""
+  },
+  {
+    "lineNo": 35,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 36,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 37,
+    "text": "class=\"nav-item-btn\"",
+    "full": "class=\"nav-item-btn\""
+  },
+  {
+    "lineNo": 39,
+    "text": "(click)=\"setTab('consumption')\"",
+    "full": "(click)=\"setTab('consumption')\""
+  },
+  {
+    "lineNo": 47,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 48,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 49,
+    "text": "class=\"nav-item-btn\"",
+    "full": "class=\"nav-item-btn\""
+  },
+  {
+    "lineNo": 51,
+    "text": "(click)=\"setTab('requests')\"",
+    "full": "(click)=\"setTab('requests')\""
+  },
+  {
+    "lineNo": 60,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 61,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 62,
+    "text": "class=\"nav-item-btn\"",
+    "full": "class=\"nav-item-btn\""
+  },
+  {
+    "lineNo": 64,
+    "text": "(click)=\"setTab('logistics')\"",
+    "full": "(click)=\"setTab('logistics')\""
+  },
+  {
+    "lineNo": 72,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 73,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 74,
+    "text": "class=\"nav-item-btn\"",
+    "full": "class=\"nav-item-btn\""
+  },
+  {
+    "lineNo": 76,
+    "text": "(click)=\"setTab('route-weather')\"",
+    "full": "(click)=\"setTab('route-weather')\""
+  },
+  {
+    "lineNo": 84,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 85,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 86,
+    "text": "class=\"nav-item-btn\"",
+    "full": "class=\"nav-item-btn\""
+  },
+  {
+    "lineNo": 88,
+    "text": "(click)=\"setTab('ai-insights')\"",
+    "full": "(click)=\"setTab('ai-insights')\""
+  },
+  {
+    "lineNo": 96,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 97,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 98,
+    "text": "class=\"nav-item-btn\"",
+    "full": "class=\"nav-item-btn\""
+  },
+  {
+    "lineNo": 100,
+    "text": "(click)=\"setTab('reports')\"",
+    "full": "(click)=\"setTab('reports')\""
+  },
+  {
+    "lineNo": 108,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 109,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 110,
+    "text": "class=\"nav-item-btn\"",
+    "full": "class=\"nav-item-btn\""
+  },
+  {
+    "lineNo": 112,
+    "text": "(click)=\"setTab('settings')\"",
+    "full": "(click)=\"setTab('settings')\""
+  },
+  {
+    "lineNo": 143,
+    "text": "📍 {{ unitDbService.selectedUnit().station || 'Forward Defended Locality - Shyok Sector' }} ({{ unitDbService.selectedUnit().command || 'Northern Command' }})",
+    "full": "<span class=\"ud-pin-icon\">📍</span> {{ unitDbService.selectedUnit().station || 'Forward Defended Locality - Shyok Sector' }} ({{ unitDbService.selectedUnit().command || 'Northern Command' }})"
+  },
+  {
+    "lineNo": 152,
+    "text": "SATCOM ONLINE",
+    "full": "<span class=\"ud-satcom-status\">SATCOM ONLINE</span>"
+  },
+  {
+    "lineNo": 158,
+    "text": "Flash SOS Air-Drop",
+    "full": "<span>Flash SOS Air-Drop</span>"
+  },
+  {
+    "lineNo": 173,
+    "text": "UNIT READINESS",
+    "full": "<span class=\"ud-kpi-label\">UNIT READINESS</span>"
+  },
+  {
+    "lineNo": 174,
+    "text": "OPTIMAL",
+    "full": "<span class=\"ud-kpi-badge badge-green\">OPTIMAL</span>"
+  },
+  {
+    "lineNo": 179,
+    "text": "Optimal Posture",
+    "full": "<span>Optimal Posture</span>"
+  },
+  {
+    "lineNo": 186,
+    "text": "INVENTORY HEALTH",
+    "full": "<span class=\"ud-kpi-label\">INVENTORY HEALTH</span>"
+  },
+  {
+    "lineNo": 187,
+    "text": "STABLE",
+    "full": "<span class=\"ud-kpi-badge badge-green\">STABLE</span>"
+  },
+  {
+    "lineNo": 189,
+    "text": "Optimal",
+    "full": "<div class=\"ud-kpi-val text-green\">Optimal</div>"
+  },
+  {
+    "lineNo": 192,
+    "text": "48 DOS Average",
+    "full": "<span>48 DOS Average</span>"
+  },
+  {
+    "lineNo": 199,
+    "text": "CRITICAL SUPPLIES",
+    "full": "<span class=\"ud-kpi-label\">CRITICAL SUPPLIES</span>"
+  },
+  {
+    "lineNo": 200,
+    "text": "ATTENTION",
+    "full": "<span class=\"ud-kpi-badge badge-saffron\">ATTENTION</span>"
+  },
+  {
+    "lineNo": 202,
+    "text": "2 Items",
+    "full": "<div class=\"ud-kpi-val text-saffron\">2 Items</div>"
+  },
+  {
+    "lineNo": 205,
+    "text": "Spares under transit",
+    "full": "<span>Spares under transit</span>"
+  },
+  {
+    "lineNo": 212,
+    "text": "DAYS OF SUPPLY",
+    "full": "<span class=\"ud-kpi-label\">DAYS OF SUPPLY</span>"
+  },
+  {
+    "lineNo": 213,
+    "text": "WINTER SCALE",
+    "full": "<span class=\"ud-kpi-badge badge-gold\">WINTER SCALE</span>"
+  },
+  {
+    "lineNo": 215,
+    "text": "48 DOS",
+    "full": "<div class=\"ud-kpi-val text-gold\">48 DOS</div>"
+  },
+  {
+    "lineNo": 218,
+    "text": "POL & Dry Rations",
+    "full": "<span>POL & Dry Rations</span>"
+  },
+  {
+    "lineNo": 225,
+    "text": "PENDING REQUESTS",
+    "full": "<span class=\"ud-kpi-label\">PENDING REQUESTS</span>"
+  },
+  {
+    "lineNo": 226,
+    "text": "ACTIVE",
+    "full": "<span class=\"ud-kpi-badge badge-blue\">ACTIVE</span>"
+  },
+  {
+    "lineNo": 228,
+    "text": "1 Indent",
+    "full": "<div class=\"ud-kpi-val text-blue\">1 Indent</div>"
+  },
+  {
+    "lineNo": 231,
+    "text": "18,000L POL Approved",
+    "full": "<span>18,000L POL Approved</span>"
+  },
+  {
+    "lineNo": 238,
+    "text": "INCOMING SHIPMENTS",
+    "full": "<span class=\"ud-kpi-label\">INCOMING SHIPMENTS</span>"
+  },
+  {
+    "lineNo": 239,
+    "text": "EN ROUTE",
+    "full": "<span class=\"ud-kpi-badge badge-blue\">EN ROUTE</span>"
+  },
+  {
+    "lineNo": 241,
+    "text": "2 Convoys",
+    "full": "<div class=\"ud-kpi-val text-blue\">2 Convoys</div>"
+  },
+  {
+    "lineNo": 244,
+    "text": "GARUDA-01 & HIMALAYA-9",
+    "full": "<span>GARUDA-01 & HIMALAYA-9</span>"
+  },
+  {
+    "lineNo": 251,
+    "text": "ACTIVE LOGISTICS",
+    "full": "<span class=\"ud-kpi-label\">ACTIVE LOGISTICS</span>"
+  },
+  {
+    "lineNo": 252,
+    "text": "AXIS LOAD",
+    "full": "<span class=\"ud-kpi-badge badge-gold\">AXIS LOAD</span>"
+  },
+  {
+    "lineNo": 257,
+    "text": "Rolling on Axis",
+    "full": "<span>Rolling on Axis</span>"
+  },
+  {
+    "lineNo": 265,
+    "text": "TACTICAL OPS",
+    "full": "<span class=\"ud-actions-badge\">TACTICAL OPS</span>"
+  },
+  {
+    "lineNo": 266,
+    "text": "QUICK OPERATIONAL ACTIONS:",
+    "full": "<span class=\"ud-actions-title\">QUICK OPERATIONAL ACTIONS:</span>"
+  },
+  {
+    "lineNo": 270,
+    "text": "+ Request Supply Requisition",
+    "full": "<span class=\"ud-btn-plus\">+</span> Request Supply Requisition"
+  },
+  {
+    "lineNo": 273,
+    "text": "📋 Record Daily Consumption",
+    "full": "<span class=\"ud-btn-sym\">📋</span> Record Daily Consumption"
+  },
+  {
+    "lineNo": 276,
+    "text": "📥 Update Received Inventory",
+    "full": "<span class=\"ud-btn-sym\">📥</span> Update Received Inventory"
+  },
+  {
+    "lineNo": 279,
+    "text": "🚚 Track Incoming Shipment",
+    "full": "<span class=\"ud-btn-sym\">🚚</span> Track Incoming Shipment"
+  },
+  {
+    "lineNo": 291,
+    "text": "Regimental Stores Buffer Coverage",
+    "full": "<h3 class=\"ud-panel-heading\">Regimental Stores Buffer Coverage</h3>"
+  },
+  {
+    "lineNo": 292,
+    "text": "Current holding vs authorized winter mobilization scales",
+    "full": "<span class=\"ud-panel-hint\">Current holding vs authorized winter mobilization scales</span>"
+  },
+  {
+    "lineNo": 294,
+    "text": "WINTER BUFFER 100%",
+    "full": "<span class=\"ud-header-tag\">WINTER BUFFER 100%</span>"
+  },
+  {
+    "lineNo": 302,
+    "text": "CLASS I",
+    "full": "<span class=\"ud-cat-tag\">CLASS I</span>"
+  },
+  {
+    "lineNo": 303,
+    "text": "Fresh & MRE Rations: 48 DOS",
+    "full": "<span class=\"ud-stock-title\">Fresh & MRE Rations: <strong>48 DOS</strong></span>"
+  },
+  {
+    "lineNo": 305,
+    "text": "80% Capacity",
+    "full": "<span class=\"ud-capacity-pill cap-green\">80% Capacity</span>"
+  },
+  {
+    "lineNo": 311,
+    "text": "Fresh: 12 Days",
+    "full": "<span class=\"ud-meta-segment\">Fresh: <strong>12 Days</strong></span>"
+  },
+  {
+    "lineNo": 313,
+    "text": "MRE/Dry: 36 Days",
+    "full": "<span class=\"ud-meta-segment\">MRE/Dry: <strong>36 Days</strong></span>"
+  },
+  {
+    "lineNo": 321,
+    "text": "CLASS III",
+    "full": "<span class=\"ud-cat-tag\">CLASS III</span>"
+  },
+  {
+    "lineNo": 322,
+    "text": "Winter Grade HSD: 16,200 Litres",
+    "full": "<span class=\"ud-stock-title\">Winter Grade HSD: <strong>16,200 Litres</strong></span>"
+  },
+  {
+    "lineNo": 324,
+    "text": "81% Capacity",
+    "full": "<span class=\"ud-capacity-pill cap-green\">81% Capacity</span>"
+  },
+  {
+    "lineNo": 330,
+    "text": "Winter Grade -40°C HSD: 12,400L",
+    "full": "<span class=\"ud-meta-segment\">Winter Grade -40°C HSD: <strong>12,400L</strong></span>"
+  },
+  {
+    "lineNo": 332,
+    "text": "2T Oil: 3,800L",
+    "full": "<span class=\"ud-meta-segment\">2T Oil: <strong>3,800L</strong></span>"
+  },
+  {
+    "lineNo": 340,
+    "text": "CLASS V",
+    "full": "<span class=\"ud-cat-tag\">CLASS V</span>"
+  },
+  {
+    "lineNo": 341,
+    "text": "Ammunition & Munitions: 94.5% UBL",
+    "full": "<span class=\"ud-stock-title\">Ammunition & Munitions: <strong>94.5% UBL</strong></span>"
+  },
+  {
+    "lineNo": 343,
+    "text": "94.5% Optimal",
+    "full": "<span class=\"ud-capacity-pill cap-green\">94.5% Optimal</span>"
+  },
+  {
+    "lineNo": 349,
+    "text": "Small Arms: 100%",
+    "full": "<span class=\"ud-meta-segment\">Small Arms: <strong>100%</strong></span>"
+  },
+  {
+    "lineNo": 351,
+    "text": "ATGM Missiles: 92%",
+    "full": "<span class=\"ud-meta-segment\">ATGM Missiles: <strong>92%</strong></span>"
+  },
+  {
+    "lineNo": 359,
+    "text": "CLASS IX",
+    "full": "<span class=\"ud-cat-tag tag-saffron\">CLASS IX</span>"
+  },
+  {
+    "lineNo": 360,
+    "text": "BMP-II Armor Spares: 12 Sets",
+    "full": "<span class=\"ud-stock-title\">BMP-II Armor Spares: <strong>12 Sets</strong></span>"
+  },
+  {
+    "lineNo": 362,
+    "text": "82% Review Needed",
+    "full": "<span class=\"ud-capacity-pill cap-saffron\">82% Review Needed</span>"
+  },
+  {
+    "lineNo": 368,
+    "text": "⚠️ 4 suspension pads under transit via Convoy GARUDA-01",
+    "full": "<span class=\"ud-meta-transit\">⚠️ 4 suspension pads under transit via Convoy GARUDA-01</span>"
+  },
+  {
+    "lineNo": 377,
+    "text": "CRITICAL ALERT",
+    "full": "<span class=\"ud-ai-alert-tag\">CRITICAL ALERT</span>"
+  },
+  {
+    "lineNo": 378,
+    "text": "AI Early Warning: Sub-Zero Cold Freeze Hazard",
+    "full": "<strong class=\"ud-ai-title\">AI Early Warning: Sub-Zero Cold Freeze Hazard</strong>"
+  },
+  {
+    "lineNo": 381,
+    "text": "Nighttime temperature drop to -26°C will trigger automated tank heating routines. Daily fuel burn rate is projected to increase by 24% over the next 5 days.",
+    "full": "Nighttime temperature drop to -26°C will trigger automated tank heating routines. Daily fuel burn rate is projected to increase by 24% over the next 5 days."
+  },
+  {
+    "lineNo": 384,
+    "text": "RECOMMENDED",
+    "full": "<span class=\"ud-rec-badge\">RECOMMENDED</span>"
+  },
+  {
+    "lineNo": 385,
+    "text": "Request early release of 18,000L POL buffer. (Voucher #IND-2026-9041 approved).",
+    "full": "<span class=\"ud-rec-text\">Request early release of 18,000L POL buffer. (Voucher #IND-2026-9041 approved).</span>"
+  },
+  {
+    "lineNo": 394,
+    "text": "Incoming Shipments En Route",
+    "full": "<h3 class=\"ud-panel-heading\">Incoming Shipments En Route</h3>"
+  },
+  {
+    "lineNo": 395,
+    "text": "Columns destined for FSD Leh / 14 Rajput stores",
+    "full": "<span class=\"ud-panel-hint\">Columns destined for FSD Leh / 14 Rajput stores</span>"
+  },
+  {
+    "lineNo": 397,
+    "text": "ACTIVE CONVOYS (2)",
+    "full": "<span class=\"ud-header-tag tag-blue\">ACTIVE CONVOYS (2)</span>"
+  },
+  {
+    "lineNo": 406,
+    "text": "Convoy GARUDA-01",
+    "full": "<strong class=\"ud-convoy-name\">Convoy GARUDA-01</strong>"
+  },
+  {
+    "lineNo": 408,
+    "text": "In-Transit",
+    "full": "<span class=\"ud-status-pill st-green\">In-Transit</span>"
+  },
+  {
+    "lineNo": 412,
+    "text": "320 Tonnes Class III (POL) • 28 Vehicles",
+    "full": "<span>320 Tonnes Class III (POL) • 28 Vehicles</span>"
+  },
+  {
+    "lineNo": 416,
+    "text": "ETA",
+    "full": "<span class=\"ud-eta-label\">ETA</span>"
+  },
+  {
+    "lineNo": 417,
+    "text": "4 hrs 15 mins",
+    "full": "<strong class=\"ud-eta-time\">4 hrs 15 mins</strong>"
+  },
+  {
+    "lineNo": 419,
+    "text": "Via Atal Tunnel-Keylong Axis",
+    "full": "<span class=\"ud-route-axis\">Via Atal Tunnel-Keylong Axis</span>"
+  },
+  {
+    "lineNo": 423,
+    "text": "📡 Track Convoy Live",
+    "full": "<span>📡 Track Convoy Live</span>"
+  },
+  {
+    "lineNo": 433,
+    "text": "Convoy HIMALAYA-9",
+    "full": "<strong class=\"ud-convoy-name\">Convoy HIMALAYA-9</strong>"
+  },
+  {
+    "lineNo": 435,
+    "text": "Rerouted",
+    "full": "<span class=\"ud-status-pill st-gold\">Rerouted</span>"
+  },
+  {
+    "lineNo": 439,
+    "text": "420 Tonnes Winter Stocking & Ammo • 34 Vehicles",
+    "full": "<span>420 Tonnes Winter Stocking & Ammo • 34 Vehicles</span>"
+  },
+  {
+    "lineNo": 443,
+    "text": "ETA",
+    "full": "<span class=\"ud-eta-label\">ETA</span>"
+  },
+  {
+    "lineNo": 444,
+    "text": "7 hrs 10 mins",
+    "full": "<strong class=\"ud-eta-time\">7 hrs 10 mins</strong>"
+  },
+  {
+    "lineNo": 446,
+    "text": "Via Nilgrath Bypass",
+    "full": "<span class=\"ud-route-axis\">Via Nilgrath Bypass</span>"
+  },
+  {
+    "lineNo": 450,
+    "text": "📡 Track Convoy Live",
+    "full": "<span>📡 Track Convoy Live</span>"
+  },
+  {
+    "lineNo": 459,
+    "text": "SECTOR METEOROLOGY",
+    "full": "<span class=\"ud-weather-badge\">SECTOR METEOROLOGY</span>"
+  },
+  {
+    "lineNo": 460,
+    "text": "Local Sector Weather Telemetry (Click to Inspect)",
+    "full": "<h4 class=\"ud-weather-title\">Local Sector Weather Telemetry (Click to Inspect)</h4>"
+  },
+  {
+    "lineNo": 466,
+    "text": "Feels like -24°C",
+    "full": "<div class=\"ud-temp-feels\">Feels like -24°C</div>"
+  },
+  {
+    "lineNo": 467,
+    "text": "ALT: 3,500m MSL",
+    "full": "<div class=\"ud-altitude-tag\">ALT: 3,500m MSL</div>"
+  },
+  {
+    "lineNo": 472,
+    "text": "Wind Velocity:",
+    "full": "<span class=\"ud-telemetry-k\">Wind Velocity:</span>"
+  },
+  {
+    "lineNo": 473,
+    "text": "38 km/h NNW",
+    "full": "<span class=\"ud-telemetry-v\">38 km/h NNW</span>"
+  },
+  {
+    "lineNo": 476,
+    "text": "Precipitation:",
+    "full": "<span class=\"ud-telemetry-k\">Precipitation:</span>"
+  },
+  {
+    "lineNo": 477,
+    "text": "Light Snow",
+    "full": "<span class=\"ud-telemetry-v\">Light Snow</span>"
+  },
+  {
+    "lineNo": 480,
+    "text": "Pass Status:",
+    "full": "<span class=\"ud-telemetry-k\">Pass Status:</span>"
+  },
+  {
+    "lineNo": 481,
+    "text": "Khardung La Open (Chains Mandatory)",
+    "full": "<span class=\"ud-telemetry-v pass-open\">Khardung La Open (Chains Mandatory)</span>"
+  },
+  {
+    "lineNo": 484,
+    "text": "Advisory:",
+    "full": "<span class=\"ud-telemetry-k\">Advisory:</span>"
+  },
+  {
+    "lineNo": 485,
+    "text": "Black ice alert on Km 42-56 track",
+    "full": "<span class=\"ud-telemetry-v text-saffron\">Black ice alert on Km 42-56 track</span>"
+  },
+  {
+    "lineNo": 498,
+    "text": "Regimental Stores Inventory Ledger",
+    "full": "<h2 class=\"module-title\">Regimental Stores Inventory Ledger</h2>"
+  },
+  {
+    "lineNo": 499,
+    "text": "Class I to IX items stocked at 14 Rajput Forward Defended Base",
+    "full": "<p class=\"module-subtitle\">Class I to IX items stocked at 14 Rajput Forward Defended Base</p>"
+  },
+  {
+    "lineNo": 502,
+    "text": "Record Issue",
+    "full": "<button type=\"button\" class=\"btn-outline-army\" (click)=\"openRecordConsumptionModal()\">Record Issue</button>"
+  },
+  {
+    "lineNo": 503,
+    "text": "+ Add Store Receipt",
+    "full": "<button type=\"button\" class=\"btn-army-primary\" (click)=\"openAddReceiptModal()\">+ Add Store Receipt</button>"
+  },
+  {
+    "lineNo": 510,
+    "text": "TOTAL STOCK NOMENCLATURES",
+    "full": "<div class=\"kpi-label\">TOTAL STOCK NOMENCLATURES</div>"
+  },
+  {
+    "lineNo": 514,
+    "text": "AVAILABLE & VERIFIED",
+    "full": "<div class=\"kpi-label\">AVAILABLE & VERIFIED</div>"
+  },
+  {
+    "lineNo": 518,
+    "text": "LOW STOCK ITEMS",
+    "full": "<div class=\"kpi-label\">LOW STOCK ITEMS</div>"
+  },
+  {
+    "lineNo": 522,
+    "text": "CRITICAL SURPLUS",
+    "full": "<div class=\"kpi-label\">CRITICAL SURPLUS</div>"
+  },
+  {
+    "lineNo": 526,
+    "text": "STOCKOUT RISK",
+    "full": "<div class=\"kpi-label\">STOCKOUT RISK</div>"
+  },
+  {
+    "lineNo": 534,
+    "text": "Search Nomenclature",
+    "full": "<label class=\"filter-label\">Search Nomenclature</label>"
+  },
+  {
+    "lineNo": 538,
+    "text": "Category",
+    "full": "<label class=\"filter-label\">Category</label>"
+  },
+  {
+    "lineNo": 540,
+    "text": "All Categories",
+    "full": "<option value=\"All\">All Categories</option>"
+  },
+  {
+    "lineNo": 541,
+    "text": "Class I (Rations)",
+    "full": "<option value=\"Class I (Rations)\">Class I (Rations)</option>"
+  },
+  {
+    "lineNo": 542,
+    "text": "Class III (POL)",
+    "full": "<option value=\"Class III (POL)\">Class III (POL)</option>"
+  },
+  {
+    "lineNo": 543,
+    "text": "Class V (Ammo)",
+    "full": "<option value=\"Class V (Ammo)\">Class V (Ammo)</option>"
+  },
+  {
+    "lineNo": 544,
+    "text": "Class IX (Spares)",
+    "full": "<option value=\"Class IX (Spares)\">Class IX (Spares)</option>"
+  },
+  {
+    "lineNo": 545,
+    "text": "Medical & Clothing",
+    "full": "<option value=\"Medical & Clothing\">Medical & Clothing</option>"
+  },
+  {
+    "lineNo": 549,
+    "text": "Stock Status",
+    "full": "<label class=\"filter-label\">Stock Status</label>"
+  },
+  {
+    "lineNo": 551,
+    "text": "All Statuses",
+    "full": "<option value=\"All\">All Statuses</option>"
+  },
+  {
+    "lineNo": 552,
+    "text": "Adequate",
+    "full": "<option value=\"Adequate\">Adequate</option>"
+  },
+  {
+    "lineNo": 553,
+    "text": "Low Stock",
+    "full": "<option value=\"Low\">Low Stock</option>"
+  },
+  {
+    "lineNo": 554,
+    "text": "Surplus",
+    "full": "<option value=\"Surplus\">Surplus</option>"
+  },
+  {
+    "lineNo": 555,
+    "text": "Critical",
+    "full": "<option value=\"Critical\">Critical</option>"
+  },
+  {
+    "lineNo": 559,
+    "text": "&nbsp;",
+    "full": "<label class=\"filter-label\">&nbsp;</label>"
+  },
+  {
+    "lineNo": 561,
+    "text": "✕ Reset Filters",
+    "full": "✕ Reset Filters"
+  },
+  {
+    "lineNo": 571,
+    "text": "Item ID",
+    "full": "<th>Item ID</th>"
+  },
+  {
+    "lineNo": 572,
+    "text": "Nomenclature",
+    "full": "<th>Nomenclature</th>"
+  },
+  {
+    "lineNo": 573,
+    "text": "Category",
+    "full": "<th>Category</th>"
+  },
+  {
+    "lineNo": 574,
+    "text": "Current Qty",
+    "full": "<th>Current Qty</th>"
+  },
+  {
+    "lineNo": 575,
+    "text": "Safety Buffer",
+    "full": "<th>Safety Buffer</th>"
+  },
+  {
+    "lineNo": 576,
+    "text": "Reorder Level",
+    "full": "<th>Reorder Level</th>"
+  },
+  {
+    "lineNo": 577,
+    "text": "Days Remaining",
+    "full": "<th>Days Remaining</th>"
+  },
+  {
+    "lineNo": 578,
+    "text": "Status",
+    "full": "<th>Status</th>"
+  },
+  {
+    "lineNo": 579,
+    "text": "Actions",
+    "full": "<th>Actions</th>"
+  },
+  {
+    "lineNo": 591,
+    "text": "30\" [class.text-amber]=\"item.daysRemaining",
+    "full": "<span class=\"font-bold\" [class.text-green]=\"item.daysRemaining > 30\" [class.text-amber]=\"item.daysRemaining <= 30\">"
+  },
+  {
+    "lineNo": 597,
+    "text": "● {{ item.status }}",
+    "full": "● {{ item.status }}"
+  },
+  {
+    "lineNo": 602,
+    "text": "Ledger Card",
+    "full": "Ledger Card"
+  },
+  {
+    "lineNo": 617,
+    "text": "Stock ID: {{ selectedInvItem.id }}",
+    "full": "<span class=\"text-xs text-muted font-mono\">Stock ID: {{ selectedInvItem.id }}</span>"
+  },
+  {
+    "lineNo": 624,
+    "text": "Current Available:",
+    "full": "<span class=\"d-label\">Current Available:</span>"
+  },
+  {
+    "lineNo": 628,
+    "text": "Total Received:",
+    "full": "<span class=\"d-label\">Total Received:</span>"
+  },
+  {
+    "lineNo": 632,
+    "text": "Total Issued:",
+    "full": "<span class=\"d-label\">Total Issued:</span>"
+  },
+  {
+    "lineNo": 636,
+    "text": "Safety Buffer:",
+    "full": "<span class=\"d-label\">Safety Buffer:</span>"
+  },
+  {
+    "lineNo": 640,
+    "text": "Reorder Level:",
+    "full": "<span class=\"d-label\">Reorder Level:</span>"
+  },
+  {
+    "lineNo": 644,
+    "text": "Days of Supply:",
+    "full": "<span class=\"d-label\">Days of Supply:</span>"
+  },
+  {
+    "lineNo": 648,
+    "text": "Damaged / Written Off:",
+    "full": "<span class=\"d-label\">Damaged / Written Off:</span>"
+  },
+  {
+    "lineNo": 652,
+    "text": "Expired:",
+    "full": "<span class=\"d-label\">Expired:</span>"
+  },
+  {
+    "lineNo": 658,
+    "text": "Direct Stock Actions:",
+    "full": "<span class=\"text-xs text-muted\" style=\"margin-right: 12px;\">Direct Stock Actions:</span>"
+  },
+  {
+    "lineNo": 660,
+    "text": "+ Add Store Receipt RV",
+    "full": "+ Add Store Receipt RV"
+  },
+  {
+    "lineNo": 663,
+    "text": "📋 Record Issue / Burn",
+    "full": "📋 Record Issue / Burn"
+  },
+  {
+    "lineNo": 668,
+    "text": "Close Ledger",
+    "full": "<button type=\"button\" class=\"btn-outline-army\" (click)=\"closeLedgerCard()\">Close Ledger</button>"
+  },
+  {
+    "lineNo": 681,
+    "text": "ASCON MILITARY TELEMETRY GRID · SENSOR SUITE v4.2 ONLINE · LATENCY 14ms",
+    "full": "<span>ASCON MILITARY TELEMETRY GRID · SENSOR SUITE v4.2 ONLINE · LATENCY 14ms</span>"
+  },
+  {
+    "lineNo": 683,
+    "text": "Consumption Telematics & Unit Demand",
+    "full": "<h2 class=\"module-title\">Consumption Telematics & Unit Demand</h2>"
+  },
+  {
+    "lineNo": 684,
+    "text": "High-Altitude Sub-Zero POL Burn Rates, Troop Rations & Predictive Winter Surge Analytics",
+    "full": "<p class=\"module-subtitle\">High-Altitude Sub-Zero POL Burn Rates, Troop Rations & Predictive Winter Surge Analytics</p>"
+  },
+  {
+    "lineNo": 689,
+    "text": "+ Pre-Winter Stocking Indent",
+    "full": "<span>+ Pre-Winter Stocking Indent</span>"
+  },
+  {
+    "lineNo": 698,
+    "text": "DAILY POL RUN-RATE",
+    "full": "<span class=\"kpi-label\">DAILY POL RUN-RATE</span>"
+  },
+  {
+    "lineNo": 699,
+    "text": "+31% Active",
+    "full": "<span class=\"kpi-sub-badge badge-amber\">+31% Active</span>"
+  },
+  {
+    "lineNo": 701,
+    "text": "492 L/day",
+    "full": "<div class=\"kpi-value text-gold\">492 L/day</div>"
+  },
+  {
+    "lineNo": 703,
+    "text": "Gensets (44%) + Bukhari (30%) + BMPs (17%)",
+    "full": "<span>Gensets (44%) + Bukhari (30%) + BMPs (17%)</span>"
+  },
+  {
+    "lineNo": 704,
+    "text": "48d Buffer",
+    "full": "<span class=\"kpi-buffer-tag text-green\">48d Buffer</span>"
+  },
+  {
+    "lineNo": 713,
+    "text": "DAILY TROOP RATIONS",
+    "full": "<span class=\"kpi-label\">DAILY TROOP RATIONS</span>"
+  },
+  {
+    "lineNo": 714,
+    "text": "Nominal",
+    "full": "<span class=\"kpi-sub-badge badge-green\">Nominal</span>"
+  },
+  {
+    "lineNo": 716,
+    "text": "1,460 Packs",
+    "full": "<div class=\"kpi-value text-green\">1,460 Packs</div>"
+  },
+  {
+    "lineNo": 718,
+    "text": "840 Garrison Troops · 3,800 kcal MRE",
+    "full": "<span>840 Garrison Troops · 3,800 kcal MRE</span>"
+  },
+  {
+    "lineNo": 719,
+    "text": "55d Buffer",
+    "full": "<span class=\"kpi-buffer-tag text-green\">55d Buffer</span>"
+  },
+  {
+    "lineNo": 728,
+    "text": "MUNITIONS EXPENDITURE",
+    "full": "<span class=\"kpi-label\">MUNITIONS EXPENDITURE</span>"
+  },
+  {
+    "lineNo": 729,
+    "text": "Controlled",
+    "full": "<span class=\"kpi-sub-badge badge-blue\">Controlled</span>"
+  },
+  {
+    "lineNo": 731,
+    "text": "340 Rnds",
+    "full": "<div class=\"kpi-value text-blue\">340 Rnds</div>"
+  },
+  {
+    "lineNo": 733,
+    "text": "7.62mm & 30mm Cannon Zeroing Ranges",
+    "full": "<span>7.62mm & 30mm Cannon Zeroing Ranges</span>"
+  },
+  {
+    "lineNo": 734,
+    "text": "100% WWR Safe",
+    "full": "<span class=\"kpi-buffer-tag text-blue\">100% WWR Safe</span>"
+  },
+  {
+    "lineNo": 743,
+    "text": "AI WINTER PEAK SURGE",
+    "full": "<span class=\"kpi-label\">AI WINTER PEAK SURGE</span>"
+  },
+  {
+    "lineNo": 744,
+    "text": "Alert D+4",
+    "full": "<span class=\"kpi-sub-badge badge-red\">Alert D+4</span>"
+  },
+  {
+    "lineNo": 748,
+    "text": "Forecast: 630 L/day by Mid-Nov Freeze",
+    "full": "<span>Forecast: 630 L/day by Mid-Nov Freeze</span>"
+  },
+  {
+    "lineNo": 749,
+    "text": "Pass Closes 22d",
+    "full": "<span class=\"kpi-buffer-tag text-amber\">Pass Closes 22d</span>"
+  },
+  {
+    "lineNo": 763,
+    "text": "TELEMATICS RADAR",
+    "full": "<span class=\"chart-tag\">TELEMATICS RADAR</span>"
+  },
+  {
+    "lineNo": 764,
+    "text": "NEURAL LOGISTICS ENGINE v4.2",
+    "full": "<span class=\"chart-model-tag\">NEURAL LOGISTICS ENGINE v4.2</span>"
+  },
+  {
+    "lineNo": 765,
+    "text": "14 RAJPUT · SECTOR 4A (13,500 FT)",
+    "full": "<span class=\"chart-unit-tag\">14 RAJPUT · SECTOR 4A (13,500 FT)</span>"
+  },
+  {
+    "lineNo": 767,
+    "text": "Daily Multi-Class Consumption vs AI Winter Surge Trajectory",
+    "full": "<h3 class=\"chart-title\">Daily Multi-Class Consumption vs AI Winter Surge Trajectory</h3>"
+  },
+  {
+    "lineNo": 769,
+    "text": "High-Altitude POL Fuel · High-Calorie Rations · Munitions Expenditure · Temperature Correlation Curve",
+    "full": "High-Altitude POL Fuel · High-Calorie Rations · Munitions Expenditure · Temperature Correlation Curve"
+  },
+  {
+    "lineNo": 777,
+    "text": "All Classes",
+    "full": "<span class=\"metric-indicator all-ind\"></span> All Classes"
+  },
+  {
+    "lineNo": 780,
+    "text": "Class III (POL)",
+    "full": "<span class=\"metric-indicator pol-ind\"></span> Class III (POL)"
+  },
+  {
+    "lineNo": 783,
+    "text": "Class I (Rations)",
+    "full": "<span class=\"metric-indicator rat-ind\"></span> Class I (Rations)"
+  },
+  {
+    "lineNo": 786,
+    "text": "Class V (Ammo)",
+    "full": "<span class=\"metric-indicator ammo-ind\"></span> Class V (Ammo)"
+  },
+  {
+    "lineNo": 794,
+    "text": "POL Run-Rate (L/d)",
+    "full": "<span class=\"legend-text\">POL Run-Rate (L/d)</span>"
+  },
+  {
+    "lineNo": 798,
+    "text": "Rations (Packs)",
+    "full": "<span class=\"legend-text\">Rations (Packs)</span>"
+  },
+  {
+    "lineNo": 802,
+    "text": "Munitions (Rnds)",
+    "full": "<span class=\"legend-text\">Munitions (Rnds)</span>"
+  },
+  {
+    "lineNo": 806,
+    "text": "Sub-Zero Temp (°C)",
+    "full": "<span class=\"legend-text\">Sub-Zero Temp (°C)</span>"
+  },
+  {
+    "lineNo": 810,
+    "text": "Neural Surge Model (+28%)",
+    "full": "<span class=\"legend-text\">Neural Surge Model (+28%)</span>"
+  },
+  {
+    "lineNo": 928,
+    "text": "⚠ 550 L/DAY CRITICAL DEPOT RESUPPLY CEILING",
+    "full": "<text x=\"75\" y=\"102\" fill=\"#ef4444\" font-size=\"9\" font-weight=\"bold\">⚠ 550 L/DAY CRITICAL DEPOT RESUPPLY CEILING</text>"
+  },
+  {
+    "lineNo": 936,
+    "text": "AI NEURAL WINTER SURGE FORECAST ENVELOPE",
+    "full": "<text x=\"562\" y=\"44\" fill=\"#f59e0b\" font-size=\"9\" font-weight=\"bold\">AI NEURAL WINTER SURGE FORECAST ENVELOPE</text>"
+  },
+  {
+    "lineNo": 940,
+    "text": "Lower path: (845, 84) -> (770, 96) -> (695, 108) -> (620, 120) -> (545, 130) -->",
+    "full": "Lower path: (845, 84) -> (770, 96) -> (695, 108) -> (620, 120) -> (545, 130) -->"
+  },
+  {
+    "lineNo": 942,
+    "text": "points=\"545,120 620,104 695,88 770,72 845,56 845,84 770,96 695,108 620,120 545,130\"",
+    "full": "points=\"545,120 620,104 695,88 770,72 845,56 845,84 770,96 695,108 620,120 545,130\""
+  },
+  {
+    "lineNo": 943,
+    "text": "fill=\"url(#confidenceCorridorGrad)\" opacity=\"0.7\"/>",
+    "full": "fill=\"url(#confidenceCorridorGrad)\" opacity=\"0.7\"/>"
+  },
+  {
+    "lineNo": 948,
+    "text": "fill=\"none\" stroke=\"#06b6d4\" stroke-width=\"2\" stroke-dasharray=\"4 3\" opacity=\"0.8\" filter=\"url(#glowCyan)\"/>",
+    "full": "fill=\"none\" stroke=\"#06b6d4\" stroke-width=\"2\" stroke-dasharray=\"4 3\" opacity=\"0.8\" filter=\"url(#glowCyan)\"/>"
+  },
+  {
+    "lineNo": 953,
+    "text": "points=\"95,172 170,164 245,154 320,168 395,144 470,135 545,125 545,255 95,255\"",
+    "full": "points=\"95,172 170,164 245,154 320,168 395,144 470,135 545,125 545,255 95,255\""
+  },
+  {
+    "lineNo": 954,
+    "text": "fill=\"url(#polAreaGrad)\"/>",
+    "full": "fill=\"url(#polAreaGrad)\"/>"
+  },
+  {
+    "lineNo": 960,
+    "text": "fill=\"none\" stroke=\"#f59e0b\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" filter=\"url(#glowGold)\"/>",
+    "full": "fill=\"none\" stroke=\"#f59e0b\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" filter=\"url(#glowGold)\"/>"
+  },
+  {
+    "lineNo": 966,
+    "text": "fill=\"none\" stroke=\"#22c55e\" stroke-width=\"2.5\" stroke-linecap=\"round\" opacity=\"0.9\"/>",
+    "full": "fill=\"none\" stroke=\"#22c55e\" stroke-width=\"2.5\" stroke-linecap=\"round\" opacity=\"0.9\"/>"
+  },
+  {
+    "lineNo": 972,
+    "text": "fill=\"none\" stroke=\"#38bdf8\" stroke-width=\"2\" stroke-linecap=\"round\" opacity=\"0.85\"/>",
+    "full": "fill=\"none\" stroke=\"#38bdf8\" stroke-width=\"2\" stroke-linecap=\"round\" opacity=\"0.85\"/>"
+  },
+  {
+    "lineNo": 978,
+    "text": "fill=\"none\" stroke=\"#fbbf24\" stroke-width=\"3.5\" stroke-dasharray=\"8 5\" filter=\"url(#glowGold)\">",
+    "full": "fill=\"none\" stroke=\"#fbbf24\" stroke-width=\"3.5\" stroke-dasharray=\"8 5\" filter=\"url(#glowGold)\">"
+  },
+  {
+    "lineNo": 990,
+    "text": "⚠ RESUPPLY BREACH (D+2)",
+    "full": "<text x=\"0\" y=\"-23\" fill=\"#f87171\" font-size=\"8.5\" font-weight=\"bold\" text-anchor=\"middle\">⚠ RESUPPLY BREACH (D+2)</text>"
+  },
+  {
+    "lineNo": 997,
+    "text": "▲ 630 L/d PEAK (+28.4%)",
+    "full": "<text x=\"0\" y=\"-19\" fill=\"#fbbf24\" font-size=\"8.5\" font-weight=\"bold\" text-anchor=\"middle\">▲ 630 L/d PEAK (+28.4%)</text>"
+  },
+  {
+    "lineNo": 1005,
+    "text": "x=\"-4\" y=\"25\" width=\"32\" height=\"230\"",
+    "full": "x=\"-4\" y=\"25\" width=\"32\" height=\"230\""
+  },
+  {
+    "lineNo": 1008,
+    "text": "stroke-width=\"1\" rx=\"4\"/>",
+    "full": "stroke-width=\"1\" rx=\"4\"/>"
+  },
+  {
+    "lineNo": 1012,
+    "text": "x=\"0\" [attr.y]=\"255 - (day.gensetBurn * 0.28)\" width=\"24\" [attr.height]=\"day.gensetBurn * 0.28\"",
+    "full": "x=\"0\" [attr.y]=\"255 - (day.gensetBurn * 0.28)\" width=\"24\" [attr.height]=\"day.gensetBurn * 0.28\""
+  },
+  {
+    "lineNo": 1013,
+    "text": "fill=\"url(#colGensetGrad)\" rx=\"2\" opacity=\"0.9\"/>",
+    "full": "fill=\"url(#colGensetGrad)\" rx=\"2\" opacity=\"0.9\"/>"
+  },
+  {
+    "lineNo": 1017,
+    "text": "x=\"0\" [attr.y]=\"255 - (day.gensetBurn * 0.28) - (day.bukhariBurn * 0.28)\" width=\"24\" [attr.height]=\"day.bukhariBurn * 0.28\"",
+    "full": "x=\"0\" [attr.y]=\"255 - (day.gensetBurn * 0.28) - (day.bukhariBurn * 0.28)\" width=\"24\" [attr.height]=\"day.bukhariBurn * 0.28\""
+  },
+  {
+    "lineNo": 1018,
+    "text": "fill=\"url(#colBukhariGrad)\" rx=\"2\" opacity=\"0.85\"/>",
+    "full": "fill=\"url(#colBukhariGrad)\" rx=\"2\" opacity=\"0.85\"/>"
+  },
+  {
+    "lineNo": 1022,
+    "text": "x=\"0\" [attr.y]=\"255 - (day.gensetBurn * 0.28) - (day.bukhariBurn * 0.28) - ((day.fleetBurn + day.auxBurn) * 0.28)\" width=\"24\" [attr.height]=\"(day.fleetBurn + day.auxBurn) * 0.28\"",
+    "full": "x=\"0\" [attr.y]=\"255 - (day.gensetBurn * 0.28) - (day.bukhariBurn * 0.28) - ((day.fleetBurn + day.auxBurn) * 0.28)\" width=\"24\" [attr.height]=\"(day.fleetBurn + day.auxBurn) * 0.28\""
+  },
+  {
+    "lineNo": 1023,
+    "text": "fill=\"url(#colFleetGrad)\" rx=\"2\" opacity=\"0.8\"/>",
+    "full": "fill=\"url(#colFleetGrad)\" rx=\"2\" opacity=\"0.8\"/>"
+  },
+  {
+    "lineNo": 1027,
+    "text": "cx=\"12\" [attr.cy]=\"day.polY\" r=\"4\"",
+    "full": "cx=\"12\" [attr.cy]=\"day.polY\" r=\"4\""
+  },
+  {
+    "lineNo": 1029,
+    "text": "stroke=\"#0a140d\" stroke-width=\"1.5\"/>",
+    "full": "stroke=\"#0a140d\" stroke-width=\"1.5\"/>"
+  },
+  {
+    "lineNo": 1033,
+    "text": "x=\"-8\" y=\"20\" width=\"40\" height=\"255\" fill=\"transparent\"",
+    "full": "x=\"-8\" y=\"20\" width=\"40\" height=\"255\" fill=\"transparent\""
+  },
+  {
+    "lineNo": 1034,
+    "text": "style=\"cursor: pointer;\"",
+    "full": "style=\"cursor: pointer;\""
+  },
+  {
+    "lineNo": 1035,
+    "text": "(mouseenter)=\"inspectTelemetryPoint(day)\"",
+    "full": "(mouseenter)=\"inspectTelemetryPoint(day)\""
+  },
+  {
+    "lineNo": 1036,
+    "text": "(click)=\"inspectTelemetryPoint(day)\"/>",
+    "full": "(click)=\"inspectTelemetryPoint(day)\"/>"
+  },
+  {
+    "lineNo": 1049,
+    "text": "TODAY D-0",
+    "full": "<text x=\"545\" y=\"26\" fill=\"#ffffff\" font-size=\"9\" font-weight=\"900\" text-anchor=\"middle\" letter-spacing=\"0.05em\">TODAY D-0</text>"
+  },
+  {
+    "lineNo": 1053,
+    "text": "<text",
+    "full": "<text"
+  },
+  {
+    "lineNo": 1057,
+    "text": "font-size=\"9.5\" text-anchor=\"middle\" font-family=\"monospace\">",
+    "full": "font-size=\"9.5\" text-anchor=\"middle\" font-family=\"monospace\">"
+  },
+  {
+    "lineNo": 1060,
+    "text": "<text",
+    "full": "<text"
+  },
+  {
+    "lineNo": 1063,
+    "text": "font-size=\"8.5\" text-anchor=\"middle\">",
+    "full": "font-size=\"8.5\" text-anchor=\"middle\">"
+  },
+  {
+    "lineNo": 1066,
+    "text": "<text",
+    "full": "<text"
+  },
+  {
+    "lineNo": 1069,
+    "text": "font-size=\"8\" text-anchor=\"middle\">",
+    "full": "font-size=\"8\" text-anchor=\"middle\">"
+  },
+  {
+    "lineNo": 1079,
+    "text": "SELECTED TIMESTEP",
+    "full": "<span class=\"inspector-tag\">SELECTED TIMESTEP</span>"
+  },
+  {
+    "lineNo": 1084,
+    "text": "({{ selectedTelemetryPoint.calendarDate }})",
+    "full": "<span class=\"cal-date\">({{ selectedTelemetryPoint.calendarDate }})</span>"
+  },
+  {
+    "lineNo": 1092,
+    "text": "POL BURN BREAKDOWN",
+    "full": "<span class=\"inspector-tag\">POL BURN BREAKDOWN</span>"
+  },
+  {
+    "lineNo": 1097,
+    "text": "Genset: {{ selectedTelemetryPoint.gensetBurn }}L",
+    "full": "<span title=\"Prime Generators\">Genset: <strong>{{ selectedTelemetryPoint.gensetBurn }}L</strong></span>"
+  },
+  {
+    "lineNo": 1098,
+    "text": "Bukhari: {{ selectedTelemetryPoint.bukhariBurn }}L",
+    "full": "<span title=\"Bukhari Space Heating\">Bukhari: <strong>{{ selectedTelemetryPoint.bukhariBurn }}L</strong></span>"
+  },
+  {
+    "lineNo": 1099,
+    "text": "Fleet: {{ selectedTelemetryPoint.fleetBurn }}L",
+    "full": "<span title=\"BMP Fleet & Transport\">Fleet: <strong>{{ selectedTelemetryPoint.fleetBurn }}L</strong></span>"
+  },
+  {
+    "lineNo": 1100,
+    "text": "Aux: {{ selectedTelemetryPoint.auxBurn }}L",
+    "full": "<span title=\"Auxiliary Thawing\">Aux: <strong>{{ selectedTelemetryPoint.auxBurn }}L</strong></span>"
+  },
+  {
+    "lineNo": 1105,
+    "text": "TROOP RATIONS (CLASS I)",
+    "full": "<span class=\"inspector-tag\">TROOP RATIONS (CLASS I)</span>"
+  },
+  {
+    "lineNo": 1110,
+    "text": "840 garrison troops · 3,800 kcal high-altitude nutrition",
+    "full": "840 garrison troops · 3,800 kcal high-altitude nutrition"
+  },
+  {
+    "lineNo": 1115,
+    "text": "MUNITIONS EXPENDITURE (CLASS V)",
+    "full": "<span class=\"inspector-tag\">MUNITIONS EXPENDITURE (CLASS V)</span>"
+  },
+  {
+    "lineNo": 1120,
+    "text": "Live firing zeroing ranges · War reserve buffer intact",
+    "full": "Live firing zeroing ranges · War reserve buffer intact"
+  },
+  {
+    "lineNo": 1125,
+    "text": "METEOROLOGY & POWER LOAD",
+    "full": "<span class=\"inspector-tag\">METEOROLOGY & POWER LOAD</span>"
+  },
+  {
+    "lineNo": 1127,
+    "text": "❄ {{ selectedTelemetryPoint.tempCelsius }}°C",
+    "full": "❄ {{ selectedTelemetryPoint.tempCelsius }}°C"
+  },
+  {
+    "lineNo": 1128,
+    "text": "Windchill: {{ selectedTelemetryPoint.tempCelsius - 8 }}°C",
+    "full": "<span class=\"windchill\">Windchill: {{ selectedTelemetryPoint.tempCelsius - 8 }}°C</span>"
+  },
+  {
+    "lineNo": 1131,
+    "text": "Genset Load: {{ selectedTelemetryPoint.generatorLoad }}% · Bukhari: {{ selectedTelemetryPoint.bukhariHours }}h/day",
+    "full": "Genset Load: <strong>{{ selectedTelemetryPoint.generatorLoad }}%</strong> · Bukhari: <strong>{{ selectedTelemetryPoint.bukhariHours }}h/day</strong>"
+  },
+  {
+    "lineNo": 1144,
+    "text": "Sub-Zero POL Consumption Breakdown",
+    "full": "<h4 class=\"panel-title\">Sub-Zero POL Consumption Breakdown</h4>"
+  },
+  {
+    "lineNo": 1145,
+    "text": "Real-time telematics from BFI Depot flow-meters & generator telemetry",
+    "full": "<p class=\"panel-desc\">Real-time telematics from BFI Depot flow-meters & generator telemetry</p>"
+  },
+  {
+    "lineNo": 1155,
+    "text": "Base Prime Gensets (Kirloskar 62.5kVA Twin)",
+    "full": "Base Prime Gensets (Kirloskar 62.5kVA Twin)"
+  },
+  {
+    "lineNo": 1157,
+    "text": "215 L/day (43.7%)",
+    "full": "<span class=\"meter-burn-val\">215 L/day <small>(43.7%)</small></span>"
+  },
+  {
+    "lineNo": 1162,
+    "text": "Continuous radar grid, SATCOM array & medical hospital power",
+    "full": "<div class=\"meter-sub-text\">Continuous radar grid, SATCOM array & medical hospital power</div>"
+  },
+  {
+    "lineNo": 1170,
+    "text": "Bukhari Space Heaters & Pipe Anti-Freeze",
+    "full": "Bukhari Space Heaters & Pipe Anti-Freeze"
+  },
+  {
+    "lineNo": 1172,
+    "text": "148 L/day (30.1%)",
+    "full": "<span class=\"meter-burn-val\">148 L/day <small>(30.1%)</small></span>"
+  },
+  {
+    "lineNo": 1177,
+    "text": "42 Living bunkers, water pipe continuous trace heating (-18°C)",
+    "full": "<div class=\"meter-sub-text\">42 Living bunkers, water pipe continuous trace heating (-18°C)</div>"
+  },
+  {
+    "lineNo": 1185,
+    "text": "BMP-II Armoured Vehicles & 4x4 Gypsies",
+    "full": "BMP-II Armoured Vehicles & 4x4 Gypsies"
+  },
+  {
+    "lineNo": 1187,
+    "text": "84 L/day (17.1%)",
+    "full": "<span class=\"meter-burn-val\">84 L/day <small>(17.1%)</small></span>"
+  },
+  {
+    "lineNo": 1192,
+    "text": "11 Combat vehicles on border patrol & daily sub-zero engine warmups",
+    "full": "<div class=\"meter-sub-text\">11 Combat vehicles on border patrol & daily sub-zero engine warmups</div>"
+  },
+  {
+    "lineNo": 1200,
+    "text": "Auxiliary Thawing & Pre-Heat Burners",
+    "full": "Auxiliary Thawing & Pre-Heat Burners"
+  },
+  {
+    "lineNo": 1202,
+    "text": "45 L/day (9.1%)",
+    "full": "<span class=\"meter-burn-val\">45 L/day <small>(9.1%)</small></span>"
+  },
+  {
+    "lineNo": 1207,
+    "text": "Underground reservoir coil heating to prevent diesel waxing",
+    "full": "<div class=\"meter-sub-text\">Underground reservoir coil heating to prevent diesel waxing</div>"
+  },
+  {
+    "lineNo": 1217,
+    "text": "Forward Base IoT Sensor Telemetry",
+    "full": "<h4 class=\"panel-title\">Forward Base IoT Sensor Telemetry</h4>"
+  },
+  {
+    "lineNo": 1218,
+    "text": "Direct telemetric telemetry from forward fuel tanks & weather stations",
+    "full": "<p class=\"panel-desc\">Direct telemetric telemetry from forward fuel tanks & weather stations</p>"
+  },
+  {
+    "lineNo": 1226,
+    "text": "SENSOR #BFI-TNK-01",
+    "full": "<span class=\"sensor-id\">SENSOR #BFI-TNK-01</span>"
+  },
+  {
+    "lineNo": 1227,
+    "text": "● ONLINE",
+    "full": "<span class=\"sensor-status-dot online\">● ONLINE</span>"
+  },
+  {
+    "lineNo": 1230,
+    "text": "Arctic Diesel Storage (BFI Tank 1)",
+    "full": "<span class=\"sensor-label\">Arctic Diesel Storage (BFI Tank 1)</span>"
+  },
+  {
+    "lineNo": 1231,
+    "text": "16,200 L (81% Full)",
+    "full": "<span class=\"sensor-value text-gold\">16,200 L <small>(81% Full)</small></span>"
+  },
+  {
+    "lineNo": 1234,
+    "text": "Tank Temp: -12.4°C",
+    "full": "<span>Tank Temp: <strong>-12.4°C</strong></span>"
+  },
+  {
+    "lineNo": 1235,
+    "text": "Viscosity: Nominal",
+    "full": "<span>Viscosity: <strong>Nominal</strong></span>"
+  },
+  {
+    "lineNo": 1236,
+    "text": "Flow: 21.2 L/h",
+    "full": "<span>Flow: <strong>21.2 L/h</strong></span>"
+  },
+  {
+    "lineNo": 1243,
+    "text": "SENSOR #GEN-KIR-02",
+    "full": "<span class=\"sensor-id\">SENSOR #GEN-KIR-02</span>"
+  },
+  {
+    "lineNo": 1244,
+    "text": "● ONLINE",
+    "full": "<span class=\"sensor-status-dot online\">● ONLINE</span>"
+  },
+  {
+    "lineNo": 1247,
+    "text": "Command Prime Genset 62.5kVA",
+    "full": "<span class=\"sensor-label\">Command Prime Genset 62.5kVA</span>"
+  },
+  {
+    "lineNo": 1248,
+    "text": "19.2 hrs/day (92% Load)",
+    "full": "<span class=\"sensor-value text-green\">19.2 hrs/day <small>(92% Load)</small></span>"
+  },
+  {
+    "lineNo": 1251,
+    "text": "Coolant: 84°C",
+    "full": "<span>Coolant: <strong>84°C</strong></span>"
+  },
+  {
+    "lineNo": 1252,
+    "text": "Oil Pressure: 4.8 bar",
+    "full": "<span>Oil Pressure: <strong>4.8 bar</strong></span>"
+  },
+  {
+    "lineNo": 1260,
+    "text": "SENSOR #WTH-LDK-04",
+    "full": "<span class=\"sensor-id\">SENSOR #WTH-LDK-04</span>"
+  },
+  {
+    "lineNo": 1261,
+    "text": "● ONLINE",
+    "full": "<span class=\"sensor-status-dot online\">● ONLINE</span>"
+  },
+  {
+    "lineNo": 1264,
+    "text": "Forward AWS Meteorological Mast",
+    "full": "<span class=\"sensor-label\">Forward AWS Meteorological Mast</span>"
+  },
+  {
+    "lineNo": 1265,
+    "text": "-18.2°C (Wind: 28 km/h)",
+    "full": "<span class=\"sensor-value text-cyan\">-18.2°C <small>(Wind: 28 km/h)</small></span>"
+  },
+  {
+    "lineNo": 1268,
+    "text": "Baro: 641 hPa",
+    "full": "<span>Baro: <strong>641 hPa</strong></span>"
+  },
+  {
+    "lineNo": 1269,
+    "text": "Humidity: 42%",
+    "full": "<span>Humidity: <strong>42%</strong></span>"
+  },
+  {
+    "lineNo": 1270,
+    "text": "Snow Depth: 14 cm",
+    "full": "<span>Snow Depth: <strong>14 cm</strong></span>"
+  },
+  {
+    "lineNo": 1281,
+    "text": "AI Pre-Winter Stocking & Pass Advisory",
+    "full": "<h4 class=\"panel-title\">AI Pre-Winter Stocking & Pass Advisory</h4>"
+  },
+  {
+    "lineNo": 1282,
+    "text": "Himalayan highway pass closure projections & buffer requirements",
+    "full": "<p class=\"panel-desc\">Himalayan highway pass closure projections & buffer requirements</p>"
+  },
+  {
+    "lineNo": 1290,
+    "text": "ZOJI LA PASS (11,575 FT)",
+    "full": "<span class=\"pass-name\">ZOJI LA PASS (11,575 FT)</span>"
+  },
+  {
+    "lineNo": 1291,
+    "text": "CLOSING IN ~22 DAYS",
+    "full": "<span class=\"pass-badge badge-amber\">CLOSING IN ~22 DAYS</span>"
+  },
+  {
+    "lineNo": 1294,
+    "text": "Drift Probability: 88%",
+    "full": "<span>Drift Probability: <strong>88%</strong></span>"
+  },
+  {
+    "lineNo": 1295,
+    "text": "Last Convoy Slot: 03 Nov",
+    "full": "<span>Last Convoy Slot: <strong>03 Nov</strong></span>"
+  },
+  {
+    "lineNo": 1302,
+    "text": "KHARDUNG LA PASS (17,582 FT)",
+    "full": "<span class=\"pass-name\">KHARDUNG LA PASS (17,582 FT)</span>"
+  },
+  {
+    "lineNo": 1303,
+    "text": "CLOSING IN ~31 DAYS",
+    "full": "<span class=\"pass-badge badge-blue\">CLOSING IN ~31 DAYS</span>"
+  },
+  {
+    "lineNo": 1306,
+    "text": "Snow Chain Mandate: Active",
+    "full": "<span>Snow Chain Mandate: <strong>Active</strong></span>"
+  },
+  {
+    "lineNo": 1307,
+    "text": "Road Status: Open for 4x4",
+    "full": "<span>Road Status: <strong>Open for 4x4</strong></span>"
+  },
+  {
+    "lineNo": 1316,
+    "text": "DGOS / AI LOGISTICS DIRECTIVE:",
+    "full": "<strong class=\"text-gold\">DGOS / AI LOGISTICS DIRECTIVE:</strong>"
+  },
+  {
+    "lineNo": 1319,
+    "text": "With expected winter freeze surge climbing to 630 L/day (+28.4%), current 16,200L reserves will deplete to critical safety margins in 26 days.",
+    "full": "With expected winter freeze surge climbing to <strong>630 L/day (+28.4%)</strong>, current 16,200L reserves will deplete to critical safety margins in 26 days."
+  },
+  {
+    "lineNo": 1320,
+    "text": "Pre-stock an additional 25,000L Arctic HSD before Zoji La closes.",
+    "full": "Pre-stock an additional <strong>25,000L Arctic HSD</strong> before Zoji La closes."
+  },
+  {
+    "lineNo": 1323,
+    "text": "⚡ Auto-Generate Pre-Winter Indent Voucher",
+    "full": "<span>⚡ Auto-Generate Pre-Winter Indent Voucher</span>"
+  },
+  {
+    "lineNo": 1334,
+    "text": "Unit Requisition & Indent Vouchers",
+    "full": "<h2 class=\"module-title\">Unit Requisition & Indent Vouchers</h2>"
+  },
+  {
+    "lineNo": 1335,
+    "text": "Formal logistics indents submitted to Northern Command / DGOS",
+    "full": "<p class=\"module-subtitle\">Formal logistics indents submitted to Northern Command / DGOS</p>"
+  },
+  {
+    "lineNo": 1338,
+    "text": "+ Create New Requisition",
+    "full": "+ Create New Requisition"
+  },
+  {
+    "lineNo": 1351,
+    "text": "Voucher #",
+    "full": "<th class=\"col-voucher\">Voucher #</th>"
+  },
+  {
+    "lineNo": 1352,
+    "text": "Supply Category",
+    "full": "<th class=\"col-cat\">Supply Category</th>"
+  },
+  {
+    "lineNo": 1353,
+    "text": "Item Nomenclature",
+    "full": "<th class=\"col-item\">Item Nomenclature</th>"
+  },
+  {
+    "lineNo": 1354,
+    "text": "Requested Qty",
+    "full": "<th class=\"col-qty\">Requested Qty</th>"
+  },
+  {
+    "lineNo": 1355,
+    "text": "Priority",
+    "full": "<th class=\"col-priority\">Priority</th>"
+  },
+  {
+    "lineNo": 1356,
+    "text": "Required By",
+    "full": "<th class=\"col-reqby\">Required By</th>"
+  },
+  {
+    "lineNo": 1357,
+    "text": "Date Submitted",
+    "full": "<th class=\"col-datesub\">Date Submitted</th>"
+  },
+  {
+    "lineNo": 1358,
+    "text": "Status",
+    "full": "<th class=\"col-status\">Status</th>"
+  },
+  {
+    "lineNo": 1359,
+    "text": "Actions",
+    "full": "<th class=\"col-action\">Actions</th>"
+  },
+  {
+    "lineNo": 1382,
+    "text": "Track Stepper",
+    "full": "Track Stepper"
+  },
+  {
+    "lineNo": 1398,
+    "text": "ASCON MILITARY LOGISTICS CORRIDOR",
+    "full": "<span>ASCON MILITARY LOGISTICS CORRIDOR</span>"
+  },
+  {
+    "lineNo": 1400,
+    "text": "Unit Inbound & Outbound Logistics",
+    "full": "<h2 class=\"module-title\">Unit Inbound & Outbound Logistics</h2>"
+  },
+  {
+    "lineNo": 1401,
+    "text": "Real-time SATCOM tracking of road convoys, transit depots, and heavy freight scheduled for 14 Rajput base",
+    "full": "<p class=\"module-subtitle\">Real-time SATCOM tracking of road convoys, transit depots, and heavy freight scheduled for 14 Rajput base</p>"
+  },
+  {
+    "lineNo": 1406,
+    "text": "LIVE SATCOM FEED: 5 CONVOYS TRACKED",
+    "full": "<span class=\"telemetry-text\">LIVE SATCOM FEED: <strong>5 CONVOYS TRACKED</strong></span>"
+  },
+  {
+    "lineNo": 1409,
+    "text": "＋ Generate Requisition",
+    "full": "<span class=\"btn-icon\">＋</span> Generate Requisition"
+  },
+  {
+    "lineNo": 1434,
+    "text": "Active Convoys",
+    "full": "<div class=\"kpi-label\">Active Convoys</div>"
+  },
+  {
+    "lineNo": 1451,
+    "text": "Gross Tonnage En-Route",
+    "full": "<div class=\"kpi-label\">Gross Tonnage En-Route</div>"
+  },
+  {
+    "lineNo": 1452,
+    "text": "POL, Munitions, Spares & Winter Stores",
+    "full": "<div class=\"kpi-sub\">POL, Munitions, Spares & Winter Stores</div>"
+  },
+  {
+    "lineNo": 1464,
+    "text": "Heavy Military Trucks",
+    "full": "<div class=\"kpi-label\">Heavy Military Trucks</div>"
+  },
+  {
+    "lineNo": 1465,
+    "text": "100% ASC & EME Escorts Assigned",
+    "full": "<div class=\"kpi-sub\">100% ASC & EME Escorts Assigned</div>"
+  },
+  {
+    "lineNo": 1479,
+    "text": "Next Inbound Arrival",
+    "full": "<div class=\"kpi-label\">Next Inbound Arrival</div>"
+  },
+  {
+    "lineNo": 1480,
+    "text": "CHETAK-2 (CV-442-W) • COD Agra",
+    "full": "<div class=\"kpi-sub\">CHETAK-2 (CV-442-W) • COD Agra</div>"
+  },
+  {
+    "lineNo": 1496,
+    "text": "<input",
+    "full": "<input"
+  },
+  {
+    "lineNo": 1497,
+    "text": "type=\"text\"",
+    "full": "type=\"text\""
+  },
+  {
+    "lineNo": 1499,
+    "text": "placeholder=\"Search by Callsign (e.g. GARUDA), Depot, Route Axis, Convoy ID...\"",
+    "full": "placeholder=\"Search by Callsign (e.g. GARUDA), Depot, Route Axis, Convoy ID...\""
+  },
+  {
+    "lineNo": 1500,
+    "text": "class=\"logistics-search-field\"",
+    "full": "class=\"logistics-search-field\""
+  },
+  {
+    "lineNo": 1507,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 1508,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 1509,
+    "text": "class=\"view-mode-btn\"",
+    "full": "class=\"view-mode-btn\""
+  },
+  {
+    "lineNo": 1511,
+    "text": "(click)=\"logisticsViewMode = 'cards'\"",
+    "full": "(click)=\"logisticsViewMode = 'cards'\""
+  },
+  {
+    "lineNo": 1512,
+    "text": "title=\"Tactical Fleet Cards Grid\">",
+    "full": "title=\"Tactical Fleet Cards Grid\">"
+  },
+  {
+    "lineNo": 1514,
+    "text": "Cards",
+    "full": "<span>Cards</span>"
+  },
+  {
+    "lineNo": 1516,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 1517,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 1518,
+    "text": "class=\"view-mode-btn\"",
+    "full": "class=\"view-mode-btn\""
+  },
+  {
+    "lineNo": 1520,
+    "text": "(click)=\"logisticsViewMode = 'table'\"",
+    "full": "(click)=\"logisticsViewMode = 'table'\""
+  },
+  {
+    "lineNo": 1521,
+    "text": "title=\"Military Manifest Table\">",
+    "full": "title=\"Military Manifest Table\">"
+  },
+  {
+    "lineNo": 1523,
+    "text": "Table",
+    "full": "<span>Table</span>"
+  },
+  {
+    "lineNo": 1531,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 1532,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 1533,
+    "text": "class=\"cargo-pill\"",
+    "full": "class=\"cargo-pill\""
+  },
+  {
+    "lineNo": 1535,
+    "text": "(click)=\"logisticsCargoFilter = 'All'\">",
+    "full": "(click)=\"logisticsCargoFilter = 'All'\">"
+  },
+  {
+    "lineNo": 1537,
+    "text": "All Cargo ({{ logisticsService.convoys().length }})",
+    "full": "<span>All Cargo ({{ logisticsService.convoys().length }})</span>"
+  },
+  {
+    "lineNo": 1539,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 1540,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 1541,
+    "text": "class=\"cargo-pill\"",
+    "full": "class=\"cargo-pill\""
+  },
+  {
+    "lineNo": 1543,
+    "text": "(click)=\"logisticsCargoFilter = 'Class III'\">",
+    "full": "(click)=\"logisticsCargoFilter = 'Class III'\">"
+  },
+  {
+    "lineNo": 1545,
+    "text": "Class III (POL)",
+    "full": "<span>Class III (POL)</span>"
+  },
+  {
+    "lineNo": 1547,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 1548,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 1549,
+    "text": "class=\"cargo-pill\"",
+    "full": "class=\"cargo-pill\""
+  },
+  {
+    "lineNo": 1551,
+    "text": "(click)=\"logisticsCargoFilter = 'Class V'\">",
+    "full": "(click)=\"logisticsCargoFilter = 'Class V'\">"
+  },
+  {
+    "lineNo": 1553,
+    "text": "Class V (Ammo)",
+    "full": "<span>Class V (Ammo)</span>"
+  },
+  {
+    "lineNo": 1555,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 1556,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 1557,
+    "text": "class=\"cargo-pill\"",
+    "full": "class=\"cargo-pill\""
+  },
+  {
+    "lineNo": 1559,
+    "text": "(click)=\"logisticsCargoFilter = 'Winter Stocking'\">",
+    "full": "(click)=\"logisticsCargoFilter = 'Winter Stocking'\">"
+  },
+  {
+    "lineNo": 1561,
+    "text": "Winter Stocking",
+    "full": "<span>Winter Stocking</span>"
+  },
+  {
+    "lineNo": 1563,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 1564,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 1565,
+    "text": "class=\"cargo-pill\"",
+    "full": "class=\"cargo-pill\""
+  },
+  {
+    "lineNo": 1567,
+    "text": "(click)=\"logisticsCargoFilter = 'Class IX'\">",
+    "full": "(click)=\"logisticsCargoFilter = 'Class IX'\">"
+  },
+  {
+    "lineNo": 1569,
+    "text": "Class IX (Spares)",
+    "full": "<span>Class IX (Spares)</span>"
+  },
+  {
+    "lineNo": 1576,
+    "text": "Status:",
+    "full": "<label class=\"toolbar-label\">Status:</label>"
+  },
+  {
+    "lineNo": 1578,
+    "text": "All Statuses",
+    "full": "<option value=\"All\">All Statuses</option>"
+  },
+  {
+    "lineNo": 1579,
+    "text": "In-Transit",
+    "full": "<option value=\"In-Transit\">In-Transit</option>"
+  },
+  {
+    "lineNo": 1580,
+    "text": "Rerouted",
+    "full": "<option value=\"Rerouted\">Rerouted</option>"
+  },
+  {
+    "lineNo": 1590,
+    "text": "Displaying {{ filteredConvoys().length }} of {{ logisticsService.convoys().length }} Convoys",
+    "full": "Displaying <strong>{{ filteredConvoys().length }}</strong> of {{ logisticsService.convoys().length }} Convoys"
+  },
+  {
+    "lineNo": 1593,
+    "text": "Reset Filters ↺",
+    "full": "Reset Filters ↺"
+  },
+  {
+    "lineNo": 1602,
+    "text": "No Convoys Found",
+    "full": "<h3>No Convoys Found</h3>"
+  },
+  {
+    "lineNo": 1603,
+    "text": "No military consignments match your search query or filter selection.",
+    "full": "<p>No military consignments match your search query or filter selection.</p>"
+  },
+  {
+    "lineNo": 1605,
+    "text": "Clear All Filters",
+    "full": "Clear All Filters"
+  },
+  {
+    "lineNo": 1610,
+    "text": "0\" class=\"convoy-card-grid mt-3\">",
+    "full": "<div *ngIf=\"logisticsViewMode === 'cards' && filteredConvoys().length > 0\" class=\"convoy-card-grid mt-3\">"
+  },
+  {
+    "lineNo": 1629,
+    "text": "<span class=\"c-status-badge\"",
+    "full": "<span class=\"c-status-badge\""
+  },
+  {
+    "lineNo": 1647,
+    "text": "ORIGIN DEPOT",
+    "full": "<span class=\"depot-type\">ORIGIN DEPOT</span>"
+  },
+  {
+    "lineNo": 1658,
+    "text": "DESTINATION",
+    "full": "<span class=\"depot-type\">DESTINATION</span>"
+  },
+  {
+    "lineNo": 1669,
+    "text": "Transit Axis: {{ c.route }}",
+    "full": "<span class=\"axis-text\"><strong>Transit Axis:</strong> {{ c.route }}</span>"
+  },
+  {
+    "lineNo": 1675,
+    "text": "CARGO CATEGORY",
+    "full": "<span class=\"c-metric-label\">CARGO CATEGORY</span>"
+  },
+  {
+    "lineNo": 1679,
+    "text": "PAYLOAD",
+    "full": "<span class=\"c-metric-label\">PAYLOAD</span>"
+  },
+  {
+    "lineNo": 1683,
+    "text": "FLEET VEHICLES",
+    "full": "<span class=\"c-metric-label\">FLEET VEHICLES</span>"
+  },
+  {
+    "lineNo": 1687,
+    "text": "ESTIMATED ARRIVAL",
+    "full": "<span class=\"c-metric-label\">ESTIMATED ARRIVAL</span>"
+  },
+  {
+    "lineNo": 1698,
+    "text": "Route Checkpoints Progress:",
+    "full": "</span> Route Checkpoints Progress:"
+  },
+  {
+    "lineNo": 1711,
+    "text": "<div",
+    "full": "<div"
+  },
+  {
+    "lineNo": 1713,
+    "text": "class=\"cp-step-item\"",
+    "full": "class=\"cp-step-item\""
+  },
+  {
+    "lineNo": 1731,
+    "text": "TACTICAL ADVISORY: {{ c.weatherAlert }}",
+    "full": "<strong>TACTICAL ADVISORY:</strong> {{ c.weatherAlert }}"
+  },
+  {
+    "lineNo": 1737,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 1738,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 1739,
+    "text": "class=\"btn-convoy-inspect\"",
+    "full": "class=\"btn-convoy-inspect\""
+  },
+  {
+    "lineNo": 1740,
+    "text": "(click)=\"inspectConvoy(c)\">",
+    "full": "(click)=\"inspectConvoy(c)\">"
+  },
+  {
+    "lineNo": 1743,
+    "text": "Inspect Telemetry & Stepper",
+    "full": "</span> Inspect Telemetry & Stepper"
+  },
+  {
+    "lineNo": 1745,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 1746,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 1747,
+    "text": "class=\"btn-convoy-ack\"",
+    "full": "class=\"btn-convoy-ack\""
+  },
+  {
+    "lineNo": 1749,
+    "text": "(click)=\"acknowledgeDelivery(c.id)\"",
+    "full": "(click)=\"acknowledgeDelivery(c.id)\""
+  },
+  {
+    "lineNo": 1751,
+    "text": "✓ {{ (isConvoyAcknowledged(c.id) || c.status === 'Arrived') ? 'Acknowledged & Received' : 'Acknowledge Receipt' }}",
+    "full": "<span class=\"btn-icon\">✓</span> {{ (isConvoyAcknowledged(c.id) || c.status === 'Arrived') ? 'Acknowledged & Received' : 'Acknowledge Receipt' }}"
+  },
+  {
+    "lineNo": 1759,
+    "text": "0\" class=\"card-surface mt-3\">",
+    "full": "<div *ngIf=\"logisticsViewMode === 'table' && filteredConvoys().length > 0\" class=\"card-surface mt-3\">"
+  },
+  {
+    "lineNo": 1761,
+    "text": "Inbound Military Consignments Manifest",
+    "full": "<h3 class=\"panel-heading\">Inbound Military Consignments Manifest</h3>"
+  },
+  {
+    "lineNo": 1769,
+    "text": "Shipment / Convoy",
+    "full": "<th>Shipment / Convoy</th>"
+  },
+  {
+    "lineNo": 1770,
+    "text": "Origin Depot",
+    "full": "<th>Origin Depot</th>"
+  },
+  {
+    "lineNo": 1771,
+    "text": "Destination Depot",
+    "full": "<th>Destination Depot</th>"
+  },
+  {
+    "lineNo": 1772,
+    "text": "Cargo Manifest",
+    "full": "<th>Cargo Manifest</th>"
+  },
+  {
+    "lineNo": 1773,
+    "text": "Fleet Size",
+    "full": "<th>Fleet Size</th>"
+  },
+  {
+    "lineNo": 1774,
+    "text": "Waypoints",
+    "full": "<th>Waypoints</th>"
+  },
+  {
+    "lineNo": 1775,
+    "text": "ETA",
+    "full": "<th>ETA</th>"
+  },
+  {
+    "lineNo": 1776,
+    "text": "Status & Risk",
+    "full": "<th>Status & Risk</th>"
+  },
+  {
+    "lineNo": 1777,
+    "text": "Actions",
+    "full": "<th class=\"text-right\">Actions</th>"
+  },
+  {
+    "lineNo": 1820,
+    "text": "<span class=\"c-status-badge-sm\"",
+    "full": "<span class=\"c-status-badge-sm\""
+  },
+  {
+    "lineNo": 1833,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 1834,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 1835,
+    "text": "class=\"btn-table-inspect\"",
+    "full": "class=\"btn-table-inspect\""
+  },
+  {
+    "lineNo": 1836,
+    "text": "(click)=\"inspectConvoy(c)\"",
+    "full": "(click)=\"inspectConvoy(c)\""
+  },
+  {
+    "lineNo": 1837,
+    "text": "title=\"Inspect Telemetry\">",
+    "full": "title=\"Inspect Telemetry\">"
+  },
+  {
+    "lineNo": 1838,
+    "text": "🔍 Stepper",
+    "full": "🔍 Stepper"
+  },
+  {
+    "lineNo": 1840,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 1841,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 1842,
+    "text": "class=\"btn-army-sm\"",
+    "full": "class=\"btn-army-sm\""
+  },
+  {
+    "lineNo": 1844,
+    "text": "(click)=\"acknowledgeDelivery(c.id)\"",
+    "full": "(click)=\"acknowledgeDelivery(c.id)\""
+  },
+  {
+    "lineNo": 1845,
+    "text": "title=\"Acknowledge Delivery\">",
+    "full": "title=\"Acknowledge Delivery\">"
+  },
+  {
+    "lineNo": 1865,
+    "text": "MET-SAT METEOROLOGICAL TELEMETRY",
+    "full": "<span>MET-SAT METEOROLOGICAL TELEMETRY</span>"
+  },
+  {
+    "lineNo": 1867,
+    "text": "Sector Passes & Tactical Weather",
+    "full": "<h2 class=\"module-title\">Sector Passes & Tactical Weather</h2>"
+  },
+  {
+    "lineNo": 1868,
+    "text": "High-altitude passes, DGRE avalanche danger scale, and convoy operational accessibility",
+    "full": "<p class=\"module-subtitle\">High-altitude passes, DGRE avalanche danger scale, and convoy operational accessibility</p>"
+  },
+  {
+    "lineNo": 1873,
+    "text": "MET-RADAR ACTIVE: {{ logisticsService.weatherStations().length }} STATIONS TELEMETERED",
+    "full": "<span>MET-RADAR ACTIVE: <strong>{{ logisticsService.weatherStations().length }} STATIONS TELEMETERED</strong></span>"
+  },
+  {
+    "lineNo": 1886,
+    "text": "Lowest Sector Temp",
+    "full": "<div class=\"kpi-label\">Lowest Sector Temp</div>"
+  },
+  {
+    "lineNo": 1887,
+    "text": "Khardung La Axis • Siachen Base Camp",
+    "full": "<div class=\"kpi-sub\">Khardung La Axis • Siachen Base Camp</div>"
+  },
+  {
+    "lineNo": 1896,
+    "text": "Max Operational Altitude",
+    "full": "<div class=\"kpi-label\">Max Operational Altitude</div>"
+  },
+  {
+    "lineNo": 1897,
+    "text": "Khardung La Ridge Pass AMSL",
+    "full": "<div class=\"kpi-sub\">Khardung La Ridge Pass AMSL</div>"
+  },
+  {
+    "lineNo": 1906,
+    "text": "Convoy Transit Restrictions",
+    "full": "<div class=\"kpi-label\">Convoy Transit Restrictions</div>"
+  },
+  {
+    "lineNo": 1907,
+    "text": "Chains Required / Black Ice Warnings",
+    "full": "<div class=\"kpi-sub\">Chains Required / Black Ice Warnings</div>"
+  },
+  {
+    "lineNo": 1915,
+    "text": "6 Teams",
+    "full": "<div class=\"kpi-val\">6 Teams</div>"
+  },
+  {
+    "lineNo": 1916,
+    "text": "BRO Snow Clearance Units",
+    "full": "<div class=\"kpi-label\">BRO Snow Clearance Units</div>"
+  },
+  {
+    "lineNo": 1917,
+    "text": "Project HIMANK & BEACON Clearing Axis",
+    "full": "<div class=\"kpi-sub\">Project HIMANK & BEACON Clearing Axis</div>"
+  },
+  {
+    "lineNo": 1926,
+    "text": "<input",
+    "full": "<input"
+  },
+  {
+    "lineNo": 1927,
+    "text": "type=\"text\"",
+    "full": "type=\"text\""
+  },
+  {
+    "lineNo": 1929,
+    "text": "placeholder=\"Search by Pass Name, Mountain Ridge, or Advisory Alert...\"",
+    "full": "placeholder=\"Search by Pass Name, Mountain Ridge, or Advisory Alert...\""
+  },
+  {
+    "lineNo": 1930,
+    "text": "class=\"weather-search-field\"",
+    "full": "class=\"weather-search-field\""
+  },
+  {
+    "lineNo": 1936,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 1937,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 1938,
+    "text": "class=\"cargo-pill\"",
+    "full": "class=\"cargo-pill\""
+  },
+  {
+    "lineNo": 1940,
+    "text": "(click)=\"weatherAccessibilityFilter = 'All'\">",
+    "full": "(click)=\"weatherAccessibilityFilter = 'All'\">"
+  },
+  {
+    "lineNo": 1941,
+    "text": "All Passes ({{ logisticsService.weatherStations().length }})",
+    "full": "All Passes ({{ logisticsService.weatherStations().length }})"
+  },
+  {
+    "lineNo": 1943,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 1944,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 1945,
+    "text": "class=\"cargo-pill\"",
+    "full": "class=\"cargo-pill\""
+  },
+  {
+    "lineNo": 1947,
+    "text": "(click)=\"weatherAccessibilityFilter = 'Open'\">",
+    "full": "(click)=\"weatherAccessibilityFilter = 'Open'\">"
+  },
+  {
+    "lineNo": 1948,
+    "text": "🟢 Open ({{ openPassesCount }})",
+    "full": "🟢 Open ({{ openPassesCount }})"
+  },
+  {
+    "lineNo": 1950,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 1951,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 1952,
+    "text": "class=\"cargo-pill\"",
+    "full": "class=\"cargo-pill\""
+  },
+  {
+    "lineNo": 1954,
+    "text": "(click)=\"weatherAccessibilityFilter = 'Chains Required'\">",
+    "full": "(click)=\"weatherAccessibilityFilter = 'Chains Required'\">"
+  },
+  {
+    "lineNo": 1955,
+    "text": "⛓️ Chains Required ({{ chainsPassesCount }})",
+    "full": "⛓️ Chains Required ({{ chainsPassesCount }})"
+  },
+  {
+    "lineNo": 1957,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 1958,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 1959,
+    "text": "class=\"cargo-pill\"",
+    "full": "class=\"cargo-pill\""
+  },
+  {
+    "lineNo": 1961,
+    "text": "(click)=\"weatherAccessibilityFilter = 'Convoy Restricted'\">",
+    "full": "(click)=\"weatherAccessibilityFilter = 'Convoy Restricted'\">"
+  },
+  {
+    "lineNo": 1962,
+    "text": "🚫 Convoy Restricted ({{ restrictedPassesCount }})",
+    "full": "🚫 Convoy Restricted ({{ restrictedPassesCount }})"
+  },
+  {
+    "lineNo": 1969,
+    "text": "<div",
+    "full": "<div"
+  },
+  {
+    "lineNo": 1971,
+    "text": "class=\"station-card card-surface interactive\"",
+    "full": "class=\"station-card card-surface interactive\""
+  },
+  {
+    "lineNo": 1973,
+    "text": "(click)=\"inspectPass(st)\"",
+    "full": "(click)=\"inspectPass(st)\""
+  },
+  {
+    "lineNo": 1974,
+    "text": "title=\"Click to view full pass telemetry and corridor details\">",
+    "full": "title=\"Click to view full pass telemetry and corridor details\">"
+  },
+  {
+    "lineNo": 1981,
+    "text": "⛰️ {{ st.elevation }}",
+    "full": "<span class=\"st-elevation-chip\">⛰️ {{ st.elevation }}</span>"
+  },
+  {
+    "lineNo": 1983,
+    "text": "📍 {{ st.location }}",
+    "full": "<span class=\"st-location-text\">📍 {{ st.location }}</span>"
+  },
+  {
+    "lineNo": 1986,
+    "text": "<span",
+    "full": "<span"
+  },
+  {
+    "lineNo": 1987,
+    "text": "class=\"st-access-badge\"",
+    "full": "class=\"st-access-badge\""
+  },
+  {
+    "lineNo": 1993,
+    "text": "Risk Index: {{ st.riskScore }}/100",
+    "full": "<span class=\"st-risk-score\">Risk Index: <strong>{{ st.riskScore }}/100</strong></span>"
+  },
+  {
+    "lineNo": 1999,
+    "text": "<div",
+    "full": "<div"
+  },
+  {
+    "lineNo": 2000,
+    "text": "class=\"st-risk-gauge-fill\"",
+    "full": "class=\"st-risk-gauge-fill\""
+  },
+  {
+    "lineNo": 2011,
+    "text": "TEMPERATURE",
+    "full": "<span class=\"st-m-label\">TEMPERATURE</span>"
+  },
+  {
+    "lineNo": 2015,
+    "text": "PRECIPITATION / SNOW",
+    "full": "<span class=\"st-m-label\">PRECIPITATION / SNOW</span>"
+  },
+  {
+    "lineNo": 2019,
+    "text": "WIND VELOCITY",
+    "full": "<span class=\"st-m-label\">WIND VELOCITY</span>"
+  },
+  {
+    "lineNo": 2023,
+    "text": "OPTICAL VISIBILITY",
+    "full": "<span class=\"st-m-label\">OPTICAL VISIBILITY</span>"
+  },
+  {
+    "lineNo": 2032,
+    "text": "TACTICAL WEATHER ADVISORY:",
+    "full": "<strong>TACTICAL WEATHER ADVISORY:</strong>"
+  },
+  {
+    "lineNo": 2040,
+    "text": "Recommended Bypass Axis: {{ st.alternativeRoute }} ➔",
+    "full": "<span class=\"alt-route-text\"><strong>Recommended Bypass Axis:</strong> {{ st.alternativeRoute }} ➔</span>"
+  },
+  {
+    "lineNo": 2051,
+    "text": "BORDER ROADS ORGANISATION (BRO) · HIGH-ALTITUDE ROAD CLEARANCE DIRECTIVES",
+    "full": "<h4 class=\"bro-heading\">BORDER ROADS ORGANISATION (BRO) · HIGH-ALTITUDE ROAD CLEARANCE DIRECTIVES</h4>"
+  },
+  {
+    "lineNo": 2052,
+    "text": "Live tactical telemetry between 14 Corps Logistics Branch, Project HIMANK (Leh), and Project BEACON (Srinagar)",
+    "full": "<p class=\"bro-sub\">Live tactical telemetry between 14 Corps Logistics Branch, Project HIMANK (Leh), and Project BEACON (Srinagar)</p>"
+  },
+  {
+    "lineNo": 2057,
+    "text": "BRO TASK FORCES ACTIVE: 4 SECTORS OPERATIONAL",
+    "full": "<span>BRO TASK FORCES ACTIVE: <strong>4 SECTORS OPERATIONAL</strong></span>"
+  },
+  {
+    "lineNo": 2064,
+    "text": "PROJECT HIMANK",
+    "full": "<span class=\"bro-proj-tag himank\">PROJECT HIMANK</span>"
+  },
+  {
+    "lineNo": 2065,
+    "text": "CLEARING IN PROGRESS",
+    "full": "<span class=\"bro-status-live\">CLEARING IN PROGRESS</span>"
+  },
+  {
+    "lineNo": 2067,
+    "text": "Khardung La — North Pullu Axis (Km 38–46)",
+    "full": "<strong class=\"bro-route-title\">Khardung La — North Pullu Axis (Km 38–46)</strong>"
+  },
+  {
+    "lineNo": 2068,
+    "text": "4 Heavy Snow Cutters & 2 Graders clearing 42cm fresh drift. Light military vehicles with tire chains cleared for transit.",
+    "full": "<p class=\"bro-task-desc\">4 Heavy Snow Cutters & 2 Graders clearing 42cm fresh drift. Light military vehicles with tire chains cleared for transit.</p>"
+  },
+  {
+    "lineNo": 2073,
+    "text": "PROJECT BEACON",
+    "full": "<span class=\"bro-proj-tag beacon\">PROJECT BEACON</span>"
+  },
+  {
+    "lineNo": 2074,
+    "text": "ROCKFALL CLEARANCE",
+    "full": "<span class=\"bro-status-caution\">ROCKFALL CLEARANCE</span>"
+  },
+  {
+    "lineNo": 2076,
+    "text": "Zojila Pass — Nilgrath Bypass Corridor",
+    "full": "<strong class=\"bro-route-title\">Zojila Pass — Nilgrath Bypass Corridor</strong>"
+  },
+  {
+    "lineNo": 2077,
+    "text": "Upper pass closed due to fresh rockfall at Km 84. Heavy military convoys diverted via Nilgrath bypass tunnel with Military Police escort.",
+    "full": "<p class=\"bro-task-desc\">Upper pass closed due to fresh rockfall at Km 84. Heavy military convoys diverted via Nilgrath bypass tunnel with Military Police escort.</p>"
+  },
+  {
+    "lineNo": 2082,
+    "text": "PROJECT VARTAK",
+    "full": "<span class=\"bro-proj-tag vartak\">PROJECT VARTAK</span>"
+  },
+  {
+    "lineNo": 2083,
+    "text": "ALL-WEATHER TRANSIT",
+    "full": "<span class=\"bro-status-open\">ALL-WEATHER TRANSIT</span>"
+  },
+  {
+    "lineNo": 2085,
+    "text": "Sela Twin-Tube Tunnel Corridor (Kameng)",
+    "full": "<strong class=\"bro-route-title\">Sela Twin-Tube Tunnel Corridor (Kameng)</strong>"
+  },
+  {
+    "lineNo": 2086,
+    "text": "Twin tubes fully operational with automated ventilation & heating. Surface anti-freeze brine sprayed on both approach portals.",
+    "full": "<p class=\"bro-task-desc\">Twin tubes fully operational with automated ventilation & heating. Surface anti-freeze brine sprayed on both approach portals.</p>"
+  },
+  {
+    "lineNo": 2091,
+    "text": "PROJECT DEEPAK",
+    "full": "<span class=\"bro-proj-tag deepak\">PROJECT DEEPAK</span>"
+  },
+  {
+    "lineNo": 2092,
+    "text": "HIGH-PASS PATROL",
+    "full": "<span class=\"bro-status-live\">HIGH-PASS PATROL</span>"
+  },
+  {
+    "lineNo": 2094,
+    "text": "Atal Tunnel — Baralacha La Sector (NH-3)",
+    "full": "<strong class=\"bro-route-title\">Atal Tunnel — Baralacha La Sector (NH-3)</strong>"
+  },
+  {
+    "lineNo": 2095,
+    "text": "Atal Tunnel tube clear. Continuous grit spraying on Baralacha La switchbacks due to -18°C sub-zero road icing.",
+    "full": "<p class=\"bro-task-desc\">Atal Tunnel tube clear. Continuous grit spraying on Baralacha La switchbacks due to -18°C sub-zero road icing.</p>"
+  },
+  {
+    "lineNo": 2107,
+    "text": "EARLY WARNING INTEL",
+    "full": "<span>EARLY WARNING INTEL</span>"
+  },
+  {
+    "lineNo": 2109,
+    "text": "Predictive Logistics Intel & Early Warnings",
+    "full": "<h2 class=\"module-title\">Predictive Logistics Intel & Early Warnings</h2>"
+  },
+  {
+    "lineNo": 2110,
+    "text": "Operational risk advisories, demand surge forecasts, and proactive logistics directives for forward units",
+    "full": "<p class=\"module-subtitle\">Operational risk advisories, demand surge forecasts, and proactive logistics directives for forward units</p>"
+  },
+  {
+    "lineNo": 2114,
+    "text": "ADVISORY STATUS: 4 ACTIVE SITREPS",
+    "full": "<span class=\"ai-status-text\">ADVISORY STATUS: <strong>4 ACTIVE SITREPS</strong></span>"
+  },
+  {
+    "lineNo": 2125,
+    "text": "1 Critical",
+    "full": "<div class=\"kpi-val\">1 Critical</div>"
+  },
+  {
+    "lineNo": 2126,
+    "text": "Severe Weather Hazard",
+    "full": "<div class=\"kpi-label\">Severe Weather Hazard</div>"
+  },
+  {
+    "lineNo": 2127,
+    "text": "Siachen - DBO Highway (-34°C Cold Wave)",
+    "full": "<div class=\"kpi-sub\">Siachen - DBO Highway (-34°C Cold Wave)</div>"
+  },
+  {
+    "lineNo": 2135,
+    "text": "+28% Surge",
+    "full": "<div class=\"kpi-val\">+28% Surge</div>"
+  },
+  {
+    "lineNo": 2136,
+    "text": "Winter Caloric Demand",
+    "full": "<div class=\"kpi-label\">Winter Caloric Demand</div>"
+  },
+  {
+    "lineNo": 2137,
+    "text": "Class I Rations & Heating Fuel Surge",
+    "full": "<div class=\"kpi-sub\">Class I Rations & Heating Fuel Surge</div>"
+  },
+  {
+    "lineNo": 2145,
+    "text": "4 Directives",
+    "full": "<div class=\"kpi-val\">4 Directives</div>"
+  },
+  {
+    "lineNo": 2146,
+    "text": "Mitigation Orders",
+    "full": "<div class=\"kpi-label\">Mitigation Orders</div>"
+  },
+  {
+    "lineNo": 2147,
+    "text": "Prepositioning & Alternate Tunnel Detours",
+    "full": "<div class=\"kpi-sub\">Prepositioning & Alternate Tunnel Detours</div>"
+  },
+  {
+    "lineNo": 2155,
+    "text": "92% Reliability",
+    "full": "<div class=\"kpi-val\">92% Reliability</div>"
+  },
+  {
+    "lineNo": 2156,
+    "text": "Historical Confidence",
+    "full": "<div class=\"kpi-label\">Historical Confidence</div>"
+  },
+  {
+    "lineNo": 2157,
+    "text": "Cross-Checked Against 15-Year Weather Logs",
+    "full": "<div class=\"kpi-sub\">Cross-Checked Against 15-Year Weather Logs</div>"
+  },
+  {
+    "lineNo": 2165,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 2166,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 2167,
+    "text": "class=\"cargo-pill\"",
+    "full": "class=\"cargo-pill\""
+  },
+  {
+    "lineNo": 2169,
+    "text": "(click)=\"aiFilter = 'All'\">",
+    "full": "(click)=\"aiFilter = 'All'\">"
+  },
+  {
+    "lineNo": 2170,
+    "text": "All Advisories ({{ logisticsService.alerts().length }})",
+    "full": "All Advisories ({{ logisticsService.alerts().length }})"
+  },
+  {
+    "lineNo": 2172,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 2173,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 2174,
+    "text": "class=\"cargo-pill\"",
+    "full": "class=\"cargo-pill\""
+  },
+  {
+    "lineNo": 2176,
+    "text": "(click)=\"aiFilter = 'Weather Risk'\">",
+    "full": "(click)=\"aiFilter = 'Weather Risk'\">"
+  },
+  {
+    "lineNo": 2177,
+    "text": "🌪️ Weather Hazards",
+    "full": "🌪️ Weather Hazards"
+  },
+  {
+    "lineNo": 2179,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 2180,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 2181,
+    "text": "class=\"cargo-pill\"",
+    "full": "class=\"cargo-pill\""
+  },
+  {
+    "lineNo": 2183,
+    "text": "(click)=\"aiFilter = 'Demand Surge'\">",
+    "full": "(click)=\"aiFilter = 'Demand Surge'\">"
+  },
+  {
+    "lineNo": 2184,
+    "text": "📊 Demand Surges",
+    "full": "📊 Demand Surges"
+  },
+  {
+    "lineNo": 2186,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 2187,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 2188,
+    "text": "class=\"cargo-pill\"",
+    "full": "class=\"cargo-pill\""
+  },
+  {
+    "lineNo": 2190,
+    "text": "(click)=\"aiFilter = 'Stock Critical'\">",
+    "full": "(click)=\"aiFilter = 'Stock Critical'\">"
+  },
+  {
+    "lineNo": 2191,
+    "text": "⚙️ Stock Alerts",
+    "full": "⚙️ Stock Alerts"
+  },
+  {
+    "lineNo": 2193,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 2194,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 2195,
+    "text": "class=\"cargo-pill\"",
+    "full": "class=\"cargo-pill\""
+  },
+  {
+    "lineNo": 2197,
+    "text": "(click)=\"aiFilter = 'Route Disruption'\">",
+    "full": "(click)=\"aiFilter = 'Route Disruption'\">"
+  },
+  {
+    "lineNo": 2198,
+    "text": "🚧 Route Warnings",
+    "full": "🚧 Route Warnings"
+  },
+  {
+    "lineNo": 2212,
+    "text": "<div",
+    "full": "<div"
+  },
+  {
+    "lineNo": 2214,
+    "text": "class=\"brief-card card-surface mb-3\"",
+    "full": "class=\"brief-card card-surface mb-3\""
+  },
+  {
+    "lineNo": 2221,
+    "text": "<span",
+    "full": "<span"
+  },
+  {
+    "lineNo": 2222,
+    "text": "class=\"badge-category-tag\"",
+    "full": "class=\"badge-category-tag\""
+  },
+  {
+    "lineNo": 2285,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 2287,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 2288,
+    "text": "class=\"btn-tray-toggle\"",
+    "full": "class=\"btn-tray-toggle\""
+  },
+  {
+    "lineNo": 2289,
+    "text": "(click)=\"toggleContingency(alt.id)\">",
+    "full": "(click)=\"toggleContingency(alt.id)\">"
+  },
+  {
+    "lineNo": 2292,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 2293,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 2294,
+    "text": "class=\"btn-approve-directive\"",
+    "full": "class=\"btn-approve-directive\""
+  },
+  {
+    "lineNo": 2296,
+    "text": "(click)=\"executeAlertAction(alt)\">",
+    "full": "(click)=\"executeAlertAction(alt)\">"
+  },
+  {
+    "lineNo": 2305,
+    "text": "SECONDARY CONTINGENCY COURSES OF ACTION:",
+    "full": "<div class=\"tray-title\">SECONDARY CONTINGENCY COURSES OF ACTION:</div>"
+  },
+  {
+    "lineNo": 2308,
+    "text": "↳ {{ coa }}",
+    "full": "<span class=\"coa-text\">↳ {{ coa }}</span>"
+  },
+  {
+    "lineNo": 2310,
+    "text": "Select & Dispatch COA",
+    "full": "Select & Dispatch COA"
+  },
+  {
+    "lineNo": 2326,
+    "text": "REGIMENTAL AUDIT & LEDGER CLEARANCE",
+    "full": "<span>REGIMENTAL AUDIT & LEDGER CLEARANCE</span>"
+  },
+  {
+    "lineNo": 2328,
+    "text": "Unit Logistics Reports",
+    "full": "<h2 class=\"module-title\">Unit Logistics Reports</h2>"
+  },
+  {
+    "lineNo": 2329,
+    "text": "Official Quartermaster store records, verified fuel balances, and DGOS audit certificates",
+    "full": "<p class=\"module-subtitle\">Official Quartermaster store records, verified fuel balances, and DGOS audit certificates</p>"
+  },
+  {
+    "lineNo": 2332,
+    "text": "📥 Export CSV",
+    "full": "<button type=\"button\" class=\"btn-outline-army\" (click)=\"exportReport('CSV')\">📥 Export CSV</button>"
+  },
+  {
+    "lineNo": 2333,
+    "text": "📄 Export PDF",
+    "full": "<button type=\"button\" class=\"btn-outline-army\" (click)=\"exportReport('PDF')\">📄 Export PDF</button>"
+  },
+  {
+    "lineNo": 2334,
+    "text": "🖨️ Print Ledger",
+    "full": "<button type=\"button\" class=\"btn-army-primary\" (click)=\"exportReport('Print')\">🖨️ Print Ledger</button>"
+  },
+  {
+    "lineNo": 2352,
+    "text": "Ledger Reconciliation",
+    "full": "<div class=\"kpi-label\">Ledger Reconciliation</div>"
+  },
+  {
+    "lineNo": 2353,
+    "text": "All Vouchers Mathematically Reconciled",
+    "full": "<div class=\"kpi-sub\">All Vouchers Mathematically Reconciled</div>"
+  },
+  {
+    "lineNo": 2361,
+    "text": "48 Vouchers",
+    "full": "<div class=\"kpi-val\">48 Vouchers</div>"
+  },
+  {
+    "lineNo": 2362,
+    "text": "Digitally Signed Tokens",
+    "full": "<div class=\"kpi-label\">Digitally Signed Tokens</div>"
+  },
+  {
+    "lineNo": 2363,
+    "text": "QM Key #14R-QM-71044A Appended",
+    "full": "<div class=\"kpi-sub\">QM Key #14R-QM-71044A Appended</div>"
+  },
+  {
+    "lineNo": 2371,
+    "text": "14 Indents",
+    "full": "<div class=\"kpi-val\">14 Indents</div>"
+  },
+  {
+    "lineNo": 2372,
+    "text": "Quarterly Requisitions",
+    "full": "<div class=\"kpi-label\">Quarterly Requisitions</div>"
+  },
+  {
+    "lineNo": 2373,
+    "text": "100% Verified Delivery & Air Drops",
+    "full": "<div class=\"kpi-sub\">100% Verified Delivery & Air Drops</div>"
+  },
+  {
+    "lineNo": 2382,
+    "text": "Audit Discrepancy Rate",
+    "full": "<div class=\"kpi-label\">Audit Discrepancy Rate</div>"
+  },
+  {
+    "lineNo": 2383,
+    "text": "Zero Material Discrepancies Flagged",
+    "full": "<div class=\"kpi-sub\">Zero Material Discrepancies Flagged</div>"
+  },
+  {
+    "lineNo": 2391,
+    "text": "Certified Regimental Logistics Ledgers",
+    "full": "<h3 class=\"panel-heading\">Certified Regimental Logistics Ledgers</h3>"
+  },
+  {
+    "lineNo": 2392,
+    "text": "4 Official Ledgers Available",
+    "full": "<span class=\"table-count-tag\">4 Official Ledgers Available</span>"
+  },
+  {
+    "lineNo": 2399,
+    "text": "Report Title & ID",
+    "full": "<th>Report Title & ID</th>"
+  },
+  {
+    "lineNo": 2400,
+    "text": "Category",
+    "full": "<th>Category</th>"
+  },
+  {
+    "lineNo": 2401,
+    "text": "Audit Period",
+    "full": "<th>Audit Period</th>"
+  },
+  {
+    "lineNo": 2402,
+    "text": "Authorizing Officer",
+    "full": "<th>Authorizing Officer</th>"
+  },
+  {
+    "lineNo": 2403,
+    "text": "Classification",
+    "full": "<th>Classification</th>"
+  },
+  {
+    "lineNo": 2404,
+    "text": "Ledger Status",
+    "full": "<th>Ledger Status</th>"
+  },
+  {
+    "lineNo": 2405,
+    "text": "Actions",
+    "full": "<th class=\"text-right\">Actions</th>"
+  },
+  {
+    "lineNo": 2429,
+    "text": "<span",
+    "full": "<span"
+  },
+  {
+    "lineNo": 2430,
+    "text": "class=\"badge-classification\"",
+    "full": "class=\"badge-classification\""
+  },
+  {
+    "lineNo": 2438,
+    "text": "✓ {{ rep.status }}",
+    "full": "<span class=\"badge-success\">✓ {{ rep.status }}</span>"
+  },
+  {
+    "lineNo": 2443,
+    "text": "👁️ Preview",
+    "full": "👁️ Preview"
+  },
+  {
+    "lineNo": 2446,
+    "text": "📥 PDF",
+    "full": "📥 PDF"
+  },
+  {
+    "lineNo": 2449,
+    "text": "📊 CSV",
+    "full": "📊 CSV"
+  },
+  {
+    "lineNo": 2466,
+    "text": "C4ISR SECURE TERMINAL CONFIGURATION",
+    "full": "<span>C4ISR SECURE TERMINAL CONFIGURATION</span>"
+  },
+  {
+    "lineNo": 2468,
+    "text": "Unit Terminal & SATCOM Settings",
+    "full": "<h2 class=\"module-title\">Unit Terminal & SATCOM Settings</h2>"
+  },
+  {
+    "lineNo": 2469,
+    "text": "Regimental authentication profiles, encryption keys, and secure ASCON C4ISR terminal parameters",
+    "full": "<p class=\"module-subtitle\">Regimental authentication profiles, encryption keys, and secure ASCON C4ISR terminal parameters</p>"
+  },
+  {
+    "lineNo": 2490,
+    "text": "Quartermaster Identity & Clearance",
+    "full": "<h3 class=\"panel-heading mb-0\">Quartermaster Identity & Clearance</h3>"
+  },
+  {
+    "lineNo": 2491,
+    "text": "Active duty officer signature keys",
+    "full": "<span class=\"text-xs text-muted\">Active duty officer signature keys</span>"
+  },
+  {
+    "lineNo": 2494,
+    "text": "LEVEL 4 - TOP SECRET",
+    "full": "<span class=\"badge-clearance\">LEVEL 4 - TOP SECRET</span>"
+  },
+  {
+    "lineNo": 2499,
+    "text": "Designated Military Unit",
+    "full": "<label class=\"form-label\">Designated Military Unit</label>"
+  },
+  {
+    "lineNo": 2503,
+    "text": "Authorized Commanding QM",
+    "full": "<label class=\"form-label\">Authorized Commanding QM</label>"
+  },
+  {
+    "lineNo": 2507,
+    "text": "Officer Service Identity",
+    "full": "<label class=\"form-label\">Officer Service Identity</label>"
+  },
+  {
+    "lineNo": 2511,
+    "text": "Stationed Sector Base",
+    "full": "<label class=\"form-label\">Stationed Sector Base</label>"
+  },
+  {
+    "lineNo": 2523,
+    "text": "ASCON Grid & SATCOM Uplink",
+    "full": "<h3 class=\"panel-heading mb-0\">ASCON Grid & SATCOM Uplink</h3>"
+  },
+  {
+    "lineNo": 2524,
+    "text": "Military satellite transceiver telemetry",
+    "full": "<span class=\"text-xs text-muted\">Military satellite transceiver telemetry</span>"
+  },
+  {
+    "lineNo": 2527,
+    "text": "ONLINE · SYNCED",
+    "full": "<span class=\"badge-success\">ONLINE · SYNCED</span>"
+  },
+  {
+    "lineNo": 2532,
+    "text": "Terminal Identity Node",
+    "full": "<label class=\"form-label\">Terminal Identity Node</label>"
+  },
+  {
+    "lineNo": 2536,
+    "text": "Active Transponder",
+    "full": "<label class=\"form-label\">Active Transponder</label>"
+  },
+  {
+    "lineNo": 2540,
+    "text": "Comms Encryption Standard",
+    "full": "<label class=\"form-label\">Comms Encryption Standard</label>"
+  },
+  {
+    "lineNo": 2544,
+    "text": "Sync Pulse Interval",
+    "full": "<label class=\"form-label\">Sync Pulse Interval</label>"
+  },
+  {
+    "lineNo": 2546,
+    "text": "15 Seconds",
+    "full": "<option>15 Seconds</option>"
+  },
+  {
+    "lineNo": 2547,
+    "text": "30 Seconds",
+    "full": "<option>30 Seconds</option>"
+  },
+  {
+    "lineNo": 2548,
+    "text": "60 Seconds",
+    "full": "<option>60 Seconds</option>"
+  },
+  {
+    "lineNo": 2549,
+    "text": "5 Minutes",
+    "full": "<option>5 Minutes</option>"
+  },
+  {
+    "lineNo": 2561,
+    "text": "Tactical Automation & Notification Policies",
+    "full": "<h3 class=\"panel-heading mb-0\">Tactical Automation & Notification Policies</h3>"
+  },
+  {
+    "lineNo": 2562,
+    "text": "Automated defense responses",
+    "full": "<span class=\"text-xs text-muted\">Automated defense responses</span>"
+  },
+  {
+    "lineNo": 2570,
+    "text": "Automatic SOS Emergency Flash Broadcast",
+    "full": "<strong>Automatic SOS Emergency Flash Broadcast</strong>"
+  },
+  {
+    "lineNo": 2571,
+    "text": "Auto-task emergency IAF sortie request when forward platoon cuts off by avalanche",
+    "full": "<span>Auto-task emergency IAF sortie request when forward platoon cuts off by avalanche</span>"
+  },
+  {
+    "lineNo": 2578,
+    "text": "Live Convoy SATCOM SMS & Dispatch Alerts",
+    "full": "<strong>Live Convoy SATCOM SMS & Dispatch Alerts</strong>"
+  },
+  {
+    "lineNo": 2579,
+    "text": "Broadcast checkpoint clearances and detour alerts to escort Subedars in real-time",
+    "full": "<span>Broadcast checkpoint clearances and detour alerts to escort Subedars in real-time</span>"
+  },
+  {
+    "lineNo": 2586,
+    "text": "Sub-Zero Battery & Bandwidth Optimization",
+    "full": "<strong>Sub-Zero Battery & Bandwidth Optimization</strong>"
+  },
+  {
+    "lineNo": 2587,
+    "text": "Throttles non-essential background graphics when terminal operates below -20°C ambient",
+    "full": "<span>Throttles non-essential background graphics when terminal operates below -20°C ambient</span>"
+  },
+  {
+    "lineNo": 2594,
+    "text": "Local Ledger Offline Cache",
+    "full": "<strong>Local Ledger Offline Cache</strong>"
+  },
+  {
+    "lineNo": 2595,
+    "text": "Permits complete voucher signing even if SATCOM uplink is temporarily blocked by blizzard",
+    "full": "<span>Permits complete voucher signing even if SATCOM uplink is temporarily blocked by blizzard</span>"
+  },
+  {
+    "lineNo": 2608,
+    "text": "Cryptographic Signing Credentials",
+    "full": "<h3 class=\"panel-heading mb-0\">Cryptographic Signing Credentials</h3>"
+  },
+  {
+    "lineNo": 2609,
+    "text": "Army Cyber Security Node authorization",
+    "full": "<span class=\"text-xs text-muted\">Army Cyber Security Node authorization</span>"
+  },
+  {
+    "lineNo": 2616,
+    "text": "Active QM Signing Key Token:",
+    "full": "<span class=\"key-label\">Active QM Signing Key Token:</span>"
+  },
+  {
+    "lineNo": 2620,
+    "text": "Key Certificate Expiration:",
+    "full": "<span class=\"key-label\">Key Certificate Expiration:</span>"
+  },
+  {
+    "lineNo": 2621,
+    "text": "31 December 2026 (Active)",
+    "full": "<span class=\"text-xs font-mono text-green\">31 December 2026 (Active)</span>"
+  },
+  {
+    "lineNo": 2625,
+    "text": "🔄 Re-Authenticate Key with Army Cyber Node",
+    "full": "🔄 Re-Authenticate Key with Army Cyber Node"
+  },
+  {
+    "lineNo": 2642,
+    "text": "DGOS DEFENSE INDENT · FORM IAFA-2026",
+    "full": "<span class=\"modal-form-badge\">DGOS DEFENSE INDENT · FORM IAFA-2026</span>"
+  },
+  {
+    "lineNo": 2643,
+    "text": "Submit Ordnance Requisition Voucher",
+    "full": "<h3 class=\"modal-title\">Submit Ordnance Requisition Voucher</h3>"
+  },
+  {
+    "lineNo": 2644,
+    "text": "Direct transmission to Northern Command Supply Depot (14 Corps Logistics Grid)",
+    "full": "<p class=\"modal-subtitle-text\">Direct transmission to Northern Command Supply Depot (14 Corps Logistics Grid)</p>"
+  },
+  {
+    "lineNo": 2658,
+    "text": "Supply Category *",
+    "full": "<label class=\"form-label\">Supply Category <span class=\"req-star\">*</span></label>"
+  },
+  {
+    "lineNo": 2660,
+    "text": "Class I (Rations)",
+    "full": "<option>Class I (Rations)</option>"
+  },
+  {
+    "lineNo": 2661,
+    "text": "Class III (POL)",
+    "full": "<option>Class III (POL)</option>"
+  },
+  {
+    "lineNo": 2662,
+    "text": "Class V (Ammo)",
+    "full": "<option>Class V (Ammo)</option>"
+  },
+  {
+    "lineNo": 2663,
+    "text": "Class IX (Spares)",
+    "full": "<option>Class IX (Spares)</option>"
+  },
+  {
+    "lineNo": 2664,
+    "text": "ECC / Winter Clothing",
+    "full": "<option>ECC / Winter Clothing</option>"
+  },
+  {
+    "lineNo": 2669,
+    "text": "Urgency Priority *",
+    "full": "<label class=\"form-label\">Urgency Priority <span class=\"req-star\">*</span></label>"
+  },
+  {
+    "lineNo": 2671,
+    "text": "Routine",
+    "full": "<option>Routine</option>"
+  },
+  {
+    "lineNo": 2672,
+    "text": "Operational Priority 1",
+    "full": "<option>Operational Priority 1</option>"
+  },
+  {
+    "lineNo": 2673,
+    "text": "SOS Emergency",
+    "full": "<option>SOS Emergency</option>"
+  },
+  {
+    "lineNo": 2679,
+    "text": "Item Nomenclature *",
+    "full": "<label class=\"form-label\">Item Nomenclature <span class=\"req-star\">*</span></label>"
+  },
+  {
+    "lineNo": 2684,
+    "text": "Requested Quantity *",
+    "full": "<label class=\"form-label\">Requested Quantity <span class=\"req-star\">*</span></label>"
+  },
+  {
+    "lineNo": 2690,
+    "text": "Required By Date *",
+    "full": "<label class=\"form-label\">Required By Date <span class=\"req-star\">*</span></label>"
+  },
+  {
+    "lineNo": 2695,
+    "text": "Consignee Delivery Depot",
+    "full": "<label class=\"form-label\">Consignee Delivery Depot</label>"
+  },
+  {
+    "lineNo": 2701,
+    "text": "Reason / Operational Justification *",
+    "full": "<label class=\"form-label\">Reason / Operational Justification <span class=\"req-star\">*</span></label>"
+  },
+  {
+    "lineNo": 2710,
+    "text": "SECURE DISPATCH: Authenticated with QM Key #14R-QM-71044A. Voucher will automatically be queued for DGOS automated dispatch allocation.",
+    "full": "<strong>SECURE DISPATCH:</strong> Authenticated with QM Key <code>#14R-QM-71044A</code>. Voucher will automatically be queued for DGOS automated dispatch allocation."
+  },
+  {
+    "lineNo": 2717,
+    "text": "Discard / Cancel",
+    "full": "Discard / Cancel"
+  },
+  {
+    "lineNo": 2720,
+    "text": "✓ Authorize & Submit Indent",
+    "full": "<span class=\"btn-check-icon\">✓</span> Authorize & Submit Indent"
+  },
+  {
+    "lineNo": 2732,
+    "text": "Indent Voucher: {{ selectedRequest.id }}",
+    "full": "<h3 class=\"modal-title\">Indent Voucher: {{ selectedRequest.id }}</h3>"
+  },
+  {
+    "lineNo": 2742,
+    "text": "URGENCY PRIORITY",
+    "full": "<span class=\"spec-label\">URGENCY PRIORITY</span>"
+  },
+  {
+    "lineNo": 2746,
+    "text": "REQUIRED BY",
+    "full": "<span class=\"spec-label\">REQUIRED BY</span>"
+  },
+  {
+    "lineNo": 2750,
+    "text": "DATE SUBMITTED",
+    "full": "<span class=\"spec-label\">DATE SUBMITTED</span>"
+  },
+  {
+    "lineNo": 2754,
+    "text": "CURRENT STATUS",
+    "full": "<span class=\"spec-label\">CURRENT STATUS</span>"
+  },
+  {
+    "lineNo": 2762,
+    "text": "1. Indent SubmittedBy QM 14 Rajput (Recorded in Regimental Ledger)",
+    "full": "<div class=\"cp-info\"><strong>1. Indent Submitted</strong><span>By QM 14 Rajput (Recorded in Regimental Ledger)</span></div>"
+  },
+  {
+    "lineNo": 2766,
+    "text": "2. DGOS Approval GrantedNorthern Command Ordnance Branch Clearance",
+    "full": "<div class=\"cp-info\"><strong>2. DGOS Approval Granted</strong><span>Northern Command Ordnance Branch Clearance</span></div>"
+  },
+  {
+    "lineNo": 2770,
+    "text": "3. Depot Stock AllocationAllocated at Central Ordnance Depot Pathankot",
+    "full": "<div class=\"cp-info\"><strong>3. Depot Stock Allocation</strong><span>Allocated at Central Ordnance Depot Pathankot</span></div>"
+  },
+  {
+    "lineNo": 2774,
+    "text": "4. Convoy Dispatched En-RouteAssigned to Convoy Column GARUDA-01",
+    "full": "<div class=\"cp-info\"><strong>4. Convoy Dispatched En-Route</strong><span>Assigned to Convoy Column GARUDA-01</span></div>"
+  },
+  {
+    "lineNo": 2778,
+    "text": "5. Unit Ledger AcknowledgedStores Verification & Receipt Signed",
+    "full": "<div class=\"cp-info\"><strong>5. Unit Ledger Acknowledged</strong><span>Stores Verification & Receipt Signed</span></div>"
+  },
+  {
+    "lineNo": 2785,
+    "text": "TACTICAL LIFECYCLE ACTION: You can simulate next-stage DGOS clearance or mark as received into base stores below.",
+    "full": "<strong>TACTICAL LIFECYCLE ACTION:</strong> You can simulate next-stage DGOS clearance or mark as received into base stores below."
+  },
+  {
+    "lineNo": 2791,
+    "text": "Close",
+    "full": "<button type=\"button\" class=\"btn-modal-cancel\" (click)=\"closeTrackModal()\">Close</button>"
+  },
+  {
+    "lineNo": 2794,
+    "text": "Approve via DGOS HQ",
+    "full": "<span *ngIf=\"selectedRequest.status === 'Pending HQ Approval'\">Approve via DGOS HQ</span>"
+  },
+  {
+    "lineNo": 2795,
+    "text": "Dispatch from COD",
+    "full": "<span *ngIf=\"selectedRequest.status === 'Approved by DGOS'\">Dispatch from COD</span>"
+  },
+  {
+    "lineNo": 2796,
+    "text": "Acknowledge Delivery",
+    "full": "<span *ngIf=\"selectedRequest.status === 'Dispatched from COD'\">Acknowledge Delivery</span>"
+  },
+  {
+    "lineNo": 2809,
+    "text": "SATCOM Telemetry: {{ selectedShipment.callsign }}",
+    "full": "<h3 class=\"modal-title\">SATCOM Telemetry: {{ selectedShipment.callsign }}</h3>"
+  },
+  {
+    "lineNo": 2810,
+    "text": "ID: {{ selectedShipment.id }} • {{ selectedShipment.status }} • {{ selectedShipment.riskLevel }} Risk",
+    "full": "<span class=\"convoy-modal-sub\">ID: {{ selectedShipment.id }} • {{ selectedShipment.status }} • {{ selectedShipment.riskLevel }} Risk</span>"
+  },
+  {
+    "lineNo": 2820,
+    "text": "ORIGIN DEPOT",
+    "full": "<span class=\"spec-label\">ORIGIN DEPOT</span>"
+  },
+  {
+    "lineNo": 2824,
+    "text": "DESTINATION",
+    "full": "<span class=\"spec-label\">DESTINATION</span>"
+  },
+  {
+    "lineNo": 2828,
+    "text": "ESCORT COMMANDER",
+    "full": "<span class=\"spec-label\">ESCORT COMMANDER</span>"
+  },
+  {
+    "lineNo": 2832,
+    "text": "DEPARTURE TIME",
+    "full": "<span class=\"spec-label\">DEPARTURE TIME</span>"
+  },
+  {
+    "lineNo": 2836,
+    "text": "ESTIMATED ARRIVAL",
+    "full": "<span class=\"spec-label\">ESTIMATED ARRIVAL</span>"
+  },
+  {
+    "lineNo": 2840,
+    "text": "FLEET ASSETS",
+    "full": "<span class=\"spec-label\">FLEET ASSETS</span>"
+  },
+  {
+    "lineNo": 2844,
+    "text": "CARGO MANIFEST",
+    "full": "<span class=\"spec-label\">CARGO MANIFEST</span>"
+  },
+  {
+    "lineNo": 2848,
+    "text": "SATCOM COORDINATES",
+    "full": "<span class=\"spec-label\">SATCOM COORDINATES</span>"
+  },
+  {
+    "lineNo": 2855,
+    "text": "TRANSIT AXIS:",
+    "full": "<span class=\"strip-label\">TRANSIT AXIS:</span>"
+  },
+  {
+    "lineNo": 2863,
+    "text": "ENVIRONMENTAL / HIGH-ALTITUDE ALERT:",
+    "full": "<strong>ENVIRONMENTAL / HIGH-ALTITUDE ALERT:</strong>"
+  },
+  {
+    "lineNo": 2871,
+    "text": "Route Checkpoint Verification Log",
+    "full": "<h4>Route Checkpoint Verification Log</h4>"
+  },
+  {
+    "lineNo": 2878,
+    "text": "<div",
+    "full": "<div"
+  },
+  {
+    "lineNo": 2880,
+    "text": "class=\"convoy-step-item\"",
+    "full": "class=\"convoy-step-item\""
+  },
+  {
+    "lineNo": 2893,
+    "text": "Time Stamp: {{ cp.time }}",
+    "full": "<div class=\"cp-time-text\">Time Stamp: {{ cp.time }}</div>"
+  },
+  {
+    "lineNo": 2903,
+    "text": "REGIMENTAL LEDGER DISPATCH TOKEN:",
+    "full": "<strong>REGIMENTAL LEDGER DISPATCH TOKEN:</strong>"
+  },
+  {
+    "lineNo": 2904,
+    "text": "SHA-256: 9F8A...{{ selectedShipment.id }}...4C1E",
+    "full": "<code>SHA-256: 9F8A...{{ selectedShipment.id }}...4C1E</code>"
+  },
+  {
+    "lineNo": 2905,
+    "text": "Encrypted via ASCON Indian Army C4ISR Network (HQ 14 Corps)",
+    "full": "<span>Encrypted via ASCON Indian Army C4ISR Network (HQ 14 Corps)</span>"
+  },
+  {
+    "lineNo": 2912,
+    "text": "Close Telemetry",
+    "full": "Close Telemetry"
+  },
+  {
+    "lineNo": 2914,
+    "text": "<button",
+    "full": "<button"
+  },
+  {
+    "lineNo": 2915,
+    "text": "type=\"button\"",
+    "full": "type=\"button\""
+  },
+  {
+    "lineNo": 2916,
+    "text": "class=\"btn-modal-submit\"",
+    "full": "class=\"btn-modal-submit\""
+  },
+  {
+    "lineNo": 2917,
+    "text": "(click)=\"acknowledgeDelivery(selectedShipment.id); closeConvoyModal()\">",
+    "full": "(click)=\"acknowledgeDelivery(selectedShipment.id); closeConvoyModal()\">"
+  },
+  {
+    "lineNo": 2918,
+    "text": "✓ Acknowledge & Sign Ledger",
+    "full": "<span class=\"btn-check-icon\">✓</span> Acknowledge & Sign Ledger"
+  },
+  {
+    "lineNo": 2931,
+    "text": "Document ID: {{ selectedReportPreview.id }} • {{ selectedReportPreview.period }}",
+    "full": "<p class=\"modal-subtitle-text\">Document ID: {{ selectedReportPreview.id }} • {{ selectedReportPreview.period }}</p>"
+  },
+  {
+    "lineNo": 2939,
+    "text": "AUTHORIZING OFFICER",
+    "full": "<span class=\"rm-label\">AUTHORIZING OFFICER</span>"
+  },
+  {
+    "lineNo": 2943,
+    "text": "UNIT DESIGNATION",
+    "full": "<span class=\"rm-label\">UNIT DESIGNATION</span>"
+  },
+  {
+    "lineNo": 2947,
+    "text": "CATEGORY",
+    "full": "<span class=\"rm-label\">CATEGORY</span>"
+  },
+  {
+    "lineNo": 2951,
+    "text": "LEDGER AUDIT STATUS",
+    "full": "<span class=\"rm-label\">LEDGER AUDIT STATUS</span>"
+  },
+  {
+    "lineNo": 2952,
+    "text": "✓ {{ selectedReportPreview.status }}",
+    "full": "<span class=\"text-green font-bold\">✓ {{ selectedReportPreview.status }}</span>"
+  },
+  {
+    "lineNo": 2957,
+    "text": "EXECUTIVE RECONCILIATION SUMMARY",
+    "full": "<h4>EXECUTIVE RECONCILIATION SUMMARY</h4>"
+  },
+  {
+    "lineNo": 2958,
+    "text": "This document certifies that all supply allocations, fuel receipts, and indent transfers for the designated period have been cross-verified with Army Central Ordnance Depot (COD) records and {{ unitDbService.selectedUnit().name }} Regimental Stock Registers. All transactions conform strictly to Army Ordnance Corps (AOC) Regulations and DGOS Standard Operating Procedures.",
+    "full": "<p>This document certifies that all supply allocations, fuel receipts, and indent transfers for the designated period have been cross-verified with Army Central Ordnance Depot (COD) records and {{ unitDbService.selectedUnit().name }} Regimental Stock Registers. All transactions conform strictly to Army Ordnance Corps (AOC) Regulations and DGOS Standard Operating Procedures.</p>"
+  },
+  {
+    "lineNo": 2961,
+    "text": "OFFICIALLY VERIFIED",
+    "full": "<span class=\"stamp-title\">OFFICIALLY VERIFIED</span>"
+  },
+  {
+    "lineNo": 2963,
+    "text": "DATE: {{ currentDate }}",
+    "full": "<span class=\"stamp-date\">DATE: {{ currentDate }}</span>"
+  },
+  {
+    "lineNo": 2970,
+    "text": "Close Document",
+    "full": "<button type=\"button\" class=\"btn-modal-cancel\" (click)=\"closeReportPreview()\">Close Document</button>"
+  },
+  {
+    "lineNo": 2972,
+    "text": "📊 Download CSV",
+    "full": "📊 Download CSV"
+  },
+  {
+    "lineNo": 2975,
+    "text": "📥 Download Certified PDF",
+    "full": "📥 Download Certified PDF"
+  },
+  {
+    "lineNo": 2986,
+    "text": "ARMY ORDNANCE CORPS · FORM IAFA-2027",
+    "full": "<span class=\"modal-form-badge\">ARMY ORDNANCE CORPS · FORM IAFA-2027</span>"
+  },
+  {
+    "lineNo": 2987,
+    "text": "Log Store Receipt Voucher (RV)",
+    "full": "<h3 class=\"modal-title\">Log Store Receipt Voucher (RV)</h3>"
+  },
+  {
+    "lineNo": 2988,
+    "text": "Record incoming consignment into 14 Rajput Regimental Stores Ledger",
+    "full": "<p class=\"modal-subtitle-text\">Record incoming consignment into 14 Rajput Regimental Stores Ledger</p>"
+  },
+  {
+    "lineNo": 2997,
+    "text": "Supply Category *",
+    "full": "<label class=\"form-label\">Supply Category <span class=\"req-star\">*</span></label>"
+  },
+  {
+    "lineNo": 2999,
+    "text": "Class I (Rations)",
+    "full": "<option>Class I (Rations)</option>"
+  },
+  {
+    "lineNo": 3000,
+    "text": "Class III (POL)",
+    "full": "<option>Class III (POL)</option>"
+  },
+  {
+    "lineNo": 3001,
+    "text": "Class V (Ammo)",
+    "full": "<option>Class V (Ammo)</option>"
+  },
+  {
+    "lineNo": 3002,
+    "text": "Class IX (Spares)",
+    "full": "<option>Class IX (Spares)</option>"
+  },
+  {
+    "lineNo": 3003,
+    "text": "Medical & Clothing",
+    "full": "<option>Medical & Clothing</option>"
+  },
+  {
+    "lineNo": 3008,
+    "text": "Store Receipt Voucher (RV) # *",
+    "full": "<label class=\"form-label\">Store Receipt Voucher (RV) # <span class=\"req-star\">*</span></label>"
+  },
+  {
+    "lineNo": 3014,
+    "text": "Target Inventory Item *",
+    "full": "<label class=\"form-label\">Target Inventory Item <span class=\"req-star\">*</span></label>"
+  },
+  {
+    "lineNo": 3023,
+    "text": "Quantity Received & Inspected *",
+    "full": "<label class=\"form-label\">Quantity Received & Inspected <span class=\"req-star\">*</span></label>"
+  },
+  {
+    "lineNo": 3029,
+    "text": "Consignor / Origin Depot",
+    "full": "<label class=\"form-label\">Consignor / Origin Depot</label>"
+  },
+  {
+    "lineNo": 3034,
+    "text": "Date of Store Entry *",
+    "full": "<label class=\"form-label\">Date of Store Entry <span class=\"req-star\">*</span></label>"
+  },
+  {
+    "lineNo": 3040,
+    "text": "Quality Inspection & Escort Verification",
+    "full": "<label class=\"form-label\">Quality Inspection & Escort Verification</label>"
+  },
+  {
+    "lineNo": 3049,
+    "text": "LEDGER RECONCILIATION: Submitting will automatically increment the physical stock count and update the Regimental Stock Register ledger card.",
+    "full": "<strong>LEDGER RECONCILIATION:</strong> Submitting will automatically increment the physical stock count and update the Regimental Stock Register ledger card."
+  },
+  {
+    "lineNo": 3056,
+    "text": "Cancel / Discard",
+    "full": "Cancel / Discard"
+  },
+  {
+    "lineNo": 3059,
+    "text": "✓ Verify & Add to Stores Ledger",
+    "full": "<span class=\"btn-check-icon\">✓</span> Verify & Add to Stores Ledger"
+  },
+  {
+    "lineNo": 3070,
+    "text": "ARMY ORDNANCE CORPS · FORM IAFA-2028",
+    "full": "<span class=\"modal-form-badge\">ARMY ORDNANCE CORPS · FORM IAFA-2028</span>"
+  },
+  {
+    "lineNo": 3071,
+    "text": "Record Daily Store Issue & Consumption",
+    "full": "<h3 class=\"modal-title\">Record Daily Store Issue & Consumption</h3>"
+  },
+  {
+    "lineNo": 3072,
+    "text": "Debit operational burn and troop rations from 14 Rajput Stock Ledger",
+    "full": "<p class=\"modal-subtitle-text\">Debit operational burn and troop rations from 14 Rajput Stock Ledger</p>"
+  },
+  {
+    "lineNo": 3081,
+    "text": "Supply Category *",
+    "full": "<label class=\"form-label\">Supply Category <span class=\"req-star\">*</span></label>"
+  },
+  {
+    "lineNo": 3083,
+    "text": "Class I (Rations)",
+    "full": "<option>Class I (Rations)</option>"
+  },
+  {
+    "lineNo": 3084,
+    "text": "Class III (POL)",
+    "full": "<option>Class III (POL)</option>"
+  },
+  {
+    "lineNo": 3085,
+    "text": "Class V (Ammo)",
+    "full": "<option>Class V (Ammo)</option>"
+  },
+  {
+    "lineNo": 3086,
+    "text": "Class IX (Spares)",
+    "full": "<option>Class IX (Spares)</option>"
+  },
+  {
+    "lineNo": 3087,
+    "text": "Medical & Clothing",
+    "full": "<option>Medical & Clothing</option>"
+  },
+  {
+    "lineNo": 3092,
+    "text": "Date of Issue *",
+    "full": "<label class=\"form-label\">Date of Issue <span class=\"req-star\">*</span></label>"
+  },
+  {
+    "lineNo": 3098,
+    "text": "Select Stock Item *",
+    "full": "<label class=\"form-label\">Select Stock Item <span class=\"req-star\">*</span></label>"
+  },
+  {
+    "lineNo": 3107,
+    "text": "Quantity to Issue / Burn *",
+    "full": "<label class=\"form-label\">Quantity to Issue / Burn <span class=\"req-star\">*</span></label>"
+  },
+  {
+    "lineNo": 3113,
+    "text": "Receiving Post / Sub-Unit *",
+    "full": "<label class=\"form-label\">Receiving Post / Sub-Unit <span class=\"req-star\">*</span></label>"
+  },
+  {
+    "lineNo": 3118,
+    "text": "Operational Purpose",
+    "full": "<label class=\"form-label\">Operational Purpose</label>"
+  },
+  {
+    "lineNo": 3127,
+    "text": "STOCK DEBIT: This action issues stock under Quartermaster authority. Stock ledger balance will immediately decrease by the specified quantity.",
+    "full": "<strong>STOCK DEBIT:</strong> This action issues stock under Quartermaster authority. Stock ledger balance will immediately decrease by the specified quantity."
+  },
+  {
+    "lineNo": 3134,
+    "text": "Cancel / Discard",
+    "full": "Cancel / Discard"
+  },
+  {
+    "lineNo": 3137,
+    "text": "✓ Authorize & Debit from Ledger",
+    "full": "<span class=\"btn-check-icon\">✓</span> Authorize & Debit from Ledger"
+  },
+  {
+    "lineNo": 3146,
+    "text": "BRO / METEOROLOGICAL DEFENSE INTEL · LIVE CORRIDOR STATUS",
+    "full": "<span class=\"modal-form-badge\">BRO / METEOROLOGICAL DEFENSE INTEL · LIVE CORRIDOR STATUS</span>"
+  },
+  {
+    "lineNo": 3147,
+    "text": "Pass Telemetry: {{ selectedPass.passName }}",
+    "full": "<h3 class=\"modal-title\">Pass Telemetry: {{ selectedPass.passName }}</h3>"
+  },
+  {
+    "lineNo": 3148,
+    "text": "📍 {{ selectedPass.location }} • Elevation: {{ selectedPass.elevation }}",
+    "full": "<p class=\"modal-subtitle-text\">📍 {{ selectedPass.location }} • Elevation: {{ selectedPass.elevation }}</p>"
+  },
+  {
+    "lineNo": 3157,
+    "text": "<span class=\"st-access-badge\"",
+    "full": "<span class=\"st-access-badge\""
+  },
+  {
+    "lineNo": 3163,
+    "text": "Calculated Risk Index: {{ selectedPass.riskScore }}/100",
+    "full": "<span class=\"st-risk-score\">Calculated Risk Index: <strong>{{ selectedPass.riskScore }}/100</strong></span>"
+  },
+  {
+    "lineNo": 3167,
+    "text": "<div",
+    "full": "<div"
+  },
+  {
+    "lineNo": 3168,
+    "text": "class=\"st-risk-gauge-fill\"",
+    "full": "class=\"st-risk-gauge-fill\""
+  },
+  {
+    "lineNo": 3180,
+    "text": "SURFACE TEMPERATURE",
+    "full": "<span class=\"st-m-label\">SURFACE TEMPERATURE</span>"
+  },
+  {
+    "lineNo": 3184,
+    "text": "PRECIPITATION / SNOW DEPTH",
+    "full": "<span class=\"st-m-label\">PRECIPITATION / SNOW DEPTH</span>"
+  },
+  {
+    "lineNo": 3188,
+    "text": "WIND VELOCITY",
+    "full": "<span class=\"st-m-label\">WIND VELOCITY</span>"
+  },
+  {
+    "lineNo": 3192,
+    "text": "OPTICAL VISIBILITY",
+    "full": "<span class=\"st-m-label\">OPTICAL VISIBILITY</span>"
+  },
+  {
+    "lineNo": 3201,
+    "text": "CORRIDOR DEFENSE ADVISORY:",
+    "full": "<strong>CORRIDOR DEFENSE ADVISORY:</strong>"
+  },
+  {
+    "lineNo": 3211,
+    "text": "Designated Bypass Axis:",
+    "full": "<strong>Designated Bypass Axis:</strong>"
+  },
+  {
+    "lineNo": 3216,
+    "text": "View Active Convoys on Bypass Axis ➔",
+    "full": "View Active Convoys on Bypass Axis ➔"
+  },
+  {
+    "lineNo": 3222,
+    "text": "Close Telemetry",
+    "full": "<button type=\"button\" class=\"btn-modal-cancel\" (click)=\"closePassModal()\">Close Telemetry</button>"
+  }
+]

@@ -745,44 +745,44 @@
         <div class="filter-strip card-surface mt-3">
           <div class="filter-col">
             <label class="filter-label">{{ langService.t('Search Unit') }}</label>
-            <input type="text" [(ngModel)]="unitSearch" placeholder="Search by name, ID, sector, station..." class="form-control-sm">
+            <input type="text" [(ngModel)]="unitSearch" [placeholder]="langService.t('Search by name, ID, sector, station...')" class="form-control-sm">
           </div>
           <div class="filter-col">
             <label class="filter-label">{{ langService.t('Command / Region') }}</label>
             <select [(ngModel)]="unitRegionFilter" class="form-control-sm">
-              <option value="All">All Commands (9 Theaters)</option>
-              <option value="Northern Command">Northern Command (Param Utkarsh)</option>
-              <option value="Western Command">Western Command (Sarvada Vijayi)</option>
-              <option value="Eastern Command">Eastern Command (Veerta Aur Shaurya)</option>
-              <option value="Southern Command">Southern Command (Sarvada Vijayee)</option>
-              <option value="South Western Command">South Western Command (Sapta Shakti)</option>
-              <option value="Central Command">Central Command (Surya Command)</option>
-              <option value="Army Training Command">Army Training Command (ARTRAC)</option>
-              <option value="Andaman & Nicobar Command">Andaman & Nicobar Command (ANC)</option>
-              <option value="Army Headquarters">Integrated Defence HQ / Army HQ</option>
+              <option value="All">{{ langService.t('All Commands (9 Theaters)') }}</option>
+              <option value="Northern Command">{{ langService.t('Northern Command (Param Utkarsh)') }}</option>
+              <option value="Western Command">{{ langService.t('Western Command (Sarvada Vijayi)') }}</option>
+              <option value="Eastern Command">{{ langService.t('Eastern Command (Veerta Aur Shaurya)') }}</option>
+              <option value="Southern Command">{{ langService.t('Southern Command (Sarvada Vijayee)') }}</option>
+              <option value="South Western Command">{{ langService.t('South Western Command (Sapta Shakti)') }}</option>
+              <option value="Central Command">{{ langService.t('Central Command (Surya Command)') }}</option>
+              <option value="Army Training Command">{{ langService.t('Army Training Command (ARTRAC)') }}</option>
+              <option value="Andaman & Nicobar Command">{{ langService.t('Andaman & Nicobar Command (ANC)') }}</option>
+              <option value="Army Headquarters">{{ langService.t('Integrated Defence HQ / Army HQ') }}</option>
             </select>
           </div>
           <div class="filter-col">
             <label class="filter-label">{{ langService.t('Unit Type / Arm') }}</label>
             <select [(ngModel)]="unitTypeFilter" class="form-control-sm">
-              <option value="All">All Arms & Services</option>
-              <option value="Infantry">Infantry</option>
-              <option value="Mechanised">Mechanised Infantry</option>
-              <option value="Armoured">Armoured Corps (Tanks)</option>
-              <option value="Artillery">Regiment of Artillery</option>
-              <option value="Special Forces">Para (Special Forces)</option>
-              <option value="Engineers">Corps of Engineers (Sappers)</option>
-              <option value="Ordnance">Army Ordnance Corps (AOC)</option>
-              <option value="ASC">Army Service Corps (ASC)</option>
-              <option value="EME">Corps of EME</option>
+              <option value="All">{{ langService.t('All Arms & Services') }}</option>
+              <option value="Infantry">{{ langService.t('Infantry') }}</option>
+              <option value="Mechanised">{{ langService.t('Mechanised') }}</option>
+              <option value="Armoured">{{ langService.t('Armoured') }}</option>
+              <option value="Artillery">{{ langService.t('Artillery') }}</option>
+              <option value="Special Forces">{{ langService.t('Special Forces') }}</option>
+              <option value="Engineers">{{ langService.t('Engineers') }}</option>
+              <option value="Ordnance">{{ langService.t('Ordnance') }}</option>
+              <option value="ASC">{{ langService.t('ASC') }}</option>
+              <option value="EME">{{ langService.t('EME') }}</option>
             </select>
           </div>
           <div class="filter-col">
             <label class="filter-label">{{ langService.t('Combat Readiness') }}</label>
             <select [(ngModel)]="unitReadinessFilter" class="form-control-sm">
-              <option value="All">All Levels</option>
-              <option value="High">Optimal (≥ 96%)</option>
-              <option value="Medium">Review Needed (&lt; 96%)</option>
+              <option value="All">{{ langService.t('All Levels') }}</option>
+              <option value="High">{{ langService.t('Optimal (≥ 96%)') }}</option>
+              <option value="Medium">{{ langService.t('Review Needed (< 96%)') }}</option>
             </select>
           </div>
         </div>
@@ -809,7 +809,7 @@
                 <td class="font-mono text-gold font-bold">{{ u.id }}</td>
                 <td>
                   <strong>{{ langService.t(u.name) }}</strong>
-                  <div class="text-xs text-muted">{{ langService.t(u.type) }} • Cmdr: {{ u.commander }}</div>
+                  <div class="text-xs text-muted">{{ langService.t(u.type) }} • {{ langService.t('Cmdr:') }} {{ langService.t(u.commander) }}</div>
                 </td>
                 <td>{{ langService.t(u.location) }}</td>
                 <td>{{ u.personnel }}</td>
@@ -820,7 +820,7 @@
                 </td>
                 <td>
                   <span class="badge-health" [class.text-green]="u.inventoryHealth === 'Healthy'" [class.text-amber]="u.inventoryHealth === 'Warning'">
-                    ● {{ langService.t(u.inventoryHealth) }} ({{ u.dos }} DOS)
+                    ● {{ langService.t(u.inventoryHealth) }} ({{ u.dos }} {{ langService.t('DOS') }})
                   </span>
                 </td>
                 <td>
@@ -828,7 +828,7 @@
                     {{ langService.t(u.riskLevel) }}
                   </span>
                 </td>
-                <td>{{ u.pendingRequests }} req</td>
+                <td>{{ u.pendingRequests }} {{ langService.t('req') }}</td>
                 <td>
                   <span class="status-pill" [class.online]="u.onlineStatus === 'Online'" [class.satcom]="u.onlineStatus === 'SATCOM Only'">
                     {{ langService.t(u.onlineStatus) }}
@@ -849,8 +849,8 @@
           <div class="modal-card-lg" (click)="$event.stopPropagation()">
             <div class="modal-header">
               <div>
-                <h3 class="modal-title">{{ selectedUnit.name }} ({{ selectedUnit.id }})</h3>
-                <span class="text-sm text-gold">{{ selectedUnit.location }}</span>
+                <h3 class="modal-title">{{ langService.t(selectedUnit.name) }} ({{ selectedUnit.id }})</h3>
+                <span class="text-sm text-gold">{{ langService.t(selectedUnit.location) }}</span>
               </div>
               <button class="modal-close-btn" (click)="selectedUnit = null">✕</button>
             </div>
@@ -858,49 +858,49 @@
               <div class="unit-detail-grid">
                 <div class="detail-box">
                   <span class="d-label">{{ langService.t('Commanding Officer:') }}</span>
-                  <span class="d-val">{{ selectedUnit.commander }}</span>
+                  <span class="d-val">{{ langService.t(selectedUnit.commander) }}</span>
                 </div>
                 <div class="detail-box">
                   <span class="d-label">{{ langService.t('Effective Personnel:') }}</span>
-                  <span class="d-val">{{ selectedUnit.personnel }} Troops</span>
+                  <span class="d-val">{{ selectedUnit.personnel }} {{ langService.t('Troops') }}</span>
                 </div>
                 <div class="detail-box">
                   <span class="d-label">{{ langService.t('Days of Supply (DOS):') }}</span>
-                  <span class="d-val text-green">{{ selectedUnit.dos }} Days Buffer</span>
+                  <span class="d-val text-green">{{ selectedUnit.dos }} {{ langService.t('Days Buffer') }}</span>
                 </div>
                 <div class="detail-box">
                   <span class="d-label">{{ langService.t('Tactical Network Link:') }}</span>
-                  <span class="d-val text-blue">{{ selectedUnit.onlineStatus }}</span>
+                  <span class="d-val text-blue">{{ langService.t(selectedUnit.onlineStatus) }}</span>
                 </div>
               </div>
 
               <h4 class="mt-4 mb-2">{{ langService.t('Unit Inventory Posture:') }}</h4>
               <div class="unit-inventory-bars">
                 <div class="u-bar-row">
-                  <span>Class I (Rations): 180 DOS (Optimal)</span>
+                  <span>{{ langService.t('Class I (Rations): 180 DOS (Optimal)') }}</span>
                   <div class="progress-bar-wrap"><div class="progress-fill fill-green" style="width: 95%;"></div></div>
                 </div>
                 <div class="u-bar-row">
-                  <span>Class III (POL): 16,200 Litres (Adequate)</span>
+                  <span>{{ langService.t('Class III (POL): 16,200 Litres (Adequate)') }}</span>
                   <div class="progress-bar-wrap"><div class="progress-fill fill-green" style="width: 81%;"></div></div>
                 </div>
                 <div class="u-bar-row">
-                  <span>Class V (Ammunition): 94.5% Unit Basic Load</span>
+                  <span>{{ langService.t('Class V (Ammunition): 94.5% Unit Basic Load') }}</span>
                   <div class="progress-bar-wrap"><div class="progress-fill fill-green" style="width: 94.5%;"></div></div>
                 </div>
                 <div class="u-bar-row">
-                  <span>Class IX (Spares): 4 Sets Pending Receipt</span>
+                  <span>{{ langService.t('Class IX (Spares): 4 Sets Pending Receipt') }}</span>
                   <div class="progress-bar-wrap"><div class="progress-fill fill-amber" style="width: 82%;"></div></div>
                 </div>
               </div>
 
               <h4 class="mt-4 mb-2">{{ langService.t('Incoming Logistics & Weather Context:') }}</h4>
               <p class="text-sm text-muted">
-                Convoy GARUDA-01 currently rolling with 320 Tonnes POL. ETA 4 hrs 15 mins. Temperature forecast -18°C with snow advisory.
+                {{ langService.t('Convoy GARUDA-01 currently rolling with 320 Tonnes POL. ETA 4 hrs 15 mins. Temperature forecast -18°C with snow advisory.') }}
               </p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn-outline-army" (click)="selectedUnit = null">Close</button>
+              <button type="button" class="btn-outline-army" (click)="selectedUnit = null">{{ langService.t('Close') }}</button>
               <button type="button" class="btn-army-primary" (click)="setTab('logistics'); selectedUnit = null">{{ langService.t('Track Active Convoy') }}</button>
             </div>
           </div>
@@ -916,23 +916,23 @@
             <div class="modal-body">
               <div class="form-group mb-2">
                 <label class="form-label">{{ langService.t('Unit Name') }}</label>
-                <input type="text" [(ngModel)]="newUnitModel.name" placeholder="e.g. 5 GORKHA RIFLES" class="form-control">
+                <input type="text" [(ngModel)]="newUnitModel.name" [placeholder]="langService.t('e.g. 5 GORKHA RIFLES')" class="form-control">
               </div>
               <div class="form-group mb-2">
-                <label class="form-label">Unit ID</label>
-                <input type="text" [(ngModel)]="newUnitModel.id" placeholder="e.g. UN-05GR-KRG" class="form-control">
+                <label class="form-label">{{ langService.t('Unit ID') }}</label>
+                <input type="text" [(ngModel)]="newUnitModel.id" [placeholder]="langService.t('e.g. UN-05GR-KRG')" class="form-control">
               </div>
               <div class="form-group mb-2">
                 <label class="form-label">{{ langService.t('Location / Sector') }}</label>
-                <input type="text" [(ngModel)]="newUnitModel.location" placeholder="e.g. Drass Forward Ridge" class="form-control">
+                <input type="text" [(ngModel)]="newUnitModel.location" [placeholder]="langService.t('e.g. Drass Forward Ridge')" class="form-control">
               </div>
               <div class="form-group mb-2">
                 <label class="form-label">{{ langService.t('Commanding Officer') }}</label>
-                <input type="text" [(ngModel)]="newUnitModel.commander" placeholder="e.g. Col R. Thapa" class="form-control">
+                <input type="text" [(ngModel)]="newUnitModel.commander" [placeholder]="langService.t('e.g. Col R. Thapa')" class="form-control">
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn-outline-army" (click)="showAddUnitModal = false">Cancel</button>
+              <button type="button" class="btn-outline-army" (click)="showAddUnitModal = false">{{ langService.t('Cancel') }}</button>
               <button type="button" class="btn-army-primary" (click)="saveNewUnit()">{{ langService.t('Save Unit') }}</button>
             </div>
           </div>

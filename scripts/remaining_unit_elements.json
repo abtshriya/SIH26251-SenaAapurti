@@ -1,0 +1,530 @@
+[
+  {
+    "lineNo": 291,
+    "tag": "h3",
+    "text": "Regimental Stores Buffer Coverage",
+    "line": "<h3 class=\"ud-panel-heading\">Regimental Stores Buffer Coverage</h3>"
+  },
+  {
+    "lineNo": 394,
+    "tag": "h3",
+    "text": "Incoming Shipments En Route",
+    "line": "<h3 class=\"ud-panel-heading\">Incoming Shipments En Route</h3>"
+  },
+  {
+    "lineNo": 460,
+    "tag": "h4",
+    "text": "Local Sector Weather Telemetry (Click to Inspect)",
+    "line": "<h4 class=\"ud-weather-title\">Local Sector Weather Telemetry (Click to Inspect)</h4>"
+  },
+  {
+    "lineNo": 498,
+    "tag": "h2",
+    "text": "Regimental Stores Inventory Ledger",
+    "line": "<h2 class=\"module-title\">Regimental Stores Inventory Ledger</h2>"
+  },
+  {
+    "lineNo": 502,
+    "tag": "button",
+    "text": "Record Issue",
+    "line": "<button type=\"button\" class=\"btn-outline-army\" (click)=\"openRecordConsumptionModal()\">Record Issue</button>"
+  },
+  {
+    "lineNo": 503,
+    "tag": "button",
+    "text": "+ Add Store Receipt",
+    "line": "<button type=\"button\" class=\"btn-army-primary\" (click)=\"openAddReceiptModal()\">+ Add Store Receipt</button>"
+  },
+  {
+    "lineNo": 559,
+    "tag": "label",
+    "text": "&nbsp;",
+    "line": "<label class=\"filter-label\">&nbsp;</label>"
+  },
+  {
+    "lineNo": 571,
+    "tag": "th",
+    "text": "Item ID",
+    "line": "<th>Item ID</th>"
+  },
+  {
+    "lineNo": 572,
+    "tag": "th",
+    "text": "Nomenclature",
+    "line": "<th>Nomenclature</th>"
+  },
+  {
+    "lineNo": 573,
+    "tag": "th",
+    "text": "Category",
+    "line": "<th>Category</th>"
+  },
+  {
+    "lineNo": 574,
+    "tag": "th",
+    "text": "Current Qty",
+    "line": "<th>Current Qty</th>"
+  },
+  {
+    "lineNo": 575,
+    "tag": "th",
+    "text": "Safety Buffer",
+    "line": "<th>Safety Buffer</th>"
+  },
+  {
+    "lineNo": 576,
+    "tag": "th",
+    "text": "Reorder Level",
+    "line": "<th>Reorder Level</th>"
+  },
+  {
+    "lineNo": 577,
+    "tag": "th",
+    "text": "Days Remaining",
+    "line": "<th>Days Remaining</th>"
+  },
+  {
+    "lineNo": 578,
+    "tag": "th",
+    "text": "Status",
+    "line": "<th>Status</th>"
+  },
+  {
+    "lineNo": 579,
+    "tag": "th",
+    "text": "Actions",
+    "line": "<th>Actions</th>"
+  },
+  {
+    "lineNo": 668,
+    "tag": "button",
+    "text": "Close Ledger",
+    "line": "<button type=\"button\" class=\"btn-outline-army\" (click)=\"closeLedgerCard()\">Close Ledger</button>"
+  },
+  {
+    "lineNo": 683,
+    "tag": "h2",
+    "text": "Consumption Telematics & Unit Demand",
+    "line": "<h2 class=\"module-title\">Consumption Telematics & Unit Demand</h2>"
+  },
+  {
+    "lineNo": 767,
+    "tag": "h3",
+    "text": "Daily Multi-Class Consumption vs AI Winter Surge Trajectory",
+    "line": "<h3 class=\"chart-title\">Daily Multi-Class Consumption vs AI Winter Surge Trajectory</h3>"
+  },
+  {
+    "lineNo": 1144,
+    "tag": "h4",
+    "text": "Sub-Zero POL Consumption Breakdown",
+    "line": "<h4 class=\"panel-title\">Sub-Zero POL Consumption Breakdown</h4>"
+  },
+  {
+    "lineNo": 1217,
+    "tag": "h4",
+    "text": "Forward Base IoT Sensor Telemetry",
+    "line": "<h4 class=\"panel-title\">Forward Base IoT Sensor Telemetry</h4>"
+  },
+  {
+    "lineNo": 1281,
+    "tag": "h4",
+    "text": "AI Pre-Winter Stocking & Pass Advisory",
+    "line": "<h4 class=\"panel-title\">AI Pre-Winter Stocking & Pass Advisory</h4>"
+  },
+  {
+    "lineNo": 1334,
+    "tag": "h2",
+    "text": "Unit Requisition & Indent Vouchers",
+    "line": "<h2 class=\"module-title\">Unit Requisition & Indent Vouchers</h2>"
+  },
+  {
+    "lineNo": 1351,
+    "tag": "th",
+    "text": "Voucher #",
+    "line": "<th class=\"col-voucher\">Voucher #</th>"
+  },
+  {
+    "lineNo": 1352,
+    "tag": "th",
+    "text": "Supply Category",
+    "line": "<th class=\"col-cat\">Supply Category</th>"
+  },
+  {
+    "lineNo": 1353,
+    "tag": "th",
+    "text": "Item Nomenclature",
+    "line": "<th class=\"col-item\">Item Nomenclature</th>"
+  },
+  {
+    "lineNo": 1354,
+    "tag": "th",
+    "text": "Requested Qty",
+    "line": "<th class=\"col-qty\">Requested Qty</th>"
+  },
+  {
+    "lineNo": 1355,
+    "tag": "th",
+    "text": "Priority",
+    "line": "<th class=\"col-priority\">Priority</th>"
+  },
+  {
+    "lineNo": 1356,
+    "tag": "th",
+    "text": "Required By",
+    "line": "<th class=\"col-reqby\">Required By</th>"
+  },
+  {
+    "lineNo": 1357,
+    "tag": "th",
+    "text": "Date Submitted",
+    "line": "<th class=\"col-datesub\">Date Submitted</th>"
+  },
+  {
+    "lineNo": 1358,
+    "tag": "th",
+    "text": "Status",
+    "line": "<th class=\"col-status\">Status</th>"
+  },
+  {
+    "lineNo": 1359,
+    "tag": "th",
+    "text": "Actions",
+    "line": "<th class=\"col-action\">Actions</th>"
+  },
+  {
+    "lineNo": 1400,
+    "tag": "h2",
+    "text": "Unit Inbound & Outbound Logistics",
+    "line": "<h2 class=\"module-title\">Unit Inbound & Outbound Logistics</h2>"
+  },
+  {
+    "lineNo": 1576,
+    "tag": "label",
+    "text": "Status:",
+    "line": "<label class=\"toolbar-label\">Status:</label>"
+  },
+  {
+    "lineNo": 1602,
+    "tag": "h3",
+    "text": "No Convoys Found",
+    "line": "<h3>No Convoys Found</h3>"
+  },
+  {
+    "lineNo": 1761,
+    "tag": "h3",
+    "text": "Inbound Military Consignments Manifest",
+    "line": "<h3 class=\"panel-heading\">Inbound Military Consignments Manifest</h3>"
+  },
+  {
+    "lineNo": 1769,
+    "tag": "th",
+    "text": "Shipment / Convoy",
+    "line": "<th>Shipment / Convoy</th>"
+  },
+  {
+    "lineNo": 1770,
+    "tag": "th",
+    "text": "Origin Depot",
+    "line": "<th>Origin Depot</th>"
+  },
+  {
+    "lineNo": 1771,
+    "tag": "th",
+    "text": "Destination Depot",
+    "line": "<th>Destination Depot</th>"
+  },
+  {
+    "lineNo": 1772,
+    "tag": "th",
+    "text": "Cargo Manifest",
+    "line": "<th>Cargo Manifest</th>"
+  },
+  {
+    "lineNo": 1773,
+    "tag": "th",
+    "text": "Fleet Size",
+    "line": "<th>Fleet Size</th>"
+  },
+  {
+    "lineNo": 1774,
+    "tag": "th",
+    "text": "Waypoints",
+    "line": "<th>Waypoints</th>"
+  },
+  {
+    "lineNo": 1775,
+    "tag": "th",
+    "text": "ETA",
+    "line": "<th>ETA</th>"
+  },
+  {
+    "lineNo": 1776,
+    "tag": "th",
+    "text": "Status & Risk",
+    "line": "<th>Status & Risk</th>"
+  },
+  {
+    "lineNo": 1777,
+    "tag": "th",
+    "text": "Actions",
+    "line": "<th class=\"text-right\">Actions</th>"
+  },
+  {
+    "lineNo": 1867,
+    "tag": "h2",
+    "text": "Sector Passes & Tactical Weather",
+    "line": "<h2 class=\"module-title\">Sector Passes & Tactical Weather</h2>"
+  },
+  {
+    "lineNo": 2051,
+    "tag": "h4",
+    "text": "BORDER ROADS ORGANISATION (BRO) · HIGH-ALTITUDE ROAD CLEARANCE DIRECTIVES",
+    "line": "<h4 class=\"bro-heading\">BORDER ROADS ORGANISATION (BRO) · HIGH-ALTITUDE ROAD CLEARANCE DIRECTIVES</h4>"
+  },
+  {
+    "lineNo": 2109,
+    "tag": "h2",
+    "text": "Predictive Logistics Intel & Early Warnings",
+    "line": "<h2 class=\"module-title\">Predictive Logistics Intel & Early Warnings</h2>"
+  },
+  {
+    "lineNo": 2328,
+    "tag": "h2",
+    "text": "Unit Logistics Reports",
+    "line": "<h2 class=\"module-title\">Unit Logistics Reports</h2>"
+  },
+  {
+    "lineNo": 2332,
+    "tag": "button",
+    "text": "📥 Export CSV",
+    "line": "<button type=\"button\" class=\"btn-outline-army\" (click)=\"exportReport('CSV')\">📥 Export CSV</button>"
+  },
+  {
+    "lineNo": 2333,
+    "tag": "button",
+    "text": "📄 Export PDF",
+    "line": "<button type=\"button\" class=\"btn-outline-army\" (click)=\"exportReport('PDF')\">📄 Export PDF</button>"
+  },
+  {
+    "lineNo": 2334,
+    "tag": "button",
+    "text": "🖨️ Print Ledger",
+    "line": "<button type=\"button\" class=\"btn-army-primary\" (click)=\"exportReport('Print')\">🖨️ Print Ledger</button>"
+  },
+  {
+    "lineNo": 2391,
+    "tag": "h3",
+    "text": "Certified Regimental Logistics Ledgers",
+    "line": "<h3 class=\"panel-heading\">Certified Regimental Logistics Ledgers</h3>"
+  },
+  {
+    "lineNo": 2399,
+    "tag": "th",
+    "text": "Report Title & ID",
+    "line": "<th>Report Title & ID</th>"
+  },
+  {
+    "lineNo": 2400,
+    "tag": "th",
+    "text": "Category",
+    "line": "<th>Category</th>"
+  },
+  {
+    "lineNo": 2401,
+    "tag": "th",
+    "text": "Audit Period",
+    "line": "<th>Audit Period</th>"
+  },
+  {
+    "lineNo": 2402,
+    "tag": "th",
+    "text": "Authorizing Officer",
+    "line": "<th>Authorizing Officer</th>"
+  },
+  {
+    "lineNo": 2403,
+    "tag": "th",
+    "text": "Classification",
+    "line": "<th>Classification</th>"
+  },
+  {
+    "lineNo": 2404,
+    "tag": "th",
+    "text": "Ledger Status",
+    "line": "<th>Ledger Status</th>"
+  },
+  {
+    "lineNo": 2405,
+    "tag": "th",
+    "text": "Actions",
+    "line": "<th class=\"text-right\">Actions</th>"
+  },
+  {
+    "lineNo": 2468,
+    "tag": "h2",
+    "text": "Unit Terminal & SATCOM Settings",
+    "line": "<h2 class=\"module-title\">Unit Terminal & SATCOM Settings</h2>"
+  },
+  {
+    "lineNo": 2490,
+    "tag": "h3",
+    "text": "Quartermaster Identity & Clearance",
+    "line": "<h3 class=\"panel-heading mb-0\">Quartermaster Identity & Clearance</h3>"
+  },
+  {
+    "lineNo": 2499,
+    "tag": "label",
+    "text": "Designated Military Unit",
+    "line": "<label class=\"form-label\">Designated Military Unit</label>"
+  },
+  {
+    "lineNo": 2503,
+    "tag": "label",
+    "text": "Authorized Commanding QM",
+    "line": "<label class=\"form-label\">Authorized Commanding QM</label>"
+  },
+  {
+    "lineNo": 2507,
+    "tag": "label",
+    "text": "Officer Service Identity",
+    "line": "<label class=\"form-label\">Officer Service Identity</label>"
+  },
+  {
+    "lineNo": 2511,
+    "tag": "label",
+    "text": "Stationed Sector Base",
+    "line": "<label class=\"form-label\">Stationed Sector Base</label>"
+  },
+  {
+    "lineNo": 2523,
+    "tag": "h3",
+    "text": "ASCON Grid & SATCOM Uplink",
+    "line": "<h3 class=\"panel-heading mb-0\">ASCON Grid & SATCOM Uplink</h3>"
+  },
+  {
+    "lineNo": 2532,
+    "tag": "label",
+    "text": "Terminal Identity Node",
+    "line": "<label class=\"form-label\">Terminal Identity Node</label>"
+  },
+  {
+    "lineNo": 2536,
+    "tag": "label",
+    "text": "Active Transponder",
+    "line": "<label class=\"form-label\">Active Transponder</label>"
+  },
+  {
+    "lineNo": 2540,
+    "tag": "label",
+    "text": "Comms Encryption Standard",
+    "line": "<label class=\"form-label\">Comms Encryption Standard</label>"
+  },
+  {
+    "lineNo": 2544,
+    "tag": "label",
+    "text": "Sync Pulse Interval",
+    "line": "<label class=\"form-label\">Sync Pulse Interval</label>"
+  },
+  {
+    "lineNo": 2561,
+    "tag": "h3",
+    "text": "Tactical Automation & Notification Policies",
+    "line": "<h3 class=\"panel-heading mb-0\">Tactical Automation & Notification Policies</h3>"
+  },
+  {
+    "lineNo": 2608,
+    "tag": "h3",
+    "text": "Cryptographic Signing Credentials",
+    "line": "<h3 class=\"panel-heading mb-0\">Cryptographic Signing Credentials</h3>"
+  },
+  {
+    "lineNo": 2643,
+    "tag": "h3",
+    "text": "Submit Ordnance Requisition Voucher",
+    "line": "<h3 class=\"modal-title\">Submit Ordnance Requisition Voucher</h3>"
+  },
+  {
+    "lineNo": 2695,
+    "tag": "label",
+    "text": "Consignee Delivery Depot",
+    "line": "<label class=\"form-label\">Consignee Delivery Depot</label>"
+  },
+  {
+    "lineNo": 2732,
+    "tag": "h3",
+    "text": "Indent Voucher: {{ selectedRequest.id }}",
+    "line": "<h3 class=\"modal-title\">Indent Voucher: {{ selectedRequest.id }}</h3>"
+  },
+  {
+    "lineNo": 2791,
+    "tag": "button",
+    "text": "Close",
+    "line": "<button type=\"button\" class=\"btn-modal-cancel\" (click)=\"closeTrackModal()\">Close</button>"
+  },
+  {
+    "lineNo": 2809,
+    "tag": "h3",
+    "text": "SATCOM Telemetry: {{ selectedShipment.callsign }}",
+    "line": "<h3 class=\"modal-title\">SATCOM Telemetry: {{ selectedShipment.callsign }}</h3>"
+  },
+  {
+    "lineNo": 2871,
+    "tag": "h4",
+    "text": "Route Checkpoint Verification Log",
+    "line": "<h4>Route Checkpoint Verification Log</h4>"
+  },
+  {
+    "lineNo": 2957,
+    "tag": "h4",
+    "text": "EXECUTIVE RECONCILIATION SUMMARY",
+    "line": "<h4>EXECUTIVE RECONCILIATION SUMMARY</h4>"
+  },
+  {
+    "lineNo": 2970,
+    "tag": "button",
+    "text": "Close Document",
+    "line": "<button type=\"button\" class=\"btn-modal-cancel\" (click)=\"closeReportPreview()\">Close Document</button>"
+  },
+  {
+    "lineNo": 2987,
+    "tag": "h3",
+    "text": "Log Store Receipt Voucher (RV)",
+    "line": "<h3 class=\"modal-title\">Log Store Receipt Voucher (RV)</h3>"
+  },
+  {
+    "lineNo": 3029,
+    "tag": "label",
+    "text": "Consignor / Origin Depot",
+    "line": "<label class=\"form-label\">Consignor / Origin Depot</label>"
+  },
+  {
+    "lineNo": 3040,
+    "tag": "label",
+    "text": "Quality Inspection & Escort Verification",
+    "line": "<label class=\"form-label\">Quality Inspection & Escort Verification</label>"
+  },
+  {
+    "lineNo": 3071,
+    "tag": "h3",
+    "text": "Record Daily Store Issue & Consumption",
+    "line": "<h3 class=\"modal-title\">Record Daily Store Issue & Consumption</h3>"
+  },
+  {
+    "lineNo": 3118,
+    "tag": "label",
+    "text": "Operational Purpose",
+    "line": "<label class=\"form-label\">Operational Purpose</label>"
+  },
+  {
+    "lineNo": 3147,
+    "tag": "h3",
+    "text": "Pass Telemetry: {{ selectedPass.passName }}",
+    "line": "<h3 class=\"modal-title\">Pass Telemetry: {{ selectedPass.passName }}</h3>"
+  },
+  {
+    "lineNo": 3222,
+    "tag": "button",
+    "text": "Close Telemetry",
+    "line": "<button type=\"button\" class=\"btn-modal-cancel\" (click)=\"closePassModal()\">Close Telemetry</button>"
+  }
+]

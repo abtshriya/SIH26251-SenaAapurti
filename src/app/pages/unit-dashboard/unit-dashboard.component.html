@@ -135,27 +135,27 @@
         <div class="ud-header-banner">
           <div class="ud-header-left">
             <div class="ud-tag-row">
-              <span class="ud-sec-badge">{{ unitDbService.selectedUnit().corps ? ('CORPS // ' + unitDbService.selectedUnit().corps) : 'SECTOR COMMAND // 14 CORPS' }}</span>
-              <span class="ud-grid-coord">{{ unitDbService.selectedUnit().sector || 'GRID 34°07\'N 77°35\'E • FDL-SHYOK' }}</span>
+              <span class="ud-sec-badge">{{ unitDbService.selectedUnit().corps ? (langService.t('CORPS // ') + langService.t(unitDbService.selectedUnit().corps)) : langService.t('SECTOR COMMAND // 14 CORPS') }}</span>
+              <span class="ud-grid-coord">{{ langService.t(unitDbService.selectedUnit().sector) || 'GRID 34°07\'N 77°35\'E • FDL-SHYOK' }}</span>
             </div>
-            <h2 class="ud-title">{{ unitDbService.selectedUnit().name || 'Tactical Unit Command Dashboard' }}</h2>
+            <h2 class="ud-title">{{ langService.t(unitDbService.selectedUnit().name) || langService.t('Tactical Unit Command Dashboard') }}</h2>
             <p class="ud-subtitle">
-              <span class="ud-pin-icon">📍</span> {{ unitDbService.selectedUnit().station || 'Forward Defended Locality - Shyok Sector' }} ({{ unitDbService.selectedUnit().command || 'Northern Command' }})
+              <span class="ud-pin-icon">📍</span> {{ langService.t(unitDbService.selectedUnit().station) || langService.t('Forward Defended Locality - Shyok Sector') }} ({{ langService.t(unitDbService.selectedUnit().command) || langService.t('Northern Command') }})
               <span class="ud-bullet-sep">•</span>
               <span class="ud-date-display">{{ currentDate }}</span>
             </p>
           </div>
           <div class="ud-header-right">
-            <div class="ud-satcom-pill" title="Encrypted ASCON Link">
+            <div class="ud-satcom-pill" [title]="langService.t('Encrypted ASCON Link')">
               <span class="ud-pulse-beacon"></span>
               <div class="ud-satcom-info">
-                <span class="ud-satcom-status">SATCOM ONLINE</span>
+                <span class="ud-satcom-status">{{ langService.t('SATCOM ONLINE') }}</span>
                 <span class="ud-satcom-sub">{{ lastSync }}</span>
               </div>
             </div>
-            <button type="button" class="ud-btn-sos" (click)="triggerSosEmergency()" title="Trigger Tactical Air-Drop Priority Indent">
+            <button type="button" class="ud-btn-sos" (click)="triggerSosEmergency()" [title]="langService.t('Trigger Tactical Air-Drop Priority Indent')">
               <span class="ud-sos-flash">🚨</span>
-              <span>Flash SOS Air-Drop</span>
+              <span>{{ langService.t('Flash SOS Air-Drop') }}</span>
             </button>
           </div>
         </div>
@@ -170,75 +170,75 @@
           <!-- KPI 1 -->
           <div class="ud-kpi-card" tabindex="0">
             <div class="ud-kpi-top">
-              <span class="ud-kpi-label">UNIT READINESS</span>
-              <span class="ud-kpi-badge badge-green">OPTIMAL</span>
+              <span class="ud-kpi-label">{{ langService.t('UNIT READINESS') }}</span>
+              <span class="ud-kpi-badge badge-green">{{ langService.t('OPTIMAL') }}</span>
             </div>
             <div class="ud-kpi-val text-green">97.4%</div>
             <div class="ud-kpi-sub">
               <span class="ud-kpi-dot dot-green"></span>
-              <span>Optimal Posture</span>
+              <span>{{ langService.t('Optimal Posture') }}</span>
             </div>
           </div>
 
           <!-- KPI 2 -->
-          <div class="ud-kpi-card interactive" (click)="setTab('inventory')" tabindex="0" role="button" title="View Unit Inventory">
+          <div class="ud-kpi-card interactive" (click)="setTab('inventory')" tabindex="0" role="button" [title]="langService.t('View Unit Inventory')">
             <div class="ud-kpi-top">
-              <span class="ud-kpi-label">INVENTORY HEALTH</span>
-              <span class="ud-kpi-badge badge-green">STABLE</span>
+              <span class="ud-kpi-label">{{ langService.t('INVENTORY HEALTH') }}</span>
+              <span class="ud-kpi-badge badge-green">{{ langService.t('STABLE') }}</span>
             </div>
-            <div class="ud-kpi-val text-green">Optimal</div>
+            <div class="ud-kpi-val text-green">{{ langService.t('Optimal') }}</div>
             <div class="ud-kpi-sub">
               <span class="ud-kpi-dot dot-green"></span>
-              <span>48 DOS Average</span>
+              <span>{{ langService.t('48 DOS Average') }}</span>
             </div>
           </div>
 
           <!-- KPI 3 -->
-          <div class="ud-kpi-card interactive alert-glow" (click)="setTab('inventory')" tabindex="0" role="button" title="Inspect Critical Supplies">
+          <div class="ud-kpi-card interactive alert-glow" (click)="setTab('inventory')" tabindex="0" role="button" [title]="langService.t('Inspect Critical Supplies')">
             <div class="ud-kpi-top">
-              <span class="ud-kpi-label">CRITICAL SUPPLIES</span>
-              <span class="ud-kpi-badge badge-saffron">ATTENTION</span>
+              <span class="ud-kpi-label">{{ langService.t('CRITICAL SUPPLIES') }}</span>
+              <span class="ud-kpi-badge badge-saffron">{{ langService.t('ATTENTION') }}</span>
             </div>
-            <div class="ud-kpi-val text-saffron">2 Items</div>
+            <div class="ud-kpi-val text-saffron">{{ langService.t('2 Items') }}</div>
             <div class="ud-kpi-sub">
               <span class="ud-kpi-dot dot-saffron"></span>
-              <span>Spares under transit</span>
+              <span>{{ langService.t('Spares under transit') }}</span>
             </div>
           </div>
 
           <!-- KPI 4 -->
-          <div class="ud-kpi-card interactive" (click)="setTab('consumption')" tabindex="0" role="button" title="Inspect Consumption & Days of Supply">
+          <div class="ud-kpi-card interactive" (click)="setTab('consumption')" tabindex="0" role="button" [title]="langService.t('Inspect Consumption & Days of Supply')">
             <div class="ud-kpi-top">
-              <span class="ud-kpi-label">DAYS OF SUPPLY</span>
-              <span class="ud-kpi-badge badge-gold">WINTER SCALE</span>
+              <span class="ud-kpi-label">{{ langService.t('DAYS OF SUPPLY') }}</span>
+              <span class="ud-kpi-badge badge-gold">{{ langService.t('WINTER SCALE') }}</span>
             </div>
-            <div class="ud-kpi-val text-gold">48 DOS</div>
+            <div class="ud-kpi-val text-gold">{{ langService.t('48 DOS') }}</div>
             <div class="ud-kpi-sub">
               <span class="ud-kpi-dot dot-gold"></span>
-              <span>POL & Dry Rations</span>
+              <span>{{ langService.t('POL & Dry Rations') }}</span>
             </div>
           </div>
 
           <!-- KPI 5 -->
-          <div class="ud-kpi-card interactive" (click)="setTab('requests')" tabindex="0" role="button" title="Inspect Supply Requests">
+          <div class="ud-kpi-card interactive" (click)="setTab('requests')" tabindex="0" role="button" [title]="langService.t('Inspect Supply Requests')">
             <div class="ud-kpi-top">
-              <span class="ud-kpi-label">PENDING REQUESTS</span>
-              <span class="ud-kpi-badge badge-blue">ACTIVE</span>
+              <span class="ud-kpi-label">{{ langService.t('PENDING REQUESTS') }}</span>
+              <span class="ud-kpi-badge badge-blue">{{ langService.t('ACTIVE') }}</span>
             </div>
-            <div class="ud-kpi-val text-blue">1 Indent</div>
+            <div class="ud-kpi-val text-blue">{{ langService.t('1 Indent') }}</div>
             <div class="ud-kpi-sub">
               <span class="ud-kpi-dot dot-blue"></span>
-              <span>18,000L POL Approved</span>
+              <span>{{ langService.t('18,000L POL Approved') }}</span>
             </div>
           </div>
 
           <!-- KPI 6 -->
-          <div class="ud-kpi-card interactive" (click)="setTab('logistics')" tabindex="0" role="button" title="Track Convoys">
+          <div class="ud-kpi-card interactive" (click)="setTab('logistics')" tabindex="0" role="button" [title]="langService.t('Track Convoys')">
             <div class="ud-kpi-top">
-              <span class="ud-kpi-label">INCOMING SHIPMENTS</span>
-              <span class="ud-kpi-badge badge-blue">EN ROUTE</span>
+              <span class="ud-kpi-label">{{ langService.t('INCOMING SHIPMENTS') }}</span>
+              <span class="ud-kpi-badge badge-blue">{{ langService.t('EN ROUTE') }}</span>
             </div>
-            <div class="ud-kpi-val text-blue">2 Convoys</div>
+            <div class="ud-kpi-val text-blue">{{ langService.t('2 Convoys') }}</div>
             <div class="ud-kpi-sub">
               <span class="ud-kpi-dot dot-blue"></span>
               <span>GARUDA-01 & HIMALAYA-9</span>
@@ -246,15 +246,15 @@
           </div>
 
           <!-- KPI 7 -->
-          <div class="ud-kpi-card interactive" (click)="setTab('logistics')" tabindex="0" role="button" title="Inspect Active Logistics Axis Load">
+          <div class="ud-kpi-card interactive" (click)="setTab('logistics')" tabindex="0" role="button" [title]="langService.t('Inspect Active Logistics Axis Load')">
             <div class="ud-kpi-top">
-              <span class="ud-kpi-label">ACTIVE LOGISTICS</span>
-              <span class="ud-kpi-badge badge-gold">AXIS LOAD</span>
+              <span class="ud-kpi-label">{{ langService.t('ACTIVE LOGISTICS') }}</span>
+              <span class="ud-kpi-badge badge-gold">{{ langService.t('AXIS LOAD') }}</span>
             </div>
-            <div class="ud-kpi-val text-gold">340 T</div>
+            <div class="ud-kpi-val text-gold">{{ langService.t('340 T') }}</div>
             <div class="ud-kpi-sub">
               <span class="ud-kpi-dot dot-gold"></span>
-              <span>Rolling on Axis</span>
+              <span>{{ langService.t('Rolling on Axis') }}</span>
             </div>
           </div>
         </div>
@@ -262,36 +262,36 @@
         <!-- QUICK ACTIONS BAR -->
         <div class="ud-actions-panel">
           <div class="ud-actions-title-wrap">
-            <span class="ud-actions-badge">TACTICAL OPS</span>
-            <span class="ud-actions-title">QUICK OPERATIONAL ACTIONS:</span>
+            <span class="ud-actions-badge">{{ langService.t('TACTICAL OPS') }}</span>
+            <span class="ud-actions-title">{{ langService.t('QUICK OPERATIONAL ACTIONS:') }}</span>
           </div>
           <div class="ud-actions-btns">
             <button type="button" class="ud-btn-action-primary" (click)="openCreateRequestModal()">
-              <span class="ud-btn-plus">+</span> Request Supply Requisition
+              <span class="ud-btn-plus">+</span> {{ langService.t('Request Supply Requisition') }}
             </button>
             <button type="button" class="ud-btn-action-secondary" (click)="openRecordConsumptionModal()">
-              <span class="ud-btn-sym">📋</span> Record Daily Consumption
+              <span class="ud-btn-sym">📋</span> {{ langService.t('Record Daily Consumption') }}
             </button>
             <button type="button" class="ud-btn-action-secondary" (click)="openAddReceiptModal()">
-              <span class="ud-btn-sym">📥</span> Update Received Inventory
+              <span class="ud-btn-sym">📥</span> {{ langService.t('Update Received Inventory') }}
             </button>
             <button type="button" class="ud-btn-action-secondary" (click)="setTab('logistics')">
-              <span class="ud-btn-sym">🚚</span> Track Incoming Shipment
+              <span class="ud-btn-sym">🚚</span> {{ langService.t('Track Incoming Shipment') }}
             </button>
           </div>
         </div>
 
-        <!-- 2-COL: INVENTORY HEALTH + INCOMING SUPPLIES & WEATHER -->
+        <!-- 2-COL: {{ langService.t('INVENTORY HEALTH') }} + INCOMING SUPPLIES & WEATHER -->
         <div class="ud-twocol-grid">
 
-          <!-- COLUMN 1: INVENTORY HEALTH & AI WARNING -->
+          <!-- COLUMN 1: {{ langService.t('INVENTORY HEALTH') }} & AI WARNING -->
           <div class="ud-card">
             <div class="ud-card-header">
               <div class="ud-card-header-titles">
-                <h3 class="ud-panel-heading">Regimental Stores Buffer Coverage</h3>
-                <span class="ud-panel-hint">Current holding vs authorized winter mobilization scales</span>
+                <h3 class="ud-panel-heading">{{ langService.t('Regimental Stores Buffer Coverage') }}</h3>
+                <span class="ud-panel-hint">{{ langService.t('Current holding vs authorized winter mobilization scales') }}</span>
               </div>
-              <span class="ud-header-tag">WINTER BUFFER 100%</span>
+              <span class="ud-header-tag">{{ langService.t('WINTER BUFFER 100%') }}</span>
             </div>
 
             <div class="ud-stock-list">
@@ -299,18 +299,18 @@
               <div class="ud-stock-item">
                 <div class="ud-stock-head">
                   <div class="ud-stock-name-wrap">
-                    <span class="ud-cat-tag">CLASS I</span>
-                    <span class="ud-stock-title">Fresh & MRE Rations: <strong>48 DOS</strong></span>
+                    <span class="ud-cat-tag">{{ langService.t('CLASS I') }}</span>
+                    <span class="ud-stock-title">{{ langService.t('Fresh & MRE Rations:') }} <strong>{{ langService.t('48 DOS') }}</strong></span>
                   </div>
-                  <span class="ud-capacity-pill cap-green">80% Capacity</span>
+                  <span class="ud-capacity-pill cap-green">80% {{ langService.t('Capacity') }}</span>
                 </div>
                 <div class="ud-progress-track">
                   <div class="ud-progress-bar bar-green" style="width: 80%;"></div>
                 </div>
                 <div class="ud-stock-meta">
-                  <span class="ud-meta-segment">Fresh: <strong>12 Days</strong></span>
+                  <span class="ud-meta-segment">{{ langService.t('Fresh:') }} <strong>{{ langService.t('12 Days') }}</strong></span>
                   <span class="ud-meta-divider">|</span>
-                  <span class="ud-meta-segment">MRE/Dry: <strong>36 Days</strong></span>
+                  <span class="ud-meta-segment">{{ langService.t('MRE/Dry:') }} <strong>{{ langService.t('36 Days') }}</strong></span>
                 </div>
               </div>
 
@@ -318,18 +318,18 @@
               <div class="ud-stock-item">
                 <div class="ud-stock-head">
                   <div class="ud-stock-name-wrap">
-                    <span class="ud-cat-tag">CLASS III</span>
-                    <span class="ud-stock-title">Winter Grade HSD: <strong>16,200 Litres</strong></span>
+                    <span class="ud-cat-tag">{{ langService.t('CLASS III') }}</span>
+                    <span class="ud-stock-title">{{ langService.t('Winter Grade HSD:') }} <strong>{{ langService.t('16,200 Litres') }}</strong></span>
                   </div>
-                  <span class="ud-capacity-pill cap-green">81% Capacity</span>
+                  <span class="ud-capacity-pill cap-green">81% {{ langService.t('Capacity') }}</span>
                 </div>
                 <div class="ud-progress-track">
                   <div class="ud-progress-bar bar-green" style="width: 81%;"></div>
                 </div>
                 <div class="ud-stock-meta">
-                  <span class="ud-meta-segment">Winter Grade -40°C HSD: <strong>12,400L</strong></span>
+                  <span class="ud-meta-segment">{{ langService.t('Winter Grade -40°C HSD:') }} <strong>12,400L</strong></span>
                   <span class="ud-meta-divider">|</span>
-                  <span class="ud-meta-segment">2T Oil: <strong>3,800L</strong></span>
+                  <span class="ud-meta-segment">{{ langService.t('2T Oil:') }} <strong>3,800L</strong></span>
                 </div>
               </div>
 
@@ -337,18 +337,18 @@
               <div class="ud-stock-item">
                 <div class="ud-stock-head">
                   <div class="ud-stock-name-wrap">
-                    <span class="ud-cat-tag">CLASS V</span>
-                    <span class="ud-stock-title">Ammunition & Munitions: <strong>94.5% UBL</strong></span>
+                    <span class="ud-cat-tag">{{ langService.t('CLASS V') }}</span>
+                    <span class="ud-stock-title">{{ langService.t('Ammunition & Munitions:') }} <strong>94.5% UBL</strong></span>
                   </div>
-                  <span class="ud-capacity-pill cap-green">94.5% Optimal</span>
+                  <span class="ud-capacity-pill cap-green">94.5% {{ langService.t('Optimal') }}</span>
                 </div>
                 <div class="ud-progress-track">
                   <div class="ud-progress-bar bar-green" style="width: 94.5%;"></div>
                 </div>
                 <div class="ud-stock-meta">
-                  <span class="ud-meta-segment">Small Arms: <strong>100%</strong></span>
+                  <span class="ud-meta-segment">{{ langService.t('Small Arms:') }} <strong>100%</strong></span>
                   <span class="ud-meta-divider">|</span>
-                  <span class="ud-meta-segment">ATGM Missiles: <strong>92%</strong></span>
+                  <span class="ud-meta-segment">{{ langService.t('ATGM Missiles:') }} <strong>92%</strong></span>
                 </div>
               </div>
 
@@ -356,16 +356,16 @@
               <div class="ud-stock-item warning-highlight">
                 <div class="ud-stock-head">
                   <div class="ud-stock-name-wrap">
-                    <span class="ud-cat-tag tag-saffron">CLASS IX</span>
-                    <span class="ud-stock-title">BMP-II Armor Spares: <strong>12 Sets</strong></span>
+                    <span class="ud-cat-tag tag-saffron">{{ langService.t('CLASS IX') }}</span>
+                    <span class="ud-stock-title">{{ langService.t('BMP-II Armor Spares:') }} <strong>{{ langService.t('12 Sets') }}</strong></span>
                   </div>
-                  <span class="ud-capacity-pill cap-saffron">82% Review Needed</span>
+                  <span class="ud-capacity-pill cap-saffron">82% {{ langService.t('Review Needed') }}</span>
                 </div>
                 <div class="ud-progress-track">
                   <div class="ud-progress-bar bar-saffron" style="width: 82%;"></div>
                 </div>
                 <div class="ud-stock-meta">
-                  <span class="ud-meta-transit">⚠️ 4 suspension pads under transit via Convoy GARUDA-01</span>
+                  <span class="ud-meta-transit">⚠️ {{ langService.t('4 suspension pads under transit via Convoy GARUDA-01') }}</span>
                 </div>
               </div>
             </div>
@@ -374,15 +374,15 @@
             <div class="ud-ai-card">
               <div class="ud-ai-head">
                 <span class="ud-ai-beacon"></span>
-                <span class="ud-ai-alert-tag">CRITICAL ALERT</span>
-                <strong class="ud-ai-title">AI Early Warning: Sub-Zero Cold Freeze Hazard</strong>
+                <span class="ud-ai-alert-tag">{{ langService.t('CRITICAL ALERT') }}</span>
+                <strong class="ud-ai-title">{{ langService.t('AI Early Warning: Sub-Zero Cold Freeze Hazard') }}</strong>
               </div>
               <p class="ud-ai-body">
-                Nighttime temperature drop to -26°C will trigger automated tank heating routines. Daily fuel burn rate is projected to increase by 24% over the next 5 days.
+                {{ langService.t('Nighttime temperature drop to -26°C will trigger automated tank heating routines. Daily fuel burn rate is projected to increase by 24% over the next 5 days.') }}
               </p>
               <div class="ud-ai-action-box">
-                <span class="ud-rec-badge">RECOMMENDED</span>
-                <span class="ud-rec-text">Request early release of 18,000L POL buffer. (Voucher #IND-2026-9041 approved).</span>
+                <span class="ud-rec-badge">{{ langService.t('RECOMMENDED') }}</span>
+                <span class="ud-rec-text">{{ langService.t('Request early release of 18,000L POL buffer. (Voucher #IND-2026-9041 approved).') }}</span>
               </div>
             </div>
           </div>
@@ -391,10 +391,10 @@
           <div class="ud-card">
             <div class="ud-card-header">
               <div class="ud-card-header-titles">
-                <h3 class="ud-panel-heading">Incoming Shipments En Route</h3>
-                <span class="ud-panel-hint">Columns destined for FSD Leh / 14 Rajput stores</span>
+                <h3 class="ud-panel-heading">{{ langService.t('Incoming Shipments En Route') }}</h3>
+                <span class="ud-panel-hint">{{ langService.t('Columns destined for FSD Leh / 14 Rajput stores') }}</span>
               </div>
-              <span class="ud-header-tag tag-blue">ACTIVE CONVOYS (2)</span>
+              <span class="ud-header-tag tag-blue">{{ langService.t('ACTIVE CONVOYS (2)') }}</span>
             </div>
 
             <div class="ud-shipments-wrap">
@@ -403,24 +403,24 @@
                 <div class="ud-shipment-header">
                   <div class="ud-shipment-title-grp">
                     <span class="ud-convoy-callsign">CV-104-N</span>
-                    <strong class="ud-convoy-name">Convoy GARUDA-01</strong>
+                    <strong class="ud-convoy-name">{{ langService.t('Convoy GARUDA-01') }}</strong>
                   </div>
-                  <span class="ud-status-pill st-green">In-Transit</span>
+                  <span class="ud-status-pill st-green">{{ langService.t('In-Transit') }}</span>
                 </div>
                 <div class="ud-shipment-cargo">
                   <span class="ud-cargo-icon">📦</span>
-                  <span>320 Tonnes Class III (POL) • 28 Vehicles</span>
+                  <span>{{ langService.t('320 Tonnes Class III (POL) • 28 Vehicles') }}</span>
                 </div>
                 <div class="ud-shipment-footer">
                   <div class="ud-eta-badge eta-green">
-                    <span class="ud-eta-label">ETA</span>
-                    <strong class="ud-eta-time">4 hrs 15 mins</strong>
+                    <span class="ud-eta-label">{{ langService.t('ETA') }}</span>
+                    <strong class="ud-eta-time">{{ langService.t('4 hrs 15 mins') }}</strong>
                   </div>
-                  <span class="ud-route-axis">Via Atal Tunnel-Keylong Axis</span>
+                  <span class="ud-route-axis">{{ langService.t('Via Atal Tunnel-Keylong Axis') }}</span>
                 </div>
                 <div class="ud-shipment-btn-wrap">
                   <button type="button" class="ud-btn-track" (click)="setTab('logistics')">
-                    <span>📡 Track Convoy Live</span>
+                    <span>📡 {{ langService.t('Track Convoy Live') }}</span>
                   </button>
                 </div>
               </div>
@@ -430,59 +430,59 @@
                 <div class="ud-shipment-header">
                   <div class="ud-shipment-title-grp">
                     <span class="ud-convoy-callsign callsign-gold">CV-318-N</span>
-                    <strong class="ud-convoy-name">Convoy HIMALAYA-9</strong>
+                    <strong class="ud-convoy-name">{{ langService.t('Convoy HIMALAYA-9') }}</strong>
                   </div>
-                  <span class="ud-status-pill st-gold">Rerouted</span>
+                  <span class="ud-status-pill st-gold">{{ langService.t('Rerouted') }}</span>
                 </div>
                 <div class="ud-shipment-cargo">
                   <span class="ud-cargo-icon">📦</span>
-                  <span>420 Tonnes Winter Stocking & Ammo • 34 Vehicles</span>
+                  <span>{{ langService.t('420 Tonnes Winter Stocking & Ammo • 34 Vehicles') }}</span>
                 </div>
                 <div class="ud-shipment-footer">
                   <div class="ud-eta-badge eta-gold">
-                    <span class="ud-eta-label">ETA</span>
-                    <strong class="ud-eta-time">7 hrs 10 mins</strong>
+                    <span class="ud-eta-label">{{ langService.t('ETA') }}</span>
+                    <strong class="ud-eta-time">{{ langService.t('7 hrs 10 mins') }}</strong>
                   </div>
-                  <span class="ud-route-axis">Via Nilgrath Bypass</span>
+                  <span class="ud-route-axis">{{ langService.t('Via Nilgrath Bypass') }}</span>
                 </div>
                 <div class="ud-shipment-btn-wrap">
-                  <button type="button" class="ud-btn-track" (click)="setTab('logistics')" title="Track Convoy Live">
-                    <span>📡 Track Convoy Live</span>
+                  <button type="button" class="ud-btn-track" (click)="setTab('logistics')" [title]="langService.t('Track Convoy Live')">
+                    <span>📡 {{ langService.t('Track Convoy Live') }}</span>
                   </button>
                 </div>
               </div>
             </div>
 
             <!-- LOCAL MOUNTAIN WEATHER -->
-            <div class="ud-weather-section interactive" (click)="setTab('route-weather')" tabindex="0" role="button" title="View Full Sector Weather Telemetry">
+            <div class="ud-weather-section interactive" (click)="setTab('route-weather')" tabindex="0" role="button" [title]="langService.t('View Full Sector Weather Telemetry')">
               <div class="ud-weather-header">
-                <span class="ud-weather-badge">SECTOR METEOROLOGY</span>
-                <h4 class="ud-weather-title">Local Sector Weather Telemetry (Click to Inspect)</h4>
+                <span class="ud-weather-badge">{{ langService.t('SECTOR METEOROLOGY') }}</span>
+                <h4 class="ud-weather-title">{{ langService.t('Local Sector Weather Telemetry (Click to Inspect)') }}</h4>
               </div>
 
               <div class="ud-weather-box">
                 <div class="ud-weather-temp-card">
                   <div class="ud-temp-main">-18°C</div>
-                  <div class="ud-temp-feels">Feels like -24°C</div>
-                  <div class="ud-altitude-tag">ALT: 3,500m MSL</div>
+                  <div class="ud-temp-feels">{{ langService.t('Feels like') }} -24°C</div>
+                  <div class="ud-altitude-tag">{{ langService.t('ALT: 3,500m MSL') }}</div>
                 </div>
 
                 <div class="ud-weather-telemetry-list">
                   <div class="ud-telemetry-row">
-                    <span class="ud-telemetry-k">Wind Velocity:</span>
-                    <span class="ud-telemetry-v">38 km/h NNW</span>
+                    <span class="ud-telemetry-k">{{ langService.t('Wind Velocity:') }}</span>
+                    <span class="ud-telemetry-v">38 {{ langService.t('km/h') }} NNW</span>
                   </div>
                   <div class="ud-telemetry-row">
-                    <span class="ud-telemetry-k">Precipitation:</span>
-                    <span class="ud-telemetry-v">Light Snow</span>
+                    <span class="ud-telemetry-k">{{ langService.t('Precipitation:') }}</span>
+                    <span class="ud-telemetry-v">{{ langService.t('Light Snow') }}</span>
                   </div>
                   <div class="ud-telemetry-row">
-                    <span class="ud-telemetry-k">Pass Status:</span>
-                    <span class="ud-telemetry-v pass-open">Khardung La Open (Chains Mandatory)</span>
+                    <span class="ud-telemetry-k">{{ langService.t('Pass Status:') }}</span>
+                    <span class="ud-telemetry-v pass-open">{{ langService.t('Khardung La Open (Chains Mandatory)') }}</span>
                   </div>
                   <div class="ud-telemetry-row advisory-row">
-                    <span class="ud-telemetry-k">Advisory:</span>
-                    <span class="ud-telemetry-v text-saffron">Black ice alert on Km 42-56 track</span>
+                    <span class="ud-telemetry-k">{{ langService.t('Advisory:') }}</span>
+                    <span class="ud-telemetry-v text-saffron">{{ langService.t('Black ice alert on Km 42-56 track') }}</span>
                   </div>
                 </div>
               </div>
@@ -495,70 +495,70 @@
       <section *ngIf="activeTab === 'inventory'" class="c2-tab-content">
         <div class="content-header-row">
           <div>
-            <h2 class="module-title">Regimental Stores Inventory Ledger</h2>
-            <p class="module-subtitle">Class I to IX items stocked at 14 Rajput Forward Defended Base</p>
+            <h2 class="module-title">{{ langService.t('Regimental Stores Inventory Ledger') }}</h2>
+            <p class="module-subtitle">{{ langService.t('Class I to IX items stocked at 14 Rajput Forward Defended Base') }}</p>
           </div>
           <div class="header-action-group">
-            <button type="button" class="btn-outline-army" (click)="openRecordConsumptionModal()">Record Issue</button>
-            <button type="button" class="btn-army-primary" (click)="openAddReceiptModal()">+ Add Store Receipt</button>
+            <button type="button" class="btn-outline-army" (click)="openRecordConsumptionModal()">{{ langService.t('Record Issue') }}</button>
+            <button type="button" class="btn-army-primary" (click)="openAddReceiptModal()">{{ langService.t('+ Add Store Receipt') }}</button>
           </div>
         </div>
 
         <!-- 5 KPI CARDS -->
         <div class="kpi-grid-5 mt-3">
-          <div class="kpi-card interactive" [class.kpi-active]="invStatusFilter === 'All'" (click)="filterByStatus('All')" role="button" tabindex="0" title="Filter by All Items">
-            <div class="kpi-label">TOTAL STOCK NOMENCLATURES</div>
-            <div class="kpi-value text-gold">{{ totalInventoryCount }} Items</div>
+          <div class="kpi-card interactive" [class.kpi-active]="invStatusFilter === 'All'" (click)="filterByStatus('All')" role="button" tabindex="0" [title]="langService.t('Filter by All Items')">
+            <div class="kpi-label">{{ langService.t('TOTAL STOCK NOMENCLATURES') }}</div>
+            <div class="kpi-value text-gold">{{ totalInventoryCount }} {{ langService.t('Items') }}</div>
           </div>
-          <div class="kpi-card interactive" [class.kpi-active]="invStatusFilter === 'Adequate'" (click)="filterByStatus('Adequate')" role="button" tabindex="0" title="Filter by Adequate Items">
-            <div class="kpi-label">AVAILABLE & VERIFIED</div>
-            <div class="kpi-value text-green">{{ adequateInventoryCount }} Items</div>
+          <div class="kpi-card interactive" [class.kpi-active]="invStatusFilter === 'Adequate'" (click)="filterByStatus('Adequate')" role="button" tabindex="0" [title]="langService.t('Filter by Adequate Items')">
+            <div class="kpi-label">{{ langService.t('AVAILABLE & VERIFIED') }}</div>
+            <div class="kpi-value text-green">{{ adequateInventoryCount }} {{ langService.t('Items') }}</div>
           </div>
-          <div class="kpi-card interactive" [class.kpi-active]="invStatusFilter === 'Low'" (click)="filterByStatus('Low')" role="button" tabindex="0" title="Filter by Low Stock Items">
-            <div class="kpi-label">LOW STOCK ITEMS</div>
-            <div class="kpi-value text-amber">{{ lowInventoryCount }} Items</div>
+          <div class="kpi-card interactive" [class.kpi-active]="invStatusFilter === 'Low'" (click)="filterByStatus('Low')" role="button" tabindex="0" [title]="langService.t('Filter by Low Stock Items')">
+            <div class="kpi-label">{{ langService.t('LOW STOCK ITEMS') }}</div>
+            <div class="kpi-value text-amber">{{ lowInventoryCount }} {{ langService.t('Items') }}</div>
           </div>
-          <div class="kpi-card interactive" [class.kpi-active]="invStatusFilter === 'Surplus'" (click)="filterByStatus('Surplus')" role="button" tabindex="0" title="Filter by Surplus Items">
-            <div class="kpi-label">CRITICAL SURPLUS</div>
-            <div class="kpi-value text-blue">{{ surplusInventoryCount }} Item</div>
+          <div class="kpi-card interactive" [class.kpi-active]="invStatusFilter === 'Surplus'" (click)="filterByStatus('Surplus')" role="button" tabindex="0" [title]="langService.t('Filter by Surplus Items')">
+            <div class="kpi-label">{{ langService.t('CRITICAL SURPLUS') }}</div>
+            <div class="kpi-value text-blue">{{ surplusInventoryCount }} {{ langService.t('Item') }}</div>
           </div>
-          <div class="kpi-card interactive" [class.kpi-active]="invStatusFilter === 'Critical'" (click)="filterByStatus('Critical')" role="button" tabindex="0" title="Filter by Stockout Risk">
-            <div class="kpi-label">STOCKOUT RISK</div>
-            <div class="kpi-value text-red">{{ criticalInventoryCount }} High Risk</div>
+          <div class="kpi-card interactive" [class.kpi-active]="invStatusFilter === 'Critical'" (click)="filterByStatus('Critical')" role="button" tabindex="0" [title]="langService.t('Filter by Stockout Risk')">
+            <div class="kpi-label">{{ langService.t('STOCKOUT RISK') }}</div>
+            <div class="kpi-value text-red">{{ langService.t(criticalInventoryCount + ' High Risk') }}</div>
           </div>
         </div>
 
         <!-- FILTERS -->
         <div class="filter-strip card-surface mt-3">
           <div class="filter-col">
-            <label class="filter-label">Search Nomenclature</label>
-            <input type="text" [(ngModel)]="invSearch" placeholder="Search item..." class="form-control-sm">
+            <label class="filter-label">{{ langService.t('Search Nomenclature') }}</label>
+            <input type="text" [(ngModel)]="invSearch" [placeholder]="langService.t('Search item...')" class="form-control-sm">
           </div>
           <div class="filter-col">
-            <label class="filter-label">Category</label>
+            <label class="filter-label">{{ langService.t('Category') }}</label>
             <select [(ngModel)]="invCategoryFilter" class="form-control-sm">
-              <option value="All">All Categories</option>
-              <option value="Class I (Rations)">Class I (Rations)</option>
-              <option value="Class III (POL)">Class III (POL)</option>
-              <option value="Class V (Ammo)">Class V (Ammo)</option>
-              <option value="Class IX (Spares)">Class IX (Spares)</option>
-              <option value="Medical & Clothing">Medical & Clothing</option>
+              <option value="All">{{ langService.t('All Categories') }}</option>
+              <option value="Class I (Rations)">{{ langService.t('Class I (Rations)') }}</option>
+              <option value="Class III (POL)">{{ langService.t('Class III (POL)') }}</option>
+              <option value="Class V (Ammo)">{{ langService.t('Class V (Ammo)') }}</option>
+              <option value="Class IX (Spares)">{{ langService.t('Class IX (Spares)') }}</option>
+              <option value="Medical & Clothing">{{ langService.t('Medical & Clothing') }}</option>
             </select>
           </div>
           <div class="filter-col">
-            <label class="filter-label">Stock Status</label>
+            <label class="filter-label">{{ langService.t('Stock Status') }}</label>
             <select [(ngModel)]="invStatusFilter" class="form-control-sm">
-              <option value="All">All Statuses</option>
-              <option value="Adequate">Adequate</option>
-              <option value="Low">Low Stock</option>
-              <option value="Surplus">Surplus</option>
-              <option value="Critical">Critical</option>
+              <option value="All">{{ langService.t('All Statuses') }}</option>
+              <option value="Adequate">{{ langService.t('Adequate') }}</option>
+              <option value="Low">{{ langService.t('Low Stock') }}</option>
+              <option value="Surplus">{{ langService.t('Surplus') }}</option>
+              <option value="Critical">{{ langService.t('Critical') }}</option>
             </select>
           </div>
           <div class="filter-col filter-action-col" *ngIf="invSearch || invCategoryFilter !== 'All' || invStatusFilter !== 'All'">
             <label class="filter-label">&nbsp;</label>
-            <button type="button" class="btn-filter-reset" (click)="invSearch = ''; invCategoryFilter = 'All'; invStatusFilter = 'All'" title="Reset All Filters">
-              ✕ Reset Filters
+            <button type="button" class="btn-filter-reset" (click)="invSearch = ''; invCategoryFilter = 'All'; invStatusFilter = 'All'" [title]="langService.t('Reset All Filters')">
+              ✕ {{ langService.t('Reset Filters') }}
             </button>
           </div>
         </div>
@@ -568,38 +568,38 @@
           <table class="c2-table">
             <thead>
               <tr>
-                <th>Item ID</th>
-                <th>Nomenclature</th>
-                <th>Category</th>
-                <th>Current Qty</th>
-                <th>Safety Buffer</th>
-                <th>Reorder Level</th>
-                <th>Days Remaining</th>
-                <th>Status</th>
-                <th>Actions</th>
+                <th>{{ langService.t('Item ID') }}</th>
+                <th>{{ langService.t('Nomenclature') }}</th>
+                <th>{{ langService.t('Category') }}</th>
+                <th>{{ langService.t('Current Qty') }}</th>
+                <th>{{ langService.t('Safety Buffer') }}</th>
+                <th>{{ langService.t('Reorder Level') }}</th>
+                <th>{{ langService.t('Days Remaining') }}</th>
+                <th>{{ langService.t('Status') }}</th>
+                <th>{{ langService.t('Actions') }}</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let item of filteredInventory()">
                 <td class="font-mono text-gold font-bold">{{ item.id }}</td>
-                <td><strong>{{ item.item }}</strong></td>
-                <td><span class="badge-military">{{ item.category }}</span></td>
-                <td class="font-bold text-green">{{ item.quantity }}</td>
-                <td>{{ item.safetyStock }}</td>
-                <td>{{ item.reorderLevel }}</td>
+                <td><strong>{{ langService.t(item.item) }}</strong></td>
+                <td><span class="badge-military">{{ langService.t(item.category) }}</span></td>
+                <td class="font-bold text-green">{{ langService.t(item.quantity) }}</td>
+                <td>{{ langService.t(item.safetyStock) }}</td>
+                <td>{{ langService.t(item.reorderLevel) }}</td>
                 <td>
                   <span class="font-bold" [class.text-green]="item.daysRemaining > 30" [class.text-amber]="item.daysRemaining <= 30">
-                    {{ item.daysRemaining }} Days
+                    {{ langService.t(item.daysRemaining + ' Days') }}
                   </span>
                 </td>
                 <td>
                   <span class="badge-health" [class.text-green]="item.status === 'Adequate'" [class.text-amber]="item.status === 'Low'">
-                    ● {{ item.status }}
+                    ● {{ langService.t(item.status) }}
                   </span>
                 </td>
                 <td>
                   <button type="button" class="btn-inspect" (click)="openLedgerCard(item)">
-                    Ledger Card
+                    {{ langService.t('Ledger Card') }}
                   </button>
                 </td>
               </tr>
@@ -612,7 +612,7 @@
           <div class="modal-card" (click)="$event.stopPropagation()">
             <div class="modal-header">
               <div>
-                <span class="modal-form-badge">{{ selectedInvItem.category }} · REGIMENTAL STOCK LEDGER</span>
+                <span class="modal-form-badge">{{ langService.t(selectedInvItem.category) }} · {{ langService.t('REGIMENTAL STOCK LEDGER') }}</span>
                 <h3 class="modal-title">{{ selectedInvItem.item }}</h3>
                 <span class="text-xs text-muted font-mono">Stock ID: {{ selectedInvItem.id }}</span>
               </div>
@@ -621,51 +621,51 @@
             <div class="modal-body">
               <div class="unit-detail-grid">
                 <div class="detail-box">
-                  <span class="d-label">Current Available:</span>
+                  <span class="d-label">{{ langService.t('Current Available:') }}</span>
                   <span class="d-val text-green font-bold">{{ selectedInvItem.quantity }}</span>
                 </div>
                 <div class="detail-box">
-                  <span class="d-label">Total Received:</span>
+                  <span class="d-label">{{ langService.t('Total Received:') }}</span>
                   <span class="d-val text-green">{{ selectedInvItem.received }}</span>
                 </div>
                 <div class="detail-box">
-                  <span class="d-label">Total Issued:</span>
+                  <span class="d-label">{{ langService.t('Total Issued:') }}</span>
                   <span class="d-val text-blue">{{ selectedInvItem.issued }}</span>
                 </div>
                 <div class="detail-box">
-                  <span class="d-label">Safety Buffer:</span>
+                  <span class="d-label">{{ langService.t('Safety Buffer:') }}</span>
                   <span class="d-val font-mono">{{ selectedInvItem.safetyStock }}</span>
                 </div>
                 <div class="detail-box">
-                  <span class="d-label">Reorder Level:</span>
+                  <span class="d-label">{{ langService.t('Reorder Level:') }}</span>
                   <span class="d-val font-mono">{{ selectedInvItem.reorderLevel }}</span>
                 </div>
                 <div class="detail-box">
-                  <span class="d-label">Days of Supply:</span>
+                  <span class="d-label">{{ langService.t('Days of Supply:') }}</span>
                   <span class="d-val text-gold font-bold">{{ selectedInvItem.daysRemaining }} Days</span>
                 </div>
                 <div class="detail-box">
-                  <span class="d-label">Damaged / Written Off:</span>
+                  <span class="d-label">{{ langService.t('Damaged / Written Off:') }}</span>
                   <span class="d-val text-amber">{{ selectedInvItem.damaged }}</span>
                 </div>
                 <div class="detail-box">
-                  <span class="d-label">Expired:</span>
+                  <span class="d-label">{{ langService.t('Expired:') }}</span>
                   <span class="d-val">{{ selectedInvItem.expired }}</span>
                 </div>
               </div>
 
               <div class="stock-action-pills-row mt-3">
-                <span class="text-xs text-muted" style="margin-right: 12px;">Direct Stock Actions:</span>
+                <span class="text-xs text-muted" style="margin-right: 12px;">{{ langService.t('Direct Stock Actions:') }}</span>
                 <button type="button" class="btn-army-sm" (click)="openAddReceiptModal(selectedInvItem); closeLedgerCard()" style="margin-right: 8px;">
-                  + Add Store Receipt RV
+                  {{ langService.t('+ Add Store Receipt RV') }}
                 </button>
                 <button type="button" class="btn-outline-army" (click)="openRecordConsumptionModal(selectedInvItem); closeLedgerCard()">
-                  📋 Record Issue / Burn
+                  📋 {{ langService.t('Record Issue / Burn') }}
                 </button>
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn-outline-army" (click)="closeLedgerCard()">Close Ledger</button>
+              <button type="button" class="btn-outline-army" (click)="closeLedgerCard()">{{ langService.t('Close Ledger') }}</button>
             </div>
           </div>
         </div>
@@ -678,15 +678,15 @@
           <div>
             <div class="telemetry-badge-live">
               <span class="telemetry-ping-dot"></span>
-              <span>ASCON MILITARY TELEMETRY GRID · SENSOR SUITE v4.2 ONLINE · LATENCY 14ms</span>
+              <span>{{ langService.t('ASCON MILITARY TELEMETRY GRID · SENSOR SUITE v4.2 ONLINE · LATENCY 14ms') }}</span>
             </div>
-            <h2 class="module-title">Consumption Telematics & Unit Demand</h2>
-            <p class="module-subtitle">High-Altitude Sub-Zero POL Burn Rates, Troop Rations & Predictive Winter Surge Analytics</p>
+            <h2 class="module-title">{{ langService.t('Consumption Telematics & Unit Demand') }}</h2>
+            <p class="module-subtitle">{{ langService.t('High-Altitude Sub-Zero POL Burn Rates, Troop Rations & Predictive Winter Surge Analytics') }}</p>
           </div>
           <div class="header-action-group">
             <button type="button" class="btn-army-prewinter" (click)="autoFillPreWinterIndent()">
               <span class="btn-winter-icon">❄</span>
-              <span>+ Pre-Winter Stocking Indent</span>
+              <span>{{ langService.t('+ Pre-Winter Stocking Indent') }}</span>
             </button>
           </div>
         </div>
@@ -695,12 +695,12 @@
         <div class="kpi-grid-4 mt-3">
           <div class="kpi-card" (click)="setChartMetric('POL')">
             <div class="kpi-card-header">
-              <span class="kpi-label">DAILY POL RUN-RATE</span>
+              <span class="kpi-label">{{ langService.t('DAILY POL RUN-RATE') }}</span>
               <span class="kpi-sub-badge badge-amber">+31% Active</span>
             </div>
             <div class="kpi-value text-gold">492 L/day</div>
             <div class="kpi-sub">
-              <span>Gensets (44%) + Bukhari (30%) + BMPs (17%)</span>
+              <span>{{ langService.t('Gensets (44%) + Bukhari (30%) + BMPs (17%)') }}</span>
               <span class="kpi-buffer-tag text-green">48d Buffer</span>
             </div>
             <div class="kpi-progress-bar">
@@ -710,12 +710,12 @@
 
           <div class="kpi-card" (click)="setChartMetric('RATIONS')">
             <div class="kpi-card-header">
-              <span class="kpi-label">DAILY TROOP RATIONS</span>
+              <span class="kpi-label">{{ langService.t('DAILY TROOP RATIONS') }}</span>
               <span class="kpi-sub-badge badge-green">Nominal</span>
             </div>
             <div class="kpi-value text-green">1,460 Packs</div>
             <div class="kpi-sub">
-              <span>840 Garrison Troops · 3,800 kcal MRE</span>
+              <span>{{ langService.t('840 Garrison Troops · 3,800 kcal MRE') }}</span>
               <span class="kpi-buffer-tag text-green">55d Buffer</span>
             </div>
             <div class="kpi-progress-bar">
@@ -725,13 +725,13 @@
 
           <div class="kpi-card" (click)="setChartMetric('AMMO')">
             <div class="kpi-card-header">
-              <span class="kpi-label">MUNITIONS EXPENDITURE</span>
+              <span class="kpi-label">{{ langService.t('MUNITIONS EXPENDITURE') }}</span>
               <span class="kpi-sub-badge badge-blue">Controlled</span>
             </div>
             <div class="kpi-value text-blue">340 Rnds</div>
             <div class="kpi-sub">
-              <span>7.62mm & 30mm Cannon Zeroing Ranges</span>
-              <span class="kpi-buffer-tag text-blue">100% WWR Safe</span>
+              <span>{{ langService.t('7.62mm & 30mm Cannon Zeroing Ranges') }}</span>
+              <span class="kpi-buffer-tag text-blue">{{ langService.t('100% WWR Safe') }}</span>
             </div>
             <div class="kpi-progress-bar">
               <div class="kpi-progress-fill ammo-fill" style="width: 42%;"></div>
@@ -740,13 +740,13 @@
 
           <div class="kpi-card" (click)="setChartMetric('ALL')">
             <div class="kpi-card-header">
-              <span class="kpi-label">AI WINTER PEAK SURGE</span>
+              <span class="kpi-label">{{ langService.t('AI WINTER PEAK SURGE') }}</span>
               <span class="kpi-sub-badge badge-red">Alert D+4</span>
             </div>
             <div class="kpi-value text-amber">+28.4%</div>
             <div class="kpi-sub">
-              <span>Forecast: 630 L/day by Mid-Nov Freeze</span>
-              <span class="kpi-buffer-tag text-amber">Pass Closes 22d</span>
+              <span>{{ langService.t('Forecast: 630 L/day by Mid-Nov Freeze') }}</span>
+              <span class="kpi-buffer-tag text-amber">{{ langService.t('Pass Closes 22d') }}</span>
             </div>
             <div class="kpi-progress-bar">
               <div class="kpi-progress-fill surge-fill" style="width: 88%;"></div>
@@ -760,13 +760,13 @@
           <div class="chart-hud-header">
             <div class="chart-title-group">
               <div class="chart-tag-row">
-                <span class="chart-tag">TELEMATICS RADAR</span>
-                <span class="chart-model-tag">NEURAL LOGISTICS ENGINE v4.2</span>
+                <span class="chart-tag">{{ langService.t('TELEMATICS RADAR') }}</span>
+                <span class="chart-model-tag">{{ langService.t('NEURAL LOGISTICS ENGINE v4.2') }}</span>
                 <span class="chart-unit-tag">14 RAJPUT · SECTOR 4A (13,500 FT)</span>
               </div>
-              <h3 class="chart-title">Daily Multi-Class Consumption vs AI Winter Surge Trajectory</h3>
+              <h3 class="chart-title">{{ langService.t('Daily Multi-Class Consumption vs AI Winter Surge Trajectory') }}</h3>
               <p class="chart-subtitle">
-                High-Altitude POL Fuel · High-Calorie Rations · Munitions Expenditure · Temperature Correlation Curve
+                {{ langService.t('High-Altitude POL Fuel · High-Calorie Rations · Munitions Expenditure · Temperature Correlation Curve') }}
               </p>
             </div>
 
@@ -774,16 +774,16 @@
             <div class="chart-controls-cluster">
               <div class="metric-switch-group">
                 <button type="button" class="btn-metric-tab" [class.active]="activeChartMetric === 'ALL'" (click)="setChartMetric('ALL')">
-                  <span class="metric-indicator all-ind"></span> All Classes
+                  <span class="metric-indicator all-ind"></span> {{ langService.t('All Classes') }}
                 </button>
                 <button type="button" class="btn-metric-tab" [class.active]="activeChartMetric === 'POL'" (click)="setChartMetric('POL')">
-                  <span class="metric-indicator pol-ind"></span> Class III (POL)
+                  <span class="metric-indicator pol-ind"></span> {{ langService.t('Class III (POL)') }}
                 </button>
                 <button type="button" class="btn-metric-tab" [class.active]="activeChartMetric === 'RATIONS'" (click)="setChartMetric('RATIONS')">
-                  <span class="metric-indicator rat-ind"></span> Class I (Rations)
+                  <span class="metric-indicator rat-ind"></span> {{ langService.t('Class I (Rations)') }}
                 </button>
                 <button type="button" class="btn-metric-tab" [class.active]="activeChartMetric === 'AMMO'" (click)="setChartMetric('AMMO')">
-                  <span class="metric-indicator ammo-ind"></span> Class V (Ammo)
+                  <span class="metric-indicator ammo-ind"></span> {{ langService.t('Class V (Ammo)') }}
                 </button>
               </div>
 
@@ -791,23 +791,23 @@
               <div class="chart-legend-row">
                 <div class="legend-badge pol-badge">
                   <span class="legend-dot pol"></span>
-                  <span class="legend-text">POL Run-Rate (L/d)</span>
+                  <span class="legend-text">{{ langService.t('POL Run-Rate (L/d)') }}</span>
                 </div>
                 <div class="legend-badge rat-badge">
                   <span class="legend-dot rations"></span>
-                  <span class="legend-text">Rations (Packs)</span>
+                  <span class="legend-text">{{ langService.t('Rations (Packs)') }}</span>
                 </div>
                 <div class="legend-badge ammo-badge">
                   <span class="legend-dot ammo"></span>
-                  <span class="legend-text">Munitions (Rnds)</span>
+                  <span class="legend-text">{{ langService.t('Munitions (Rnds)') }}</span>
                 </div>
                 <div class="legend-badge temp-badge">
                   <span class="legend-line temp"></span>
-                  <span class="legend-text">Sub-Zero Temp (°C)</span>
+                  <span class="legend-text">{{ langService.t('Sub-Zero Temp (°C)') }}</span>
                 </div>
                 <div class="legend-badge surge-badge">
                   <span class="legend-line surge"></span>
-                  <span class="legend-text">Neural Surge Model (+28%)</span>
+                  <span class="legend-text">{{ langService.t('Neural Surge Model (+28%)') }}</span>
                 </div>
               </div>
             </div>
@@ -1089,20 +1089,20 @@
             </div>
 
             <div class="inspector-col metric-col">
-              <span class="inspector-tag">POL BURN BREAKDOWN</span>
+              <span class="inspector-tag">{{ langService.t('POL BURN BREAKDOWN') }}</span>
               <div class="inspector-main-val text-gold">
                 {{ selectedTelemetryPoint.polLpd }} L/day
               </div>
               <div class="inspector-breakdown-row">
-                <span title="Prime Generators">Genset: <strong>{{ selectedTelemetryPoint.gensetBurn }}L</strong></span>
-                <span title="Bukhari Space Heating">Bukhari: <strong>{{ selectedTelemetryPoint.bukhariBurn }}L</strong></span>
-                <span title="BMP Fleet & Transport">Fleet: <strong>{{ selectedTelemetryPoint.fleetBurn }}L</strong></span>
-                <span title="Auxiliary Thawing">Aux: <strong>{{ selectedTelemetryPoint.auxBurn }}L</strong></span>
+                <span [title]="langService.t('Prime Generators')">{{ langService.t('Genset:') }} <strong>{{ selectedTelemetryPoint.gensetBurn }}L</strong></span>
+                <span [title]="langService.t('Bukhari Space Heating')">{{ langService.t('Bukhari:') }} <strong>{{ selectedTelemetryPoint.bukhariBurn }}L</strong></span>
+                <span [title]="langService.t('BMP Fleet & Transport')">{{ langService.t('Fleet:') }} <strong>{{ selectedTelemetryPoint.fleetBurn }}L</strong></span>
+                <span [title]="langService.t('Auxiliary Thawing')">{{ langService.t('Aux:') }} <strong>{{ selectedTelemetryPoint.auxBurn }}L</strong></span>
               </div>
             </div>
 
             <div class="inspector-col metric-col">
-              <span class="inspector-tag">TROOP RATIONS (CLASS I)</span>
+              <span class="inspector-tag">{{ langService.t('TROOP RATIONS (CLASS I)') }}</span>
               <div class="inspector-main-val text-green">
                 {{ selectedTelemetryPoint.rationsPacks }} Packs
               </div>
@@ -1112,7 +1112,7 @@
             </div>
 
             <div class="inspector-col metric-col">
-              <span class="inspector-tag">MUNITIONS EXPENDITURE (CLASS V)</span>
+              <span class="inspector-tag">{{ langService.t('MUNITIONS EXPENDITURE (CLASS V)') }}</span>
               <div class="inspector-main-val text-blue">
                 {{ selectedTelemetryPoint.ammoRounds }} Rnds
               </div>
@@ -1122,13 +1122,13 @@
             </div>
 
             <div class="inspector-col metric-col">
-              <span class="inspector-tag">METEOROLOGY & POWER LOAD</span>
+              <span class="inspector-tag">{{ langService.t('METEOROLOGY & POWER LOAD') }}</span>
               <div class="inspector-temp-val text-cyan">
                 ❄ {{ selectedTelemetryPoint.tempCelsius }}°C
                 <span class="windchill">Windchill: {{ selectedTelemetryPoint.tempCelsius - 8 }}°C</span>
               </div>
               <div class="inspector-sub-text">
-                Genset Load: <strong>{{ selectedTelemetryPoint.generatorLoad }}%</strong> · Bukhari: <strong>{{ selectedTelemetryPoint.bukhariHours }}h/day</strong>
+                {{ langService.t('Genset Load:') }} <strong>{{ selectedTelemetryPoint.generatorLoad }}%</strong> · {{ langService.t('Bukhari:') }} <strong>{{ selectedTelemetryPoint.bukhariHours }}h/day</strong>
               </div>
             </div>
           </div>
@@ -1141,8 +1141,8 @@
             <div class="panel-card-header">
               <div class="header-icon-box fuel-box">⛽</div>
               <div>
-                <h4 class="panel-title">Sub-Zero POL Consumption Breakdown</h4>
-                <p class="panel-desc">Real-time telematics from BFI Depot flow-meters & generator telemetry</p>
+                <h4 class="panel-title">{{ langService.t('Sub-Zero POL Consumption Breakdown') }}</h4>
+                <p class="panel-desc">{{ langService.t('Real-time telematics from BFI Depot flow-meters & generator telemetry') }}</p>
               </div>
             </div>
 
@@ -1152,14 +1152,14 @@
                 <div class="meter-info-row">
                   <span class="meter-name">
                     <span class="meter-bullet pol-bullet"></span>
-                    Base Prime Gensets (Kirloskar 62.5kVA Twin)
+                    {{ langService.t('Base Prime Gensets (Kirloskar 62.5kVA Twin)') }}
                   </span>
                   <span class="meter-burn-val">215 L/day <small>(43.7%)</small></span>
                 </div>
                 <div class="meter-bar-track">
                   <div class="meter-bar-fill fill-pol" style="width: 43.7%;"></div>
                 </div>
-                <div class="meter-sub-text">Continuous radar grid, SATCOM array & medical hospital power</div>
+                <div class="meter-sub-text">{{ langService.t('Continuous radar grid, SATCOM array & medical hospital power') }}</div>
               </div>
 
               <!-- Item 2: Bukhari Space Heaters -->
@@ -1167,14 +1167,14 @@
                 <div class="meter-info-row">
                   <span class="meter-name">
                     <span class="meter-bullet rat-bullet"></span>
-                    Bukhari Space Heaters & Pipe Anti-Freeze
+                    {{ langService.t('Bukhari Space Heaters & Pipe Anti-Freeze') }}
                   </span>
                   <span class="meter-burn-val">148 L/day <small>(30.1%)</small></span>
                 </div>
                 <div class="meter-bar-track">
                   <div class="meter-bar-fill fill-green" style="width: 30.1%;"></div>
                 </div>
-                <div class="meter-sub-text">42 Living bunkers, water pipe continuous trace heating (-18°C)</div>
+                <div class="meter-sub-text">{{ langService.t('42 Living bunkers, water pipe continuous trace heating (-18°C)') }}</div>
               </div>
 
               <!-- Item 3: BMP Fleet & Combat Transport -->
@@ -1182,14 +1182,14 @@
                 <div class="meter-info-row">
                   <span class="meter-name">
                     <span class="meter-bullet ammo-bullet"></span>
-                    BMP-II Armoured Vehicles & 4x4 Gypsies
+                    {{ langService.t('BMP-II Armoured Vehicles & 4x4 Gypsies') }}
                   </span>
                   <span class="meter-burn-val">84 L/day <small>(17.1%)</small></span>
                 </div>
                 <div class="meter-bar-track">
                   <div class="meter-bar-fill fill-blue" style="width: 17.1%;"></div>
                 </div>
-                <div class="meter-sub-text">11 Combat vehicles on border patrol & daily sub-zero engine warmups</div>
+                <div class="meter-sub-text">{{ langService.t('11 Combat vehicles on border patrol & daily sub-zero engine warmups') }}</div>
               </div>
 
               <!-- Item 4: Emergency Thawing & Aux -->
@@ -1197,14 +1197,14 @@
                 <div class="meter-info-row">
                   <span class="meter-name">
                     <span class="meter-bullet surge-bullet"></span>
-                    Auxiliary Thawing & Pre-Heat Burners
+                    {{ langService.t('Auxiliary Thawing & Pre-Heat Burners') }}
                   </span>
                   <span class="meter-burn-val">45 L/day <small>(9.1%)</small></span>
                 </div>
                 <div class="meter-bar-track">
                   <div class="meter-bar-fill fill-amber" style="width: 9.1%;"></div>
                 </div>
-                <div class="meter-sub-text">Underground reservoir coil heating to prevent diesel waxing</div>
+                <div class="meter-sub-text">{{ langService.t('Underground reservoir coil heating to prevent diesel waxing') }}</div>
               </div>
             </div>
           </div>
@@ -1214,8 +1214,8 @@
             <div class="panel-card-header">
               <div class="header-icon-box iot-box">📡</div>
               <div>
-                <h4 class="panel-title">Forward Base IoT Sensor Telemetry</h4>
-                <p class="panel-desc">Direct telemetric telemetry from forward fuel tanks & weather stations</p>
+                <h4 class="panel-title">{{ langService.t('Forward Base IoT Sensor Telemetry') }}</h4>
+                <p class="panel-desc">{{ langService.t('Direct telemetric telemetry from forward fuel tanks & weather stations') }}</p>
               </div>
             </div>
 
@@ -1227,13 +1227,13 @@
                   <span class="sensor-status-dot online">● ONLINE</span>
                 </div>
                 <div class="sensor-metric-row">
-                  <span class="sensor-label">Arctic Diesel Storage (BFI Tank 1)</span>
+                  <span class="sensor-label">{{ langService.t('Arctic Diesel Storage (BFI Tank 1)') }}</span>
                   <span class="sensor-value text-gold">16,200 L <small>(81% Full)</small></span>
                 </div>
                 <div class="sensor-sub-details">
-                  <span>Tank Temp: <strong>-12.4°C</strong></span>
-                  <span>Viscosity: <strong>Nominal</strong></span>
-                  <span>Flow: <strong>21.2 L/h</strong></span>
+                  <span>{{ langService.t('Tank Temp:') }} <strong>-12.4°C</strong></span>
+                  <span>{{ langService.t('Viscosity:') }} <strong>Nominal</strong></span>
+                  <span>{{ langService.t('Flow:') }} <strong>21.2 L/h</strong></span>
                 </div>
               </div>
 
@@ -1244,12 +1244,12 @@
                   <span class="sensor-status-dot online">● ONLINE</span>
                 </div>
                 <div class="sensor-metric-row">
-                  <span class="sensor-label">Command Prime Genset 62.5kVA</span>
+                  <span class="sensor-label">{{ langService.t('Command Prime Genset 62.5kVA') }}</span>
                   <span class="sensor-value text-green">19.2 hrs/day <small>(92% Load)</small></span>
                 </div>
                 <div class="sensor-sub-details">
-                  <span>Coolant: <strong>84°C</strong></span>
-                  <span>Oil Pressure: <strong>4.8 bar</strong></span>
+                  <span>{{ langService.t('Coolant:') }} <strong>84°C</strong></span>
+                  <span>{{ langService.t('Oil Pressure:') }} <strong>4.8 bar</strong></span>
                   <span>Hz: <strong>50.2 Hz</strong></span>
                 </div>
               </div>
@@ -1261,13 +1261,13 @@
                   <span class="sensor-status-dot online">● ONLINE</span>
                 </div>
                 <div class="sensor-metric-row">
-                  <span class="sensor-label">Forward AWS Meteorological Mast</span>
+                  <span class="sensor-label">{{ langService.t('Forward AWS Meteorological Mast') }}</span>
                   <span class="sensor-value text-cyan">-18.2°C <small>(Wind: 28 km/h)</small></span>
                 </div>
                 <div class="sensor-sub-details">
-                  <span>Baro: <strong>641 hPa</strong></span>
-                  <span>Humidity: <strong>42%</strong></span>
-                  <span>Snow Depth: <strong>14 cm</strong></span>
+                  <span>{{ langService.t('Baro:') }} <strong>641 hPa</strong></span>
+                  <span>{{ langService.t('Humidity:') }} <strong>42%</strong></span>
+                  <span>{{ langService.t('Snow Depth:') }} <strong>14 cm</strong></span>
                 </div>
               </div>
             </div>
@@ -1278,33 +1278,33 @@
             <div class="panel-card-header">
               <div class="header-icon-box alert-box">🏔</div>
               <div>
-                <h4 class="panel-title">AI Pre-Winter Stocking & Pass Advisory</h4>
-                <p class="panel-desc">Himalayan highway pass closure projections & buffer requirements</p>
+                <h4 class="panel-title">{{ langService.t('AI Pre-Winter Stocking & Pass Advisory') }}</h4>
+                <p class="panel-desc">{{ langService.t('Himalayan highway pass closure projections & buffer requirements') }}</p>
               </div>
             </div>
 
             <div class="pass-status-container">
               <!-- Pass 1: Zoji La -->
-              <div class="pass-tile warning interactive-pass" (click)="setTab('route-weather')" role="button" tabindex="0" title="Inspect Zoji La Route & Weather Telemetry">
+              <div class="pass-tile warning interactive-pass" (click)="setTab('route-weather')" role="button" tabindex="0" [title]="langService.t('Inspect Zoji La Route & Weather Telemetry')">
                 <div class="pass-tile-top">
-                  <span class="pass-name">ZOJI LA PASS (11,575 FT)</span>
-                  <span class="pass-badge badge-amber">CLOSING IN ~22 DAYS</span>
+                  <span class="pass-name">{{ langService.t('ZOJI LA PASS (11,575 FT)') }}</span>
+                  <span class="pass-badge badge-amber">{{ langService.t('CLOSING IN ~22 DAYS') }}</span>
                 </div>
                 <div class="pass-meta">
-                  <span>Drift Probability: <strong>88%</strong></span>
-                  <span>Last Convoy Slot: <strong>03 Nov</strong></span>
+                  <span>{{ langService.t('Drift Probability:') }} <strong>88%</strong></span>
+                  <span>{{ langService.t('Last Convoy Slot:') }} <strong>03 Nov</strong></span>
                 </div>
               </div>
 
               <!-- Pass 2: Khardung La -->
-              <div class="pass-tile safe interactive-pass" (click)="setTab('route-weather')" role="button" tabindex="0" title="Inspect Khardung La Route & Weather Telemetry">
+              <div class="pass-tile safe interactive-pass" (click)="setTab('route-weather')" role="button" tabindex="0" [title]="langService.t('Inspect Khardung La Route & Weather Telemetry')">
                 <div class="pass-tile-top">
-                  <span class="pass-name">KHARDUNG LA PASS (17,582 FT)</span>
-                  <span class="pass-badge badge-blue">CLOSING IN ~31 DAYS</span>
+                  <span class="pass-name">{{ langService.t('KHARDUNG LA PASS (17,582 FT)') }}</span>
+                  <span class="pass-badge badge-blue">{{ langService.t('CLOSING IN ~31 DAYS') }}</span>
                 </div>
                 <div class="pass-meta">
-                  <span>Snow Chain Mandate: <strong>Active</strong></span>
-                  <span>Road Status: <strong>Open for 4x4</strong></span>
+                  <span>{{ langService.t('Snow Chain Mandate:') }} <strong>{{ langService.t('Active') }}</strong></span>
+                  <span>{{ langService.t('Road Status:') }} <strong>{{ langService.t('Open for 4x4') }}</strong></span>
                 </div>
               </div>
             </div>
@@ -1313,14 +1313,11 @@
             <div class="ai-advisory-callout mt-3">
               <div class="advisory-title-row">
                 <span class="advisory-icon">💡</span>
-                <strong class="text-gold">DGOS / AI LOGISTICS DIRECTIVE:</strong>
+                <strong class="text-gold">{{ langService.t('DGOS / AI LOGISTICS DIRECTIVE:') }}</strong>
               </div>
-              <p class="advisory-text">
-                With expected winter freeze surge climbing to <strong>630 L/day (+28.4%)</strong>, current 16,200L reserves will deplete to critical safety margins in 26 days.
-                Pre-stock an additional <strong>25,000L Arctic HSD</strong> before Zoji La closes.
-              </p>
+              <p class="advisory-text">{{ langService.t('With expected winter freeze surge climbing to 630 L/day (+28.4%), current 16,200L reserves will deplete to critical safety margins in 26 days. Pre-stock an additional 25,000L Arctic HSD before Zoji La closes.') }}</p>
               <button type="button" class="btn-generate-indent-full" (click)="autoFillPreWinterIndent()">
-                <span>⚡ Auto-Generate Pre-Winter Indent Voucher</span>
+                <span>⚡ {{ langService.t('Auto-Generate Pre-Winter Indent Voucher') }}</span>
               </button>
             </div>
           </div>
@@ -1331,11 +1328,11 @@
       <section *ngIf="activeTab === 'requests'" class="c2-tab-content">
         <div class="content-header-row">
           <div>
-            <h2 class="module-title">Unit Requisition & Indent Vouchers</h2>
+            <h2 class="module-title">{{ langService.t('Unit Requisition & Indent Vouchers') }}</h2>
             <p class="module-subtitle">Formal logistics indents submitted to Northern Command / DGOS</p>
           </div>
           <button type="button" class="btn-army-primary" (click)="openCreateRequestModal()">
-            + Create New Requisition
+            + {{ langService.t('Create New Requisition') }}
           </button>
         </div>
 
@@ -1348,38 +1345,38 @@
           <table class="c2-table requests-c2-table">
             <thead>
               <tr>
-                <th class="col-voucher">Voucher #</th>
-                <th class="col-cat">Supply Category</th>
-                <th class="col-item">Item Nomenclature</th>
-                <th class="col-qty">Requested Qty</th>
-                <th class="col-priority">Priority</th>
-                <th class="col-reqby">Required By</th>
-                <th class="col-datesub">Date Submitted</th>
-                <th class="col-status">Status</th>
-                <th class="col-action">Actions</th>
+                <th class="col-voucher">{{ langService.t('Voucher #') }}</th>
+                <th class="col-cat">{{ langService.t('Supply Category') }}</th>
+                <th class="col-item">{{ langService.t('Item Nomenclature') }}</th>
+                <th class="col-qty">{{ langService.t('Requested Qty') }}</th>
+                <th class="col-priority">{{ langService.t('Priority') }}</th>
+                <th class="col-reqby">{{ langService.t('Required By') }}</th>
+                <th class="col-datesub">{{ langService.t('Date Submitted') }}</th>
+                <th class="col-status">{{ langService.t('Status') }}</th>
+                <th class="col-action">{{ langService.t('Actions') }}</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let ind of logisticsService.indents()">
                 <td class="col-voucher font-mono text-gold font-bold nowrap-cell">{{ ind.id }}</td>
-                <td class="col-cat nowrap-cell"><span class="badge-military">{{ ind.category }}</span></td>
-                <td class="col-item item-nomenclature-cell"><strong>{{ ind.itemDescription }}</strong></td>
+                <td class="col-cat nowrap-cell"><span class="badge-military">{{ langService.t(ind.category) }}</span></td>
+                <td class="col-item item-nomenclature-cell"><strong>{{ langService.t(ind.itemDescription) }}</strong></td>
                 <td class="col-qty font-bold text-green nowrap-cell">{{ ind.requestedQty }}</td>
                 <td class="col-priority nowrap-cell">
                   <span class="badge-risk" [class.badge-danger]="ind.urgency === 'SOS Emergency'" [class.badge-gold]="ind.urgency === 'Operational Priority 1'" [class.badge-success]="ind.urgency === 'Routine'">
-                    {{ ind.urgency }}
+                    {{ langService.t(ind.urgency) }}
                   </span>
                 </td>
                 <td class="col-reqby font-mono nowrap-cell">{{ ind.requiredBy }}</td>
                 <td class="col-datesub font-mono nowrap-cell">{{ ind.dateCreated }}</td>
                 <td class="col-status nowrap-cell">
                   <span class="badge-status" [class.badge-success]="ind.status === 'Approved by DGOS' || ind.status === 'Dispatched from COD'" [class.badge-gold]="ind.status === 'Pending HQ Approval'">
-                    {{ ind.status }}
+                    {{ langService.t(ind.status) }}
                   </span>
                 </td>
                 <td class="col-action nowrap-cell">
                   <button type="button" class="btn-inspect btn-track-stepper" (click)="openTrackModal(ind)">
-                    Track Stepper
+                    {{ langService.t('Track Stepper') }}
                   </button>
                 </td>
               </tr>
@@ -1395,15 +1392,15 @@
           <div>
             <div class="module-title-tag">
               <span class="pulse-indicator"></span>
-              <span>ASCON MILITARY LOGISTICS CORRIDOR</span>
+              <span>{{ langService.t('ASCON MILITARY LOGISTICS CORRIDOR') }}</span>
             </div>
-            <h2 class="module-title">Unit Inbound & Outbound Logistics</h2>
-            <p class="module-subtitle">Real-time SATCOM tracking of road convoys, transit depots, and heavy freight scheduled for 14 Rajput base</p>
+            <h2 class="module-title">{{ langService.t('Unit Inbound & Outbound Logistics') }}</h2>
+            <p class="module-subtitle">{{ langService.t('Real-time SATCOM tracking of road convoys, transit depots, and heavy freight scheduled for 14 Rajput base') }}</p>
           </div>
           <div class="logistics-header-actions">
             <div class="telemetry-pill">
               <span class="telemetry-radar-dot"></span>
-              <span class="telemetry-text">LIVE SATCOM FEED: <strong>5 CONVOYS TRACKED</strong></span>
+              <span class="telemetry-text">{{ langService.t('LIVE SATCOM FEED:') }} <strong>{{ langService.t('5 CONVOYS TRACKED') }}</strong></span>
             </div>
             <button type="button" class="btn-tactical-req" (click)="openCreateRequestModal()">
               <span class="btn-icon">＋</span> Generate Requisition
@@ -1431,8 +1428,8 @@
             </div>
             <div class="kpi-content">
               <div class="kpi-val">{{ logisticsService.convoys().length }}</div>
-              <div class="kpi-label">Active Convoys</div>
-              <div class="kpi-sub">{{ logisticsService.convoys().length - getReroutedConvoysCount() }} In-Transit • {{ getReroutedConvoysCount() }} Rerouted</div>
+              <div class="kpi-label">{{ langService.t('Active Convoys') }}</div>
+              <div class="kpi-sub">{{ logisticsService.convoys().length - getReroutedConvoysCount() }} {{ langService.t('In-Transit') }} • {{ getReroutedConvoysCount() }} {{ langService.t('Rerouted') }}</div>
             </div>
           </div>
 
@@ -1448,8 +1445,8 @@
             </div>
             <div class="kpi-content">
               <div class="kpi-val">{{ getTotalTonnage() | number }}<span class="kpi-unit">T</span></div>
-              <div class="kpi-label">Gross Tonnage En-Route</div>
-              <div class="kpi-sub">POL, Munitions, Spares & Winter Stores</div>
+              <div class="kpi-label">{{ langService.t('Gross Tonnage En-Route') }}</div>
+              <div class="kpi-sub">{{ langService.t('POL, Munitions, Spares & Winter Stores') }}</div>
             </div>
           </div>
 
@@ -1461,8 +1458,8 @@
             </div>
             <div class="kpi-content">
               <div class="kpi-val">{{ getTotalTrucks() }}</div>
-              <div class="kpi-label">Heavy Military Trucks</div>
-              <div class="kpi-sub">100% ASC & EME Escorts Assigned</div>
+              <div class="kpi-label">{{ langService.t('Heavy Military Trucks') }}</div>
+              <div class="kpi-sub">{{ langService.t('100% ASC & EME Escorts Assigned') }}</div>
             </div>
           </div>
 
@@ -1476,8 +1473,8 @@
             </div>
             <div class="kpi-content">
               <div class="kpi-val">1h 15m</div>
-              <div class="kpi-label">Next Inbound Arrival</div>
-              <div class="kpi-sub">CHETAK-2 (CV-442-W) • COD Agra</div>
+              <div class="kpi-label">{{ langService.t('Next Inbound Arrival') }}</div>
+              <div class="kpi-sub">{{ langService.t('CHETAK-2 (CV-442-W) • COD Agra') }}</div>
             </div>
           </div>
         </div>
@@ -1496,10 +1493,10 @@
               <input
                 type="text"
                 [(ngModel)]="logisticsSearch"
-                placeholder="Search by Callsign (e.g. GARUDA), Depot, Route Axis, Convoy ID..."
+                [placeholder]="langService.t('Search by Callsign (e.g. GARUDA), Depot, Route Axis, Convoy ID...')"
                 class="logistics-search-field"
               />
-              <button *ngIf="logisticsSearch" (click)="logisticsSearch = ''" class="search-clear-btn" title="Clear Search">✕</button>
+              <button *ngIf="logisticsSearch" (click)="logisticsSearch = ''" class="search-clear-btn" [title]="langService.t('Clear Search')">✕</button>
             </div>
 
             <!-- View Mode Switcher -->
@@ -1509,18 +1506,18 @@
                 class="view-mode-btn"
                 [class.active]="logisticsViewMode === 'cards'"
                 (click)="logisticsViewMode = 'cards'"
-                title="Tactical Fleet Cards Grid">
+                [title]="langService.t('Tactical Fleet Cards Grid')">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-svg"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-                <span>Cards</span>
+                <span>{{ langService.t('Cards') }}</span>
               </button>
               <button
                 type="button"
                 class="view-mode-btn"
                 [class.active]="logisticsViewMode === 'table'"
                 (click)="logisticsViewMode = 'table'"
-                title="Military Manifest Table">
+                [title]="langService.t('Military Manifest Table')">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-svg"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
-                <span>Table</span>
+                <span>{{ langService.t('Table') }}</span>
               </button>
             </div>
           </div>
@@ -1534,7 +1531,7 @@
                 [class.active]="logisticsCargoFilter === 'All'"
                 (click)="logisticsCargoFilter = 'All'">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="pill-svg-icon"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-                <span>All Cargo ({{ logisticsService.convoys().length }})</span>
+                <span>{{ langService.t('All Cargo') }} ({{ logisticsService.convoys().length }})</span>
               </button>
               <button
                 type="button"
@@ -1542,7 +1539,7 @@
                 [class.active]="logisticsCargoFilter === 'Class III'"
                 (click)="logisticsCargoFilter = 'Class III'">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="pill-svg-icon"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
-                <span>Class III (POL)</span>
+                <span>{{ langService.t('Class III (POL)') }}</span>
               </button>
               <button
                 type="button"
@@ -1550,7 +1547,7 @@
                 [class.active]="logisticsCargoFilter === 'Class V'"
                 (click)="logisticsCargoFilter = 'Class V'">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="pill-svg-icon"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
-                <span>Class V (Ammo)</span>
+                <span>{{ langService.t('Class V (Ammo)') }}</span>
               </button>
               <button
                 type="button"
@@ -1558,7 +1555,7 @@
                 [class.active]="logisticsCargoFilter === 'Winter Stocking'"
                 (click)="logisticsCargoFilter = 'Winter Stocking'">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="pill-svg-icon"><line x1="12" y1="2" x2="12" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line><line x1="19.07" y1="4.93" x2="4.93" y2="19.07"></line></svg>
-                <span>Winter Stocking</span>
+                <span>{{ langService.t('Winter Stocking') }}</span>
               </button>
               <button
                 type="button"
@@ -1566,18 +1563,18 @@
                 [class.active]="logisticsCargoFilter === 'Class IX'"
                 (click)="logisticsCargoFilter = 'Class IX'">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="pill-svg-icon"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                <span>Class IX (Spares)</span>
+                <span>{{ langService.t('Class IX (Spares)') }}</span>
               </button>
             </div>
 
             <div class="toolbar-right-controls">
               <!-- Status Dropdown Filter -->
               <div class="status-select-wrap">
-                <label class="toolbar-label">Status:</label>
+                <label class="toolbar-label">{{ langService.t('Status:') }}</label>
                 <select [(ngModel)]="logisticsStatusFilter" class="toolbar-select">
-                  <option value="All">All Statuses</option>
-                  <option value="In-Transit">In-Transit</option>
-                  <option value="Rerouted">Rerouted</option>
+                  <option value="All">{{ langService.t('All Statuses') }}</option>
+                  <option value="In-Transit">{{ langService.t('In-Transit') }}</option>
+                  <option value="Rerouted">{{ langService.t('Rerouted') }}</option>
                 </select>
               </div>
             </div>
@@ -1587,10 +1584,10 @@
         <!-- Filter Count & Active Criteria Sub-bar -->
         <div class="logistics-criteria-bar">
           <span class="criteria-count">
-            Displaying <strong>{{ filteredConvoys().length }}</strong> of {{ logisticsService.convoys().length }} Convoys
+            {{ langService.t('Displaying') }} <strong>{{ filteredConvoys().length }}</strong> {{ langService.t('of') }} {{ logisticsService.convoys().length }} {{ langService.t('Convoys') }}
           </span>
           <span *ngIf="logisticsSearch || logisticsCargoFilter !== 'All' || logisticsStatusFilter !== 'All'" class="criteria-reset-link" (click)="logisticsSearch = ''; logisticsCargoFilter = 'All'; logisticsStatusFilter = 'All'">
-            Reset Filters ↺
+            {{ langService.t('Reset Filters') }} ↺
           </span>
         </div>
 
@@ -1599,10 +1596,10 @@
           <div class="empty-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="empty-svg"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
           </div>
-          <h3>No Convoys Found</h3>
-          <p>No military consignments match your search query or filter selection.</p>
+          <h3>{{ langService.t('No Convoys Found') }}</h3>
+          <p>{{ langService.t('No military consignments match your search query or filter selection.') }}</p>
           <button type="button" class="btn-army-sm mt-2" (click)="logisticsSearch = ''; logisticsCargoFilter = 'All'; logisticsStatusFilter = 'All'">
-            Clear All Filters
+            {{ langService.t('Clear All Filters') }}
           </button>
         </div>
 
@@ -1614,14 +1611,14 @@
             <div class="c-card-header">
               <div class="c-card-title-group">
                 <div class="c-callsign-row">
-                  <span class="c-callsign convoy-clickable-title" (click)="inspectConvoy(c)" title="Inspect Telemetry & Stepper">{{ c.callsign }}</span>
+                  <span class="c-callsign convoy-clickable-title" (click)="inspectConvoy(c)" [title]="langService.t('Inspect Telemetry & Stepper')">{{ langService.t(c.callsign) }}</span>
                   <span class="c-id-chip">{{ c.id }}</span>
                 </div>
                 <div class="c-escort-info">
                   <span class="escort-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                   </span>
-                  <span class="escort-name">{{ c.driverEscort }}</span>
+                  <span class="escort-name">{{ langService.t(c.driverEscort) }}</span>
                 </div>
               </div>
 
@@ -1631,10 +1628,10 @@
                   [class.status-rerouted]="c.status === 'Rerouted' && !isConvoyAcknowledged(c.id)"
                   [class.status-arrived]="c.status === 'Arrived' || isConvoyAcknowledged(c.id)">
                   <span class="status-pulse-dot"></span>
-                  {{ (c.status === 'Arrived' || isConvoyAcknowledged(c.id)) ? 'Received / In Stores' : c.status }}
+                  {{ langService.t((c.status === 'Arrived' || isConvoyAcknowledged(c.id)) ? 'Received / In Stores' : c.status) }}
                 </span>
                 <span class="c-risk-badge" [class.risk-low]="c.riskLevel === 'Low'" [class.risk-high]="c.riskLevel === 'High'">
-                  {{ c.riskLevel }} Risk
+                  {{ langService.t(c.riskLevel) }} {{ langService.t('Risk') }}
                 </span>
               </div>
             </div>
@@ -1644,8 +1641,8 @@
               <div class="corridor-depot corridor-origin">
                 <span class="corridor-dot dot-origin"></span>
                 <div class="corridor-label-group">
-                  <span class="depot-type">ORIGIN DEPOT</span>
-                  <span class="depot-name">{{ c.source }}</span>
+                  <span class="depot-type">{{ langService.t('ORIGIN DEPOT') }}</span>
+                  <span class="depot-name">{{ langService.t(c.source) }}</span>
                 </div>
               </div>
               <div class="corridor-connector">
@@ -1655,8 +1652,8 @@
               <div class="corridor-depot corridor-destination">
                 <span class="corridor-dot dot-destination"></span>
                 <div class="corridor-label-group">
-                  <span class="depot-type">DESTINATION</span>
-                  <span class="depot-name">{{ c.destination }}</span>
+                  <span class="depot-type">{{ langService.t('DESTINATION') }}</span>
+                  <span class="depot-name">{{ langService.t(c.destination) }}</span>
                 </div>
               </div>
             </div>
@@ -1666,26 +1663,26 @@
               <span class="axis-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="12" y1="3" x2="12" y2="8"></line><line x1="12" y1="11" x2="12" y2="13"></line><line x1="12" y1="16" x2="12" y2="21"></line></svg>
               </span>
-              <span class="axis-text"><strong>Transit Axis:</strong> {{ c.route }}</span>
+              <span class="axis-text"><strong>{{ langService.t('Transit Axis:') }}</strong> {{ langService.t(c.route) }}</span>
             </div>
 
             <!-- Key Metrics Grid -->
             <div class="c-metrics-grid">
               <div class="c-metric-cell">
-                <span class="c-metric-label">CARGO CATEGORY</span>
-                <span class="c-metric-val font-accent">{{ c.cargoType }}</span>
+                <span class="c-metric-label">{{ langService.t('CARGO CATEGORY') }}</span>
+                <span class="c-metric-val font-accent">{{ langService.t(c.cargoType) }}</span>
               </div>
               <div class="c-metric-cell">
-                <span class="c-metric-label">PAYLOAD</span>
-                <span class="c-metric-val font-gold">{{ c.tonnage }} Metric Tons</span>
+                <span class="c-metric-label">{{ langService.t('PAYLOAD') }}</span>
+                <span class="c-metric-val font-gold">{{ c.tonnage }} {{ langService.t('Metric Tons') }}</span>
               </div>
               <div class="c-metric-cell">
-                <span class="c-metric-label">FLEET VEHICLES</span>
-                <span class="c-metric-val">{{ c.vehiclesCount }} Trucks</span>
+                <span class="c-metric-label">{{ langService.t('FLEET VEHICLES') }}</span>
+                <span class="c-metric-val">{{ c.vehiclesCount }} {{ langService.t('Trucks') }}</span>
               </div>
               <div class="c-metric-cell">
-                <span class="c-metric-label">ESTIMATED ARRIVAL</span>
-                <span class="c-metric-val font-green font-bold">{{ c.eta }}</span>
+                <span class="c-metric-label">{{ langService.t('ESTIMATED ARRIVAL') }}</span>
+                <span class="c-metric-val font-green font-bold">{{ langService.t(c.eta) }}</span>
               </div>
             </div>
 
@@ -1695,8 +1692,8 @@
                 <span class="waypoint-title">
                   <span class="waypoint-radar-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="2"></circle><path d="M4.93 19.07a10 10 0 0 1 0-14.14M7.76 16.24a6 6 0 0 1 0-8.48"></path></svg>
-                  </span> Route Checkpoints Progress:
-                  <strong>{{ getPassedCheckpointsCount(c) }} of {{ getTotalCheckpointsCount(c) }} Cleared</strong>
+                  </span> {{ langService.t('Route Checkpoints Progress:') }}
+                  <strong>{{ getPassedCheckpointsCount(c) }} {{ langService.t('of') }} {{ getTotalCheckpointsCount(c) }} {{ langService.t('Cleared') }}</strong>
                 </span>
                 <span class="waypoint-percent font-mono">{{ getCheckpointProgressPercent(c) }}%</span>
               </div>
@@ -1717,7 +1714,7 @@
                     <span *ngIf="cp.passed">✓</span>
                     <span *ngIf="!cp.passed">{{ i + 1 }}</span>
                   </div>
-                  <span class="cp-step-name">{{ cp.name }}</span>
+                  <span class="cp-step-name">{{ langService.t(cp.name) }}</span>
                 </div>
               </div>
             </div>
@@ -1728,7 +1725,7 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
               </span>
               <div class="weather-alert-content">
-                <strong>TACTICAL ADVISORY:</strong> {{ c.weatherAlert }}
+                <strong>{{ langService.t('TACTICAL ADVISORY:') }}</strong> {{ langService.t(c.weatherAlert) }}
               </div>
             </div>
 
@@ -1740,7 +1737,7 @@
                 (click)="inspectConvoy(c)">
                 <span class="btn-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                </span> Inspect Telemetry & Stepper
+                </span> {{ langService.t('Inspect Telemetry & Stepper') }}
               </button>
               <button
                 type="button"
@@ -1748,7 +1745,7 @@
                 [class.btn-acked]="isConvoyAcknowledged(c.id) || c.status === 'Arrived'"
                 (click)="acknowledgeDelivery(c.id)"
                 [title]="(isConvoyAcknowledged(c.id) || c.status === 'Arrived') ? 'Consignment already received into unit stores' : 'Sign and acknowledge consignment delivery'">
-                <span class="btn-icon">✓</span> {{ (isConvoyAcknowledged(c.id) || c.status === 'Arrived') ? 'Acknowledged & Received' : 'Acknowledge Receipt' }}
+                <span class="btn-icon">✓</span> {{ (isConvoyAcknowledged(c.id) || c.status === 'Arrived') ? langService.t('Acknowledged & Received') : langService.t('Acknowledge Receipt') }}
               </button>
             </div>
 
@@ -1758,23 +1755,23 @@
         <!-- ================= VIEW MODE 2: MILITARY MANIFEST TABLE ================= -->
         <div *ngIf="logisticsViewMode === 'table' && filteredConvoys().length > 0" class="card-surface mt-3">
           <div class="table-header-subbar">
-            <h3 class="panel-heading">Inbound Military Consignments Manifest</h3>
-            <span class="table-count-tag">{{ filteredConvoys().length }} Records Active</span>
+            <h3 class="panel-heading">{{ langService.t('Inbound Military Consignments Manifest') }}</h3>
+            <span class="table-count-tag">{{ filteredConvoys().length }} {{ langService.t('Records Active') }}</span>
           </div>
 
           <div class="table-responsive mt-2">
             <table class="c2-table tactical-manifest-table">
               <thead>
                 <tr>
-                  <th>Shipment / Convoy</th>
-                  <th>Origin Depot</th>
-                  <th>Destination Depot</th>
-                  <th>Cargo Manifest</th>
-                  <th>Fleet Size</th>
-                  <th>Waypoints</th>
-                  <th>ETA</th>
-                  <th>Status & Risk</th>
-                  <th class="text-right">Actions</th>
+                  <th>{{ langService.t('Shipment / Convoy') }}</th>
+                  <th>{{ langService.t('Origin Depot') }}</th>
+                  <th>{{ langService.t('Destination Depot') }}</th>
+                  <th>{{ langService.t('Cargo Manifest') }}</th>
+                  <th>{{ langService.t('Fleet Size') }}</th>
+                  <th>{{ langService.t('Waypoints') }}</th>
+                  <th>{{ langService.t('ETA') }}</th>
+                  <th>{{ langService.t('Status & Risk') }}</th>
+                  <th class="text-right">{{ langService.t('Actions') }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -1805,7 +1802,7 @@
                   <td>
                     <div class="table-waypoint-cell">
                       <div class="table-wp-label text-xs">
-                        {{ getPassedCheckpointsCount(c) }}/{{ getTotalCheckpointsCount(c) }} Cleared
+                        {{ getPassedCheckpointsCount(c) }}/{{ getTotalCheckpointsCount(c) }} {{ langService.t('Cleared') }}
                       </div>
                       <div class="table-progress-bar">
                         <div class="table-progress-fill" [style.width.%]="getCheckpointProgressPercent(c)"></div>
@@ -1821,7 +1818,7 @@
                         [class.status-transit]="c.status === 'In-Transit' && !isConvoyAcknowledged(c.id)"
                         [class.status-rerouted]="c.status === 'Rerouted' && !isConvoyAcknowledged(c.id)"
                         [class.status-arrived]="c.status === 'Arrived' || isConvoyAcknowledged(c.id)">
-                        {{ (c.status === 'Arrived' || isConvoyAcknowledged(c.id)) ? 'Received' : c.status }}
+                        {{ langService.t((c.status === 'Arrived' || isConvoyAcknowledged(c.id)) ? 'Received' : c.status) }}
                       </span>
                       <span class="c-risk-badge-sm" [class.risk-low]="c.riskLevel === 'Low'" [class.risk-high]="c.riskLevel === 'High'">
                         {{ c.riskLevel }}
@@ -1834,16 +1831,16 @@
                         type="button"
                         class="btn-table-inspect"
                         (click)="inspectConvoy(c)"
-                        title="Inspect Telemetry">
-                        🔍 Stepper
+                        [title]="langService.t('Inspect Telemetry')">
+                        🔍 {{ langService.t('Stepper') }}
                       </button>
                       <button
                         type="button"
                         class="btn-army-sm"
                         [class.btn-acked]="isConvoyAcknowledged(c.id) || c.status === 'Arrived'"
                         (click)="acknowledgeDelivery(c.id)"
-                        title="Acknowledge Delivery">
-                        {{ (isConvoyAcknowledged(c.id) || c.status === 'Arrived') ? '✓ In Stores' : '✓ Acknowledge' }}
+                        [title]="langService.t('Acknowledge Delivery')">
+                        {{ (isConvoyAcknowledged(c.id) || c.status === 'Arrived') ? ('✓ ' + langService.t('In Stores')) : ('✓ ' + langService.t('Acknowledge')) }}
                       </button>
                     </div>
                   </td>
@@ -1862,15 +1859,15 @@
           <div>
             <div class="module-title-tag">
               <span class="pulse-indicator"></span>
-              <span>MET-SAT METEOROLOGICAL TELEMETRY</span>
+              <span>{{ langService.t('MET-SAT METEOROLOGICAL TELEMETRY') }}</span>
             </div>
-            <h2 class="module-title">Sector Passes & Tactical Weather</h2>
-            <p class="module-subtitle">High-altitude passes, DGRE avalanche danger scale, and convoy operational accessibility</p>
+            <h2 class="module-title">{{ langService.t('Sector Passes & Tactical Weather') }}</h2>
+            <p class="module-subtitle">{{ langService.t('High-altitude passes, DGRE avalanche danger scale, and convoy operational accessibility') }}</p>
           </div>
           <div class="weather-header-actions">
             <div class="telemetry-pill">
               <span class="telemetry-radar-dot"></span>
-              <span>MET-RADAR ACTIVE: <strong>{{ logisticsService.weatherStations().length }} STATIONS TELEMETERED</strong></span>
+              <span>{{ langService.t('MET-RADAR ACTIVE:') }} <strong>{{ logisticsService.weatherStations().length }} {{ langService.t('STATIONS TELEMETERED') }}</strong></span>
             </div>
           </div>
         </div>
@@ -1883,8 +1880,8 @@
             </div>
             <div class="kpi-content">
               <div class="kpi-val">-26°C</div>
-              <div class="kpi-label">Lowest Sector Temp</div>
-              <div class="kpi-sub">Khardung La Axis • Siachen Base Camp</div>
+              <div class="kpi-label">{{ langService.t('Lowest Sector Temp') }}</div>
+              <div class="kpi-sub">{{ langService.t('Khardung La Axis • Siachen Base Camp') }}</div>
             </div>
           </div>
           <div class="weather-kpi-card">
@@ -1893,8 +1890,8 @@
             </div>
             <div class="kpi-content">
               <div class="kpi-val">17,800<span class="kpi-unit">ft</span></div>
-              <div class="kpi-label">Max Operational Altitude</div>
-              <div class="kpi-sub">Khardung La Ridge Pass AMSL</div>
+              <div class="kpi-label">{{ langService.t('Max Operational Altitude') }}</div>
+              <div class="kpi-sub">{{ langService.t('Khardung La Ridge Pass AMSL') }}</div>
             </div>
           </div>
           <div class="weather-kpi-card kpi-card-highlight">
@@ -1902,9 +1899,9 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="kpi-svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
             </div>
             <div class="kpi-content">
-              <div class="kpi-val">{{ getRestrictedPassesCount() }} Passes</div>
-              <div class="kpi-label">Convoy Transit Restrictions</div>
-              <div class="kpi-sub">Chains Required / Black Ice Warnings</div>
+              <div class="kpi-val">{{ getRestrictedPassesCount() }} {{ langService.t('Passes') }}</div>
+              <div class="kpi-label">{{ langService.t('Convoy Transit Restrictions') }}</div>
+              <div class="kpi-sub">{{ langService.t('Chains Required / Black Ice Warnings') }}</div>
             </div>
           </div>
           <div class="weather-kpi-card">
@@ -1912,9 +1909,9 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="kpi-svg"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
             </div>
             <div class="kpi-content">
-              <div class="kpi-val">6 Teams</div>
-              <div class="kpi-label">BRO Snow Clearance Units</div>
-              <div class="kpi-sub">Project HIMANK & BEACON Clearing Axis</div>
+              <div class="kpi-val">{{ langService.t('6 Teams') }}</div>
+              <div class="kpi-label">{{ langService.t('BRO Snow Clearance Units') }}</div>
+              <div class="kpi-sub">{{ langService.t('Project HIMANK & BEACON Clearing Axis') }}</div>
             </div>
           </div>
         </div>
@@ -1926,7 +1923,7 @@
             <input
               type="text"
               [(ngModel)]="weatherSearch"
-              placeholder="Search by Pass Name, Mountain Ridge, or Advisory Alert..."
+              [placeholder]="langService.t('Search by Pass Name, Mountain Ridge, or Advisory Alert...')"
               class="weather-search-field"
             />
             <button *ngIf="weatherSearch" (click)="weatherSearch = ''" class="search-clear-btn">✕</button>
@@ -1938,28 +1935,28 @@
               class="cargo-pill"
               [class.active]="weatherAccessibilityFilter === 'All'"
               (click)="weatherAccessibilityFilter = 'All'">
-              All Passes ({{ logisticsService.weatherStations().length }})
+              {{ langService.t('All Passes') }} ({{ logisticsService.weatherStations().length }})
             </button>
             <button
               type="button"
               class="cargo-pill"
               [class.active]="weatherAccessibilityFilter === 'Open'"
               (click)="weatherAccessibilityFilter = 'Open'">
-              🟢 Open ({{ openPassesCount }})
+              🟢 {{ langService.t('Open') }} ({{ openPassesCount }})
             </button>
             <button
               type="button"
               class="cargo-pill"
               [class.active]="weatherAccessibilityFilter === 'Chains Required'"
               (click)="weatherAccessibilityFilter = 'Chains Required'">
-              ⛓️ Chains Required ({{ chainsPassesCount }})
+              ⛓️ {{ langService.t('Chains Required') }} ({{ chainsPassesCount }})
             </button>
             <button
               type="button"
               class="cargo-pill"
               [class.active]="weatherAccessibilityFilter === 'Convoy Restricted'"
               (click)="weatherAccessibilityFilter = 'Convoy Restricted'">
-              🚫 Convoy Restricted ({{ restrictedPassesCount }})
+              🚫 {{ langService.t('Convoy Restricted') }} ({{ restrictedPassesCount }})
             </button>
           </div>
         </div>
@@ -1971,16 +1968,16 @@
             class="station-card card-surface interactive"
             [class.card-alert-red]="st.accessibility !== 'Open'"
             (click)="inspectPass(st)"
-            title="Click to view full pass telemetry and corridor details">
+            [title]="langService.t('Click to view full pass telemetry and corridor details')">
 
             <!-- Card Header -->
             <div class="st-card-header">
               <div class="st-title-col">
                 <div class="st-pass-row">
-                  <h3 class="st-pass-name">{{ st.passName }}</h3>
-                  <span class="st-elevation-chip">⛰️ {{ st.elevation }}</span>
+                  <h3 class="st-pass-name">{{ langService.t(st.passName) }}</h3>
+                  <span class="st-elevation-chip">⛰️ {{ langService.t(st.elevation) }}</span>
                 </div>
-                <span class="st-location-text">📍 {{ st.location }}</span>
+                <span class="st-location-text">📍 {{ langService.t(st.location) }}</span>
               </div>
               <div class="st-badge-col">
                 <span
@@ -1988,9 +1985,9 @@
                   [class.badge-open]="st.accessibility === 'Open'"
                   [class.badge-chains]="st.accessibility === 'Chains Required'"
                   [class.badge-restricted]="st.accessibility.includes('Restric')">
-                  {{ st.accessibility }}
+                  {{ langService.t(st.accessibility) }}
                 </span>
-                <span class="st-risk-score">Risk Index: <strong>{{ st.riskScore }}/100</strong></span>
+                <span class="st-risk-score">{{ langService.t('Risk Index:') }} <strong>{{ st.riskScore }}/100</strong></span>
               </div>
             </div>
 
@@ -2008,19 +2005,19 @@
             <!-- 4-Grid Telemetry Metrics -->
             <div class="st-metrics-grid mt-2">
               <div class="st-metric-item">
-                <span class="st-m-label">TEMPERATURE</span>
+                <span class="st-m-label">{{ langService.t('TEMPERATURE') }}</span>
                 <span class="st-m-val font-accent">{{ st.temperature }}</span>
               </div>
               <div class="st-metric-item">
-                <span class="st-m-label">PRECIPITATION / SNOW</span>
+                <span class="st-m-label">{{ langService.t('PRECIPITATION / SNOW') }}</span>
                 <span class="st-m-val">{{ st.rainfallSnow }}</span>
               </div>
               <div class="st-metric-item">
-                <span class="st-m-label">WIND VELOCITY</span>
+                <span class="st-m-label">{{ langService.t('WIND VELOCITY') }}</span>
                 <span class="st-m-val">{{ st.windSpeed }}</span>
               </div>
               <div class="st-metric-item">
-                <span class="st-m-label">OPTICAL VISIBILITY</span>
+                <span class="st-m-label">{{ langService.t('OPTICAL VISIBILITY') }}</span>
                 <span class="st-m-val font-gold">{{ st.visibility }}</span>
               </div>
             </div>
@@ -2029,15 +2026,15 @@
             <div class="st-alert-callout mt-3" [class.alert-danger-glow]="st.riskScore >= 60">
               <span class="st-alert-icon">⚠️</span>
               <div class="st-alert-text">
-                <strong>TACTICAL WEATHER ADVISORY:</strong>
-                <p>{{ st.alert }}</p>
+                <strong>{{ langService.t('TACTICAL WEATHER ADVISORY:') }}</strong>
+                <p>{{ langService.t(st.alert) }}</p>
               </div>
             </div>
 
             <!-- Alternative Corridor Route if Available -->
-            <div *ngIf="st.alternativeRoute" class="st-alt-route mt-2" (click)="viewAxisInLogistics(st.alternativeRoute); $event.stopPropagation()" title="View active convoys on this bypass axis">
+            <div *ngIf="st.alternativeRoute" class="st-alt-route mt-2" (click)="viewAxisInLogistics(st.alternativeRoute); $event.stopPropagation()" [title]="langService.t('View active convoys on this bypass axis')">
               <span class="alt-route-icon">🔄</span>
-              <span class="alt-route-text"><strong>Recommended Bypass Axis:</strong> {{ st.alternativeRoute }} ➔</span>
+              <span class="alt-route-text"><strong>{{ langService.t('Recommended Bypass Axis:') }}</strong> {{ langService.t(st.alternativeRoute) }} ➔</span>
             </div>
           </div>
         </div>
@@ -2048,51 +2045,51 @@
             <div class="bro-title-group">
               <span class="bro-icon">🚜</span>
               <div>
-                <h4 class="bro-heading">BORDER ROADS ORGANISATION (BRO) · HIGH-ALTITUDE ROAD CLEARANCE DIRECTIVES</h4>
-                <p class="bro-sub">Live tactical telemetry between 14 Corps Logistics Branch, Project HIMANK (Leh), and Project BEACON (Srinagar)</p>
+                <h4 class="bro-heading">{{ langService.t('BORDER ROADS ORGANISATION (BRO) · HIGH-ALTITUDE ROAD CLEARANCE DIRECTIVES') }}</h4>
+                <p class="bro-sub">{{ langService.t('Live tactical telemetry between 14 Corps Logistics Branch, Project HIMANK (Leh), and Project BEACON (Srinagar)') }}</p>
               </div>
             </div>
             <div class="bro-telemetry-badge">
               <span class="telemetry-radar-dot"></span>
-              <span>BRO TASK FORCES ACTIVE: <strong>4 SECTORS OPERATIONAL</strong></span>
+              <span>{{ langService.t('BRO TASK FORCES ACTIVE:') }} <strong>{{ langService.t('4 SECTORS OPERATIONAL') }}</strong></span>
             </div>
           </div>
 
           <div class="bro-tasks-grid mt-3">
             <div class="bro-task-card">
               <div class="bro-task-header">
-                <span class="bro-proj-tag himank">PROJECT HIMANK</span>
-                <span class="bro-status-live">CLEARING IN PROGRESS</span>
+                <span class="bro-proj-tag himank">{{ langService.t('PROJECT HIMANK') }}</span>
+                <span class="bro-status-live">{{ langService.t('CLEARING IN PROGRESS') }}</span>
               </div>
-              <strong class="bro-route-title">Khardung La — North Pullu Axis (Km 38–46)</strong>
-              <p class="bro-task-desc">4 Heavy Snow Cutters & 2 Graders clearing 42cm fresh drift. Light military vehicles with tire chains cleared for transit.</p>
+              <strong class="bro-route-title">{{ langService.t('Khardung La — North Pullu Axis (Km 38–46)') }}</strong>
+              <p class="bro-task-desc">{{ langService.t('4 Heavy Snow Cutters & 2 Graders clearing 42cm fresh drift. Light military vehicles with tire chains cleared for transit.') }}</p>
             </div>
 
             <div class="bro-task-card">
               <div class="bro-task-header">
-                <span class="bro-proj-tag beacon">PROJECT BEACON</span>
-                <span class="bro-status-caution">ROCKFALL CLEARANCE</span>
+                <span class="bro-proj-tag beacon">{{ langService.t('PROJECT BEACON') }}</span>
+                <span class="bro-status-caution">{{ langService.t('ROCKFALL CLEARANCE') }}</span>
               </div>
-              <strong class="bro-route-title">Zojila Pass — Nilgrath Bypass Corridor</strong>
-              <p class="bro-task-desc">Upper pass closed due to fresh rockfall at Km 84. Heavy military convoys diverted via Nilgrath bypass tunnel with Military Police escort.</p>
+              <strong class="bro-route-title">{{ langService.t('Zojila Pass — Nilgrath Bypass Corridor') }}</strong>
+              <p class="bro-task-desc">{{ langService.t('Upper pass closed due to fresh rockfall at Km 84. Heavy military convoys diverted via Nilgrath bypass tunnel with Military Police escort.') }}</p>
             </div>
 
             <div class="bro-task-card">
               <div class="bro-task-header">
-                <span class="bro-proj-tag vartak">PROJECT VARTAK</span>
-                <span class="bro-status-open">ALL-WEATHER TRANSIT</span>
+                <span class="bro-proj-tag vartak">{{ langService.t('PROJECT VARTAK') }}</span>
+                <span class="bro-status-open">{{ langService.t('ALL-WEATHER TRANSIT') }}</span>
               </div>
-              <strong class="bro-route-title">Sela Twin-Tube Tunnel Corridor (Kameng)</strong>
-              <p class="bro-task-desc">Twin tubes fully operational with automated ventilation & heating. Surface anti-freeze brine sprayed on both approach portals.</p>
+              <strong class="bro-route-title">{{ langService.t('Sela Twin-Tube Tunnel Corridor (Kameng)') }}</strong>
+              <p class="bro-task-desc">{{ langService.t('Twin tubes fully operational with automated ventilation & heating. Surface anti-freeze brine sprayed on both approach portals.') }}</p>
             </div>
 
             <div class="bro-task-card">
               <div class="bro-task-header">
-                <span class="bro-proj-tag deepak">PROJECT DEEPAK</span>
-                <span class="bro-status-live">HIGH-PASS PATROL</span>
+                <span class="bro-proj-tag deepak">{{ langService.t('PROJECT DEEPAK') }}</span>
+                <span class="bro-status-live">{{ langService.t('HIGH-PASS PATROL') }}</span>
               </div>
-              <strong class="bro-route-title">Atal Tunnel — Baralacha La Sector (NH-3)</strong>
-              <p class="bro-task-desc">Atal Tunnel tube clear. Continuous grit spraying on Baralacha La switchbacks due to -18°C sub-zero road icing.</p>
+              <strong class="bro-route-title">{{ langService.t('Atal Tunnel — Baralacha La Sector (NH-3)') }}</strong>
+              <p class="bro-task-desc">{{ langService.t('Atal Tunnel tube clear. Continuous grit spraying on Baralacha La switchbacks due to -18°C sub-zero road icing.') }}</p>
             </div>
           </div>
         </div>
@@ -2104,14 +2101,14 @@
           <div>
             <div class="module-title-tag">
               <span class="pulse-indicator"></span>
-              <span>EARLY WARNING INTEL</span>
+              <span>{{ langService.t('EARLY WARNING INTEL') }}</span>
             </div>
-            <h2 class="module-title">Predictive Logistics Intel & Early Warnings</h2>
-            <p class="module-subtitle">Operational risk advisories, demand surge forecasts, and proactive logistics directives for forward units</p>
+            <h2 class="module-title">{{ langService.t('Predictive Logistics Intel & Early Warnings') }}</h2>
+            <p class="module-subtitle">{{ langService.t('Operational risk advisories, demand surge forecasts, and proactive logistics directives for forward units') }}</p>
           </div>
           <div class="ai-header-status">
             <span class="telemetry-radar-dot"></span>
-            <span class="ai-status-text">ADVISORY STATUS: <strong>4 ACTIVE SITREPS</strong></span>
+            <span class="ai-status-text">{{ langService.t('ADVISORY STATUS:') }} <strong>{{ langService.t('4 ACTIVE SITREPS') }}</strong></span>
           </div>
         </div>
 
@@ -2122,9 +2119,9 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="kpi-svg"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
             </div>
             <div class="kpi-content">
-              <div class="kpi-val">1 Critical</div>
-              <div class="kpi-label">Severe Weather Hazard</div>
-              <div class="kpi-sub">Siachen - DBO Highway (-34°C Cold Wave)</div>
+              <div class="kpi-val">{{ langService.t('1 Critical') }}</div>
+              <div class="kpi-label">{{ langService.t('Severe Weather Hazard') }}</div>
+              <div class="kpi-sub">{{ langService.t('Siachen - DBO Highway (-34°C Cold Wave)') }}</div>
             </div>
           </div>
           <div class="ai-kpi-card">
@@ -2132,9 +2129,9 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="kpi-svg"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
             </div>
             <div class="kpi-content">
-              <div class="kpi-val">+28% Surge</div>
-              <div class="kpi-label">Winter Caloric Demand</div>
-              <div class="kpi-sub">Class I Rations & Heating Fuel Surge</div>
+              <div class="kpi-val">{{ langService.t('+28% Surge') }}</div>
+              <div class="kpi-label">{{ langService.t('Winter Caloric Demand') }}</div>
+              <div class="kpi-sub">{{ langService.t('Class I Rations & Heating Fuel Surge') }}</div>
             </div>
           </div>
           <div class="ai-kpi-card">
@@ -2142,9 +2139,9 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="kpi-svg"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
             </div>
             <div class="kpi-content">
-              <div class="kpi-val">4 Directives</div>
-              <div class="kpi-label">Mitigation Orders</div>
-              <div class="kpi-sub">Prepositioning & Alternate Tunnel Detours</div>
+              <div class="kpi-val">{{ langService.t('4 Directives') }}</div>
+              <div class="kpi-label">{{ langService.t('Mitigation Orders') }}</div>
+              <div class="kpi-sub">{{ langService.t('Prepositioning & Alternate Tunnel Detours') }}</div>
             </div>
           </div>
           <div class="ai-kpi-card">
@@ -2152,9 +2149,9 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="kpi-svg"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
             </div>
             <div class="kpi-content">
-              <div class="kpi-val">92% Reliability</div>
-              <div class="kpi-label">Historical Confidence</div>
-              <div class="kpi-sub">Cross-Checked Against 15-Year Weather Logs</div>
+              <div class="kpi-val">{{ langService.t('92% Reliability') }}</div>
+              <div class="kpi-label">{{ langService.t('Historical Confidence') }}</div>
+              <div class="kpi-sub">{{ langService.t('Cross-Checked Against 15-Year Weather Logs') }}</div>
             </div>
           </div>
         </div>
@@ -2167,35 +2164,35 @@
               class="cargo-pill"
               [class.active]="aiFilter === 'All'"
               (click)="aiFilter = 'All'">
-              All Advisories ({{ logisticsService.alerts().length }})
+              {{ langService.t('All Advisories') }} ({{ logisticsService.alerts().length }})
             </button>
             <button
               type="button"
               class="cargo-pill"
               [class.active]="aiFilter === 'Weather Risk'"
               (click)="aiFilter = 'Weather Risk'">
-              🌪️ Weather Hazards
+              🌪️ {{ langService.t('Weather Hazards') }}
             </button>
             <button
               type="button"
               class="cargo-pill"
               [class.active]="aiFilter === 'Demand Surge'"
               (click)="aiFilter = 'Demand Surge'">
-              📊 Demand Surges
+              📊 {{ langService.t('Demand Surges') }}
             </button>
             <button
               type="button"
               class="cargo-pill"
               [class.active]="aiFilter === 'Stock Critical'"
               (click)="aiFilter = 'Stock Critical'">
-              ⚙️ Stock Alerts
+              ⚙️ {{ langService.t('Stock Alerts') }}
             </button>
             <button
               type="button"
               class="cargo-pill"
               [class.active]="aiFilter === 'Route Disruption'"
               (click)="aiFilter = 'Route Disruption'">
-              🚧 Route Warnings
+              🚧 {{ langService.t('Route Warnings') }}
             </button>
           </div>
         </div>
@@ -2302,12 +2299,12 @@
 
             <!-- Collapsible Secondary Options (COA) -->
             <div class="contingency-tray mt-2" *ngIf="expandedContingencies[alt.id] && alt.alternativeActions && alt.alternativeActions.length > 0">
-              <div class="tray-title">SECONDARY CONTINGENCY COURSES OF ACTION:</div>
+              <div class="tray-title">{{ langService.t('SECONDARY CONTINGENCY COURSES OF ACTION:') }}</div>
               <ul class="tray-bullets">
                 <li *ngFor="let coa of alt.alternativeActions" class="tray-coa-item">
-                  <span class="coa-text">↳ {{ coa }}</span>
+                  <span class="coa-text">↳ {{ langService.t(coa) }}</span>
                   <button type="button" class="btn-select-coa" (click)="executeAlternativeAction(alt, coa)">
-                    Select & Dispatch COA
+                    {{ langService.t('Select & Dispatch COA') }}
                   </button>
                 </li>
               </ul>
@@ -2323,15 +2320,15 @@
           <div>
             <div class="module-title-tag">
               <span class="pulse-indicator"></span>
-              <span>REGIMENTAL AUDIT & LEDGER CLEARANCE</span>
+              <span>{{ langService.t('REGIMENTAL AUDIT & LEDGER CLEARANCE') }}</span>
             </div>
-            <h2 class="module-title">Unit Logistics Reports</h2>
-            <p class="module-subtitle">Official Quartermaster store records, verified fuel balances, and DGOS audit certificates</p>
+            <h2 class="module-title">{{ langService.t('Unit Logistics Reports') }}</h2>
+            <p class="module-subtitle">{{ langService.t('Official Quartermaster store records, verified fuel balances, and DGOS audit certificates') }}</p>
           </div>
           <div class="header-action-group">
-            <button type="button" class="btn-outline-army" (click)="exportReport('CSV')">📥 Export CSV</button>
-            <button type="button" class="btn-outline-army" (click)="exportReport('PDF')">📄 Export PDF</button>
-            <button type="button" class="btn-army-primary" (click)="exportReport('Print')">🖨️ Print Ledger</button>
+            <button type="button" class="btn-outline-army" (click)="exportReport('CSV')">📥 {{ langService.t('Export CSV') }}</button>
+            <button type="button" class="btn-outline-army" (click)="exportReport('PDF')">📄 {{ langService.t('Export PDF') }}</button>
+            <button type="button" class="btn-army-primary" (click)="exportReport('Print')">🖨️ {{ langService.t('Print Ledger') }}</button>
           </div>
         </div>
 
@@ -2349,8 +2346,8 @@
             </div>
             <div class="kpi-content">
               <div class="kpi-val">100%</div>
-              <div class="kpi-label">Ledger Reconciliation</div>
-              <div class="kpi-sub">All Vouchers Mathematically Reconciled</div>
+              <div class="kpi-label">{{ langService.t('Ledger Reconciliation') }}</div>
+              <div class="kpi-sub">{{ langService.t('All Vouchers Mathematically Reconciled') }}</div>
             </div>
           </div>
           <div class="reports-kpi-card">
@@ -2359,8 +2356,8 @@
             </div>
             <div class="kpi-content">
               <div class="kpi-val">48 Vouchers</div>
-              <div class="kpi-label">Digitally Signed Tokens</div>
-              <div class="kpi-sub">QM Key #14R-QM-71044A Appended</div>
+              <div class="kpi-label">{{ langService.t('Digitally Signed Tokens') }}</div>
+              <div class="kpi-sub">{{ langService.t('QM Key #14R-QM-71044A Appended') }}</div>
             </div>
           </div>
           <div class="reports-kpi-card">
@@ -2369,8 +2366,8 @@
             </div>
             <div class="kpi-content">
               <div class="kpi-val">14 Indents</div>
-              <div class="kpi-label">Quarterly Requisitions</div>
-              <div class="kpi-sub">100% Verified Delivery & Air Drops</div>
+              <div class="kpi-label">{{ langService.t('Quarterly Requisitions') }}</div>
+              <div class="kpi-sub">{{ langService.t('100% Verified Delivery & Air Drops') }}</div>
             </div>
           </div>
           <div class="reports-kpi-card">
@@ -2379,8 +2376,8 @@
             </div>
             <div class="kpi-content">
               <div class="kpi-val">0.00%</div>
-              <div class="kpi-label">Audit Discrepancy Rate</div>
-              <div class="kpi-sub">Zero Material Discrepancies Flagged</div>
+              <div class="kpi-label">{{ langService.t('Audit Discrepancy Rate') }}</div>
+              <div class="kpi-sub">{{ langService.t('Zero Material Discrepancies Flagged') }}</div>
             </div>
           </div>
         </div>
@@ -2388,41 +2385,41 @@
         <!-- Reports Table -->
         <div class="card-surface mt-3">
           <div class="table-header-subbar">
-            <h3 class="panel-heading">Certified Regimental Logistics Ledgers</h3>
-            <span class="table-count-tag">4 Official Ledgers Available</span>
+            <h3 class="panel-heading">{{ langService.t('Certified Regimental Logistics Ledgers') }}</h3>
+            <span class="table-count-tag">{{ langService.t('4 Official Ledgers Available') }}</span>
           </div>
 
           <div class="table-responsive mt-2">
             <table class="c2-table tactical-manifest-table">
               <thead>
                 <tr>
-                  <th>Report Title & ID</th>
-                  <th>Category</th>
-                  <th>Audit Period</th>
-                  <th>Authorizing Officer</th>
-                  <th>Classification</th>
-                  <th>Ledger Status</th>
-                  <th class="text-right">Actions</th>
+                  <th>{{ langService.t('Report Title & ID') }}</th>
+                  <th>{{ langService.t('Category') }}</th>
+                  <th>{{ langService.t('Audit Period') }}</th>
+                  <th>{{ langService.t('Authorizing Officer') }}</th>
+                  <th>{{ langService.t('Classification') }}</th>
+                  <th>{{ langService.t('Ledger Status') }}</th>
+                  <th class="text-right">{{ langService.t('Actions') }}</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let rep of reportsList">
                   <td>
                     <div class="table-convoy-cell">
-                      <strong class="convoy-name-link" (click)="openReportPreview(rep)">{{ rep.title }}</strong>
+                      <strong class="convoy-name-link" (click)="openReportPreview(rep)">{{ langService.t(rep.title) }}</strong>
                       <span class="c-id-chip-sm">{{ rep.id }}</span>
                     </div>
-                    <span class="text-xs text-muted block">{{ rep.recordsCount }} Records • {{ rep.fileSize }}</span>
+                    <span class="text-xs text-muted block">{{ rep.recordsCount }} {{ langService.t('Records') }} • {{ rep.fileSize }}</span>
                   </td>
                   <td>
-                    <span class="cargo-tag">{{ rep.category }}</span>
+                    <span class="cargo-tag">{{ langService.t(rep.category) }}</span>
                   </td>
                   <td>
-                    <span class="font-mono text-xs">{{ rep.period }}</span>
+                    <span class="font-mono text-xs">{{ langService.t(rep.period) }}</span>
                   </td>
                   <td>
                     <div class="officer-cell">
-                      <strong>{{ rep.authorizingOfficer }}</strong>
+                      <strong>{{ langService.t(rep.authorizingOfficer) }}</strong>
                     </div>
                   </td>
                   <td>
@@ -2431,21 +2428,21 @@
                       [class.class-secret]="rep.classification === 'SECRET'"
                       [class.class-confidential]="rep.classification === 'CONFIDENTIAL'"
                       [class.class-restricted]="rep.classification === 'RESTRICTED'">
-                      {{ rep.classification }}
+                      {{ langService.t(rep.classification) }}
                     </span>
                   </td>
                   <td>
-                    <span class="badge-success">✓ {{ rep.status }}</span>
+                    <span class="badge-success">✓ {{ langService.t(rep.status) }}</span>
                   </td>
                   <td class="text-right">
                     <div class="table-actions-cell">
                       <button type="button" class="btn-table-inspect" (click)="openReportPreview(rep)">
-                        👁️ Preview
+                        👁️ {{ langService.t('Preview') }}
                       </button>
                       <button type="button" class="btn-army-sm" (click)="exportReport('PDF', rep)">
                         📥 PDF
                       </button>
-                      <button type="button" class="btn-outline-sm" (click)="downloadReportCSV(rep)" title="Download CSV">
+                      <button type="button" class="btn-outline-sm" (click)="downloadReportCSV(rep)" [title]="langService.t('Download CSV')">
                         📊 CSV
                       </button>
                     </div>
@@ -2463,13 +2460,13 @@
           <div>
             <div class="module-title-tag">
               <span class="pulse-indicator"></span>
-              <span>C4ISR SECURE TERMINAL CONFIGURATION</span>
+              <span>{{ langService.t('C4ISR SECURE TERMINAL CONFIGURATION') }}</span>
             </div>
-            <h2 class="module-title">Unit Terminal & SATCOM Settings</h2>
-            <p class="module-subtitle">Regimental authentication profiles, encryption keys, and secure ASCON C4ISR terminal parameters</p>
+            <h2 class="module-title">{{ langService.t('Unit Terminal & SATCOM Settings') }}</h2>
+            <p class="module-subtitle">{{ langService.t('Regimental authentication profiles, encryption keys, and secure ASCON C4ISR terminal parameters') }}</p>
           </div>
           <button type="button" class="btn-army-primary" [class.btn-saved]="settingsSaved" (click)="saveUnitSettings()">
-            <span class="btn-icon">{{ settingsSaved ? '✓' : '💾' }}</span> {{ settingsSaved ? 'Settings Saved & Synced!' : 'Save & Sync Settings' }}
+            <span class="btn-icon">{{ settingsSaved ? '✓' : '💾' }}</span> {{ settingsSaved ? langService.t('Settings Saved & Synced!') : langService.t('Save & Sync Settings') }}
           </button>
         </div>
 
@@ -2487,28 +2484,28 @@
               <div class="settings-card-title-group">
                 <span class="st-icon">🛡️</span>
                 <div>
-                  <h3 class="panel-heading mb-0">Quartermaster Identity & Clearance</h3>
-                  <span class="text-xs text-muted">Active duty officer signature keys</span>
+                  <h3 class="panel-heading mb-0">{{ langService.t('Quartermaster Identity & Clearance') }}</h3>
+                  <span class="text-xs text-muted">{{ langService.t('Active duty officer signature keys') }}</span>
                 </div>
               </div>
-              <span class="badge-clearance">LEVEL 4 - TOP SECRET</span>
+              <span class="badge-clearance">{{ langService.t('LEVEL 4 - TOP SECRET') }}</span>
             </div>
 
             <div class="form-grid-2 mt-3">
               <div class="form-group">
-                <label class="form-label">Designated Military Unit</label>
+                <label class="form-label">{{ langService.t('Designated Military Unit') }}</label>
                 <input type="text" [value]="unitDbService.selectedUnit().name" class="form-control form-readonly" readonly>
               </div>
               <div class="form-group">
-                <label class="form-label">Authorized Commanding QM</label>
+                <label class="form-label">{{ langService.t('Authorized Commanding QM') }}</label>
                 <input type="text" [value]="unitDbService.selectedUnit().officerName" class="form-control form-readonly" readonly>
               </div>
               <div class="form-group">
-                <label class="form-label">Officer Service Identity</label>
+                <label class="form-label">{{ langService.t('Officer Service Identity') }}</label>
                 <input type="text" [value]="unitDbService.selectedUnit().serviceNo" class="form-control form-readonly" readonly>
               </div>
               <div class="form-group">
-                <label class="form-label">Stationed Sector Base</label>
+                <label class="form-label">{{ langService.t('Stationed Sector Base') }}</label>
                 <input type="text" [value]="unitDbService.selectedUnit().station + ' (' + unitDbService.selectedUnit().corps + ')'" class="form-control form-readonly" readonly>
               </div>
             </div>
@@ -2520,33 +2517,33 @@
               <div class="settings-card-title-group">
                 <span class="st-icon">📡</span>
                 <div>
-                  <h3 class="panel-heading mb-0">ASCON Grid & SATCOM Uplink</h3>
-                  <span class="text-xs text-muted">Military satellite transceiver telemetry</span>
+                  <h3 class="panel-heading mb-0">{{ langService.t('ASCON Grid & SATCOM Uplink') }}</h3>
+                  <span class="text-xs text-muted">{{ langService.t('Military satellite transceiver telemetry') }}</span>
                 </div>
               </div>
-              <span class="badge-success">ONLINE · SYNCED</span>
+              <span class="badge-success">{{ langService.t('ONLINE · SYNCED') }}</span>
             </div>
 
             <div class="form-grid-2 mt-3">
               <div class="form-group">
-                <label class="form-label">Terminal Identity Node</label>
+                <label class="form-label">{{ langService.t('Terminal Identity Node') }}</label>
                 <input type="text" [value]="'UN-' + unitDbService.selectedUnit().id + '-NODE-1'" class="form-control form-readonly" readonly>
               </div>
               <div class="form-group">
-                <label class="form-label">Active Transponder</label>
-                <input type="text" value="GSAT-7A Military Ku-Band (Channel 4)" class="form-control form-readonly" readonly>
+                <label class="form-label">{{ langService.t('Active Transponder') }}</label>
+                <input type="text" [value]="langService.t('GSAT-7A Military Ku-Band (Channel 4)')" class="form-control form-readonly" readonly>
               </div>
               <div class="form-group">
-                <label class="form-label">Comms Encryption Standard</label>
-                <input type="text" value="AES-256-GCM Hardware Encrypted" class="form-control form-readonly" readonly>
+                <label class="form-label">{{ langService.t('Comms Encryption Standard') }}</label>
+                <input type="text" [value]="langService.t('AES-256-GCM Hardware Encrypted')" class="form-control form-readonly" readonly>
               </div>
               <div class="form-group">
-                <label class="form-label">Sync Pulse Interval</label>
+                <label class="form-label">{{ langService.t('Sync Pulse Interval') }}</label>
                 <select [(ngModel)]="asconSyncInterval" class="form-control form-select">
-                  <option>15 Seconds</option>
-                  <option>30 Seconds</option>
-                  <option>60 Seconds</option>
-                  <option>5 Minutes</option>
+                  <option value="15 Seconds">{{ langService.t('15 Seconds') }}</option>
+                  <option value="30 Seconds">{{ langService.t('30 Seconds') }}</option>
+                  <option value="60 Seconds">{{ langService.t('60 Seconds') }}</option>
+                  <option value="5 Minutes">{{ langService.t('5 Minutes') }}</option>
                 </select>
               </div>
             </div>
@@ -2558,8 +2555,8 @@
               <div class="settings-card-title-group">
                 <span class="st-icon">⚙️</span>
                 <div>
-                  <h3 class="panel-heading mb-0">Tactical Automation & Notification Policies</h3>
-                  <span class="text-xs text-muted">Automated defense responses</span>
+                  <h3 class="panel-heading mb-0">{{ langService.t('Tactical Automation & Notification Policies') }}</h3>
+                  <span class="text-xs text-muted">{{ langService.t('Automated defense responses') }}</span>
                 </div>
               </div>
             </div>
@@ -2567,32 +2564,32 @@
             <div class="settings-toggle-list mt-3">
               <label class="toggle-row">
                 <div class="toggle-text">
-                  <strong>Automatic SOS Emergency Flash Broadcast</strong>
-                  <span>Auto-task emergency IAF sortie request when forward platoon cuts off by avalanche</span>
+                  <strong>{{ langService.t('Automatic SOS Emergency Flash Broadcast') }}</strong>
+                  <span>{{ langService.t('Auto-task emergency IAF sortie request when forward platoon cuts off by avalanche') }}</span>
                 </div>
                 <input type="checkbox" [(ngModel)]="autoSosBroadcast" class="toggle-checkbox">
               </label>
 
               <label class="toggle-row">
                 <div class="toggle-text">
-                  <strong>Live Convoy SATCOM SMS & Dispatch Alerts</strong>
-                  <span>Broadcast checkpoint clearances and detour alerts to escort Subedars in real-time</span>
+                  <strong>{{ langService.t('Live Convoy SATCOM SMS & Dispatch Alerts') }}</strong>
+                  <span>{{ langService.t('Broadcast checkpoint clearances and detour alerts to escort Subedars in real-time') }}</span>
                 </div>
                 <input type="checkbox" [(ngModel)]="convoySmsAlerts" class="toggle-checkbox">
               </label>
 
               <label class="toggle-row">
                 <div class="toggle-text">
-                  <strong>Sub-Zero Battery & Bandwidth Optimization</strong>
-                  <span>Throttles non-essential background graphics when terminal operates below -20°C ambient</span>
+                  <strong>{{ langService.t('Sub-Zero Battery & Bandwidth Optimization') }}</strong>
+                  <span>{{ langService.t('Throttles non-essential background graphics when terminal operates below -20°C ambient') }}</span>
                 </div>
                 <input type="checkbox" [(ngModel)]="batteryOptimization" class="toggle-checkbox">
               </label>
 
               <label class="toggle-row">
                 <div class="toggle-text">
-                  <strong>Local Ledger Offline Cache</strong>
-                  <span>Permits complete voucher signing even if SATCOM uplink is temporarily blocked by blizzard</span>
+                  <strong>{{ langService.t('Local Ledger Offline Cache') }}</strong>
+                  <span>{{ langService.t('Permits complete voucher signing even if SATCOM uplink is temporarily blocked by blizzard') }}</span>
                 </div>
                 <input type="checkbox" [(ngModel)]="offlineCache" class="toggle-checkbox">
               </label>
@@ -2605,24 +2602,24 @@
               <div class="settings-card-title-group">
                 <span class="st-icon">🔑</span>
                 <div>
-                  <h3 class="panel-heading mb-0">Cryptographic Signing Credentials</h3>
-                  <span class="text-xs text-muted">Army Cyber Security Node authorization</span>
+                  <h3 class="panel-heading mb-0">{{ langService.t('Cryptographic Signing Credentials') }}</h3>
+                  <span class="text-xs text-muted">{{ langService.t('Army Cyber Security Node authorization') }}</span>
                 </div>
               </div>
             </div>
 
             <div class="crypto-key-display mt-3">
               <div class="key-row">
-                <span class="key-label">Active QM Signing Key Token:</span>
+                <span class="key-label">{{ langService.t('Active QM Signing Key Token:') }}</span>
                 <code class="key-value">{{ activeSigningKey }}</code>
               </div>
               <div class="key-row mt-1">
-                <span class="key-label">Key Certificate Expiration:</span>
-                <span class="text-xs font-mono text-green">31 December 2026 (Active)</span>
+                <span class="key-label">{{ langService.t('Key Certificate Expiration:') }}</span>
+                <span class="text-xs font-mono text-green">{{ langService.t('31 December 2026 (Active)') }}</span>
               </div>
               <div class="key-actions mt-3">
                 <button type="button" class="btn-outline-army" (click)="rekeyTerminal()">
-                  🔄 Re-Authenticate Key with Army Cyber Node
+                  🔄 {{ langService.t('Re-Authenticate Key with Army Cyber Node') }}
                 </button>
               </div>
             </div>
@@ -2639,11 +2636,11 @@
     <div class="modal-card modal-card-requisition" (click)="$event.stopPropagation()">
       <div class="modal-header">
         <div>
-          <span class="modal-form-badge">DGOS DEFENSE INDENT · FORM IAFA-2026</span>
-          <h3 class="modal-title">Submit Ordnance Requisition Voucher</h3>
-          <p class="modal-subtitle-text">Direct transmission to Northern Command Supply Depot (14 Corps Logistics Grid)</p>
+          <span class="modal-form-badge">{{ langService.t('DGOS DEFENSE INDENT · FORM IAFA-2026') }}</span>
+          <h3 class="modal-title">{{ langService.t('Submit Ordnance Requisition Voucher') }}</h3>
+          <p class="modal-subtitle-text">{{ langService.t('Direct transmission to Northern Command Supply Depot (14 Corps Logistics Grid)') }}</p>
         </div>
-        <button class="modal-close-btn" (click)="closeCreateRequestModal()" title="Close Voucher">✕</button>
+        <button class="modal-close-btn" (click)="closeCreateRequestModal()" [title]="langService.t('Close Voucher')">✕</button>
       </div>
       
       <div class="modal-body">
@@ -2655,51 +2652,51 @@
         <div class="modal-form-grid">
           <!-- Row 1: Category & Priority -->
           <div class="form-group">
-            <label class="form-label">Supply Category <span class="req-star">*</span></label>
+            <label class="form-label">{{ langService.t('Supply Category') }} <span class="req-star">*</span></label>
             <select [(ngModel)]="newReqCategory" class="form-control form-select">
-              <option>Class I (Rations)</option>
-              <option>Class III (POL)</option>
-              <option>Class V (Ammo)</option>
-              <option>Class IX (Spares)</option>
-              <option>ECC / Winter Clothing</option>
+              <option value="Class I (Rations)">{{ langService.t('Class I (Rations)') }}</option>
+              <option value="Class III (POL)">{{ langService.t('Class III (POL)') }}</option>
+              <option value="Class V (Ammo)">{{ langService.t('Class V (Ammo)') }}</option>
+              <option value="Class IX (Spares)">{{ langService.t('Class IX (Spares)') }}</option>
+              <option value="ECC / Winter Clothing">{{ langService.t('ECC / Winter Clothing') }}</option>
             </select>
           </div>
 
           <div class="form-group">
-            <label class="form-label">Urgency Priority <span class="req-star">*</span></label>
+            <label class="form-label">{{ langService.t('Urgency Priority') }} <span class="req-star">*</span></label>
             <select [(ngModel)]="newReqPriority" class="form-control form-select">
-              <option>Routine</option>
-              <option>Operational Priority 1</option>
-              <option>SOS Emergency</option>
+              <option value="Routine">{{ langService.t('Routine') }}</option>
+              <option value="Operational Priority 1">{{ langService.t('Operational Priority 1') }}</option>
+              <option value="SOS Emergency">{{ langService.t('SOS Emergency') }}</option>
             </select>
           </div>
 
           <!-- Row 2: Nomenclature & Quantity -->
           <div class="form-group">
-            <label class="form-label">Item Nomenclature <span class="req-star">*</span></label>
-            <input type="text" [(ngModel)]="newReqItem" placeholder="e.g. Sub-Zero -40°C HSD" class="form-control">
+            <label class="form-label">{{ langService.t('Item Nomenclature') }} <span class="req-star">*</span></label>
+            <input type="text" [(ngModel)]="newReqItem" [placeholder]="langService.t('e.g. Sub-Zero -40°C HSD')" class="form-control">
           </div>
 
           <div class="form-group">
-            <label class="form-label">Requested Quantity <span class="req-star">*</span></label>
-            <input type="text" [(ngModel)]="newReqQty" placeholder="e.g. 18,000 Litres" class="form-control">
+            <label class="form-label">{{ langService.t('Requested Quantity') }} <span class="req-star">*</span></label>
+            <input type="text" [(ngModel)]="newReqQty" [placeholder]="langService.t('e.g. 18,000 Litres')" class="form-control">
           </div>
 
           <!-- Row 3: Required Date & Destination -->
           <div class="form-group">
-            <label class="form-label">Required By Date <span class="req-star">*</span></label>
+            <label class="form-label">{{ langService.t('Required By Date') }} <span class="req-star">*</span></label>
             <input type="date" [(ngModel)]="newReqDate" class="form-control form-date">
           </div>
 
           <div class="form-group">
-            <label class="form-label">Consignee Delivery Depot</label>
-            <input type="text" value="14 Rajput BFI Depot (Sector 4A Forward)" class="form-control form-readonly" readonly>
+            <label class="form-label">{{ langService.t('Consignee Delivery Depot') }}</label>
+            <input type="text" [value]="langService.t('14 Rajput BFI Depot (Sector 4A Forward)')" class="form-control form-readonly" readonly>
           </div>
 
           <!-- Row 4: Reason / Justification (Full Span) -->
           <div class="form-group col-span-full">
-            <label class="form-label">Reason / Operational Justification <span class="req-star">*</span></label>
-            <textarea [(ngModel)]="newReqReason" rows="3" placeholder="Specify tactical justification, burn-rate surge, or pre-winter stockpile buffer requirement..." class="form-control form-textarea"></textarea>
+            <label class="form-label">{{ langService.t('Reason / Operational Justification') }} <span class="req-star">*</span></label>
+            <textarea [(ngModel)]="newReqReason" rows="3" [placeholder]="langService.t('Specify tactical justification, burn-rate surge, or pre-winter stockpile buffer requirement...')" class="form-control form-textarea"></textarea>
           </div>
         </div>
 
@@ -2707,17 +2704,17 @@
         <div class="modal-notice-callout">
           <span class="notice-callout-icon">🛡️</span>
           <div class="notice-callout-text">
-            <strong>SECURE DISPATCH:</strong> Authenticated with QM Key <code>#14R-QM-71044A</code>. Voucher will automatically be queued for DGOS automated dispatch allocation.
+            <strong>{{ langService.t('SECURE DISPATCH:') }}</strong> {{ langService.t('Authenticated with QM Key') }} <code>#14R-QM-71044A</code>. {{ langService.t('Voucher will automatically be queued for DGOS automated dispatch allocation.') }}
           </div>
         </div>
       </div>
 
       <div class="modal-footer">
         <button type="button" class="btn-modal-cancel" (click)="closeCreateRequestModal()">
-          Discard / Cancel
+          {{ langService.t('Discard / Cancel') }}
         </button>
         <button type="button" class="btn-modal-submit" (click)="submitNewRequest()">
-          <span class="btn-check-icon">✓</span> Authorize & Submit Indent
+          <span class="btn-check-icon">✓</span> {{ langService.t('Authorize & Submit Indent') }}
         </button>
       </div>
     </div>
@@ -2728,72 +2725,72 @@
     <div class="modal-card modal-card-requisition" (click)="$event.stopPropagation()">
       <div class="modal-header">
         <div>
-          <span class="modal-form-badge">{{ selectedRequest.category }} · DEFENSE INDENT LIFECYCLE</span>
-          <h3 class="modal-title">Indent Voucher: {{ selectedRequest.id }}</h3>
-          <p class="modal-subtitle-text">{{ selectedRequest.itemDescription }} ({{ selectedRequest.requestedQty }})</p>
+          <span class="modal-form-badge">{{ langService.t(selectedRequest.category) }} · {{ langService.t('DEFENSE INDENT LIFECYCLE') }}</span>
+          <h3 class="modal-title">{{ langService.t('Indent Voucher:') }} {{ selectedRequest.id }}</h3>
+          <p class="modal-subtitle-text">{{ langService.t(selectedRequest.itemDescription) }} ({{ langService.t(selectedRequest.requestedQty) }})</p>
         </div>
-        <button class="modal-close-btn" (click)="closeTrackModal()" title="Close Tracker">✕</button>
+        <button class="modal-close-btn" (click)="closeTrackModal()" [title]="langService.t('Close Tracker')">✕</button>
       </div>
 
       <div class="modal-body">
         <!-- Specs Summary -->
         <div class="convoy-spec-grid mb-3">
           <div class="spec-tile">
-            <span class="spec-label">URGENCY PRIORITY</span>
-            <span class="spec-val font-accent">{{ selectedRequest.urgency }}</span>
+            <span class="spec-label">{{ langService.t('URGENCY PRIORITY') }}</span>
+            <span class="spec-val font-accent">{{ langService.t(selectedRequest.urgency) }}</span>
           </div>
           <div class="spec-tile">
-            <span class="spec-label">REQUIRED BY</span>
+            <span class="spec-label">{{ langService.t('REQUIRED BY') }}</span>
             <span class="spec-val font-mono">{{ selectedRequest.requiredBy }}</span>
           </div>
           <div class="spec-tile">
-            <span class="spec-label">DATE SUBMITTED</span>
+            <span class="spec-label">{{ langService.t('DATE SUBMITTED') }}</span>
             <span class="spec-val font-mono">{{ selectedRequest.dateCreated }}</span>
           </div>
           <div class="spec-tile">
-            <span class="spec-label">CURRENT STATUS</span>
-            <span class="spec-val font-green font-bold">{{ selectedRequest.status }}</span>
+            <span class="spec-label">{{ langService.t('CURRENT STATUS') }}</span>
+            <span class="spec-val font-green font-bold">{{ langService.t(selectedRequest.status) }}</span>
           </div>
         </div>
 
         <div class="checkpoint-stepper">
           <div class="cp-item passed">
             <div class="cp-dot">✓</div>
-            <div class="cp-info"><strong>1. Indent Submitted</strong><span>By QM 14 Rajput (Recorded in Regimental Ledger)</span></div>
+            <div class="cp-info"><strong>{{ langService.t('1. Indent Submitted') }}</strong><span>{{ langService.t('By QM 14 Rajput (Recorded in Regimental Ledger)') }}</span></div>
           </div>
           <div class="cp-item" [class.passed]="selectedRequest.status !== 'Pending HQ Approval'">
             <div class="cp-dot">{{ selectedRequest.status !== 'Pending HQ Approval' ? '✓' : '2' }}</div>
-            <div class="cp-info"><strong>2. DGOS Approval Granted</strong><span>Northern Command Ordnance Branch Clearance</span></div>
+            <div class="cp-info"><strong>{{ langService.t('2. DGOS Approval Granted') }}</strong><span>{{ langService.t('Northern Command Ordnance Branch Clearance') }}</span></div>
           </div>
           <div class="cp-item" [class.passed]="selectedRequest.status === 'Dispatched from COD' || selectedRequest.status === 'Delivered'">
             <div class="cp-dot">{{ (selectedRequest.status === 'Dispatched from COD' || selectedRequest.status === 'Delivered') ? '✓' : '3' }}</div>
-            <div class="cp-info"><strong>3. Depot Stock Allocation</strong><span>Allocated at Central Ordnance Depot Pathankot</span></div>
+            <div class="cp-info"><strong>{{ langService.t('3. Depot Stock Allocation') }}</strong><span>{{ langService.t('Allocated at Central Ordnance Depot Pathankot') }}</span></div>
           </div>
           <div class="cp-item" [class.passed]="selectedRequest.status === 'Dispatched from COD' || selectedRequest.status === 'Delivered'">
             <div class="cp-dot">{{ (selectedRequest.status === 'Dispatched from COD' || selectedRequest.status === 'Delivered') ? '✓' : '4' }}</div>
-            <div class="cp-info"><strong>4. Convoy Dispatched En-Route</strong><span>Assigned to Convoy Column GARUDA-01</span></div>
+            <div class="cp-info"><strong>{{ langService.t('4. Convoy Dispatched En-Route') }}</strong><span>{{ langService.t('Assigned to Convoy Column GARUDA-01') }}</span></div>
           </div>
           <div class="cp-item" [class.passed]="selectedRequest.status === 'Delivered'">
             <div class="cp-dot">{{ selectedRequest.status === 'Delivered' ? '✓' : '5' }}</div>
-            <div class="cp-info"><strong>5. Unit Ledger Acknowledged</strong><span>Stores Verification & Receipt Signed</span></div>
+            <div class="cp-info"><strong>{{ langService.t('5. Unit Ledger Acknowledged') }}</strong><span>{{ langService.t('Stores Verification & Receipt Signed') }}</span></div>
           </div>
         </div>
 
         <div class="modal-notice-callout mt-3" *ngIf="selectedRequest.status !== 'Delivered'">
           <span class="notice-callout-icon">⚡</span>
           <div class="notice-callout-text">
-            <strong>TACTICAL LIFECYCLE ACTION:</strong> You can simulate next-stage DGOS clearance or mark as received into base stores below.
+            <strong>{{ langService.t('TACTICAL LIFECYCLE ACTION:') }}</strong> {{ langService.t('You can simulate next-stage DGOS clearance or mark as received into base stores below.') }}
           </div>
         </div>
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn-modal-cancel" (click)="closeTrackModal()">Close</button>
+        <button type="button" class="btn-modal-cancel" (click)="closeTrackModal()">{{ langService.t('Close') }}</button>
         <button *ngIf="selectedRequest.status !== 'Delivered'" type="button" class="btn-modal-submit" (click)="advanceIndent(selectedRequest)">
           <span class="btn-check-icon">✓</span>
-          <span *ngIf="selectedRequest.status === 'Pending HQ Approval'">Approve via DGOS HQ</span>
-          <span *ngIf="selectedRequest.status === 'Approved by DGOS'">Dispatch from COD</span>
-          <span *ngIf="selectedRequest.status === 'Dispatched from COD'">Acknowledge Delivery</span>
+          <span *ngIf="selectedRequest.status === 'Pending HQ Approval'">{{ langService.t('Approve via DGOS HQ') }}</span>
+          <span *ngIf="selectedRequest.status === 'Approved by DGOS'">{{ langService.t('Dispatch from COD') }}</span>
+          <span *ngIf="selectedRequest.status === 'Dispatched from COD'">{{ langService.t('Acknowledge Delivery') }}</span>
         </button>
       </div>
     </div>
@@ -2806,8 +2803,8 @@
         <div class="convoy-modal-title-group">
           <span class="telemetry-radar-dot"></span>
           <div>
-            <h3 class="modal-title">SATCOM Telemetry: {{ selectedShipment.callsign }}</h3>
-            <span class="convoy-modal-sub">ID: {{ selectedShipment.id }} • {{ selectedShipment.status }} • {{ selectedShipment.riskLevel }} Risk</span>
+            <h3 class="modal-title">{{ langService.t('SATCOM Telemetry:') }} {{ langService.t(selectedShipment.callsign) }}</h3>
+            <span class="convoy-modal-sub">ID: {{ selectedShipment.id }} • {{ langService.t(selectedShipment.status) }} • {{ langService.t(selectedShipment.riskLevel) }} {{ langService.t('Risk') }}</span>
           </div>
         </div>
         <button class="modal-close-btn" (click)="closeConvoyModal()">✕</button>
@@ -2817,60 +2814,60 @@
         <!-- Telemetry Summary Cards Grid -->
         <div class="convoy-spec-grid">
           <div class="spec-tile">
-            <span class="spec-label">ORIGIN DEPOT</span>
-            <span class="spec-val">{{ selectedShipment.source }}</span>
+            <span class="spec-label">{{ langService.t('ORIGIN DEPOT') }}</span>
+            <span class="spec-val">{{ langService.t(selectedShipment.source) }}</span>
           </div>
           <div class="spec-tile">
-            <span class="spec-label">DESTINATION</span>
-            <span class="spec-val">{{ selectedShipment.destination }}</span>
+            <span class="spec-label">{{ langService.t('DESTINATION') }}</span>
+            <span class="spec-val">{{ langService.t(selectedShipment.destination) }}</span>
           </div>
           <div class="spec-tile">
-            <span class="spec-label">ESCORT COMMANDER</span>
-            <span class="spec-val font-accent">{{ selectedShipment.driverEscort }}</span>
+            <span class="spec-label">{{ langService.t('ESCORT COMMANDER') }}</span>
+            <span class="spec-val font-accent">{{ langService.t(selectedShipment.driverEscort) }}</span>
           </div>
           <div class="spec-tile">
-            <span class="spec-label">DEPARTURE TIME</span>
+            <span class="spec-label">{{ langService.t('DEPARTURE TIME') }}</span>
             <span class="spec-val">{{ selectedShipment.departureTime }}</span>
           </div>
           <div class="spec-tile">
-            <span class="spec-label">ESTIMATED ARRIVAL</span>
+            <span class="spec-label">{{ langService.t('ESTIMATED ARRIVAL') }}</span>
             <span class="spec-val font-green font-bold">{{ selectedShipment.eta }}</span>
           </div>
           <div class="spec-tile">
-            <span class="spec-label">FLEET ASSETS</span>
-            <span class="spec-val">{{ selectedShipment.vehiclesCount }} Military Trucks</span>
+            <span class="spec-label">{{ langService.t('FLEET ASSETS') }}</span>
+            <span class="spec-val">{{ selectedShipment.vehiclesCount }} {{ langService.t('Military Trucks') }}</span>
           </div>
           <div class="spec-tile">
-            <span class="spec-label">CARGO MANIFEST</span>
-            <span class="spec-val font-gold">{{ selectedShipment.cargoType }} ({{ selectedShipment.tonnage }}T)</span>
+            <span class="spec-label">{{ langService.t('CARGO MANIFEST') }}</span>
+            <span class="spec-val font-gold">{{ langService.t(selectedShipment.cargoType) }} ({{ selectedShipment.tonnage }}T)</span>
           </div>
           <div class="spec-tile">
-            <span class="spec-label">SATCOM COORDINATES</span>
+            <span class="spec-label">{{ langService.t('SATCOM COORDINATES') }}</span>
             <span class="spec-val font-mono">{{ selectedShipment.gpsCoordinates.lat }}°N, {{ selectedShipment.gpsCoordinates.lng }}°E</span>
           </div>
         </div>
 
         <!-- Route Axis -->
         <div class="modal-route-strip">
-          <span class="strip-label">TRANSIT AXIS:</span>
-          <span class="strip-text">{{ selectedShipment.route }}</span>
+          <span class="strip-label">{{ langService.t('TRANSIT AXIS:') }}</span>
+          <span class="strip-text">{{ langService.t(selectedShipment.route) }}</span>
         </div>
 
         <!-- Weather Alert Notice if present -->
         <div *ngIf="selectedShipment.weatherAlert" class="modal-weather-alert">
           <span class="alert-icon">⚠️</span>
           <div>
-            <strong>ENVIRONMENTAL / HIGH-ALTITUDE ALERT:</strong>
-            <p>{{ selectedShipment.weatherAlert }}</p>
+            <strong>{{ langService.t('ENVIRONMENTAL / HIGH-ALTITUDE ALERT:') }}</strong>
+            <p>{{ langService.t(selectedShipment.weatherAlert) }}</p>
           </div>
         </div>
 
         <!-- Waypoint Checkpoint Lifecycle Stepper -->
         <div class="convoy-timeline-box" *ngIf="selectedShipment.checkpoints && selectedShipment.checkpoints.length > 0">
           <div class="timeline-header">
-            <h4>Route Checkpoint Verification Log</h4>
+            <h4>{{ langService.t('Route Checkpoint Verification Log') }}</h4>
             <span class="timeline-progress-tag">
-              {{ getPassedCheckpointsCount(selectedShipment) }} of {{ getTotalCheckpointsCount(selectedShipment) }} Checkpoints Verified
+              {{ getPassedCheckpointsCount(selectedShipment) }} {{ langService.t('of') }} {{ getTotalCheckpointsCount(selectedShipment) }} {{ langService.t('Checkpoints Verified') }}
             </span>
           </div>
 
@@ -2885,12 +2882,12 @@
               </div>
               <div class="convoy-step-detail">
                 <div class="cp-name-row">
-                  <strong class="cp-title">{{ cp.name }}</strong>
+                  <strong class="cp-title">{{ langService.t(cp.name) }}</strong>
                   <span class="cp-status-tag" [class.passed]="cp.passed">
-                    {{ cp.passed ? 'PASSED' : 'EN-ROUTE' }}
+                    {{ cp.passed ? langService.t('PASSED') : langService.t('EN-ROUTE') }}
                   </span>
                 </div>
-                <div class="cp-time-text">Time Stamp: {{ cp.time }}</div>
+                <div class="cp-time-text">{{ langService.t('Time Stamp:') }} {{ cp.time }}</div>
               </div>
             </div>
           </div>
@@ -2900,22 +2897,22 @@
         <div class="modal-crypto-box">
           <span class="crypto-icon">🛡️</span>
           <div class="crypto-meta">
-            <strong>REGIMENTAL LEDGER DISPATCH TOKEN:</strong>
+            <strong>{{ langService.t('REGIMENTAL LEDGER DISPATCH TOKEN:') }}</strong>
             <code>SHA-256: 9F8A...{{ selectedShipment.id }}...4C1E</code>
-            <span>Encrypted via ASCON Indian Army C4ISR Network (HQ 14 Corps)</span>
+            <span>{{ langService.t('Encrypted via ASCON Indian Army C4ISR Network (HQ 14 Corps)') }}</span>
           </div>
         </div>
       </div>
 
       <div class="modal-footer">
         <button type="button" class="btn-modal-cancel" (click)="closeConvoyModal()">
-          Close Telemetry
+          {{ langService.t('Close Telemetry') }}
         </button>
         <button
           type="button"
           class="btn-modal-submit"
           (click)="acknowledgeDelivery(selectedShipment.id); closeConvoyModal()">
-          <span class="btn-check-icon">✓</span> Acknowledge & Sign Ledger
+          <span class="btn-check-icon">✓</span> {{ langService.t('Acknowledge & Sign Ledger') }}
         </button>
       </div>
     </div>
@@ -2926,9 +2923,9 @@
     <div class="modal-card report-modal-card" (click)="$event.stopPropagation()">
       <div class="modal-header">
         <div>
-          <span class="modal-form-badge">{{ selectedReportPreview.classification }} · INDIAN ARMY OFFICIAL RECORD</span>
-          <h3 class="modal-title">{{ selectedReportPreview.title }}</h3>
-          <p class="modal-subtitle-text">Document ID: {{ selectedReportPreview.id }} • {{ selectedReportPreview.period }}</p>
+          <span class="modal-form-badge">{{ langService.t(selectedReportPreview.classification) }} · {{ langService.t('INDIAN ARMY OFFICIAL RECORD') }}</span>
+          <h3 class="modal-title">{{ langService.t(selectedReportPreview.title) }}</h3>
+          <p class="modal-subtitle-text">{{ langService.t('Document ID:') }} {{ selectedReportPreview.id }} • {{ langService.t(selectedReportPreview.period) }}</p>
         </div>
         <button class="modal-close-btn" (click)="closeReportPreview()">✕</button>
       </div>
@@ -2936,43 +2933,43 @@
       <div class="modal-body report-modal-body">
         <div class="report-meta-box">
           <div class="rm-item">
-            <span class="rm-label">AUTHORIZING OFFICER</span>
-            <strong>{{ selectedReportPreview.authorizingOfficer }}</strong>
+            <span class="rm-label">{{ langService.t('AUTHORIZING OFFICER') }}</span>
+            <strong>{{ langService.t(selectedReportPreview.authorizingOfficer) }}</strong>
           </div>
           <div class="rm-item">
-            <span class="rm-label">UNIT DESIGNATION</span>
-            <strong>{{ unitDbService.selectedUnit().name }}</strong>
+            <span class="rm-label">{{ langService.t('UNIT DESIGNATION') }}</span>
+            <strong>{{ langService.t(unitDbService.selectedUnit().name) }}</strong>
           </div>
           <div class="rm-item">
-            <span class="rm-label">CATEGORY</span>
-            <strong>{{ selectedReportPreview.category }}</strong>
+            <span class="rm-label">{{ langService.t('CATEGORY') }}</span>
+            <strong>{{ langService.t(selectedReportPreview.category) }}</strong>
           </div>
           <div class="rm-item">
-            <span class="rm-label">LEDGER AUDIT STATUS</span>
-            <span class="text-green font-bold">✓ {{ selectedReportPreview.status }}</span>
+            <span class="rm-label">{{ langService.t('LEDGER AUDIT STATUS') }}</span>
+            <span class="text-green font-bold">✓ {{ langService.t(selectedReportPreview.status) }}</span>
           </div>
         </div>
 
         <div class="report-document-body mt-3">
-          <h4>EXECUTIVE RECONCILIATION SUMMARY</h4>
-          <p>This document certifies that all supply allocations, fuel receipts, and indent transfers for the designated period have been cross-verified with Army Central Ordnance Depot (COD) records and {{ unitDbService.selectedUnit().name }} Regimental Stock Registers. All transactions conform strictly to Army Ordnance Corps (AOC) Regulations and DGOS Standard Operating Procedures.</p>
+          <h4>{{ langService.t('EXECUTIVE RECONCILIATION SUMMARY') }}</h4>
+          <p>{{ langService.t('This document certifies that all supply allocations, fuel receipts, and indent transfers for the designated period have been cross-verified with Army Central Ordnance Depot (COD) records and 14 Rajput (Mechanised) Regimental Stock Registers. All transactions conform strictly to Army Ordnance Corps (AOC) Regulations and DGOS Standard Operating Procedures.') }}</p>
           <div class="report-stamp-block mt-3">
             <div class="stamp-box">
-              <span class="stamp-title">OFFICIALLY VERIFIED</span>
+              <span class="stamp-title">{{ langService.t('OFFICIALLY VERIFIED') }}</span>
               <span class="stamp-officer">{{ unitDbService.selectedUnit().corps ? unitDbService.selectedUnit().corps : 'HQ 14 CORPS' }} · {{ unitDbService.selectedUnit().station.split(',')[0] }}</span>
-              <span class="stamp-date">DATE: {{ currentDate }}</span>
+              <span class="stamp-date">{{ langService.t('DATE:') }} {{ currentDate }}</span>
             </div>
           </div>
         </div>
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn-modal-cancel" (click)="closeReportPreview()">Close Document</button>
+        <button type="button" class="btn-modal-cancel" (click)="closeReportPreview()">{{ langService.t('Close Document') }}</button>
         <button type="button" class="btn-outline-army" (click)="downloadReportCSV(selectedReportPreview)">
-          📊 Download CSV
+          📊 {{ langService.t('Download CSV') }}
         </button>
         <button type="button" class="btn-modal-submit" (click)="exportReport('PDF', selectedReportPreview); closeReportPreview()">
-          📥 Download Certified PDF
+          📥 {{ langService.t('Download Certified PDF') }}
         </button>
       </div>
     </div>
@@ -2983,11 +2980,11 @@
     <div class="modal-card modal-card-requisition" (click)="$event.stopPropagation()">
       <div class="modal-header">
         <div>
-          <span class="modal-form-badge">ARMY ORDNANCE CORPS · FORM IAFA-2027</span>
-          <h3 class="modal-title">Log Store Receipt Voucher (RV)</h3>
-          <p class="modal-subtitle-text">Record incoming consignment into 14 Rajput Regimental Stores Ledger</p>
+          <span class="modal-form-badge">{{ langService.t('ARMY ORDNANCE CORPS · FORM IAFA-2027') }}</span>
+          <h3 class="modal-title">{{ langService.t('Log Store Receipt Voucher (RV)') }}</h3>
+          <p class="modal-subtitle-text">{{ langService.t('Record incoming consignment into 14 Rajput Regimental Stores Ledger') }}</p>
         </div>
-        <button class="modal-close-btn" (click)="closeAddReceiptModal()" title="Close Receipt Voucher">✕</button>
+        <button class="modal-close-btn" (click)="closeAddReceiptModal()" [title]="langService.t('Close Receipt Voucher')">✕</button>
       </div>
 
       <div class="modal-body">
@@ -3005,40 +3002,40 @@
           </div>
 
           <div class="form-group">
-            <label class="form-label">Store Receipt Voucher (RV) # <span class="req-star">*</span></label>
+            <label class="form-label">{{ langService.t('Store Receipt Voucher (RV) #') }} <span class="req-star">*</span></label>
             <input type="text" [(ngModel)]="newReceiptRvNo" class="form-control font-mono font-bold text-gold">
           </div>
 
           <!-- Row 2: Select Item Nomenclature & Received Quantity -->
           <div class="form-group">
-            <label class="form-label">Target Inventory Item <span class="req-star">*</span></label>
+            <label class="form-label">{{ langService.t('Target Inventory Item') }} <span class="req-star">*</span></label>
             <select [(ngModel)]="newReceiptItemId" class="form-control form-select">
               <option *ngFor="let itm of itemsForReceiptCategory" [value]="itm.id">
-                [{{ itm.id }}] {{ itm.item }} (Available: {{ itm.quantity }})
+                [{{ itm.id }}] {{ langService.t(itm.item) }} ({{ langService.t('Available:') }} {{ itm.quantity }})
               </option>
             </select>
           </div>
 
           <div class="form-group">
-            <label class="form-label">Quantity Received & Inspected <span class="req-star">*</span></label>
-            <input type="text" [(ngModel)]="newReceiptQty" placeholder="e.g. 5,000 Litres or 500 Packs" class="form-control">
+            <label class="form-label">{{ langService.t('Quantity Received & Inspected') }} <span class="req-star">*</span></label>
+            <input type="text" [(ngModel)]="newReceiptQty" [placeholder]="langService.t('e.g. 5,000 Litres or 500 Packs')" class="form-control">
           </div>
 
           <!-- Row 3: Dispatching Depot & Date -->
           <div class="form-group">
-            <label class="form-label">Consignor / Origin Depot</label>
-            <input type="text" [(ngModel)]="newReceiptDepot" placeholder="e.g. COD Pathankot / FSD Leh" class="form-control">
+            <label class="form-label">{{ langService.t('Consignor / Origin Depot') }}</label>
+            <input type="text" [(ngModel)]="newReceiptDepot" [placeholder]="langService.t('e.g. COD Pathankot / FSD Leh')" class="form-control">
           </div>
 
           <div class="form-group">
-            <label class="form-label">Date of Store Entry <span class="req-star">*</span></label>
+            <label class="form-label">{{ langService.t('Date of Store Entry') }} <span class="req-star">*</span></label>
             <input type="date" [(ngModel)]="newReceiptDate" class="form-control form-date">
           </div>
 
           <!-- Row 4: Quality & Inspection Notes -->
           <div class="form-group col-span-full">
-            <label class="form-label">Quality Inspection & Escort Verification</label>
-            <textarea [(ngModel)]="newReceiptNotes" rows="2" placeholder="Inspection certified by Quartermaster. Seals intact, lab test verified..." class="form-control form-textarea"></textarea>
+            <label class="form-label">{{ langService.t('Quality Inspection & Escort Verification') }}</label>
+            <textarea [(ngModel)]="newReceiptNotes" rows="2" [placeholder]="langService.t('Inspection certified by Quartermaster. Seals intact, lab test verified...')" class="form-control form-textarea"></textarea>
           </div>
         </div>
 
@@ -3046,17 +3043,17 @@
         <div class="modal-notice-callout">
           <span class="notice-callout-icon">📥</span>
           <div class="notice-callout-text">
-            <strong>LEDGER RECONCILIATION:</strong> Submitting will automatically increment the physical stock count and update the Regimental Stock Register ledger card.
+            <strong>{{ langService.t('LEDGER RECONCILIATION:') }}</strong> {{ langService.t('Submitting will automatically increment the physical stock count and update the Regimental Stock Register ledger card.') }}
           </div>
         </div>
       </div>
 
       <div class="modal-footer">
         <button type="button" class="btn-modal-cancel" (click)="closeAddReceiptModal()">
-          Cancel / Discard
+          {{ langService.t('Cancel / Discard') }}
         </button>
         <button type="button" class="btn-modal-submit" (click)="submitAddReceipt()">
-          <span class="btn-check-icon">✓</span> Verify & Add to Stores Ledger
+          <span class="btn-check-icon">✓</span> {{ langService.t('Verify & Add to Stores Ledger') }}
         </button>
       </div>
     </div>
@@ -3067,11 +3064,11 @@
     <div class="modal-card modal-card-requisition" (click)="$event.stopPropagation()">
       <div class="modal-header">
         <div>
-          <span class="modal-form-badge">ARMY ORDNANCE CORPS · FORM IAFA-2028</span>
-          <h3 class="modal-title">Record Daily Store Issue & Consumption</h3>
-          <p class="modal-subtitle-text">Debit operational burn and troop rations from 14 Rajput Stock Ledger</p>
+          <span class="modal-form-badge">{{ langService.t('ARMY ORDNANCE CORPS · FORM IAFA-2028') }}</span>
+          <h3 class="modal-title">{{ langService.t('Record Daily Store Issue & Consumption') }}</h3>
+          <p class="modal-subtitle-text">{{ langService.t('Debit operational burn and troop rations from 14 Rajput Stock Ledger') }}</p>
         </div>
-        <button class="modal-close-btn" (click)="closeRecordConsumptionModal()" title="Close Issue Voucher">✕</button>
+        <button class="modal-close-btn" (click)="closeRecordConsumptionModal()" [title]="langService.t('Close Issue Voucher')">✕</button>
       </div>
 
       <div class="modal-body">
@@ -3089,34 +3086,34 @@
           </div>
 
           <div class="form-group">
-            <label class="form-label">Date of Issue <span class="req-star">*</span></label>
+            <label class="form-label">{{ langService.t('Date of Issue') }} <span class="req-star">*</span></label>
             <input type="date" [(ngModel)]="newIssueDate" class="form-control form-date">
           </div>
 
           <!-- Row 2: Target Item & Issued Quantity -->
           <div class="form-group">
-            <label class="form-label">Select Stock Item <span class="req-star">*</span></label>
+            <label class="form-label">{{ langService.t('Select Stock Item') }} <span class="req-star">*</span></label>
             <select [(ngModel)]="newIssueItemId" class="form-control form-select">
               <option *ngFor="let itm of itemsForIssueCategory" [value]="itm.id">
-                [{{ itm.id }}] {{ itm.item }} (Available: {{ itm.quantity }})
+                [{{ itm.id }}] {{ langService.t(itm.item) }} ({{ langService.t('Available:') }} {{ itm.quantity }})
               </option>
             </select>
           </div>
 
           <div class="form-group">
-            <label class="form-label">Quantity to Issue / Burn <span class="req-star">*</span></label>
-            <input type="text" [(ngModel)]="newIssueQty" placeholder="e.g. 450 Litres or 200 Packs" class="form-control">
+            <label class="form-label">{{ langService.t('Quantity to Issue / Burn') }} <span class="req-star">*</span></label>
+            <input type="text" [(ngModel)]="newIssueQty" [placeholder]="langService.t('e.g. 450 Litres or 200 Packs')" class="form-control">
           </div>
 
           <!-- Row 3: Sub-unit / Post & Purpose -->
           <div class="form-group">
-            <label class="form-label">Receiving Post / Sub-Unit <span class="req-star">*</span></label>
-            <input type="text" [(ngModel)]="newIssueRecipient" placeholder="e.g. Bravo Coy, FDL Shyok Sector 4A" class="form-control">
+            <label class="form-label">{{ langService.t('Receiving Post / Sub-Unit') }} <span class="req-star">*</span></label>
+            <input type="text" [(ngModel)]="newIssueRecipient" [placeholder]="langService.t('e.g. Bravo Coy, FDL Shyok Sector 4A')" class="form-control">
           </div>
 
           <div class="form-group">
-            <label class="form-label">Operational Purpose</label>
-            <input type="text" [(ngModel)]="newIssuePurpose" placeholder="e.g. Bukhari continuous heating / BMP-II patrol" class="form-control">
+            <label class="form-label">{{ langService.t('Operational Purpose') }}</label>
+            <input type="text" [(ngModel)]="newIssuePurpose" [placeholder]="langService.t('e.g. Bukhari continuous heating / BMP-II patrol')" class="form-control">
           </div>
         </div>
 
@@ -3124,17 +3121,17 @@
         <div class="modal-notice-callout">
           <span class="notice-callout-icon">📋</span>
           <div class="notice-callout-text">
-            <strong>STOCK DEBIT:</strong> This action issues stock under Quartermaster authority. Stock ledger balance will immediately decrease by the specified quantity.
+            <strong>{{ langService.t('STOCK DEBIT:') }}</strong> {{ langService.t('This action issues stock under Quartermaster authority. Stock ledger balance will immediately decrease by the specified quantity.') }}
           </div>
         </div>
       </div>
 
       <div class="modal-footer">
         <button type="button" class="btn-modal-cancel" (click)="closeRecordConsumptionModal()">
-          Cancel / Discard
+          {{ langService.t('Cancel / Discard') }}
         </button>
         <button type="button" class="btn-modal-submit" (click)="submitRecordConsumption()">
-          <span class="btn-check-icon">✓</span> Authorize & Debit from Ledger
+          <span class="btn-check-icon">✓</span> {{ langService.t('Authorize & Debit from Ledger') }}
         </button>
       </div>
     </div>
@@ -3143,11 +3140,11 @@
     <div class="modal-card modal-card-pass-telemetry" (click)="$event.stopPropagation()">
       <div class="modal-header">
         <div>
-          <span class="modal-form-badge">BRO / METEOROLOGICAL DEFENSE INTEL · LIVE CORRIDOR STATUS</span>
-          <h3 class="modal-title">Pass Telemetry: {{ selectedPass.passName }}</h3>
-          <p class="modal-subtitle-text">📍 {{ selectedPass.location }} • Elevation: {{ selectedPass.elevation }}</p>
+          <span class="modal-form-badge">{{ langService.t('BRO / METEOROLOGICAL DEFENSE INTEL · LIVE CORRIDOR STATUS') }}</span>
+          <h3 class="modal-title">{{ langService.t('Pass Telemetry:') }} {{ langService.t(selectedPass.passName) }}</h3>
+          <p class="modal-subtitle-text">📍 {{ langService.t(selectedPass.location) }} • {{ langService.t('Elevation:') }} {{ selectedPass.elevation }}</p>
         </div>
-        <button class="modal-close-btn" (click)="closePassModal()" title="Close Pass Telemetry">✕</button>
+        <button class="modal-close-btn" (click)="closePassModal()" [title]="langService.t('Close Pass Telemetry')">✕</button>
       </div>
 
       <div class="modal-body">
@@ -3160,7 +3157,7 @@
               [class.badge-restricted]="selectedPass.accessibility.includes('Restric')">
               {{ selectedPass.accessibility }}
             </span>
-            <span class="st-risk-score">Calculated Risk Index: <strong>{{ selectedPass.riskScore }}/100</strong></span>
+            <span class="st-risk-score">{{ langService.t('Calculated Risk Index:') }} <strong>{{ selectedPass.riskScore }}/100</strong></span>
           </div>
 
           <div class="st-risk-gauge-wrap mt-2">
@@ -3177,19 +3174,19 @@
         <!-- 4-Grid Telemetry Metrics -->
         <div class="st-metrics-grid mt-3">
           <div class="st-metric-item">
-            <span class="st-m-label">SURFACE TEMPERATURE</span>
+            <span class="st-m-label">{{ langService.t('SURFACE TEMPERATURE') }}</span>
             <span class="st-m-val font-accent">{{ selectedPass.temperature }}</span>
           </div>
           <div class="st-metric-item">
-            <span class="st-m-label">PRECIPITATION / SNOW DEPTH</span>
+            <span class="st-m-label">{{ langService.t('PRECIPITATION / SNOW DEPTH') }}</span>
             <span class="st-m-val">{{ selectedPass.rainfallSnow }}</span>
           </div>
           <div class="st-metric-item">
-            <span class="st-m-label">WIND VELOCITY</span>
+            <span class="st-m-label">{{ langService.t('WIND VELOCITY') }}</span>
             <span class="st-m-val">{{ selectedPass.windSpeed }}</span>
           </div>
           <div class="st-metric-item">
-            <span class="st-m-label">OPTICAL VISIBILITY</span>
+            <span class="st-m-label">{{ langService.t('OPTICAL VISIBILITY') }}</span>
             <span class="st-m-val font-gold">{{ selectedPass.visibility }}</span>
           </div>
         </div>
@@ -3198,8 +3195,8 @@
         <div class="st-alert-callout mt-3 alert-danger-glow">
           <span class="st-alert-icon">⚠️</span>
           <div class="st-alert-text">
-            <strong>CORRIDOR DEFENSE ADVISORY:</strong>
-            <p>{{ selectedPass.alert }}</p>
+            <strong>{{ langService.t('CORRIDOR DEFENSE ADVISORY:') }}</strong>
+            <p>{{ langService.t(selectedPass.alert) }}</p>
           </div>
         </div>
 
@@ -3208,18 +3205,18 @@
           <div class="alt-route-box">
             <span class="alt-route-icon">🔄</span>
             <div>
-              <strong>Designated Bypass Axis:</strong>
-              <p>{{ selectedPass.alternativeRoute }}</p>
+              <strong>{{ langService.t('Designated Bypass Axis:') }}</strong>
+              <p>{{ langService.t(selectedPass.alternativeRoute) }}</p>
             </div>
           </div>
           <button type="button" class="btn-army-primary btn-sm mt-2" (click)="viewAxisInLogistics(selectedPass.alternativeRoute)">
-            View Active Convoys on Bypass Axis ➔
+            {{ langService.t('View Active Convoys on Bypass Axis ➔') }}
           </button>
         </div>
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn-modal-cancel" (click)="closePassModal()">Close Telemetry</button>
+        <button type="button" class="btn-modal-cancel" (click)="closePassModal()">{{ langService.t('Close Telemetry') }}</button>
       </div>
     </div>
   </div>
